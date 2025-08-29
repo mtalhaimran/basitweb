@@ -16,18 +16,8 @@ export default function UrduLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="ur" dir="rtl">
-      <head>
-        <link
-          href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;500;600;700&family=Noto+Naskh+Arabic:wght@400;500;600&display=swap"
-          rel="stylesheet"
-        />
-        <script defer src="/pagefind/pagefind-ui.js"></script>
-        <link href="/pagefind/pagefind-ui.css" rel="stylesheet" />
-      </head>
-      <body className="urdu-text">
-        {children}
-      </body>
-    </html>
+    <div className="urdu-text" lang="ur" dir="rtl">
+      {children}
+    </div>
   );
 }
