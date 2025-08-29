@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import { X, Search } from 'lucide-react';
+import { X, Search, Command } from 'lucide-react';
 
 interface SearchOverlayProps {
   isOpen: boolean;
@@ -67,23 +67,25 @@ export function SearchOverlay({ isOpen, onClose, lang = 'en' }: SearchOverlayPro
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 search-overlay">
+    <div className="fixed inset-0 z-50 search-overlay animate-fade-in">
       <div className="fixed inset-0" onClick={onClose} />
-      <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full max-w-2xl mx-4 search-modal">
-        <div className="bg-background border rounded-xl shadow-2xl overflow-hidden">
+      <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full max-w-2xl mx-4 animate-scale-in">
+        <div className="search-modal rounded-xl overflow-hidden">
           {/* Header */}
-          <div className={`flex items-center justify-between p-4 border-b bg-muted/30 ${
+          <div className={`flex items-center justify-between p-4 border-b border-line bg-subtle ${
             isUrdu ? 'flex-row-reverse' : ''
           }`}>
             <div className={`flex items-center space-x-3 ${isUrdu ? 'flex-row-reverse space-x-reverse' : ''}`}>
-              <Search className="w-5 h-5 text-primary" />
-              <h2 className={`text-lg font-semibold ${isUrdu ? 'font-urdu-heading' : ''}`}>
+              <div className="p-2 bg-brand/10 rounded-lg">
+                <Search className="w-4 h-4 text-brand" />
+              </div>
+              <h2 className={`text-lg font-semibold ${isUrdu ? 'urdu-heading-3' : ''}`}>
                 {isUrdu ? 'تلاش' : 'Search'}
               </h2>
             </div>
             <button
               onClick={onClose}
-              className="p-2 hover:bg-accent rounded-lg transition-colors focus-ring"
+              className="btn btn-ghost p-2"
               aria-label={isUrdu ? 'بند کریں' : 'Close search'}
             >
               <X className="w-5 h-5" />
@@ -91,37 +93,40 @@ export function SearchOverlay({ isOpen, onClose, lang = 'en' }: SearchOverlayPro
           </div>
 
           {/* Search Content */}
-          <div className="p-6">
+          <div className="p-6 min-h-[300px]">
             {!isLoaded && (
-              <div className={`text-center py-8 ${isUrdu ? 'font-urdu-body' : ''}`}>
-                <Search className="w-8 h-8 text-muted-foreground mx-auto mb-4" />
-                <p className="text-muted-foreground">
+              <div className={`text-center py-12 ${isUrdu ? 'urdu-body' : ''}`}>
+                <div className="loading-skeleton w-12 h-12 rounded-lg mx-auto mb-4"></div>
+                <p className="text-ink-muted">
                   {isUrdu ? 'تلاش لوڈ ہو رہی ہے...' : 'Loading search...'}
                 </p>
               </div>
             )}
             <div 
               ref={searchRef} 
-              className={`min-h-[200px] ${isUrdu ? 'text-right' : ''}`}
+              className={isUrdu ? 'text-right' : ''}
               dir={isUrdu ? 'rtl' : 'ltr'}
             />
           </div>
 
           {/* Footer */}
-          <div className={`px-6 py-4 border-t bg-muted/30 text-xs text-muted-foreground ${
-            isUrdu ? 'text-right font-urdu-body' : ''
+          <div className={`px-6 py-4 border-t border-line bg-subtle text-caption ${
+            isUrdu ? 'text-right urdu-body-sm' : ''
           }`}>
             <div className={`flex items-center justify-between ${isUrdu ? 'flex-row-reverse' : ''}`}>
+              <div className={`flex items-center space-x-2 ${isUrdu ? 'flex-row-reverse space-x-reverse' : ''}`}>
+                <Command className="w-3 h-3" />
+                <span>
+                  {isUrdu 
+                    ? 'تلاش کے لیے ٹائپ کریں'
+                    : 'Type to search'
+                  }
+                </span>
+              </div>
               <span>
                 {isUrdu 
-                  ? 'تلاش کے لیے ٹائپ کریں'
-                  : 'Type to search across all content'
-                }
-              </span>
-              <span>
-                {isUrdu 
-                  ? 'بند کرنے کے لیے Escape دبائیں'
-                  : 'Press Escape to close'
+                  ? 'بند کرنے کے لیے Esc دبائیں'
+                  : 'Press Esc to close'
                 }
               </span>
             </div>
