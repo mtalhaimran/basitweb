@@ -12,6 +12,7 @@ export function Header() { // Removed lang prop as site is now primarily Urdu
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const isUrdu = true; // Site is now primarily Urdu
 
   const navigation = isUrdu ? [
     { name: 'ہوم', href: '/' },
