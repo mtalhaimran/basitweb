@@ -488,12 +488,6 @@ export function PortfolioGrid() { // Removed lang prop as site is now primarily 
                 </span>
                 <ArrowUpRight className={`w-5 h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform ${isUrdu ? 'mr-2' : 'ml-2'}`} />
               </Link>
-              <Link 
-                href="/newsletter"
-                className={`btn btn-secondary ${isUrdu ? 'urdu-text' : ''}`}
-              >
-                {isUrdu ? 'نیوز لیٹر' : 'Newsletter'}
-              </Link>
             </div>
           </div>
         </div>

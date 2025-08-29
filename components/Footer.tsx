@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import { NewsletterForm } from './NewsletterForm';
 import { Twitter, Linkedin, Mail, Heart, Download, FileText } from 'lucide-react';
 
 interface FooterProps {
@@ -108,33 +107,18 @@ export function Footer() { // Removed lang prop as site is now primarily Urdu
           <div className={`md:col-span-4 ${isUrdu ? 'md:col-start-1' : ''}`}>
             <h3 className={`text-heading-4 mb-8 ${isUrdu ? 'urdu-heading' : ''}`}>
               {isUrdu ? 'اپڈیٹ رہیں' : 'Stay Updated'}
-            </h3> {/* Always Urdu */}
-            
-            <div className="bg-surface rounded-2xl p-6 border border-line shadow-sm"> {/* Use new surface and line colors */}
-              <h4 className={`text-lg font-semibold mb-4 ${isUrdu ? 'urdu-heading' : ''}`}>
-                {isUrdu ? 'نیوز لیٹر' : 'Newsletter'}
-              </h4>
-              <p className={`text-ink-muted mb-6 text-sm urdu-text`}> {/* Use new ink-muted */}
-                {isUrdu // Always Urdu
-                  ? 'نئی کہانیوں، خیالات، اور تحریری عمل کی پردے کے پیچھے کی جھلکیوں کے ساتھ اپڈیٹ حاصل کریں۔'
-                  : 'Get updates on new stories, thoughts, and behind-the-scenes glimpses into the writing process.'
-                }
-              </p>
-              <NewsletterForm compact />
-            </div>
-          </div>
         </div>
 
         {/* Bottom Section */}
         <div className={`mt-16 pt-8 border-t border-gray-200 ${isUrdu ? 'text-right' : ''}`}>
           <div className={`flex flex-col md:flex-row items-center justify-between space-y-4 md:space-y-0 ${
             isUrdu ? 'md:flex-row-reverse' : ''
-          }`}>
+          <div className="flex flex-col items-center space-y-4">
             <p className={`text-ink-muted text-sm urdu-text`}> {/* Use new ink-muted */}
               © {new Date().getFullYear()} عبدالباسط ظفر۔ تمام حقوق محفوظ ہیں۔
             </p>
             
-            <div className={`flex items-center gap-6 text-sm text-gray-500 ${
+            <div className="flex items-center gap-6 text-sm text-gray-500">
               isUrdu ? 'flex-row-reverse' : ''
             }`}>
               <Link // Keep sitemap link
@@ -144,7 +128,7 @@ export function Footer() { // Removed lang prop as site is now primarily Urdu
                 Sitemap
               </Link>
               <span>•</span>
-              <div className={`flex items-center gap-1 ${isUrdu ? 'flex-row-reverse urdu-text' : ''}`}>
+              <div className="flex items-center gap-1 urdu-text">
                 <span>جرمنی میں محبت سے بنایا گیا</span> {/* Always Urdu */}
                 {!isUrdu && <Heart className="w-4 h-4 text-red-500" />}
                 {!isUrdu && <span>in Germany</span>}
