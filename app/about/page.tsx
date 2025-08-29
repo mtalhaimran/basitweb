@@ -2,24 +2,24 @@ import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
 import { AudioBlock } from '@/components/AudioBlock';
 import Image from 'next/image';
-import { MapPin, Award, BookOpen, Users } from 'lucide-react';
+import { MapPin, Award, BookOpen, Users, ArrowUpRight } from 'lucide-react';
+import Link from 'next/link';
 
 export const metadata = {
-  title: 'About - Abdul Basit Zafar',
-  description: 'Learn more about Abdul Basit Zafar - writer, storyteller, and bridge between cultures.',
+  title: 'تعارف - عبدالباسط ظفر',
+  description: 'عبدالباسط ظفر کے بارے میں جانیں - لکھاری، کہانی گو، اور ثقافتوں کے درمیان پل۔',
 };
 
 export default function AboutPage() {
   return (
-    <div className="min-h-screen">
-      <Header />
+    <div className="min-h-screen" lang="ur" dir="rtl">
+      <Header lang="ur" />
       <main id="main-content" className="pt-32 pb-20" data-pagefind-body>
         <div className="container">
-          {/* Hero Section */}
           <div className="text-center mb-20">
-            <h1 className="text-display mb-8">About</h1>
-            <p className="text-body-lg text-gray-600 max-w-3xl mx-auto">
-              Writer and storyteller exploring the intersection of technology, culture, and human experience.
+            <h1 className="text-display urdu-display mb-8">تعارف</h1>
+            <p className="large-text urdu-text text-gray-600 max-w-3xl mx-auto">
+              لکھاری اور کہانی گو جو ٹیکنالوجی، ثقافت، اور انسانی تجربات کے درمیان تعلق کو دریافت کرتا ہے۔
             </p>
           </div>
 
@@ -30,7 +30,7 @@ export default function AboutPage() {
                 <div className="aspect-square relative rounded-3xl overflow-hidden shadow-2xl mb-8">
                   <Image
                     src="https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=500&h=500&fit=crop"
-                    alt="Abdul Basit Zafar"
+                    alt="عبدالباسط ظفر"
                     fill
                     className="object-cover"
                     priority
@@ -39,87 +39,89 @@ export default function AboutPage() {
                 </div>
                 
                 {/* Quick Stats */}
-                <div className="space-y-4">
-                  <div className="flex items-center space-x-3 text-gray-600">
+                <div className="space-y-4 text-right">
+                  <div className="flex items-center space-x-3 space-x-reverse justify-end">
                     <MapPin className="w-5 h-5 text-red-600" />
-                    <span>Bonn, Germany</span>
+                    <span className="urdu-text">بن، جرمنی</span>
                   </div>
                   
-                  <div className="flex items-center space-x-3 text-gray-600">
+                  <div className="flex items-center space-x-3 space-x-reverse justify-end">
                     <BookOpen className="w-5 h-5 text-red-600" />
-                    <span>3 Published Books</span>
+                    <span className="urdu-text">3 کتابیں شائع</span>
                   </div>
                   
-                  <div className="flex items-center space-x-3 text-gray-600">
+                  <div className="flex items-center space-x-3 space-x-reverse justify-end">
                     <Users className="w-5 h-5 text-red-600" />
-                    <span>Bilingual Writer</span>
+                    <span className="urdu-text">دو زبانی لکھاری</span>
                   </div>
                 </div>
               </div>
             </div>
 
             {/* Biography */}
-            <div className="lg:col-span-2">
+            <div className="lg:col-span-2 text-right">
               <div className="prose max-w-none">
-                <p className="text-body-lg text-gray-700 mb-8">
-                  Abdul Basit Zafar is a bilingual writer whose work bridges the digital and literary worlds. 
-                  Born in Pakistan and now based in Germany, his writing explores themes of migration, 
-                  technology, and cultural identity.
-                </p>
+                <div className="urdu-text text-gray-700 leading-loose space-y-8">
+                  <p>
+                    عبدالباسط ظفر ایک دو زبانی لکھاری ہے جس کا کام ڈیجیٹل اور ادبی دنیاوں کو جوڑتا ہے۔ 
+                    پاکستان میں پیدا ہوا اور اب جرمنی میں مقیم، اس کی تحریریں ہجرت، ٹیکنالوجی، 
+                    اور ثقافتی شناخت کے موضوعات کو دریافت کرتی ہیں۔
+                  </p>
 
-                <p className="text-body text-gray-700 mb-8">
-                  His debut novel "Shadows of Memory" received critical acclaim for its nuanced portrayal 
-                  of immigrant experience in modern Pakistan. His essays have appeared in publications 
-                  ranging from tech journals to literary magazines, always seeking to find the human 
-                  story within technological change.
-                </p>
+                  <p>
+                    ان کا پہلا ناول "یادوں کے سائے" جدید پاکستان میں مہاجر تجربے کی نفیس تصویر کشی 
+                    کے لیے تنقیدی پذیرائی حاصل کر چکا ہے۔ ان کے مضامین ٹیک جرنلز سے لے کر ادبی 
+                    رسائل تک مختلف اشاعات میں شائع ہوئے ہیں۔
+                  </p>
 
-                <AudioBlock 
-                  src="/audio/about-intro.mp3"
-                  transcript="Hello, I'm Abdul Basit. I write stories that live between worlds - between languages, cultures, and the digital spaces that connect us all. My work explores how technology shapes our most human experiences."
-                  title="About Me - Audio Introduction"
-                />
+                  <AudioBlock 
+                    src="/audio/about-intro-urdu.mp3"
+                    transcript="السلام علیکم، میں عبدالباسط ہوں۔ میں ایسی کہانیاں لکھتا ہوں جو دنیاوں کے درمیان رہتی ہیں - زبانوں، ثقافتوں، اور ان ڈیجیٹل جگہوں کے درمیان جو ہم سب کو جوڑتی ہیں۔"
+                    title="تعارف - آڈیو"
+                    lang="ur"
+                  />
 
-                <p className="text-body text-gray-700 mb-8">
-                  Writing in both English and Urdu, Abdul Basit seeks to preserve and celebrate the 
-                  richness of multilingual storytelling. His Urdu series "بن کا بنجارہ" (Bonn Ka Banjara) 
-                  chronicles his experiences as a wanderer in Germany, capturing the poetry of displacement 
-                  and discovery.
-                </p>
+                  <p>
+                    اردو اور انگریزی دونوں میں لکھتے ہوئے، عبدالباسط کثیر لسانی کہانی گوئی کی 
+                    بھرپوری کو محفوظ اور منانے کی کوشش کرتا ہے۔ ان کا اردو سلسلہ "بن کا بنجارہ" 
+                    جرمنی میں ایک آوارہ کے تجربات کو بیان کرتا ہے۔
+                  </p>
 
-                <div className="bg-gray-50 rounded-2xl p-8 mb-8">
-                  <h2 className="text-heading-3 mb-6 flex items-center">
-                    <Award className="w-6 h-6 text-red-600 mr-3" />
-                    Recognition
-                  </h2>
-                  <ul className="space-y-3 text-gray-700">
-                    <li className="flex items-start">
-                      <span className="w-2 h-2 bg-red-600 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                      Shortlisted for the International Literature Prize (2023)
-                    </li>
-                    <li className="flex items-start">
-                      <span className="w-2 h-2 bg-red-600 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                      Featured in "30 Under 30" Writers to Watch
-                    </li>
-                    <li className="flex items-start">
-                      <span className="w-2 h-2 bg-red-600 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                      Recipient of the Digital Storytelling Innovation Grant
-                    </li>
-                  </ul>
+                  <div className="bg-gray-50 rounded-2xl p-8 my-8">
+                    <h2 className="text-heading-3 urdu-heading mb-6 flex items-center space-x-2 space-x-reverse justify-end">
+                      <Award className="w-6 h-6 text-red-600" />
+                      <span>اعزازات</span>
+                    </h2>
+                    <ul className="space-y-3 urdu-text">
+                      <li>• بین الاقوامی ادبی انعام کے لیے شارٹ لسٹ (2023)</li>
+                      <li>• "30 انڈر 30" لکھاریوں میں شامل</li>
+                      <li>• ڈیجیٹل کہانی گوئی انوویشن گرانٹ کے وصول کنندہ</li>
+                    </ul>
+                  </div>
+
+                  <h2 className="text-heading-3 urdu-heading mb-6">تقاریر اور کمیونٹی</h2>
+                  <p>
+                    عبدالباسط باقاعدگی سے کانفرنسوں میں ٹیکنالوجی اور کہانی گوئی کے درمیان تعلق 
+                    کے بارے میں بات کرتا ہے۔ وہ کہانی کی طاقت میں یقین رکھتا ہے کہ یہ ثقافتی 
+                    تقسیم کو ختم کر سکتی ہے اور ہماری بڑھتی ہوئی جڑی دنیا میں تفہیم پیدا کر سکتی ہے۔
+                  </p>
                 </div>
+              </div>
 
-                <h2 className="text-heading-3 mb-6">Speaking & Community</h2>
-                <p className="text-body text-gray-700">
-                  Abdul Basit regularly speaks at conferences about the intersection of technology 
-                  and storytelling. He believes in the power of narrative to bridge cultural divides 
-                  and create understanding in our increasingly connected world.
-                </p>
+              <div className="mt-12 text-center">
+                <Link 
+                  href="/contact"
+                  className="btn btn-primary group urdu-text"
+                >
+                  رابطہ کریں
+                  <ArrowUpRight className="w-5 h-5 mr-2 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                </Link>
               </div>
             </div>
           </div>
         </div>
       </main>
-      <Footer />
+      <Footer lang="ur" />
     </div>
   );
 }

@@ -4,31 +4,33 @@ import { EssayCard } from '@/components/EssayCard';
 import { essays } from '@/lib/data/content';
 
 export const metadata = {
-  title: 'Writing - Abdul Basit Zafar',
-  description: 'Essays and articles exploring technology, culture, and human experience.',
+  title: 'تحریریں - عبدالباسط ظفر',
+  description: 'مضامین اور تحریریں جو ٹیکنالوجی، ثقافت، اور انسانی تجربات کو دریافت کرتی ہیں۔',
 };
 
 export default function WritingPage() {
   return (
-    <div className="min-h-screen flex flex-col">
-      <Header />
-      <main id="main-content" className="flex-1 py-16" data-pagefind-body>
-        <div className="container mx-auto px-4">
-          <div className="mb-12">
-            <h1 className="text-4xl font-bold mb-6">Writing</h1>
-            <p className="text-xl text-muted-foreground max-w-2xl">
-              Essays and articles exploring the intersection of technology, culture, and human experience.
+    <div className="min-h-screen" lang="ur" dir="rtl">
+      <Header lang="ur" />
+      <main id="main-content" className="pt-32 pb-20" data-pagefind-body>
+        <div className="container">
+          <div className="text-center mb-20">
+            <h1 className="text-display urdu-display mb-8">تحریریں</h1>
+            <p className="large-text urdu-text text-gray-600 max-w-3xl mx-auto">
+              مضامین اور تحریریں جو ٹیکنالوجی، ثقافت، اور انسانی تجربات کے درمیان تعلق کو دریافت کرتی ہیں۔
             </p>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            {essays.map((essay) => (
-              <EssayCard key={essay.id} essay={essay} />
+          <div className="work-grid">
+            {essays.map((essay, index) => (
+              <div key={essay.id} className="animate-slide-up" style={{animationDelay: `${index * 150}ms`}}>
+                <EssayCard essay={essay} lang="ur" />
+              </div>
             ))}
           </div>
         </div>
       </main>
-      <Footer />
+      <Footer lang="ur" />
     </div>
   );
 }

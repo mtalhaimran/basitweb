@@ -2,22 +2,36 @@
 
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
-import { Search, Menu, X, Home, BookOpen, PenTool, User, Mail, FileText } from 'lucide-react';
+import { Search, Menu, X, ArrowUpRight } from 'lucide-react';
 import { SearchOverlay } from './SearchOverlay';
 
-export function Header() {
+interface HeaderProps {
+  lang?: 'en' | 'ur';
+}
+
+export function Header({ lang = 'en' }: HeaderProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
-  const navigation = [
-    { name: 'Home', href: '/', icon: Home },
-    { name: 'Work', href: '/work', icon: PenTool },
-    { name: 'Books', href: '/books', icon: BookOpen },
-    { name: 'Writing', href: '/writing', icon: FileText },
-    { name: 'Bonn Ka Banjara', href: '/bonn-ka-banjara', icon: PenTool },
-    { name: 'About', href: '/about', icon: User },
-    { name: 'Contact', href: '/contact', icon: Mail }
+  const isUrdu = lang === 'ur';
+
+  const navigation = isUrdu ? [
+    { name: 'ہوم', href: '/' },
+    { name: 'کام', href: '/work' },
+    { name: 'کتابیں', href: '/books' },
+    { name: 'تحریریں', href: '/writing' },
+    { name: 'بن کا بنجارہ', href: '/bonn-ka-banjara' },
+    { name: 'تعارف', href: '/about' },
+    { name: 'رابطہ', href: '/contact' }
+  ] : [
+    { name: 'Home', href: '/' },
+    { name: 'Work', href: '/work' },
+    { name: 'Books', href: '/books' },
+    { name: 'Writing', href: '/writing' },
+    { name: 'Bonn Ka Banjara', href: '/bonn-ka-banjara' },
+    { name: 'About', href: '/about' },
+    { name: 'Contact', href: '/contact' }
   ];
 
   useEffect(() => {
@@ -48,50 +62,44 @@ export function Header() {
   return (
     <>
       <a href="#main-content" className="skip-link">
-        Skip to main content
+        {isUrdu ? 'مین کنٹینٹ پر جائیں' : 'Skip to main content'}
       </a>
 
-      <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled 
-          ? 'glass-effect shadow-lg' 
-          : 'bg-transparent'
-      }`}>
+      <header className={`minimal-nav ${isScrolled ? 'scrolled' : ''}`}>
         <div className="container">
-          <div className="flex h-20 items-center justify-between">
+          <div className={`flex h-20 items-center justify-between ${isUrdu ? 'flex-row-reverse' : ''}`}>
             {/* Logo */}
             <Link 
               href="/" 
-              className="text-2xl font-black text-gray-900 hover:text-red-600 transition-colors duration-200 focus-ring rounded-lg"
+              className={`text-2xl font-bold text-gray-900 hover:text-red-600 transition-colors duration-200 focus-ring rounded-lg ${
+                isUrdu ? 'urdu-heading' : ''
+              }`}
             >
-              Abdul Basit Zafar
+              {isUrdu ? 'عبدالباسط ظفر' : 'Abdul Basit Zafar'}
             </Link>
 
             {/* Desktop Navigation */}
-            <nav className="hidden lg:flex items-center space-x-1" role="navigation">
-              {navigation.map((item) => {
-                const Icon = item.icon;
-                return (
-                  <Link
-                    key={item.href}
-                    href={item.href}
-                    className="nav-link flex items-center space-x-2"
-                  >
-                    <Icon className="w-4 h-4" />
-                    <span>{item.name}</span>
-                  </Link>
-                );
-              })}
+            <nav className={`hidden lg:flex items-center ${isUrdu ? 'space-x-reverse space-x-8' : 'space-x-8'}`} role="navigation">
+              {navigation.map((item) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className={`nav-link ${isUrdu ? 'urdu-text' : ''}`}
+                >
+                  {item.name}
+                </Link>
+              ))}
             </nav>
 
             {/* Actions */}
-            <div className="flex items-center space-x-3">
+            <div className={`flex items-center ${isUrdu ? 'space-x-reverse space-x-4' : 'space-x-4'}`}>
               <button
                 onClick={() => setIsSearchOpen(true)}
-                className="btn-ghost p-3 rounded-lg"
-                aria-label="Search"
+                className="btn-ghost p-3 rounded-lg group"
+                aria-label={isUrdu ? 'تلاش' : 'Search'}
               >
                 <Search className="w-5 h-5" />
-                <span className="hidden sm:inline text-xs text-gray-500 ml-2">
+                <span className={`hidden sm:inline text-xs text-gray-500 ${isUrdu ? 'mr-2 urdu-text' : 'ml-2'}`}>
                   ⌘K
                 </span>
               </button>
@@ -100,7 +108,7 @@ export function Header() {
               <button
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
                 className="lg:hidden btn-ghost p-3 rounded-lg"
-                aria-label="Open menu"
+                aria-label={isUrdu ? 'مینو کھولیں' : 'Open menu'}
                 aria-expanded={isMenuOpen}
               >
                 {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -113,23 +121,21 @@ export function Header() {
             <nav 
               className="lg:hidden border-t border-gray-200 glass-effect animate-slide-up"
               role="navigation"
-              aria-label="Mobile navigation"
+              aria-label={isUrdu ? 'موبائل نیویگیشن' : 'Mobile navigation'}
             >
-              <div className="py-6 space-y-2">
-                {navigation.map((item) => {
-                  const Icon = item.icon;
-                  return (
-                    <Link
-                      key={item.href}
-                      href={item.href}
-                      className="flex items-center space-x-3 px-4 py-3 text-base font-medium hover:bg-gray-50 rounded-lg transition-colors focus-ring"
-                      onClick={() => setIsMenuOpen(false)}
-                    >
-                      <Icon className="w-5 h-5 text-gray-400" />
-                      <span className="text-gray-900">{item.name}</span>
-                    </Link>
-                  );
-                })}
+              <div className={`py-6 space-y-2 ${isUrdu ? 'text-right' : ''}`}>
+                {navigation.map((item) => (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    className={`block px-4 py-3 text-base font-medium hover:bg-gray-50 rounded-lg transition-colors focus-ring ${
+                      isUrdu ? 'urdu-text' : ''
+                    }`}
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    {item.name}
+                  </Link>
+                ))}
               </div>
             </nav>
           )}
@@ -138,7 +144,8 @@ export function Header() {
 
       <SearchOverlay 
         isOpen={isSearchOpen} 
-        onClose={() => setIsSearchOpen(false)} 
+        onClose={() => setIsSearchOpen(false)}
+        lang={lang}
       />
     </>
   );

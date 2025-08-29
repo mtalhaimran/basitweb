@@ -21,30 +21,24 @@ const notoNaskh = Noto_Naskh_Arabic({
 });
 
 export const metadata: Metadata = {
-  title: 'Abdul Basit Zafar - Writer & Storyteller',
-  description: 'Portfolio of Abdul Basit Zafar - books, essays, and stories in English and Urdu',
+  title: 'عبدالباسط ظفر - لکھاری اور کہانی گو',
+  description: 'عبدالباسط ظفر کا پورٹ فولیو - کتابیں، مضامین، اور کہانیاں',
   metadataBase: new URL('https://abdulbasitzafar.com'),
   openGraph: {
     type: 'website',
-    locale: 'en_US',
+    locale: 'ur_PK',
     url: 'https://abdulbasitzafar.com',
-    siteName: 'Abdul Basit Zafar',
+    siteName: 'عبدالباسط ظفر',
     images: [{
       url: '/og-image.jpg',
       width: 1200,
       height: 630,
-      alt: 'Abdul Basit Zafar - Writer & Storyteller'
+      alt: 'عبدالباسط ظفر - لکھاری اور کہانی گو'
     }]
   },
   twitter: {
     card: 'summary_large_image',
     creator: '@abdulbasitzafar'
-  },
-  alternates: {
-    languages: {
-      'en': '/',
-      'ur': '/ur'
-    }
   }
 };
 
@@ -54,12 +48,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="ur" dir="rtl">
       <head>
         <script defer src="/pagefind/pagefind-ui.js"></script>
         <link href="/pagefind/pagefind-ui.css" rel="stylesheet" />
       </head>
-      <body className={`${inter.variable} ${notoNastaliq.variable} ${notoNaskh.variable} font-sans antialiased`}>
+      <body className={`${inter.variable} ${notoNastaliq.variable} ${notoNaskh.variable} font-urdu-body antialiased`}>
         {children}
       </body>
     </html>
