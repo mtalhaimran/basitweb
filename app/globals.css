@@ -765,10 +765,12 @@
 
 /* Large text treatment */
 .large-text {
-  font-size: clamp(1.25rem, 3vw, 1.75rem);
-  line-height: 1.4;
+  font-size: clamp(1.125rem, 2.5vw, 1.375rem); /* More readable size */
+  line-height: 1.6; /* Improved readability */
   font-weight: 400;
   color: var(--ink); /* Use new ink color */
+  max-width: 65ch; /* Optimal line length */
+  letter-spacing: 0.01em; /* Slight spacing for clarity */
 }
 
 /* Minimal navigation */

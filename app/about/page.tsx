@@ -88,10 +88,10 @@ export default function AboutPage() {
                   </p>
 
                   <div className="bg-gray-50 rounded-2xl p-8 my-8">
-                    <h2 className="text-heading-3 urdu-heading mb-6 flex items-center space-x-2 space-x-reverse justify-end">
+                    <h3 className="text-heading-3 urdu-heading mb-6 flex items-center space-x-2 space-x-reverse justify-end">
                       <Award className="w-6 h-6 text-red-600" />
                       <span className="text-ink">اعزازات</span> {/* Use new ink color */}
-                    </h2>
+                    </h3>
                     <ul className="space-y-3 urdu-text">
                       <li>• بین الاقوامی ادبی انعام کے لیے شارٹ لسٹ (2023)</li>
                       <li>• "30 انڈر 30" لکھاریوں میں شامل</li>
@@ -99,7 +99,7 @@ export default function AboutPage() {
                     </ul>
                   </div>
 
-                  <h2 className="text-heading-3 urdu-heading mb-6">تقاریر اور کمیونٹی</h2>
+                  <h3 className="text-heading-3 urdu-heading mb-6">تقاریر اور کمیونٹی</h3>
                   <p>
                     عبدالباسط باقاعدگی سے کانفرنسوں میں ٹیکنالوجی اور کہانی گوئی کے درمیان تعلق 
                     کے بارے میں بات کرتا ہے۔ وہ کہانی کی طاقت میں یقین رکھتا ہے کہ یہ ثقافتی 
