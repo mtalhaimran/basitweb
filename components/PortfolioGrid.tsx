@@ -297,12 +297,12 @@ export function PortfolioGrid({ lang = 'en' }: PortfolioGridProps) {
         <div className="container">
           <div className={`max-w-4xl mx-auto text-center ${isUrdu ? 'text-right' : ''}`}>
             <h2 className={`text-heading-2 mb-8 ${isUrdu ? 'urdu-heading' : ''}`}>
-              {isUrdu ? 'آئیے جڑتے ہیں' : 'Let's Connect'}
+              {isUrdu ? 'آئیے جڑتے ہیں' : 'Let\'s Connect'}
             </h2>
             <p className={`large-text mb-12 ${isUrdu ? 'urdu-text' : ''}`}>
               {isUrdu 
                 ? 'تعاون، تقاریر، یا صرف کہانیوں کے بارے میں بات کرنے میں دلچسپی ہے؟ میں آپ سے سننا پسند کروں گا۔'
-                : 'Interested in collaborations, speaking engagements, or just want to discuss stories? I'd love to hear from you.'
+                : 'Interested in collaborations, speaking engagements, or just want to discuss stories? I\'d love to hear from you.'
               }
             </p>
             <div className={`flex flex-col sm:flex-row gap-6 justify-center ${isUrdu ? 'sm:flex-row-reverse' : ''}`}>
