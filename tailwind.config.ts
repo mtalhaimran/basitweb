@@ -39,16 +39,11 @@ const config: Config = {
         'surface-muted': 'var(--surface-muted)',
         line: 'var(--line)',
         'line-strong': 'var(--line-strong)',
-        
-        // Semantic colors (retained but adjusted to new palette)
-        success: 'var(--success)',
-        warning: 'var(--warning)',
-        error: 'var(--error)',
-        },
         // Semantic colors
         success: '#059669',
         warning: '#D97706',
         error: '#DC2626',
+      },
       },
       fontSize: {
         'xs': ['0.75rem', { lineHeight: '1.5' }],
