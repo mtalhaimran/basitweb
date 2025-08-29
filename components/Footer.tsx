@@ -1,3 +1,5 @@
+'use client';
+
 import Link from 'next/link';
 import { Twitter, Linkedin, Mail, Heart, Download, FileText } from 'lucide-react';
 
@@ -107,20 +109,21 @@ export function Footer() { // Removed lang prop as site is now primarily Urdu
           <div className={`md:col-span-4 ${isUrdu ? 'md:col-start-1' : ''}`}>
             <h3 className={`text-heading-4 mb-8 ${isUrdu ? 'urdu-heading' : ''}`}>
               {isUrdu ? 'اپڈیٹ رہیں' : 'Stay Updated'}
+            </h3>
+          </div>
         </div>
 
         {/* Bottom Section */}
         <div className={`mt-16 pt-8 border-t border-gray-200 ${isUrdu ? 'text-right' : ''}`}>
           <div className={`flex flex-col md:flex-row items-center justify-between space-y-4 md:space-y-0 ${
             isUrdu ? 'md:flex-row-reverse' : ''
+          }`}>
           <div className="flex flex-col items-center space-y-4">
             <p className={`text-ink-muted text-sm urdu-text`}> {/* Use new ink-muted */}
               © {new Date().getFullYear()} عبدالباسط ظفر۔ تمام حقوق محفوظ ہیں۔
             </p>
             
             <div className="flex items-center gap-6 text-sm text-gray-500">
-              isUrdu ? 'flex-row-reverse' : ''
-            }`}>
               <Link // Keep sitemap link
                 href="/sitemap.xml" 
                 className="hover:text-red-600 transition-colors focus-ring rounded"
@@ -135,6 +138,7 @@ export function Footer() { // Removed lang prop as site is now primarily Urdu
               </div>
             </div>
           </div>
+        </div>
         </div>
       </div>
     </footer>
