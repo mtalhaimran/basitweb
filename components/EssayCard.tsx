@@ -1,3 +1,4 @@
+import React from 'react';
 import Link from 'next/link';
 import { FileText, Clock, ArrowUpRight, Calendar, Tag } from 'lucide-react';
 import type { Essay } from '@/lib/data/content';
