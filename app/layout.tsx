@@ -1,8 +1,24 @@
 import './globals.css';
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
+import { Inter, Noto_Nastaliq_Urdu, Noto_Naskh_Arabic } from 'next/font/google';
 
-const inter = Inter({ subsets: ['latin'] });
+const inter = Inter({ 
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-inter'
+});
+
+const notoNastaliq = Noto_Nastaliq_Urdu({
+  subsets: ['arabic'],
+  display: 'swap',
+  variable: '--font-urdu-heading'
+});
+
+const notoNaskh = Noto_Naskh_Arabic({
+  subsets: ['arabic'],
+  display: 'swap',
+  variable: '--font-urdu-body'
+});
 
 export const metadata: Metadata = {
   title: 'Abdul Basit Zafar - Writer & Storyteller',
@@ -40,14 +56,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <link
-          href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;500;600;700&family=Noto+Naskh+Arabic:wght@400;500;600&display=swap"
-          rel="stylesheet"
-        />
         <script defer src="/pagefind/pagefind-ui.js"></script>
         <link href="/pagefind/pagefind-ui.css" rel="stylesheet" />
       </head>
-      <body className={inter.className}>{children}</body>
+      <body className={`${inter.variable} ${notoNastaliq.variable} ${notoNaskh.variable} font-sans antialiased`}>
+        {children}
+      </body>
     </html>
   );
 }

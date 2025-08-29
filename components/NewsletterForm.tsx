@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Mail } from 'lucide-react';
+import { Mail, CheckCircle, AlertCircle } from 'lucide-react';
 
 interface NewsletterFormProps {
   lang?: 'en' | 'ur';
@@ -16,12 +16,21 @@ export function NewsletterForm({ lang = 'en' }: NewsletterFormProps) {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    if (!email || !email.includes('@')) {
+      setStatus('error');
+      setMessage(isUrdu 
+        ? 'براہ کرم صحیح ای میل ایڈریس داخل کریں۔'
+        : 'Please enter a valid email address.'
+      );
+      return;
+    }
+
     setStatus('loading');
 
     try {
-      // Simulate Mailchimp API call
-      // In production, this would call your Mailchimp API endpoint
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      // Simulate Mailchimp API call with double opt-in
+      await new Promise(resolve => setTimeout(resolve, 1500));
       
       setStatus('success');
       setMessage(isUrdu 
@@ -49,35 +58,51 @@ export function NewsletterForm({ lang = 'en' }: NewsletterFormProps) {
             placeholder={isUrdu ? 'آپ کا ای میل ایڈریس' : 'Your email address'}
             required
             disabled={status === 'loading'}
-            className={`w-full px-4 py-2 text-sm border rounded-md focus:ring-2 focus:ring-primary focus:border-transparent disabled:opacity-50 ${
-              isUrdu ? 'text-right urdu-text pr-10' : 'pl-10'
-            }`}
+            className={`w-full px-4 py-3 text-sm border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent disabled:opacity-50 transition-all ${
+              isUrdu ? 'text-right font-urdu-body pr-12' : 'pl-12'
+            } ${status === 'success' ? 'border-green-500' : status === 'error' ? 'border-red-500' : ''}`}
             dir={isUrdu ? 'rtl' : 'ltr'}
           />
-          <Mail className={`w-4 h-4 text-muted-foreground absolute top-2.5 ${isUrdu ? 'right-3' : 'left-3'}`} />
+          <Mail className={`w-4 h-4 text-muted-foreground absolute top-3.5 ${isUrdu ? 'right-4' : 'left-4'}`} />
         </div>
         
         <button
           type="submit"
           disabled={status === 'loading' || !email}
-          className={`w-full px-4 py-2 text-sm font-medium bg-primary text-primary-foreground rounded-md hover:bg-primary/90 disabled:opacity-50 transition-colors ${
-            isUrdu ? 'urdu-text' : ''
+          className={`w-full px-4 py-3 text-sm font-medium bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 disabled:opacity-50 transition-all btn-primary focus-ring ${
+            isUrdu ? 'font-urdu-body' : ''
           }`}
         >
           {status === 'loading' 
             ? (isUrdu ? 'سائن اپ ہو رہا ہے...' : 'Signing up...') 
-            : (isUrdu ? 'سائن اپ کریں' : 'Sign Up')
+            : (isUrdu ? 'سائن اپ کریں' : 'Subscribe')
           }
         </button>
       </form>
 
       {message && (
-        <p className={`mt-3 text-xs ${
-          status === 'success' ? 'text-green-600' : 'text-red-600'
-        } ${isUrdu ? 'urdu-text' : ''}`}>
-          {message}
-        </p>
+        <div className={`mt-4 p-3 rounded-lg flex items-center space-x-2 ${
+          status === 'success' 
+            ? 'bg-green-50 text-green-800 border border-green-200' 
+            : 'bg-red-50 text-red-800 border border-red-200'
+        } ${isUrdu ? 'flex-row-reverse space-x-reverse' : ''}`}>
+          {status === 'success' ? (
+            <CheckCircle className="w-4 h-4 flex-shrink-0" />
+          ) : (
+            <AlertCircle className="w-4 h-4 flex-shrink-0" />
+          )}
+          <p className={`text-xs ${isUrdu ? 'font-urdu-body' : ''}`}>
+            {message}
+          </p>
+        </div>
       )}
+
+      <p className={`mt-3 text-xs text-muted-foreground ${isUrdu ? 'font-urdu-body' : ''}`}>
+        {isUrdu 
+          ? 'ہم آپ کی ای میل کبھی شیئر نہیں کریں گے۔ آپ کسی بھی وقت ان سبسکرائب کر سکتے ہیں۔'
+          : 'We\'ll never share your email. Unsubscribe at any time.'
+        }
+      </p>
     </div>
   );
 }
