@@ -42,8 +42,8 @@ export default function ContactPage() {
   ];
 
   return (
-    <div className="min-h-screen" lang="ur" dir="rtl">
-      <Header lang="ur" />
+    <div className="min-h-screen"> {/* Removed lang/dir as it's now in root layout */}
+      <Header />
       <main id="main-content" className="pt-32 pb-20" data-pagefind-body>
         <div className="container">
           <div className="text-center mb-20">
@@ -61,7 +61,7 @@ export default function ContactPage() {
                 
                 <div className="space-y-6">
                   <div className="flex items-center space-x-4 space-x-reverse justify-end">
-                    <div className="p-4 bg-red-100 rounded-2xl">
+                    <div className="p-4 bg-primary-light rounded-2xl"> {/* Use new primary-light */}
                       <Mail className="w-6 h-6 text-red-600" />
                     </div>
                     <div>
@@ -76,7 +76,7 @@ export default function ContactPage() {
                   </div>
                   
                   <div className="flex items-center space-x-4 space-x-reverse justify-end">
-                    <div className="p-4 bg-red-100 rounded-2xl">
+                    <div className="p-4 bg-primary-light rounded-2xl"> {/* Use new primary-light */}
                       <MapPin className="w-6 h-6 text-red-600" />
                     </div>
                     <div>
@@ -121,7 +121,7 @@ export default function ContactPage() {
                   {collaborationTypes.map((type) => {
                     const Icon = type.icon;
                     return (
-                      <div key={type.title} className="minimal-card">
+                      <div key={type.title} className="minimal-card"> {/* Use new card styling */}
                         <div className="flex items-start space-x-4 space-x-reverse justify-end">
                           <div className="p-4 bg-red-100 rounded-2xl flex-shrink-0">
                             <Icon className="w-6 h-6 text-red-600" />
@@ -151,7 +151,7 @@ export default function ContactPage() {
           </div>
         </div>
       </main>
-      <Footer lang="ur" />
+      <Footer />
     </div>
   );
 }

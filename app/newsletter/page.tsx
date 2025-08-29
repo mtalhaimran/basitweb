@@ -9,9 +9,9 @@ export const metadata = {
 };
 
 export default function NewsletterPage() {
-  return (
-    <div className="min-h-screen" lang="ur" dir="rtl">
-      <Header lang="ur" />
+  return ( // Removed lang/dir as it's now in root layout
+    <div className="min-h-screen">
+      <Header />
       <main id="main-content" className="pt-32 pb-20" data-pagefind-body>
         <div className="container">
           <div className="text-center mb-20">
@@ -22,26 +22,26 @@ export default function NewsletterPage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
-            <div className="text-center p-8">
-              <Mail className="w-12 h-12 text-red-600 mx-auto mb-6" />
-              <h3 className="text-heading-4 urdu-heading mb-4">کہانیاں پہلے</h3>
-              <p className="urdu-text text-gray-600">
+            <div className="text-center p-8"> {/* Use new text colors */}
+              <Mail className="w-12 h-12 text-primary mx-auto mb-6" /> {/* Use new primary color */}
+              <h3 className="text-heading-4 urdu-heading mb-4 text-ink">کہانیاں پہلے</h3> {/* Use new ink color */}
+              <p className="urdu-text text-ink-muted">
                 نئے مضامین، کتابوں کے اقتباسات، اور تاملات آپ کے انباکس میں۔
               </p>
             </div>
             
-            <div className="text-center p-8">
-              <Users className="w-12 h-12 text-red-600 mx-auto mb-6" />
-              <h3 className="text-heading-4 urdu-heading mb-4">کمیونٹی</h3>
-              <p className="urdu-text text-gray-600">
+            <div className="text-center p-8"> {/* Use new text colors */}
+              <Users className="w-12 h-12 text-primary mx-auto mb-6" /> {/* Use new primary color */}
+              <h3 className="text-heading-4 urdu-heading mb-4 text-ink">کمیونٹی</h3> {/* Use new ink color */}
+              <p className="urdu-text text-ink-muted">
                 دنیا بھر کے ساتھی قارئین اور لکھاریوں کے ساتھ بحث میں شامل ہوں۔
               </p>
             </div>
             
-            <div className="text-center p-8">
-              <Calendar className="w-12 h-12 text-red-600 mx-auto mb-6" />
-              <h3 className="text-heading-4 urdu-heading mb-4">پردے کے پیچھے</h3>
-              <p className="urdu-text text-gray-600">
+            <div className="text-center p-8"> {/* Use new text colors */}
+              <Calendar className="w-12 h-12 text-primary mx-auto mb-6" /> {/* Use new primary color */}
+              <h3 className="text-heading-4 urdu-heading mb-4 text-ink">پردے کے پیچھے</h3> {/* Use new ink color */}
+              <p className="urdu-text text-ink-muted">
                 تحریری عمل کی بصیرت، الہام کے ذرائع، اور آنے والے منصوبے۔
               </p>
             </div>
@@ -52,7 +52,7 @@ export default function NewsletterPage() {
             <NewsletterForm lang="ur" />
             
             <div className="mt-8 p-6 bg-gray-50 rounded-xl">
-              <p className="text-caption urdu-text text-gray-600 text-center leading-relaxed">
+              <p className="text-caption urdu-text text-ink-muted text-center leading-relaxed"> {/* Use new ink-muted */}
                 سبسکرائب کرنے سے، آپ کو ایک تصدیقی ای میل موصول ہوگا۔ آپ کا ای میل کبھی شیئر نہیں کیا جائے گا، 
                 اور آپ کسی بھی وقت ان سبسکرائب کر سکتے ہیں۔ ماہانہ نیوز لیٹر، کوئی سپیم نہیں۔
               </p>
@@ -60,7 +60,7 @@ export default function NewsletterPage() {
           </div>
         </div>
       </main>
-      <Footer lang="ur" />
+      <Footer />
     </div>
   );
 }

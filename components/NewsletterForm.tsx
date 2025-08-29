@@ -10,12 +10,12 @@ interface NewsletterFormProps {
   lang?: 'en' | 'ur';
 }
 
-export function NewsletterForm({ compact = false, lang = 'en' }: NewsletterFormProps) {
+export function NewsletterForm({ compact = false }: NewsletterFormProps) { // Removed lang prop as site is now primarily Urdu
   const [email, setEmail] = useState('');
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const [message, setMessage] = useState('');
   
-  const isUrdu = lang === 'ur';
+  const isUrdu = true; // Always Urdu
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -56,7 +56,7 @@ export function NewsletterForm({ compact = false, lang = 'en' }: NewsletterFormP
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder={isUrdu ? 'آپ کا ای میل' : 'Your email'}
-            required
+            required // Keep required
             disabled={status === 'loading'}
             className={`input flex-1 text-sm ${isUrdu ? 'text-right urdu-text' : ''}`}
             dir={isUrdu ? 'rtl' : 'ltr'}
@@ -64,7 +64,7 @@ export function NewsletterForm({ compact = false, lang = 'en' }: NewsletterFormP
           <button
             type="submit"
             disabled={status === 'loading' || !email}
-            className={`btn btn-primary text-sm px-6 ${isUrdu ? 'urdu-text' : ''}`}
+            className={`btn btn-primary text-sm px-6 urdu-text`} // Always Urdu
           >
             {status === 'loading' ? '...' : (isUrdu ? 'سبسکرائب' : 'Subscribe')}
           </button>
@@ -72,7 +72,7 @@ export function NewsletterForm({ compact = false, lang = 'en' }: NewsletterFormP
         
         {message && (
           <div className={`mt-4 text-xs ${
-            status === 'success' ? 'text-green-600' : 'text-red-600'
+            status === 'success' ? 'text-success' : 'text-error' // Use semantic colors
           } ${isUrdu ? 'urdu-text text-right' : ''}`}>
             {message}
           </div>
@@ -92,18 +92,18 @@ export function NewsletterForm({ compact = false, lang = 'en' }: NewsletterFormP
             placeholder={isUrdu ? 'آپ کا ای میل ایڈریس' : 'Your email address'}
             required
             disabled={status === 'loading'}
-            className={`input ${isUrdu ? 'text-right urdu-text pr-12' : 'pl-12'} ${
-              status === 'success' ? 'border-green-500' : status === 'error' ? 'border-red-500' : ''
+            className={`input ${isUrdu ? 'text-right urdu-text pr-12' : 'pl-12'} ${ // Always Urdu
+              status === 'success' ? 'border-success' : status === 'error' ? 'border-error' : '' // Use semantic colors
             }`}
             dir={isUrdu ? 'rtl' : 'ltr'}
           />
-          <Mail className={`w-5 h-5 text-gray-400 absolute top-4 ${isUrdu ? 'right-4' : 'left-4'}`} />
+          <Mail className={`w-5 h-5 text-ink-light absolute top-4 right-4`} /> {/* Use new ink-light, always RTL */}
         </div>
         
         <button
           type="submit"
           disabled={status === 'loading' || !email}
-          className={`btn btn-primary w-full group ${isUrdu ? 'urdu-text flex-row-reverse' : ''}`}
+          className={`btn btn-primary w-full group urdu-text flex-row-reverse`} // Always Urdu
         >
           <span>{status === 'loading' ? (isUrdu ? 'سبسکرائب ہو رہا ہے...' : 'Subscribing...') : (isUrdu ? 'نیوز لیٹر سبسکرائب کریں' : 'Subscribe to Newsletter')}</span>
           <ArrowUpRight className={`w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform ${isUrdu ? 'mr-2' : 'ml-2'}`} />
@@ -113,11 +113,11 @@ export function NewsletterForm({ compact = false, lang = 'en' }: NewsletterFormP
       {message && (
         <div className={`mt-6 p-4 rounded-xl flex items-center gap-3 ${
           status === 'success' 
-            ? 'bg-green-50 text-green-800 border border-green-200' 
-            : 'bg-red-50 text-red-800 border border-red-200'
-        } ${isUrdu ? 'flex-row-reverse text-right' : ''}`}>
+            ? 'bg-success/10 text-success border border-success/30' // Use semantic colors
+            : 'bg-error/10 text-error border border-error/30' // Use semantic colors
+        } flex-row-reverse text-right`}> {/* Always RTL */}
           {status === 'success' ? (
-            <CheckCircle className="w-5 h-5 flex-shrink-0" />
+            <CheckCircle className="w-5 h-5 flex-shrink-0 text-success" /> {/* Use semantic color */}
           ) : (
             <AlertCircle className="w-5 h-5 flex-shrink-0" />
           )}

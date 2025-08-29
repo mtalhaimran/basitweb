@@ -10,40 +10,40 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
-        'sans': ['Inter', 'system-ui', 'sans-serif'],
+        sans: ['Inter', 'system-ui', 'sans-serif'],
         'urdu-heading': ['Noto Nastaliq Urdu', 'serif'],
         'urdu-body': ['Noto Naskh Arabic', 'serif'],
       },
       colors: {
-        // Crimson Minimal (Light)
-        brand: {
-          DEFAULT: '#D12A2A',
-          hover: '#B91C1C',
-          light: '#FEF2F2',
-          50: '#FEF2F2',
-          100: '#FEE2E2',
-          200: '#FECACA',
-          300: '#FCA5A5',
-          400: '#F87171',
-          500: '#EF4444',
-          600: '#DC2626',
-          700: '#B91C1C',
-          800: '#991B1B',
-          900: '#7F1D1D',
+        // New Palette: Deep Teal / Elegant Neutrals
+        primary: {
+          DEFAULT: 'var(--primary)',
+          hover: 'var(--primary-hover)',
+          light: 'var(--primary-light)',
+          50: 'var(--primary-50)',
+          100: 'var(--primary-100)',
+          200: 'var(--primary-200)',
+          300: 'var(--primary-300)',
+          400: 'var(--primary-400)',
+          500: 'var(--primary-500)',
+          600: 'var(--primary-600)',
+          700: 'var(--primary-700)',
+          800: 'var(--primary-800)',
+          900: 'var(--primary-900)',
         },
-        ink: {
-          DEFAULT: '#0B0B0F',
-          muted: '#6B7280',
-          light: '#9CA3AF',
-        },
-        surface: {
-          DEFAULT: '#FFFFFF',
-          elevated: '#FAFAFA',
-        },
-        subtle: '#F8F8FA',
-        line: {
-          DEFAULT: '#E9E9EE',
-          strong: '#D1D5DB',
+        ink: 'var(--ink)',
+        'ink-muted': 'var(--ink-muted)',
+        'ink-light': 'var(--ink-light)',
+        surface: 'var(--surface)',
+        'surface-elevated': 'var(--surface-elevated)',
+        'surface-muted': 'var(--surface-muted)',
+        line: 'var(--line)',
+        'line-strong': 'var(--line-strong)',
+        
+        // Semantic colors (retained but adjusted to new palette)
+        success: 'var(--success)',
+        warning: 'var(--warning)',
+        error: 'var(--error)',
         },
         // Semantic colors
         success: '#059669',
@@ -68,7 +68,7 @@ const config: Config = {
         '128': '32rem',
       },
       maxWidth: {
-        'prose': '72ch',
+        prose: '72ch',
         'container': '1280px',
       },
       borderRadius: {
@@ -78,12 +78,12 @@ const config: Config = {
         'xl': '1.5rem',
         '2xl': '2rem',
       },
-      boxShadow: {
-        'sm': '0 1px 2px 0 rgb(0 0 0 / 0.05)',
-        'md': '0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)',
-        'lg': '0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1)',
-        'xl': '0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1)',
-        '2xl': '0 25px 50px -12px rgb(0 0 0 / 0.25)',
+      boxShadow: { // Softer shadows for elegant feel
+        sm: '0 1px 3px 0 rgba(0, 0, 0, 0.08)',
+        md: '0 4px 8px 0 rgba(0, 0, 0, 0.08)',
+        lg: '0 8px 16px 0 rgba(0, 0, 0, 0.08)',
+        xl: '0 12px 24px 0 rgba(0, 0, 0, 0.08)',
+        '2xl': '0 20px 40px 0 rgba(0, 0, 0, 0.1)',
       },
       transitionDuration: {
         '150': '150ms',

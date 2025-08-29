@@ -11,9 +11,9 @@ export const metadata = {
 };
 
 export default function AboutPage() {
-  return (
-    <div className="min-h-screen" lang="ur" dir="rtl">
-      <Header lang="ur" />
+  return ( // Removed lang/dir as it's now in root layout
+    <div className="min-h-screen">
+      <Header />
       <main id="main-content" className="pt-32 pb-20" data-pagefind-body>
         <div className="container">
           <div className="text-center mb-20">
@@ -30,7 +30,7 @@ export default function AboutPage() {
                 <div className="aspect-square relative rounded-3xl overflow-hidden shadow-2xl mb-8">
                   <Image
                     src="https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=500&h=500&fit=crop"
-                    alt="عبدالباسط ظفر"
+                    alt="عبدالباسط ظفر" // Keep alt text
                     fill
                     className="object-cover"
                     priority
@@ -42,17 +42,17 @@ export default function AboutPage() {
                 <div className="space-y-4 text-right">
                   <div className="flex items-center space-x-3 space-x-reverse justify-end">
                     <MapPin className="w-5 h-5 text-red-600" />
-                    <span className="urdu-text">بن، جرمنی</span>
+                    <span className="urdu-text text-ink-muted">بن، جرمنی</span> {/* Use new ink-muted */}
                   </div>
                   
                   <div className="flex items-center space-x-3 space-x-reverse justify-end">
                     <BookOpen className="w-5 h-5 text-red-600" />
-                    <span className="urdu-text">3 کتابیں شائع</span>
+                    <span className="urdu-text text-ink-muted">3 کتابیں شائع</span> {/* Use new ink-muted */}
                   </div>
                   
                   <div className="flex items-center space-x-3 space-x-reverse justify-end">
                     <Users className="w-5 h-5 text-red-600" />
-                    <span className="urdu-text">دو زبانی لکھاری</span>
+                    <span className="urdu-text text-ink-muted">دو زبانی لکھاری</span> {/* Use new ink-muted */}
                   </div>
                 </div>
               </div>
@@ -82,7 +82,7 @@ export default function AboutPage() {
                   />
 
                   <p>
-                    اردو اور انگریزی دونوں میں لکھتے ہوئے، عبدالباسط کثیر لسانی کہانی گوئی کی 
+                    اردو اور انگریزی دونوں میں لکھتے ہوئے، عبدالباسط کثیر لسانی کہانی گوئی کی
                     بھرپوری کو محفوظ اور منانے کی کوشش کرتا ہے۔ ان کا اردو سلسلہ "بن کا بنجارہ" 
                     جرمنی میں ایک آوارہ کے تجربات کو بیان کرتا ہے۔
                   </p>
@@ -90,7 +90,7 @@ export default function AboutPage() {
                   <div className="bg-gray-50 rounded-2xl p-8 my-8">
                     <h2 className="text-heading-3 urdu-heading mb-6 flex items-center space-x-2 space-x-reverse justify-end">
                       <Award className="w-6 h-6 text-red-600" />
-                      <span>اعزازات</span>
+                      <span className="text-ink">اعزازات</span> {/* Use new ink color */}
                     </h2>
                     <ul className="space-y-3 urdu-text">
                       <li>• بین الاقوامی ادبی انعام کے لیے شارٹ لسٹ (2023)</li>
@@ -113,7 +113,7 @@ export default function AboutPage() {
                   href="/contact"
                   className="btn btn-primary group urdu-text"
                 >
-                  رابطہ کریں
+                  رابطہ کریں {/* Use new button styling */}
                   <ArrowUpRight className="w-5 h-5 mr-2 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
                 </Link>
               </div>
@@ -121,7 +121,7 @@ export default function AboutPage() {
           </div>
         </div>
       </main>
-      <Footer lang="ur" />
+      <Footer />
     </div>
   );
 }

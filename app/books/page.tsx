@@ -9,9 +9,9 @@ export const metadata = {
 };
 
 export default function BooksPage() {
-  return (
-    <div className="min-h-screen" lang="ur" dir="rtl">
-      <Header lang="ur" />
+  return ( // Removed lang/dir as it's now in root layout
+    <div className="min-h-screen">
+      <Header />
       <main id="main-content" className="pt-32 pb-20" data-pagefind-body>
         <div className="container">
           <div className="text-center mb-20">
@@ -21,7 +21,7 @@ export default function BooksPage() {
             </p>
           </div>
 
-          <div className="portfolio-grid">
+          <div className="portfolio-grid"> {/* Use new grid styling */}
             {books.map((book, index) => (
               <div key={book.id} className="animate-slide-up" style={{animationDelay: `${index * 150}ms`}}>
                 <BookCard book={book} lang="ur" />
@@ -30,7 +30,7 @@ export default function BooksPage() {
           </div>
         </div>
       </main>
-      <Footer lang="ur" />
+      <Footer />
     </div>
   );
 }

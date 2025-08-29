@@ -8,11 +8,10 @@ interface SearchOverlayProps {
   onClose: () => void;
   lang?: 'en' | 'ur';
 }
-
-export function SearchOverlay({ isOpen, onClose, lang = 'en' }: SearchOverlayProps) {
+export function SearchOverlay({ isOpen, onClose }: SearchOverlayProps) { // Removed lang prop as site is now primarily Urdu
   const searchRef = useRef<HTMLDivElement>(null);
   const [isLoaded, setIsLoaded] = useState(false);
-  const isUrdu = lang === 'ur';
+  const isUrdu = true; // Always Urdu
 
   useEffect(() => {
     if (isOpen && typeof window !== 'undefined') {
@@ -58,14 +57,14 @@ export function SearchOverlay({ isOpen, onClose, lang = 'en' }: SearchOverlayPro
     <div className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm animate-fade-in">
       <div className="fixed inset-0" onClick={onClose} />
       <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full max-w-2xl mx-4 animate-scale-in">
-        <div className="bg-white rounded-3xl shadow-2xl border border-gray-200">
+        <div className="bg-surface rounded-3xl shadow-2xl border border-line"> {/* Use new surface and line colors */}
           {/* Header */}
-          <div className={`flex items-center justify-between p-8 border-b border-gray-200 ${isUrdu ? 'flex-row-reverse' : ''}`}>
-            <div className={`flex items-center gap-4 ${isUrdu ? 'flex-row-reverse' : ''}`}>
-              <div className="p-3 bg-red-100 rounded-2xl">
-                <Search className="w-6 h-6 text-red-600" />
+          <div className={`flex items-center justify-between p-8 border-b border-line flex-row-reverse`}> {/* Always RTL, use new line color */}
+            <div className={`flex items-center gap-4 flex-row-reverse`}> {/* Always RTL */}
+              <div className="p-3 bg-primary-light rounded-2xl"> {/* Use new primary-light */}
+                <Search className="w-6 h-6 text-primary" /> {/* Use new primary color */}
               </div>
-              <h2 className={`text-2xl font-bold ${isUrdu ? 'urdu-heading' : ''}`}>
+              <h2 className={`text-2xl font-bold urdu-heading text-ink`}> {/* Always Urdu, use new ink color */}
                 {isUrdu ? 'تلاش' : 'Search'}
               </h2>
             </div>
@@ -82,9 +81,9 @@ export function SearchOverlay({ isOpen, onClose, lang = 'en' }: SearchOverlayPro
           <div className="p-8 min-h-[400px]">
             {!isLoaded && (
               <div className="text-center py-16">
-                <div className="loading-skeleton w-16 h-16 rounded-2xl mx-auto mb-6"></div>
-                <p className={`text-gray-500 ${isUrdu ? 'urdu-text' : ''}`}>
-                  {isUrdu ? 'تلاش لوڈ ہو رہی ہے...' : 'Loading search...'}
+                <div className="loading-skeleton w-16 h-16 rounded-2xl mx-auto mb-6 bg-surface-muted"></div> {/* Use new surface-muted */}
+                <p className={`text-ink-muted urdu-text`}> {/* Use new ink-muted, always Urdu */}
+                  تلاش لوڈ ہو رہی ہے...
                 </p>
               </div>
             )}
@@ -92,7 +91,7 @@ export function SearchOverlay({ isOpen, onClose, lang = 'en' }: SearchOverlayPro
           </div>
 
           {/* Footer */}
-          <div className={`px-8 py-6 border-t border-gray-200 bg-gray-50 text-caption text-gray-500 ${
+          <div className={`px-8 py-6 border-t border-line bg-surface-muted text-caption text-ink-muted ${ // Use new line, surface-muted, ink-muted
             isUrdu ? 'text-right' : ''
           }`}>
             <div className={`flex items-center justify-between ${isUrdu ? 'flex-row-reverse' : ''}`}>

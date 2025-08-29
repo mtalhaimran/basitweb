@@ -10,7 +10,7 @@ interface AudioBlockProps {
   lang?: 'en' | 'ur';
 }
 
-export function AudioBlock({ src, transcript, title, lang = 'en' }: AudioBlockProps) {
+export function AudioBlock({ src, transcript, title }: AudioBlockProps) { // Removed lang prop as site is now primarily Urdu
   const [isPlaying, setIsPlaying] = useState(false);
   const [showTranscript, setShowTranscript] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
@@ -18,8 +18,7 @@ export function AudioBlock({ src, transcript, title, lang = 'en' }: AudioBlockPr
   const [isLoaded, setIsLoaded] = useState(false);
   const audioRef = useRef<HTMLAudioElement>(null);
   
-  const isUrdu = lang === 'ur';
-
+  const isUrdu = true; // Always Urdu
   useEffect(() => {
     const audio = audioRef.current;
     if (!audio) return;
@@ -81,11 +80,11 @@ export function AudioBlock({ src, transcript, title, lang = 'en' }: AudioBlockPr
   return (
     <div className="minimal-card my-12">
       <div className={`flex items-center justify-between mb-8 ${isUrdu ? 'flex-row-reverse' : ''}`}>
-        <div className={`flex items-center gap-4 ${isUrdu ? 'flex-row-reverse' : ''}`}>
-          <div className="p-4 bg-red-100 rounded-2xl">
-            <Volume2 className="w-6 h-6 text-red-600" />
+        <div className={`flex items-center gap-4 flex-row-reverse`}> {/* Always RTL */}
+          <div className="p-4 bg-primary-light rounded-2xl"> {/* Use new primary-light */}
+            <Volume2 className="w-6 h-6 text-primary" /> {/* Use new primary color */}
           </div>
-          <h3 className={`text-heading-4 ${isUrdu ? 'urdu-heading' : ''}`}>
+          <h3 className={`text-heading-4 urdu-heading text-ink`}> {/* Always Urdu, use new ink color */}
             {title || (isUrdu ? 'آڈیو' : 'Audio')}
           </h3>
         </div>
@@ -93,7 +92,7 @@ export function AudioBlock({ src, transcript, title, lang = 'en' }: AudioBlockPr
         {transcript && (
           <button
             onClick={() => setShowTranscript(!showTranscript)}
-            className={`btn btn-secondary text-sm ${isUrdu ? 'urdu-text flex-row-reverse' : ''}`}
+            className={`btn btn-secondary text-sm urdu-text flex-row-reverse`} // Always Urdu
           >
             <FileText className="w-4 h-4" />
             <span className={isUrdu ? 'mr-2' : 'ml-2'}>
@@ -113,7 +112,7 @@ export function AudioBlock({ src, transcript, title, lang = 'en' }: AudioBlockPr
           <button
             onClick={() => skipTime(-10)}
             disabled={!isLoaded}
-            className="btn btn-ghost p-4 rounded-2xl"
+            className="btn btn-ghost p-4 rounded-2xl text-ink-muted hover:text-ink" // Use new ink colors
             aria-label={isUrdu ? '10 سیکنڈ پیچھے' : 'Skip back 10 seconds'}
           >
             <SkipBack className="w-5 h-5" />
@@ -123,7 +122,7 @@ export function AudioBlock({ src, transcript, title, lang = 'en' }: AudioBlockPr
           <button
             onClick={togglePlayback}
             disabled={!isLoaded}
-            className="flex items-center justify-center w-16 h-16 bg-red-600 text-white rounded-2xl hover:bg-red-700 disabled:opacity-50 transition-all focus-ring shadow-lg"
+            className="flex items-center justify-center w-16 h-16 bg-primary text-white rounded-2xl hover:bg-primary-hover disabled:opacity-50 transition-all focus-ring shadow-lg" // Use new primary colors
             aria-label={isUrdu ? (isPlaying ? 'رک جائیں' : 'چلائیں') : (isPlaying ? 'Pause' : 'Play')}
           >
             {!isLoaded ? (
@@ -139,7 +138,7 @@ export function AudioBlock({ src, transcript, title, lang = 'en' }: AudioBlockPr
           <button
             onClick={() => skipTime(10)}
             disabled={!isLoaded}
-            className="btn btn-ghost p-4 rounded-2xl"
+            className="btn btn-ghost p-4 rounded-2xl text-ink-muted hover:text-ink" // Use new ink colors
             aria-label={isUrdu ? '10 سیکنڈ آگے' : 'Skip forward 10 seconds'}
           >
             <SkipForward className="w-5 h-5" />
@@ -154,9 +153,9 @@ export function AudioBlock({ src, transcript, title, lang = 'en' }: AudioBlockPr
               value={duration ? (currentTime / duration) * 100 : 0}
               onChange={handleSeek}
               disabled={!isLoaded}
-              className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer disabled:opacity-50"
-              style={{accentColor: 'var(--brand)'}}
-              aria-label={isUrdu ? 'آڈیو پوزیشن' : 'Audio position'}
+              className="w-full h-2 bg-line rounded-lg appearance-none cursor-pointer disabled:opacity-50" // Use new line color
+              style={{accentColor: 'var(--primary)'}} // Use new primary color
+              aria-label={'آڈیو پوزیشن'} // Always Urdu
             />
             <div className={`flex justify-between text-caption text-gray-500 ${
               isUrdu ? 'flex-row-reverse' : ''
@@ -170,7 +169,7 @@ export function AudioBlock({ src, transcript, title, lang = 'en' }: AudioBlockPr
           <a
             href={src}
             download
-            className="btn btn-ghost p-4 rounded-2xl"
+            className="btn btn-ghost p-4 rounded-2xl text-ink-muted hover:text-ink" // Use new ink colors
             aria-label={isUrdu ? 'آڈیو ڈاؤن لوڈ کریں' : 'Download audio'}
           >
             <Download className="w-5 h-5" />
@@ -188,14 +187,14 @@ export function AudioBlock({ src, transcript, title, lang = 'en' }: AudioBlockPr
         {transcript && showTranscript && (
           <div className={`mt-8 p-8 bg-gray-50 border border-gray-200 rounded-2xl animate-slide-up ${
             isUrdu ? 'text-right' : ''
-          }`}>
-            <div className={`flex items-center gap-3 mb-6 ${isUrdu ? 'flex-row-reverse justify-end' : ''}`}>
-              <FileText className="w-5 h-5 text-red-600" />
-              <h4 className={`text-heading-4 ${isUrdu ? 'urdu-heading' : ''}`}>
+          }`}> {/* Use new background and border colors */}
+            <div className={`flex items-center gap-3 mb-6 flex-row-reverse justify-end`}> {/* Always RTL */}
+              <FileText className="w-5 h-5 text-primary" /> {/* Use new primary color */}
+              <h4 className={`text-heading-4 urdu-heading text-ink`}> {/* Always Urdu, use new ink color */}
                 {isUrdu ? 'ٹرانسکرپٹ' : 'Transcript'}
               </h4>
             </div>
-            <div className={`prose max-w-none ${isUrdu ? 'urdu-text' : 'text-body'}`}>
+            <div className={`prose max-w-none urdu-text`}> {/* Always Urdu */}
               {transcript.split('\n').map((paragraph, index) => (
                 <p key={index} className="mb-4 last:mb-0 text-gray-700 leading-relaxed">
                   {paragraph}

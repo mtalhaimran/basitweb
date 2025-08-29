@@ -39,7 +39,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     creator: '@abdulbasitzafar'
-  }
+  },
 };
 
 export default function RootLayout({
@@ -47,8 +47,8 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return (
-    <html lang="ur" dir="rtl">
+  return ( // Set default language to Urdu and RTL for the entire site
+    <html lang="ur" dir="rtl" className={`${inter.variable} ${notoNastaliq.variable} ${notoNaskh.variable}`}>
       <head>
         <script defer src="/pagefind/pagefind-ui.js"></script>
         <link href="/pagefind/pagefind-ui.css" rel="stylesheet" />

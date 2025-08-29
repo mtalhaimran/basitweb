@@ -5,10 +5,8 @@ import { Twitter, Linkedin, Mail, Heart, Download, FileText } from 'lucide-react
 interface FooterProps {
   lang?: 'en' | 'ur';
 }
-
-export function Footer({ lang = 'en' }: FooterProps) {
-  const isUrdu = lang === 'ur';
-
+export function Footer() { // Removed lang prop as site is now primarily Urdu
+  const isUrdu = true; // Always Urdu
   const quickLinks = isUrdu ? [
     { name: 'کام', href: '/work' },
     { name: 'کتابیں', href: '/books' },
@@ -45,14 +43,14 @@ export function Footer({ lang = 'en' }: FooterProps) {
   ];
   
   return (
-    <footer className="bg-gray-50 border-t border-gray-200" data-pagefind-ignore>
+    <footer className="bg-surface-muted border-t border-line" data-pagefind-ignore> {/* Use new surface-muted and line colors */}
       <div className="container py-20">
         <div className={`grid grid-cols-1 md:grid-cols-12 gap-12 ${isUrdu ? 'text-right' : ''}`}>
           {/* Brand Section */}
           <div className={`md:col-span-5 ${isUrdu ? 'md:col-start-8' : ''}`}>
             <Link 
               href="/" 
-              className={`text-3xl font-bold mb-6 block hover:text-red-600 transition-colors focus-ring rounded ${
+              className={`text-3xl font-bold mb-6 block text-ink hover:text-primary transition-colors focus-ring rounded ${ // Use new ink/primary colors
                 isUrdu ? 'urdu-heading' : ''
               }`}
             >
@@ -60,7 +58,7 @@ export function Footer({ lang = 'en' }: FooterProps) {
             </Link>
             
             <p className={`text-gray-600 mb-8 max-w-md leading-relaxed ${isUrdu ? 'urdu-text' : ''}`}>
-              {isUrdu 
+              {isUrdu // Always Urdu
                 ? 'لکھاری اور کہانی گو جو ٹیکنالوجی، ثقافت، اور انسانی تجربات کے درمیان کہانیوں کے ذریعے پل بناتا ہے جو زبانوں اور سرحدوں کے پار دنیاوں کو جوڑتی ہیں۔'
                 : 'A writer and storyteller bridging technology, culture, and human experience through narrative that connects worlds across languages and borders.'
               }
@@ -90,7 +88,7 @@ export function Footer({ lang = 'en' }: FooterProps) {
           <div className={`md:col-span-3 ${isUrdu ? 'md:col-start-5' : ''}`}>
             <h3 className={`text-heading-4 mb-8 ${isUrdu ? 'urdu-heading' : ''}`}>
               {isUrdu ? 'نیویگیشن' : 'Navigation'}
-            </h3>
+            </h3> {/* Always Urdu */}
             <nav className="space-y-4">
               {quickLinks.map((link) => (
                 <Link
@@ -110,19 +108,19 @@ export function Footer({ lang = 'en' }: FooterProps) {
           <div className={`md:col-span-4 ${isUrdu ? 'md:col-start-1' : ''}`}>
             <h3 className={`text-heading-4 mb-8 ${isUrdu ? 'urdu-heading' : ''}`}>
               {isUrdu ? 'اپڈیٹ رہیں' : 'Stay Updated'}
-            </h3>
+            </h3> {/* Always Urdu */}
             
-            <div className="bg-white rounded-2xl p-6 border border-gray-200 shadow-sm">
+            <div className="bg-surface rounded-2xl p-6 border border-line shadow-sm"> {/* Use new surface and line colors */}
               <h4 className={`text-lg font-semibold mb-4 ${isUrdu ? 'urdu-heading' : ''}`}>
                 {isUrdu ? 'نیوز لیٹر' : 'Newsletter'}
               </h4>
-              <p className={`text-gray-600 mb-6 text-sm ${isUrdu ? 'urdu-text' : ''}`}>
-                {isUrdu 
+              <p className={`text-ink-muted mb-6 text-sm urdu-text`}> {/* Use new ink-muted */}
+                {isUrdu // Always Urdu
                   ? 'نئی کہانیوں، خیالات، اور تحریری عمل کی پردے کے پیچھے کی جھلکیوں کے ساتھ اپڈیٹ حاصل کریں۔'
                   : 'Get updates on new stories, thoughts, and behind-the-scenes glimpses into the writing process.'
                 }
               </p>
-              <NewsletterForm compact lang={lang} />
+              <NewsletterForm compact lang="ur" /> {/* Newsletter form is always Urdu */}
             </div>
           </div>
         </div>
@@ -132,14 +130,14 @@ export function Footer({ lang = 'en' }: FooterProps) {
           <div className={`flex flex-col md:flex-row items-center justify-between space-y-4 md:space-y-0 ${
             isUrdu ? 'md:flex-row-reverse' : ''
           }`}>
-            <p className={`text-gray-500 text-sm ${isUrdu ? 'urdu-text' : ''}`}>
-              © {new Date().getFullYear()} {isUrdu ? 'عبدالباسط ظفر۔ تمام حقوق محفوظ ہیں۔' : 'Abdul Basit Zafar. All rights reserved.'}
+            <p className={`text-ink-muted text-sm urdu-text`}> {/* Use new ink-muted */}
+              © {new Date().getFullYear()} عبدالباسط ظفر۔ تمام حقوق محفوظ ہیں۔
             </p>
             
             <div className={`flex items-center gap-6 text-sm text-gray-500 ${
               isUrdu ? 'flex-row-reverse' : ''
             }`}>
-              <Link 
+              <Link // Keep sitemap link
                 href="/sitemap.xml" 
                 className="hover:text-red-600 transition-colors focus-ring rounded"
               >
@@ -147,7 +145,7 @@ export function Footer({ lang = 'en' }: FooterProps) {
               </Link>
               <span>•</span>
               <div className={`flex items-center gap-1 ${isUrdu ? 'flex-row-reverse urdu-text' : ''}`}>
-                <span>{isUrdu ? 'جرمنی میں محبت سے بنایا گیا' : 'Made with'}</span>
+                <span>جرمنی میں محبت سے بنایا گیا</span> {/* Always Urdu */}
                 {!isUrdu && <Heart className="w-4 h-4 text-red-500" />}
                 {!isUrdu && <span>in Germany</span>}
               </div>

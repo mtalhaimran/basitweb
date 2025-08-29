@@ -2,15 +2,15 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
-import { ArrowUpRight, BookOpen, PenTool, Mic, Calendar, Star } from 'lucide-react';
+import { ArrowUpRight, BookOpen, PenTool, Mic, Star } from 'lucide-react'; // Removed Calendar as it's not used here
 import { books, essays, series } from '@/lib/data/content';
 
 interface PortfolioGridProps {
   lang?: 'en' | 'ur';
 }
 
-export function PortfolioGrid({ lang = 'en' }: PortfolioGridProps) {
-  const isUrdu = lang === 'ur';
+export function PortfolioGrid() { // Removed lang prop as site is now primarily Urdu
+  const isUrdu = true; // Always Urdu
   const featuredBooks = books.slice(0, 2);
   const featuredEssays = essays.slice(0, 3);
   
@@ -18,72 +18,246 @@ export function PortfolioGrid({ lang = 'en' }: PortfolioGridProps) {
     <div className="min-h-screen">
       {/* Hero Section */}
       <section className="hero-section">
-        <div className="container">
-          <div className={`grid grid-cols-1 lg:grid-cols-2 gap-16 items-center ${isUrdu ? 'lg:grid-cols-2' : ''}`}>
-            {/* Portrait */}
-            <div className={`${isUrdu ? 'order-1 lg:order-2' : 'order-2 lg:order-1'}`}>
-              <div className="relative max-w-lg mx-auto">
-                <picture>
-                  {/* Desktop: 600x800 */}
-                  <source 
-                    media="(min-width: 1024px)" 
-                    srcSet="https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=600&h=800&fit=crop 600w, https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=1200&h=1600&fit=crop 1200w"
-                    sizes="(min-width: 1024px) 600px"
-                  />
-                  {/* Tablet: 500x600 */}
-                  <source 
-                    media="(min-width: 768px)" 
-                    srcSet="https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=500&h=600&fit=crop 500w, https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=1000&h=1200&fit=crop 1000w"
-                    sizes="(min-width: 768px) 500px"
-                  />
-                  {/* Mobile: 400x500 */}
-                  <Image
-                    src="https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=400&h=500&fit=crop"
-                    alt={isUrdu ? 'عبدالباسط ظفر - لکھاری اور کہانی گو' : 'Abdul Basit Zafar - Writer and Storyteller'}
-                    width={400}
-                    height={500}
-                    className="w-full h-auto rounded-3xl shadow-2xl"
-                    priority
-                    unoptimized
-                  />
-                </picture>
-                
-                {/* Floating accents */}
-                <div className="absolute -bottom-8 -right-8 w-32 h-32 bg-red-100 rounded-full blur-3xl animate-float opacity-60"></div>
-                <div className="absolute -top-8 -left-8 w-24 h-24 bg-red-50 rounded-full blur-2xl animate-float opacity-40" style={{animationDelay: '2s'}}></div>
-              </div>
+        {/* Full-screen background image */}
+        <div className="hero-background-image absolute inset-0">
+          <Image
+            src="https://images.pexels.com/photos/3769021/pexels-photo-3769021.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&fit=crop"
+            alt="عبدالباسط ظفر - لکھاری اور کہانی گو"
+            fill
+            priority
+            className="object-cover"
+            unoptimized // Disable Next.js Image Optimization for Pexels URLs
+          />
+          {/* Overlay for text readability */}
+          <div className="absolute inset-0 bg-black/40"></div>
+        </div>
+
+        <div className="container relative z-10 text-center text-white"> {/* Centered content on top of image */}
+          <div className="animate-fade-in">
+            <h1 className="text-display urdu-display mb-8 text-white">
+              عبدالباسط ظفر
+            </h1>
+            
+            <p className="large-text mb-12 max-w-3xl mx-auto urdu-text text-white/90">
+              لکھاری اور کہانی گو جو ٹیکنالوجی، ثقافت، اور انسانی تجربات کے درمیان تعلق کو دریافت کرتا ہے۔ کہانیاں جو زبانوں اور سرحدوں کے پار دنیاوں کو جوڑتی ہیں۔
+            </p>
+
+            <div className="flex flex-col sm:flex-row gap-6 justify-center sm:flex-row-reverse">
+              <Link 
+                href="/work"
+                className="btn btn-primary group"
+              >
+                <span className="urdu-text">
+                  میرا کام دیکھیں
+                </span>
+                <ArrowUpRight className="w-5 h-5 mr-2 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+              </Link>
+              
+              <Link 
+                href="/about"
+                className="btn btn-secondary"
+              >
+                تعارف
+              </Link>
             </div>
+          </div>
+        </div>
+      </section>
 
-            {/* Hero Content */}
-            <div className={`${isUrdu ? 'order-2 lg:order-1 text-right' : 'order-1 lg:order-2 text-left'}`}>
-              <div className="animate-fade-in">
-                <h1 className={`text-display mb-8 ${isUrdu ? 'urdu-display' : 'text-gradient'}`}>
-                  {isUrdu ? 'عبدالباسط ظفر' : 'Abdul Basit Zafar'}
-                </h1>
-                
-                <p className={`large-text mb-12 max-w-2xl ${isUrdu ? 'urdu-text ml-auto' : 'mx-auto lg:mx-0'}`}>
-                  {isUrdu 
-                    ? 'لکھاری اور کہانی گو جو ٹیکنالوجی، ثقافت، اور انسانی تجربات کے درمیان تعلق کو دریافت کرتا ہے۔ کہانیاں جو زبانوں اور سرحدوں کے پار دنیاوں کو جوڑتی ہیں۔'
-                    : 'Writer and storyteller exploring the intersection of technology, culture, and human experience. Stories that connect worlds across languages and borders.'
-                  }
+      {/* Featured Work */}
+      <section className="work-section">
+        <div className="container">
+          {/* Books Section */}
+          <div className="mb-24">
+            <div className="flex items-end justify-between mb-16 flex-row-reverse text-right">
+              <div>
+                <h2 className="text-heading-2 urdu-heading mb-4 text-ink"> {/* Use new ink color */}
+                  تازہ کتابیں
+                </h2>
+                <p className="large-text urdu-text text-ink-muted"> {/* Use new ink-muted */}
+                  ناولز اور کہانیوں کا مجموعہ جو شناخت، ٹیکنالوجی، اور انسانی رشتوں کو دریافت کرتا ہے
                 </p>
+              </div>
+              <Link 
+                href="/books"
+                className="view-link urdu-text flex-row-reverse"
+              >
+                <span>تمام کتابیں</span>
+                <ArrowUpRight className="w-4 h-4" />
+              </Link>
+            </div>
+            
+            <div className="portfolio-grid">
+              {featuredBooks.map((book, index) => (
+                <article
+                  key={book.id}
+                  className="minimal-card animate-slide-up"
+                  style={{animationDelay: `${index * 150}ms`}}
+                >
+                  <div className="flex items-start gap-6 flex-row-reverse text-right">
+                    <div className="flex-shrink-0">
+                      <div className="w-16 h-20 bg-gradient-to-br from-primary-100 to-primary-50 rounded-xl flex items-center justify-center shadow-sm"> {/* Use new primary colors */}
+                        <BookOpen className="w-8 h-8 text-primary" /> {/* Use new primary color */}
+                      </div>
+                    </div>
+                    
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center gap-3 mb-3 text-caption flex-row-reverse justify-end">
+                        <span className="uppercase tracking-wide font-semibold text-primary urdu-text"> {/* Use new primary color */}
+                          کتاب
+                        </span>
+                        <span className="text-ink-light">•</span> {/* Use new ink-light */}
+                        <span className="text-ink-muted">{book.publishedYear}</span> {/* Use new ink-muted */}
+                        {book.buyLinks && (
+                          <>
+                            <span className="text-ink-light">•</span> {/* Use new ink-light */}
+                            <div className="flex items-center gap-1 flex-row-reverse">
+                              <Star className="w-3 h-3 text-primary-500" /> {/* Use new primary-500 */}
+                              <span className="text-ink-muted urdu-text"> {/* Use new ink-muted */}
+                                دستیاب
+                              </span>
+                            </div>
+                          </>
+                        )}
+                      </div>
+                      
+                      <h3 className="card-title urdu-heading">
+                        {isUrdu && book.titleUrdu ? book.titleUrdu : book.title}
+                      </h3>
+                      
+                      <p className="text-ink-muted mb-6 leading-relaxed urdu-text"> {/* Use new ink-muted */}
+                        {isUrdu && book.descriptionUrdu ? book.descriptionUrdu : book.description}
+                      </p>
 
-                <div className={`flex flex-col sm:flex-row gap-6 ${isUrdu ? 'justify-end sm:flex-row-reverse' : 'justify-start'}`}>
+                      <Link 
+                        href={`/books/${book.slug}`}
+                        className="view-link urdu-text flex-row-reverse"
+                      >
+                        <span>دیکھیں</span>
+                        <ArrowUpRight className="w-4 h-4" />
+                      </Link>
+                    </div>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
+
+          {/* Writing Section */}
+          <div className="mb-24">
+            <div className="flex items-end justify-between mb-16 flex-row-reverse text-right">
+              <div>
+                <h2 className="text-heading-2 urdu-heading mb-4 text-ink"> {/* Use new ink color */}
+                  حالیہ تحریریں
+                </h2>
+                <p className="large-text urdu-text text-ink-muted"> {/* Use new ink-muted */}
+                  ٹیکنالوجی، ثقافت، اور کہانی گوئی پر مضامین
+                </p>
+              </div>
+              <Link 
+                href="/writing"
+                className="view-link urdu-text flex-row-reverse"
+              >
+                <span>تمام تحریریں</span>
+                <ArrowUpRight className="w-4 h-4" />
+              </Link>
+            </div>
+            
+            <div className="work-grid">
+              {featuredEssays.map((essay, index) => (
+                <article
+                  key={essay.id}
+                  className="minimal-card animate-slide-up"
+                  style={{animationDelay: `${index * 150}ms`}}
+                >
+                  <div className="text-right">
+                    <div className="flex items-center gap-3 mb-4 text-caption flex-row-reverse justify-end">
+                      <PenTool className="w-4 h-4 text-primary" /> {/* Use new primary color */}
+                      <span className="uppercase tracking-wide font-semibold text-primary urdu-text"> {/* Use new primary color */}
+                        مضمون
+                      </span>
+                      <span className="text-ink-light">•</span> {/* Use new ink-light */}
+                      <span className="text-ink-muted"> {/* Use new ink-muted */}
+                        {new Date(essay.publishedDate).toLocaleDateString('ur-PK', {
+                          year: 'numeric',
+                          month: 'short'
+                        })}
+                      </span>
+                      <span className="text-ink-light">•</span> {/* Use new ink-light */}
+                      <span className="text-ink-muted urdu-text"> {/* Use new ink-muted */}
+                        {essay.readTime} منٹ
+                      </span>
+                    </div>
+                    
+                    <h3 className="card-title urdu-heading">
+                      {isUrdu && essay.titleUrdu ? essay.titleUrdu : essay.title}
+                    </h3>
+                    
+                    <p className="text-ink-muted mb-6 leading-relaxed urdu-text"> {/* Use new ink-muted */}
+                      {isUrdu && essay.descriptionUrdu ? essay.descriptionUrdu : essay.description}
+                    </p>
+
+                    <Link 
+                      href={`/writing/${essay.slug}`}
+                      className="view-link urdu-text flex-row-reverse"
+                    >
+                      <span>پڑھیں</span>
+                      <ArrowUpRight className="w-4 h-4" />
+                    </Link>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
+
+          {/* Series Section */}
+          <div>
+            <div className="mb-16 text-right">
+              <h2 className="text-heading-2 urdu-heading mb-4 text-ink"> {/* Use new ink color */}
+                خصوصی سلسلہ
+              </h2>
+              <p className="large-text urdu-text text-ink-muted"> {/* Use new ink-muted */}
+                جاری کہانی کی تلاش
+              </p>
+            </div>
+            
+            <div className="minimal-card animate-slide-up">
+              <div className="flex items-start gap-8 flex-row-reverse text-right">
+                <div className="flex-shrink-0">
+                  <div className="w-20 h-20 bg-gradient-to-br from-primary-100 to-primary-50 rounded-2xl flex items-center justify-center shadow-sm"> {/* Use new primary colors */}
+                    <Mic className="w-10 h-10 text-primary" /> {/* Use new primary color */}
+                  </div>
+                </div>
+                
+                <div className="flex-1">
+                  <div className="flex items-center gap-3 mb-4 text-caption flex-row-reverse justify-end">
+                    <span className="uppercase tracking-wide font-semibold text-primary urdu-text"> {/* Use new primary color */}
+                      سلسلہ
+                    </span>
+                    <span className="text-ink-light">•</span> {/* Use new ink-light */}
+                    <span className="text-ink-muted urdu-text"> {/* Use new ink-muted */}
+                      {series.totalEntries} حصے
+                    </span>
+                    <span className="text-ink-light">•</span> {/* Use new ink-light */}
+                    <span className="text-ink-muted urdu-text"> {/* Use new ink-muted */}
+                      اردو
+                    </span>
+                  </div>
+                  
+                  <h3 className="text-heading-3 urdu-heading mb-6 text-ink"> {/* Use new ink color */}
+                    {isUrdu ? series.titleUrdu : series.title}
+                  </h3>
+                  
+                  <p className="text-ink-muted mb-8 leading-relaxed max-w-2xl urdu-text"> {/* Use new ink-muted */}
+                    {isUrdu ? series.descriptionUrdu : series.description}
+                  </p>
+
                   <Link 
-                    href="/work"
+                    href="/bonn-ka-banjara"
                     className="btn btn-primary group"
                   >
-                    <span className={isUrdu ? 'urdu-text' : ''}>
-                      {isUrdu ? 'میرا کام دیکھیں' : 'View My Work'}
-                    </span>
-                    <ArrowUpRight className={`w-5 h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform ${isUrdu ? 'mr-2' : 'ml-2'}`} />
-                  </Link>
-                  
-                  <Link 
-                    href="/about"
-                    className={`btn btn-secondary ${isUrdu ? 'urdu-text' : ''}`}
-                  >
-                    {isUrdu ? 'تعارف' : 'About Me'}
+                    <span className="urdu-text">سلسلہ دیکھیں</span>
+                    <ArrowUpRight className="w-5 h-5 mr-2 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
                   </Link>
                 </div>
               </div>
@@ -298,21 +472,20 @@ export function PortfolioGrid({ lang = 'en' }: PortfolioGridProps) {
       <section className="py-24 bg-gray-50">
         <div className="container">
           <div className={`max-w-4xl mx-auto text-center ${isUrdu ? 'text-right' : ''}`}>
-            <h2 className={`text-heading-2 mb-8 ${isUrdu ? 'urdu-heading' : ''}`}>
-              {isUrdu ? 'آئیے جڑتے ہیں' : 'Let\'s Connect'}
+            <h2 className="text-heading-2 urdu-heading mb-8 text-ink"> {/* Use new ink color */}
+              آئیے جڑتے ہیں
             </h2>
-            <p className={`large-text mb-12 ${isUrdu ? 'urdu-text' : ''}`}>
-              {isUrdu 
-                ? 'تعاون، تقاریر، یا صرف کہانیوں کے بارے میں بات کرنے میں دلچسپی ہے؟ میں آپ سے سننا پسند کروں گا۔'
-                : 'Interested in collaborations, speaking engagements, or just want to discuss stories? I\'d love to hear from you.'
-              }
+            <p className="large-text mb-12 urdu-text text-ink-muted"> {/* Use new ink-muted */}
+              تعاون، تقاریر، یا صرف کہانیوں کے بارے میں بات کرنے میں دلچسپی ہے؟ میں آپ سے سننا پسند کروں گا۔
             </p>
-            <div className={`flex flex-col sm:flex-row gap-6 justify-center ${isUrdu ? 'sm:flex-row-reverse' : ''}`}>
+            <div className="flex flex-col sm:flex-row gap-6 justify-center sm:flex-row-reverse">
               <Link 
                 href="/contact"
-                className={`btn btn-primary group ${isUrdu ? 'urdu-text' : ''}`}
+                className="btn btn-primary group"
               >
-                <span>{isUrdu ? 'رابطہ کریں' : 'Get in Touch'}</span>
+                <span className="urdu-text">
+                  رابطہ کریں
+                </span>
                 <ArrowUpRight className={`w-5 h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform ${isUrdu ? 'mr-2' : 'ml-2'}`} />
               </Link>
               <Link 

@@ -41,8 +41,8 @@ export default function WorkPage() {
   const filteredContent = getFilteredContent();
 
   return (
-    <div className="min-h-screen" lang="ur" dir="rtl">
-      <Header lang="ur" />
+    <div className="min-h-screen"> {/* Removed lang/dir as it's now in root layout */}
+      <Header />
       <main id="main-content" className="pt-32 pb-20" data-pagefind-body>
         <div className="container">
           <div className="text-center mb-20">
@@ -62,7 +62,7 @@ export default function WorkPage() {
                     key={filter.id}
                     onClick={() => setActiveFilter(filter.id)}
                     className={`flex items-center space-x-2 space-x-reverse px-6 py-3 text-sm font-medium rounded-xl transition-all duration-200 urdu-text ${
-                      activeFilter === filter.id
+                      activeFilter === filter.id // Use new primary color for active state
                         ? 'bg-white text-red-600 shadow-sm'
                         : 'text-gray-600 hover:text-gray-900'
                     }`}
@@ -81,7 +81,7 @@ export default function WorkPage() {
             {filteredContent.books.length > 0 && (
               <section>
                 <h2 className="text-heading-2 urdu-heading mb-12 text-right">کتابیں</h2>
-                <div className="portfolio-grid">
+                <div className="portfolio-grid"> {/* Use new grid styling */}
                   {filteredContent.books.map((book, index) => (
                     <div key={book.id} className="animate-slide-up" style={{animationDelay: `${index * 100}ms`}}>
                       <BookCard book={book} lang="ur" />
@@ -95,7 +95,7 @@ export default function WorkPage() {
             {filteredContent.essays.length > 0 && (
               <section>
                 <h2 className="text-heading-2 urdu-heading mb-12 text-right">مضامین</h2>
-                <div className="work-grid">
+                <div className="work-grid"> {/* Use new grid styling */}
                   {filteredContent.essays.map((essay, index) => (
                     <div key={essay.id} className="animate-slide-up" style={{animationDelay: `${index * 100}ms`}}>
                       <EssayCard essay={essay} lang="ur" />
@@ -119,7 +119,7 @@ export default function WorkPage() {
                       <Link 
                         href="/bonn-ka-banjara"
                         className="btn btn-primary group urdu-text"
-                      >
+                      > {/* Use new button styling */}
                         سلسلہ دیکھیں
                         <ArrowUpRight className="w-4 h-4 mr-2 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
                       </Link>
@@ -136,7 +136,7 @@ export default function WorkPage() {
             {filteredContent.talks.length > 0 && (
               <section>
                 <h2 className="text-heading-2 urdu-heading mb-12 text-right">تقاریر</h2>
-                <div className="work-grid">
+                <div className="work-grid"> {/* Use new grid styling */}
                   {filteredContent.talks.map((talk, index) => (
                     <div key={talk.id} className="minimal-card animate-slide-up text-right" style={{animationDelay: `${index * 100}ms`}}>
                       <h3 className="card-title">{talk.title}</h3>
@@ -155,7 +155,7 @@ export default function WorkPage() {
             {filteredContent.press.length > 0 && (
               <section>
                 <h2 className="text-heading-2 urdu-heading mb-12 text-right">پریس</h2>
-                <div className="work-grid">
+                <div className="work-grid"> {/* Use new grid styling */}
                   {filteredContent.press.map((item, index) => (
                     <div key={item.id} className="minimal-card animate-slide-up text-right" style={{animationDelay: `${index * 100}ms`}}>
                       <h3 className="card-title">{item.title}</h3>
@@ -172,7 +172,7 @@ export default function WorkPage() {
           </div>
         </div>
       </main>
-      <Footer lang="ur" />
+      <Footer />
     </div>
   );
 }
