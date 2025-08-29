@@ -2,37 +2,29 @@
 
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
-import { Search, Menu, X, ArrowUpRight } from 'lucide-react';
+import { Search, Menu, X } from 'lucide-react';
 import { SearchOverlay } from './SearchOverlay';
+import { motion } from 'framer-motion';
 
-interface HeaderProps {
-  lang?: 'en' | 'ur';
-}
-export function Header() { // Removed lang prop as site is now primarily Urdu
+export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const isUrdu = true; // Site is now primarily Urdu
+  const [isLoaded, setIsLoaded] = useState(false);
 
-  const navigation = isUrdu ? [
+  const navigation = [
     { name: 'ہوم', href: '/' },
     { name: 'کام', href: '/work' },
     { name: 'کتابیں', href: '/books' },
     { name: 'تحریریں', href: '/writing' },
-    { name: 'بن کا بنجارہ', href: '/bonn-ka-banjara' },
+    { name: 'بن کا بنجارہ', href: '/ur/bonn-ka-banjara' },
     { name: 'تعارف', href: '/about' },
     { name: 'رابطہ', href: '/contact' }
-  ] : [
-    { name: 'Home', href: '/' },
-    { name: 'Work', href: '/work' },
-    { name: 'Books', href: '/books' },
-    { name: 'Writing', href: '/writing' },
-    { name: 'Bonn Ka Banjara', href: '/bonn-ka-banjara' },
-    { name: 'About', href: '/about' },
-    { name: 'Contact', href: '/contact' }
   ];
 
   useEffect(() => {
+    setIsLoaded(true);
+    
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
     };
@@ -40,7 +32,7 @@ export function Header() { // Removed lang prop as site is now primarily Urdu
     const handleKeyDown = (e: KeyboardEvent) => {
       if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
         e.preventDefault();
-        setIsSearchOpen(true); // Keep search shortcut
+        setIsSearchOpen(true);
       }
       if (e.key === 'Escape') {
         setIsMenuOpen(false);
@@ -57,47 +49,111 @@ export function Header() { // Removed lang prop as site is now primarily Urdu
     };
   }, []);
 
+  // Animation variants for the logo
+  const logoVariants = {
+    hidden: { 
+      opacity: 0, 
+      x: 30,
+      scale: 0.9
+    },
+    visible: { 
+      opacity: 1, 
+      x: 0,
+      scale: 1,
+      transition: {
+        duration: 0.8,
+        ease: [0.25, 0.46, 0.45, 0.94],
+        delay: 0.2
+      }
+    }
+  };
+
+  // Stagger animation for navigation items
+  const navVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+        delayChildren: 0.5
+      }
+    }
+  };
+
+  const navItemVariants = {
+    hidden: { opacity: 0, y: -10 },
+    visible: { 
+      opacity: 1, 
+      y: 0,
+      transition: {
+        duration: 0.4,
+        ease: "easeOut"
+      }
+    }
+  };
+
   return (
     <>
       <a href="#main-content" className="skip-link">
-        {isUrdu ? 'مین کنٹینٹ پر جائیں' : 'Skip to main content'}
+        مین کنٹینٹ پر جائیں
       </a>
 
-      <header className={`minimal-nav ${isScrolled ? 'scrolled' : ''}`}>
-        <div className="container"> {/* Use new container styling */}
-          <div className={`flex h-20 items-center justify-between flex-row-reverse`}> {/* Always RTL */}
-            {/* Logo */}
-            <Link 
-              href="/" 
-              className={`text-2xl font-bold text-ink hover:text-primary transition-colors duration-200 focus-ring rounded-lg urdu-heading`} // Use new ink/primary colors
+      <motion.header 
+        className={`minimal-nav ${isScrolled ? 'scrolled' : ''}`}
+        initial={{ y: -100 }}
+        animate={{ y: 0 }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
+      >
+        <div className="container">
+          <div className="flex h-20 items-center justify-between">
+            {/* Logo with Animation */}
+            <motion.div
+              variants={logoVariants}
+              initial="hidden"
+              animate={isLoaded ? "visible" : "hidden"}
             >
-              {/* Always Urdu */}
-            >
-              {isUrdu ? 'عبدالباسط ظفر' : 'Abdul Basit Zafar'}
-            </Link>
+              <Link 
+                href="/" 
+                className="text-2xl font-bold text-ink hover:text-primary transition-colors duration-200 focus-ring rounded-lg urdu-heading"
+              >
+                عبدالباسط ظفر
+              </Link>
+            </motion.div>
 
             {/* Desktop Navigation */}
-            <nav className={`hidden lg:flex items-center ${isUrdu ? 'space-x-reverse space-x-8' : 'space-x-8'}`} role="navigation">
+            <motion.nav 
+              className="hidden lg:flex items-center space-x-8 space-x-reverse" 
+              role="navigation"
+              variants={navVariants}
+              initial="hidden"
+              animate={isLoaded ? "visible" : "hidden"}
+            >
               {navigation.map((item) => (
-                <Link
-                  key={item.href} // Use new nav-link styling
-                  href={item.href}
-                  className={`nav-link ${isUrdu ? 'urdu-text' : ''}`}
-                >
-                  {item.name}
-                </Link>
+                <motion.div key={item.href} variants={navItemVariants}>
+                  <Link
+                    href={item.href}
+                    className="nav-link urdu-text"
+                  >
+                    {item.name}
+                  </Link>
+                </motion.div>
               ))}
-            </nav>
+            </motion.nav>
 
             {/* Actions */}
-            <div className={`flex items-center space-x-reverse space-x-4`}> {/* Always RTL */}
+            <motion.div 
+              className="flex items-center space-x-4 space-x-reverse"
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5, delay: 0.8 }}
+            >
               <button
                 onClick={() => setIsSearchOpen(true)}
                 className="btn-ghost p-3 rounded-lg group"
-                aria-label={'تلاش'} // Always Urdu
+                aria-label="تلاش"
               >
                 <Search className="w-5 h-5" />
-                <span className={`hidden sm:inline text-xs text-gray-500 ${isUrdu ? 'mr-2 urdu-text' : 'ml-2'}`}>
+                <span className="hidden sm:inline text-xs text-gray-500 mr-2 urdu-text">
                   ⌘K
                 </span>
               </button>
@@ -106,44 +162,51 @@ export function Header() { // Removed lang prop as site is now primarily Urdu
               <button
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
                 className="lg:hidden btn-ghost p-3 rounded-lg"
-                aria-label={'مینو کھولیں'} // Always Urdu
+                aria-label="مینو کھولیں"
                 aria-expanded={isMenuOpen}
               >
                 {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
               </button>
-            </div>
+            </motion.div>
           </div>
 
           {/* Mobile Navigation */}
           {isMenuOpen && (
-            <nav 
-              className="lg:hidden border-t border-gray-200 glass-effect animate-slide-up"
-              role="navigation" // Use new mobile nav styling
-              aria-label={'موبائل نیویگیشن'} // Always Urdu
+            <motion.nav 
+              className="lg:hidden border-t border-gray-200 glass-effect"
+              role="navigation"
+              aria-label="موبائل نیویگیشن"
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto' }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.3 }}
             >
-              <div className={`py-6 space-y-2 text-right`}> {/* Always RTL */}
-                {navigation.map((item) => (
-                  <Link // Use new mobile nav link styling
+              <div className="py-6 space-y-2 text-right">
+                {navigation.map((item, index) => (
+                  <motion.div
                     key={item.href}
-                    href={item.href}
-                    className={`block px-4 py-3 text-base font-medium hover:bg-gray-50 rounded-lg transition-colors focus-ring ${
-                      isUrdu ? 'urdu-text' : ''
-                    }`}
-                    onClick={() => setIsMenuOpen(false)}
+                    initial={{ opacity: 0, x: 20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.3, delay: index * 0.1 }}
                   >
-                    {item.name}
-                  </Link>
+                    <Link
+                      href={item.href}
+                      className="block px-4 py-3 text-base font-medium hover:bg-gray-50 rounded-lg transition-colors focus-ring urdu-text"
+                      onClick={() => setIsMenuOpen(false)}
+                    >
+                      {item.name}
+                    </Link>
+                  </motion.div>
                 ))}
               </div>
-            </nav>
+            </motion.nav>
           )}
         </div>
-      </header>
+      </motion.header>
 
       <SearchOverlay 
         isOpen={isSearchOpen} 
         onClose={() => setIsSearchOpen(false)}
-        lang="ur" // Search overlay is always Urdu
       />
     </>
   );

@@ -2,65 +2,129 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
-import { ArrowUpRight, BookOpen, PenTool, Mic, Star } from 'lucide-react'; // Removed Calendar as it's not used here
+import { ArrowUpRight, BookOpen, PenTool, Mic, Star } from 'lucide-react';
 import { books, essays, series } from '@/lib/data/content';
+import { motion } from 'framer-motion';
 
-interface PortfolioGridProps {
-  lang?: 'en' | 'ur';
-}
-
-export function PortfolioGrid() { // Removed lang prop as site is now primarily Urdu
-  const isUrdu = true; // Always Urdu
+export function PortfolioGrid() {
   const featuredBooks = books.slice(0, 2);
   const featuredEssays = essays.slice(0, 3);
   
+  // Animation variants
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2,
+        delayChildren: 0.3
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: { 
+      opacity: 1, 
+      y: 0,
+      transition: {
+        duration: 0.6,
+        ease: [0.25, 0.46, 0.45, 0.94]
+      }
+    }
+  };
+
+  const heroVariants = {
+    hidden: { opacity: 0, scale: 0.95 },
+    visible: { 
+      opacity: 1, 
+      scale: 1,
+      transition: {
+        duration: 1.2,
+        ease: [0.25, 0.46, 0.45, 0.94]
+      }
+    }
+  };
+
   return (
     <div className="min-h-screen">
-      {/* Hero Section */}
-      <section className="hero-section">
+      {/* Hero Section with Full Background */}
+      <section className="hero-section relative">
         {/* Full-screen background image */}
-        <div className="hero-background-image absolute inset-0">
+        <div className="absolute inset-0 z-0">
           <Image
             src="https://images.pexels.com/photos/3769021/pexels-photo-3769021.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&fit=crop"
             alt="عبدالباسط ظفر - لکھاری اور کہانی گو"
             fill
             priority
             className="object-cover"
-            unoptimized // Disable Next.js Image Optimization for Pexels URLs
+            sizes="100vw"
+            quality={85}
+            unoptimized
           />
-          {/* Overlay for text readability */}
-          <div className="absolute inset-0 bg-black/40"></div>
+          {/* Gradient overlay for text readability */}
+          <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/70"></div>
         </div>
 
-        <div className="container relative z-10 text-center text-white"> {/* Centered content on top of image */}
-          <div className="animate-fade-in">
-            <h1 className="text-display urdu-display mb-8 text-white">
+        <div className="container relative z-10 text-center text-white min-h-screen flex items-center justify-center">
+          <motion.div
+            variants={heroVariants}
+            initial="hidden"
+            animate="visible"
+            className="max-w-4xl mx-auto"
+          >
+            <motion.h1 
+              className="text-display urdu-display mb-8 text-white"
+              initial={{ opacity: 0, y: 50 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1, delay: 0.5, ease: "easeOut" }}
+            >
               عبدالباسط ظفر
-            </h1>
+            </motion.h1>
             
-            <p className="large-text mb-12 max-w-3xl mx-auto urdu-text text-white/90">
+            <motion.p 
+              className="large-text mb-12 max-w-3xl mx-auto urdu-text text-white/90 leading-relaxed"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.8, ease: "easeOut" }}
+            >
               لکھاری اور کہانی گو جو ٹیکنالوجی، ثقافت، اور انسانی تجربات کے درمیان تعلق کو دریافت کرتا ہے۔ کہانیاں جو زبانوں اور سرحدوں کے پار دنیاوں کو جوڑتی ہیں۔
-            </p>
+            </motion.p>
 
-            <div className="flex flex-col sm:flex-row gap-6 justify-center sm:flex-row-reverse">
-              <Link 
-                href="/work"
-                className="btn btn-primary group"
+            <motion.div 
+              className="flex flex-col sm:flex-row gap-6 justify-center sm:flex-row-reverse"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 1.2, ease: "easeOut" }}
+            >
+              <motion.div
+                whileHover={{ scale: 1.05, y: -2 }}
+                whileTap={{ scale: 0.95 }}
+                transition={{ type: "spring", stiffness: 300, damping: 20 }}
               >
-                <span className="urdu-text">
-                  میرا کام دیکھیں
-                </span>
-                <ArrowUpRight className="w-5 h-5 mr-2 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
-              </Link>
+                <Link 
+                  href="/work"
+                  className="btn btn-primary group"
+                >
+                  <span className="urdu-text">میرا کام دیکھیں</span>
+                  <ArrowUpRight className="w-5 h-5 mr-2 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                </Link>
+              </motion.div>
               
-              <Link 
-                href="/about"
-                className="btn btn-secondary"
+              <motion.div
+                whileHover={{ scale: 1.05, y: -2 }}
+                whileTap={{ scale: 0.95 }}
+                transition={{ type: "spring", stiffness: 300, damping: 20 }}
               >
-                تعارف
-              </Link>
-            </div>
-          </div>
+                <Link 
+                  href="/about"
+                  className="btn btn-secondary urdu-text"
+                >
+                  تعارف
+                </Link>
+              </motion.div>
+            </motion.div>
+          </motion.div>
         </div>
       </section>
 
@@ -68,14 +132,23 @@ export function PortfolioGrid() { // Removed lang prop as site is now primarily 
       <section className="work-section">
         <div className="container">
           {/* Books Section */}
-          <div className="mb-24">
-            <div className="flex items-end justify-between mb-16 flex-row-reverse text-right">
+          <motion.div 
+            className="mb-24"
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+          >
+            <motion.div 
+              className="flex items-end justify-between mb-16 flex-row-reverse text-right"
+              variants={itemVariants}
+            >
               <div>
-                <h2 className="text-heading-2 urdu-heading mb-4 text-ink"> {/* Use new ink color */}
+                <h2 className="text-heading-2 urdu-heading mb-4 text-ink">
                   تازہ کتابیں
                 </h2>
-                <p className="large-text urdu-text text-ink-muted"> {/* Use new ink-muted */}
-                  ناولز اور کہانیوں کا مجموعہ جو شناخت، ٹیکنالوجی، اور انسانی رشتوں کو دریافت کرتا ہے
+                <p className="large-text urdu-text text-ink-muted">
+                  شناخت، ٹیکنالوجی، اور انسانی رشتوں کو دریافت کرنے والے ناول
                 </p>
               </div>
               <Link 
@@ -85,35 +158,43 @@ export function PortfolioGrid() { // Removed lang prop as site is now primarily 
                 <span>تمام کتابیں</span>
                 <ArrowUpRight className="w-4 h-4" />
               </Link>
-            </div>
+            </motion.div>
             
             <div className="portfolio-grid">
               {featuredBooks.map((book, index) => (
-                <article
+                <motion.article
                   key={book.id}
-                  className="minimal-card animate-slide-up"
-                  style={{animationDelay: `${index * 150}ms`}}
+                  className="minimal-card"
+                  variants={itemVariants}
+                  whileHover={{ 
+                    y: -8, 
+                    transition: { duration: 0.3, ease: "easeOut" } 
+                  }}
                 >
                   <div className="flex items-start gap-6 flex-row-reverse text-right">
                     <div className="flex-shrink-0">
-                      <div className="w-16 h-20 bg-gradient-to-br from-primary-100 to-primary-50 rounded-xl flex items-center justify-center shadow-sm"> {/* Use new primary colors */}
-                        <BookOpen className="w-8 h-8 text-primary" /> {/* Use new primary color */}
-                      </div>
+                      <motion.div 
+                        className="w-16 h-20 bg-gradient-to-br from-primary-100 to-primary-50 rounded-xl flex items-center justify-center shadow-sm"
+                        whileHover={{ scale: 1.1, rotate: 5 }}
+                        transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                      >
+                        <BookOpen className="w-8 h-8 text-primary" />
+                      </motion.div>
                     </div>
                     
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center gap-3 mb-3 text-caption flex-row-reverse justify-end">
-                        <span className="uppercase tracking-wide font-semibold text-primary urdu-text"> {/* Use new primary color */}
+                        <span className="uppercase tracking-wide font-semibold text-primary urdu-text">
                           کتاب
                         </span>
-                        <span className="text-ink-light">•</span> {/* Use new ink-light */}
-                        <span className="text-ink-muted">{book.publishedYear}</span> {/* Use new ink-muted */}
+                        <span className="text-ink-light">•</span>
+                        <span className="text-ink-muted">{book.publishedYear}</span>
                         {book.buyLinks && (
                           <>
-                            <span className="text-ink-light">•</span> {/* Use new ink-light */}
+                            <span className="text-ink-light">•</span>
                             <div className="flex items-center gap-1 flex-row-reverse">
-                              <Star className="w-3 h-3 text-primary-500" /> {/* Use new primary-500 */}
-                              <span className="text-ink-muted urdu-text"> {/* Use new ink-muted */}
+                              <Star className="w-3 h-3 text-primary-500" />
+                              <span className="text-ink-muted urdu-text">
                                 دستیاب
                               </span>
                             </div>
@@ -122,11 +203,11 @@ export function PortfolioGrid() { // Removed lang prop as site is now primarily 
                       </div>
                       
                       <h3 className="card-title urdu-heading">
-                        {isUrdu && book.titleUrdu ? book.titleUrdu : book.title}
+                        {book.titleUrdu || book.title}
                       </h3>
                       
-                      <p className="text-ink-muted mb-6 leading-relaxed urdu-text"> {/* Use new ink-muted */}
-                        {isUrdu && book.descriptionUrdu ? book.descriptionUrdu : book.description}
+                      <p className="text-ink-muted mb-6 leading-relaxed urdu-text">
+                        {book.descriptionUrdu || book.description}
                       </p>
 
                       <Link 
@@ -138,19 +219,28 @@ export function PortfolioGrid() { // Removed lang prop as site is now primarily 
                       </Link>
                     </div>
                   </div>
-                </article>
+                </motion.article>
               ))}
             </div>
-          </div>
+          </motion.div>
 
           {/* Writing Section */}
-          <div className="mb-24">
-            <div className="flex items-end justify-between mb-16 flex-row-reverse text-right">
+          <motion.div 
+            className="mb-24"
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+          >
+            <motion.div 
+              className="flex items-end justify-between mb-16 flex-row-reverse text-right"
+              variants={itemVariants}
+            >
               <div>
-                <h2 className="text-heading-2 urdu-heading mb-4 text-ink"> {/* Use new ink color */}
+                <h2 className="text-heading-2 urdu-heading mb-4 text-ink">
                   حالیہ تحریریں
                 </h2>
-                <p className="large-text urdu-text text-ink-muted"> {/* Use new ink-muted */}
+                <p className="large-text urdu-text text-ink-muted">
                   ٹیکنالوجی، ثقافت، اور کہانی گوئی پر مضامین
                 </p>
               </div>
@@ -161,40 +251,44 @@ export function PortfolioGrid() { // Removed lang prop as site is now primarily 
                 <span>تمام تحریریں</span>
                 <ArrowUpRight className="w-4 h-4" />
               </Link>
-            </div>
+            </motion.div>
             
             <div className="work-grid">
               {featuredEssays.map((essay, index) => (
-                <article
+                <motion.article
                   key={essay.id}
-                  className="minimal-card animate-slide-up"
-                  style={{animationDelay: `${index * 150}ms`}}
+                  className="minimal-card"
+                  variants={itemVariants}
+                  whileHover={{ 
+                    y: -6, 
+                    transition: { duration: 0.3, ease: "easeOut" } 
+                  }}
                 >
                   <div className="text-right">
                     <div className="flex items-center gap-3 mb-4 text-caption flex-row-reverse justify-end">
-                      <PenTool className="w-4 h-4 text-primary" /> {/* Use new primary color */}
-                      <span className="uppercase tracking-wide font-semibold text-primary urdu-text"> {/* Use new primary color */}
+                      <PenTool className="w-4 h-4 text-primary" />
+                      <span className="uppercase tracking-wide font-semibold text-primary urdu-text">
                         مضمون
                       </span>
-                      <span className="text-ink-light">•</span> {/* Use new ink-light */}
-                      <span className="text-ink-muted"> {/* Use new ink-muted */}
+                      <span className="text-ink-light">•</span>
+                      <span className="text-ink-muted">
                         {new Date(essay.publishedDate).toLocaleDateString('ur-PK', {
                           year: 'numeric',
                           month: 'short'
                         })}
                       </span>
-                      <span className="text-ink-light">•</span> {/* Use new ink-light */}
-                      <span className="text-ink-muted urdu-text"> {/* Use new ink-muted */}
+                      <span className="text-ink-light">•</span>
+                      <span className="text-ink-muted urdu-text">
                         {essay.readTime} منٹ
                       </span>
                     </div>
                     
                     <h3 className="card-title urdu-heading">
-                      {isUrdu && essay.titleUrdu ? essay.titleUrdu : essay.title}
+                      {essay.titleUrdu || essay.title}
                     </h3>
                     
-                    <p className="text-ink-muted mb-6 leading-relaxed urdu-text"> {/* Use new ink-muted */}
-                      {isUrdu && essay.descriptionUrdu ? essay.descriptionUrdu : essay.description}
+                    <p className="text-ink-muted mb-6 leading-relaxed urdu-text">
+                      {essay.descriptionUrdu || essay.description}
                     </p>
 
                     <Link 
@@ -205,291 +299,122 @@ export function PortfolioGrid() { // Removed lang prop as site is now primarily 
                       <ArrowUpRight className="w-4 h-4" />
                     </Link>
                   </div>
-                </article>
+                </motion.article>
               ))}
             </div>
-          </div>
+          </motion.div>
 
           {/* Series Section */}
-          <div>
-            <div className="mb-16 text-right">
-              <h2 className="text-heading-2 urdu-heading mb-4 text-ink"> {/* Use new ink color */}
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+          >
+            <motion.div 
+              className="mb-16 text-right"
+              variants={itemVariants}
+            >
+              <h2 className="text-heading-2 urdu-heading mb-4 text-ink">
                 خصوصی سلسلہ
               </h2>
-              <p className="large-text urdu-text text-ink-muted"> {/* Use new ink-muted */}
+              <p className="large-text urdu-text text-ink-muted">
                 جاری کہانی کی تلاش
               </p>
-            </div>
+            </motion.div>
             
-            <div className="minimal-card animate-slide-up">
+            <motion.div 
+              className="minimal-card"
+              variants={itemVariants}
+              whileHover={{ 
+                y: -8, 
+                transition: { duration: 0.3, ease: "easeOut" } 
+              }}
+            >
               <div className="flex items-start gap-8 flex-row-reverse text-right">
                 <div className="flex-shrink-0">
-                  <div className="w-20 h-20 bg-gradient-to-br from-primary-100 to-primary-50 rounded-2xl flex items-center justify-center shadow-sm"> {/* Use new primary colors */}
-                    <Mic className="w-10 h-10 text-primary" /> {/* Use new primary color */}
-                  </div>
+                  <motion.div 
+                    className="w-20 h-20 bg-gradient-to-br from-primary-100 to-primary-50 rounded-2xl flex items-center justify-center shadow-sm"
+                    whileHover={{ scale: 1.1, rotate: -5 }}
+                    transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                  >
+                    <Mic className="w-10 h-10 text-primary" />
+                  </motion.div>
                 </div>
                 
                 <div className="flex-1">
                   <div className="flex items-center gap-3 mb-4 text-caption flex-row-reverse justify-end">
-                    <span className="uppercase tracking-wide font-semibold text-primary urdu-text"> {/* Use new primary color */}
+                    <span className="uppercase tracking-wide font-semibold text-primary urdu-text">
                       سلسلہ
                     </span>
-                    <span className="text-ink-light">•</span> {/* Use new ink-light */}
-                    <span className="text-ink-muted urdu-text"> {/* Use new ink-muted */}
+                    <span className="text-ink-light">•</span>
+                    <span className="text-ink-muted urdu-text">
                       {series.totalEntries} حصے
                     </span>
-                    <span className="text-ink-light">•</span> {/* Use new ink-light */}
-                    <span className="text-ink-muted urdu-text"> {/* Use new ink-muted */}
+                    <span className="text-ink-light">•</span>
+                    <span className="text-ink-muted urdu-text">
                       اردو
                     </span>
                   </div>
                   
-                  <h3 className="text-heading-3 urdu-heading mb-6 text-ink"> {/* Use new ink color */}
-                    {isUrdu ? series.titleUrdu : series.title}
+                  <h3 className="text-heading-3 urdu-heading mb-6 text-ink">
+                    {series.titleUrdu}
                   </h3>
                   
-                  <p className="text-ink-muted mb-8 leading-relaxed max-w-2xl urdu-text"> {/* Use new ink-muted */}
-                    {isUrdu ? series.descriptionUrdu : series.description}
+                  <p className="text-ink-muted mb-8 leading-relaxed max-w-2xl urdu-text">
+                    {series.descriptionUrdu}
                   </p>
 
-                  <Link 
-                    href="/bonn-ka-banjara"
-                    className="btn btn-primary group"
+                  <motion.div
+                    whileHover={{ scale: 1.05, y: -2 }}
+                    whileTap={{ scale: 0.95 }}
+                    transition={{ type: "spring", stiffness: 300, damping: 20 }}
                   >
-                    <span className="urdu-text">سلسلہ دیکھیں</span>
-                    <ArrowUpRight className="w-5 h-5 mr-2 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
-                  </Link>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Featured Work */}
-      <section className="work-section">
-        <div className="container">
-          {/* Books Section */}
-          <div className="mb-24">
-            <div className={`flex items-end justify-between mb-16 ${isUrdu ? 'flex-row-reverse text-right' : ''}`}>
-              <div>
-                <h2 className={`text-heading-2 mb-4 ${isUrdu ? 'urdu-heading' : ''}`}>
-                  {isUrdu ? 'تازہ کتابیں' : 'Latest Books'}
-                </h2>
-                <p className={`large-text ${isUrdu ? 'urdu-text' : ''}`}>
-                  {isUrdu ? 'شناخت، ٹیکنالوجی، اور انسانی رشتوں کو دریافت کرنے والے ناول' : 'Novels exploring identity, technology, and human connection'}
-                </p>
-              </div>
-              <Link 
-                href="/books"
-                className={`view-link ${isUrdu ? 'urdu-text flex-row-reverse' : ''}`}
-              >
-                <span>{isUrdu ? 'تمام کتابیں' : 'All books'}</span>
-                <ArrowUpRight className="w-4 h-4" />
-              </Link>
-            </div>
-            
-            <div className="portfolio-grid">
-              {featuredBooks.map((book, index) => (
-                <article
-                  key={book.id}
-                  className="minimal-card animate-slide-up"
-                  style={{animationDelay: `${index * 150}ms`}}
-                >
-                  <div className={`flex items-start gap-6 ${isUrdu ? 'flex-row-reverse text-right' : ''}`}>
-                    <div className="flex-shrink-0">
-                      <div className="w-16 h-20 bg-gradient-to-br from-red-100 to-red-50 rounded-xl flex items-center justify-center shadow-sm">
-                        <BookOpen className="w-8 h-8 text-red-600" />
-                      </div>
-                    </div>
-                    
-                    <div className="flex-1 min-w-0">
-                      <div className={`flex items-center gap-3 mb-3 text-caption ${isUrdu ? 'flex-row-reverse justify-end' : ''}`}>
-                        <span className={`uppercase tracking-wide font-semibold text-red-600 ${isUrdu ? 'urdu-text' : ''}`}>
-                          {isUrdu ? 'کتاب' : 'Book'}
-                        </span>
-                        <span className="text-gray-400">•</span>
-                        <span className="text-gray-500">{book.publishedYear}</span>
-                        {book.buyLinks && (
-                          <>
-                            <span className="text-gray-400">•</span>
-                            <div className={`flex items-center gap-1 ${isUrdu ? 'flex-row-reverse' : ''}`}>
-                              <Star className="w-3 h-3 text-red-500" />
-                              <span className={`text-gray-500 ${isUrdu ? 'urdu-text' : ''}`}>
-                                {isUrdu ? 'دستیاب' : 'Available'}
-                              </span>
-                            </div>
-                          </>
-                        )}
-                      </div>
-                      
-                      <h3 className={`card-title ${isUrdu ? 'urdu-heading' : ''}`}>
-                        {isUrdu && book.titleUrdu ? book.titleUrdu : book.title}
-                      </h3>
-                      
-                      <p className={`text-gray-600 mb-6 leading-relaxed ${isUrdu ? 'urdu-text' : ''}`}>
-                        {isUrdu && book.descriptionUrdu ? book.descriptionUrdu : book.description}
-                      </p>
-
-                      <Link 
-                        href={`/books/${book.slug}`}
-                        className={`view-link ${isUrdu ? 'urdu-text flex-row-reverse' : ''}`}
-                      >
-                        <span>{isUrdu ? 'دیکھیں' : 'view'}</span>
-                        <ArrowUpRight className="w-4 h-4" />
-                      </Link>
-                    </div>
-                  </div>
-                </article>
-              ))}
-            </div>
-          </div>
-
-          {/* Writing Section */}
-          <div className="mb-24">
-            <div className={`flex items-end justify-between mb-16 ${isUrdu ? 'flex-row-reverse text-right' : ''}`}>
-              <div>
-                <h2 className={`text-heading-2 mb-4 ${isUrdu ? 'urdu-heading' : ''}`}>
-                  {isUrdu ? 'حالیہ تحریریں' : 'Recent Writing'}
-                </h2>
-                <p className={`large-text ${isUrdu ? 'urdu-text' : ''}`}>
-                  {isUrdu ? 'ٹیکنالوجی، ثقافت، اور کہانی گوئی پر مضامین' : 'Essays on technology, culture, and storytelling'}
-                </p>
-              </div>
-              <Link 
-                href="/writing"
-                className={`view-link ${isUrdu ? 'urdu-text flex-row-reverse' : ''}`}
-              >
-                <span>{isUrdu ? 'تمام تحریریں' : 'All writing'}</span>
-                <ArrowUpRight className="w-4 h-4" />
-              </Link>
-            </div>
-            
-            <div className="work-grid">
-              {featuredEssays.map((essay, index) => (
-                <article
-                  key={essay.id}
-                  className="minimal-card animate-slide-up"
-                  style={{animationDelay: `${index * 150}ms`}}
-                >
-                  <div className={`${isUrdu ? 'text-right' : ''}`}>
-                    <div className={`flex items-center gap-3 mb-4 text-caption ${isUrdu ? 'flex-row-reverse justify-end' : ''}`}>
-                      <PenTool className="w-4 h-4 text-red-600" />
-                      <span className={`uppercase tracking-wide font-semibold text-red-600 ${isUrdu ? 'urdu-text' : ''}`}>
-                        {isUrdu ? 'مضمون' : 'Essay'}
-                      </span>
-                      <span className="text-gray-400">•</span>
-                      <span className="text-gray-500">
-                        {new Date(essay.publishedDate).toLocaleDateString(isUrdu ? 'ur-PK' : 'en-US', {
-                          year: 'numeric',
-                          month: 'short'
-                        })}
-                      </span>
-                      <span className="text-gray-400">•</span>
-                      <span className={`text-gray-500 ${isUrdu ? 'urdu-text' : ''}`}>
-                        {essay.readTime} {isUrdu ? 'منٹ' : 'min'}
-                      </span>
-                    </div>
-                    
-                    <h3 className={`card-title ${isUrdu ? 'urdu-heading' : ''}`}>
-                      {isUrdu && essay.titleUrdu ? essay.titleUrdu : essay.title}
-                    </h3>
-                    
-                    <p className={`text-gray-600 mb-6 leading-relaxed ${isUrdu ? 'urdu-text' : ''}`}>
-                      {isUrdu && essay.descriptionUrdu ? essay.descriptionUrdu : essay.description}
-                    </p>
-
                     <Link 
-                      href={`/writing/${essay.slug}`}
-                      className={`view-link ${isUrdu ? 'urdu-text flex-row-reverse' : ''}`}
+                      href="/ur/bonn-ka-banjara"
+                      className="btn btn-primary group"
                     >
-                      <span>{isUrdu ? 'پڑھیں' : 'read'}</span>
-                      <ArrowUpRight className="w-4 h-4" />
+                      <span className="urdu-text">سلسلہ دیکھیں</span>
+                      <ArrowUpRight className="w-5 h-5 mr-2 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
                     </Link>
-                  </div>
-                </article>
-              ))}
-            </div>
-          </div>
-
-          {/* Series Section */}
-          <div>
-            <div className={`mb-16 ${isUrdu ? 'text-right' : ''}`}>
-              <h2 className={`text-heading-2 mb-4 ${isUrdu ? 'urdu-heading' : ''}`}>
-                {isUrdu ? 'خصوصی سلسلہ' : 'Featured Series'}
-              </h2>
-              <p className={`large-text ${isUrdu ? 'urdu-text' : ''}`}>
-                {isUrdu ? 'جاری کہانی کی تلاش' : 'Ongoing narrative explorations'}
-              </p>
-            </div>
-            
-            <div className="minimal-card animate-slide-up">
-              <div className={`flex items-start gap-8 ${isUrdu ? 'flex-row-reverse text-right' : ''}`}>
-                <div className="flex-shrink-0">
-                  <div className="w-20 h-20 bg-gradient-to-br from-red-100 to-red-50 rounded-2xl flex items-center justify-center shadow-sm">
-                    <Mic className="w-10 h-10 text-red-600" />
-                  </div>
-                </div>
-                
-                <div className="flex-1">
-                  <div className={`flex items-center gap-3 mb-4 text-caption ${isUrdu ? 'flex-row-reverse justify-end' : ''}`}>
-                    <span className={`uppercase tracking-wide font-semibold text-red-600 ${isUrdu ? 'urdu-text' : ''}`}>
-                      {isUrdu ? 'سلسلہ' : 'Series'}
-                    </span>
-                    <span className="text-gray-400">•</span>
-                    <span className={`text-gray-500 ${isUrdu ? 'urdu-text' : ''}`}>
-                      {series.totalEntries} {isUrdu ? 'حصے' : 'entries'}
-                    </span>
-                    <span className="text-gray-400">•</span>
-                    <span className={`text-gray-500 ${isUrdu ? 'urdu-text' : ''}`}>
-                      {isUrdu ? 'اردو' : 'Urdu'}
-                    </span>
-                  </div>
-                  
-                  <h3 className={`text-heading-3 mb-6 ${isUrdu ? 'urdu-heading' : ''}`}>
-                    {isUrdu ? series.titleUrdu : series.title}
-                  </h3>
-                  
-                  <p className={`text-gray-600 mb-8 leading-relaxed max-w-2xl ${isUrdu ? 'urdu-text' : ''}`}>
-                    {isUrdu ? series.descriptionUrdu : series.description}
-                  </p>
-
-                  <Link 
-                    href="/bonn-ka-banjara"
-                    className={`btn btn-primary group ${isUrdu ? 'urdu-text' : ''}`}
-                  >
-                    <span>{isUrdu ? 'سلسلہ دیکھیں' : 'Explore Series'}</span>
-                    <ArrowUpRight className={`w-5 h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform ${isUrdu ? 'mr-2' : 'ml-2'}`} />
-                  </Link>
+                  </motion.div>
                 </div>
               </div>
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
         </div>
       </section>
 
       {/* Call to Action */}
-      <section className="py-24 bg-gray-50">
+      <section className="py-24 bg-surface-muted">
         <div className="container">
-          <div className={`max-w-4xl mx-auto text-center ${isUrdu ? 'text-right' : ''}`}>
-            <h2 className="text-heading-2 urdu-heading mb-8 text-ink"> {/* Use new ink color */}
+          <motion.div 
+            className="max-w-4xl mx-auto text-center text-right"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+          >
+            <h2 className="text-heading-2 urdu-heading mb-8 text-ink">
               آئیے جڑتے ہیں
             </h2>
-            <p className="large-text mb-12 urdu-text text-ink-muted"> {/* Use new ink-muted */}
+            <p className="large-text mb-12 urdu-text text-ink-muted">
               تعاون، تقاریر، یا صرف کہانیوں کے بارے میں بات کرنے میں دلچسپی ہے؟ میں آپ سے سننا پسند کروں گا۔
             </p>
-            <div className="flex flex-col sm:flex-row gap-6 justify-center sm:flex-row-reverse">
+            <motion.div 
+              className="flex flex-col sm:flex-row gap-6 justify-center sm:flex-row-reverse"
+              whileHover={{ scale: 1.02 }}
+              transition={{ type: "spring", stiffness: 300, damping: 20 }}
+            >
               <Link 
                 href="/contact"
                 className="btn btn-primary group"
               >
-                <span className="urdu-text">
-                  رابطہ کریں
-                </span>
-                <ArrowUpRight className={`w-5 h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform ${isUrdu ? 'mr-2' : 'ml-2'}`} />
+                <span className="urdu-text">رابطہ کریں</span>
+                <ArrowUpRight className="w-5 h-5 mr-2 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
               </Link>
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
         </div>
       </section>
     </div>
