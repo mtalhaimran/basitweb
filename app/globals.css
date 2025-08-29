@@ -72,9 +72,9 @@
     --primary-hover: #00C0E0;
     --primary-light: #00272C;
 
-    --ink: #ECF0F1; /* Light Grey */
-    --ink-muted: #BDC3C7;
-    --ink-light: #7F8C8D;
+    --ink: #F8F9FA; /* Higher contrast for dark mode */
+    --ink-muted: #D1D5DB; /* Improved contrast */
+    --ink-light: #9CA3AF; /* Better visibility */
 
     --surface: #2C3E50; /* Dark Blue Grey */
     --surface-elevated: #34495E;
@@ -134,70 +134,95 @@
 @layer components {
   /* Typography */
   .text-display {
-    font-size: clamp(3.5rem, 8vw, 7rem); /* Slightly larger for impact */
+    font-size: clamp(2.5rem, 6vw, 4.5rem); /* Reduced for better readability */
     font-weight: 800;
-    line-height: 0.9;
-    letter-spacing: -0.02em;
+    line-height: 1.1; /* Improved for readability */
+    letter-spacing: -0.01em; /* Less tight spacing */
   }
   
   .text-heading-1 {
-    font-size: clamp(2.5rem, 6vw, 4rem);
+    font-size: clamp(2rem, 4vw, 3rem); /* More manageable size */
     font-weight: 700;
-    line-height: 1.1;
-    letter-spacing: -0.01em;
+    line-height: 1.2; /* Better line spacing */
+    letter-spacing: 0; /* Remove negative spacing */
   }
   
   .text-heading-2 {
-    font-size: clamp(2rem, 4vw, 3rem);
+    font-size: clamp(1.75rem, 3vw, 2.25rem); /* Clearer hierarchy */
     font-weight: 600;
-    line-height: 1.2;
+    line-height: 1.3; /* Improved readability */
   }
   
   .text-heading-3 {
-    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-size: clamp(1.375rem, 2.5vw, 1.75rem); /* Better proportion */
     font-weight: 600;
-    line-height: 1.3;
+    line-height: 1.4; /* More breathing room */
+  }
+  
+  .text-heading-4 {
+    font-size: clamp(1.125rem, 2vw, 1.375rem);
+    font-weight: 600;
+    line-height: 1.4;
+  }
+  
+  .text-heading-5 {
+    font-size: 1.125rem;
+    font-weight: 600;
+    line-height: 1.5;
+  }
+  
+  .text-heading-6 {
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1.5;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
   }
   
   .text-body-lg {
     font-size: 1.125rem;
-    line-height: 1.7;
+    line-height: 1.75; /* Improved for dyslexia */
     font-weight: 400;
+    max-width: 65ch; /* Optimal reading width */
   }
   
   .text-body {
     font-size: 1rem;
-    line-height: 1.6;
+    line-height: 1.7; /* Better for readability */
     font-weight: 400; /* Keep standard weight */
+    max-width: 70ch; /* Optimal reading width */
   }
   
   .text-caption {
     font-size: 0.875rem;
-    line-height: 1.5;
+    line-height: 1.6; /* Improved spacing */
     color: var(--gray-500);
   }
   
   /* Urdu Typography */
   .urdu-display {
     font-family: var(--font-urdu-display);
-    font-size: clamp(3.5rem, 8vw, 7rem); /* Match English display size */
+    font-size: clamp(2.5rem, 6vw, 4.5rem); /* Reduced for readability */
     font-weight: 700;
-    line-height: 1.2;
-    letter-spacing: 0.02em;
+    line-height: 1.3; /* Better for Urdu script */
+    letter-spacing: 0.03em; /* Improved for Arabic script */
   }
   
   .urdu-heading {
     font-family: var(--font-urdu-display);
-    font-size: clamp(1.5rem, 4vw, 2.5rem);
+    font-size: clamp(1.375rem, 3vw, 2rem); /* Better proportion */
     font-weight: 600;
-    line-height: 1.4;
+    line-height: 1.5; /* Improved for Arabic script */
+    letter-spacing: 0.02em;
   }
   
   .urdu-text {
     font-family: var(--font-urdu-body);
     font-size: 1.125rem;
-    line-height: 1.8; /* Keep for Urdu readability */
+    line-height: 1.9; /* Enhanced for Arabic script readability */
     font-weight: 400;
+    max-width: 60ch; /* Optimal for RTL reading */
+    letter-spacing: 0.01em;
   }
   
   /* Layout */
@@ -536,43 +561,105 @@
 .prose { /* Adjust prose colors to new palette */
   color: var(--ink);
   max-width: none;
+  font-size: 1.125rem; /* Larger base font for readability */
+  line-height: 1.75; /* Optimal for reading */
 }
 
 .prose h1, .prose h2, .prose h3 {
   color: var(--ink);
   font-weight: 600;
+  margin-top: 2.5rem; /* Clear section breaks */
+  margin-bottom: 1.25rem;
 }
 
+.prose h1 {
+  font-size: 2.25rem;
+  line-height: 1.2;
+  margin-top: 0; /* No top margin for page titles */
+}
+
+.prose h2 {
+  font-size: 1.875rem;
+  line-height: 1.3;
+}
+
+.prose h3 {
+  font-size: 1.5rem;
+  line-height: 1.4;
+}
+
+.prose h4 {
+  font-size: 1.25rem;
+  line-height: 1.4;
+  font-weight: 600;
+}
+
+.prose h5 {
+  font-size: 1.125rem;
+  line-height: 1.5;
+  font-weight: 600;
+}
+
+.prose h6 {
+  font-size: 1rem;
+  line-height: 1.5;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
 .prose p {
   color: var(--ink);
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.75rem; /* Increased paragraph spacing */
+  max-width: 70ch; /* Optimal line length */
+}
+
+.prose ul, .prose ol {
+  margin-bottom: 1.75rem;
+  padding-left: 1.5rem;
+}
+
+[dir="rtl"] .prose ul, [dir="rtl"] .prose ol {
+  padding-left: 0;
+  padding-right: 1.5rem;
+}
+
+.prose li {
+  margin-bottom: 0.75rem; /* Space between list items */
+  line-height: 1.7;
 }
 
 .prose a {
   color: var(--primary);
   text-decoration: underline;
   text-decoration-color: var(--primary);
-  text-underline-offset: 3px;
-  text-decoration-thickness: 2px;
+  text-underline-offset: 4px; /* More space for clarity */
+  text-decoration-thickness: 1px; /* Thinner for less distraction */
+  font-weight: 500; /* Slightly bolder for visibility */
 }
 
 .prose a:hover {
   color: var(--primary-hover);
   text-decoration-color: var(--primary-hover);
+  text-decoration-thickness: 2px; /* Thicker on hover */
 }
 
 .prose blockquote {
-  border-left: 4px solid var(--brand);
-  padding-left: 1.5rem;
+  border-left: 4px solid var(--primary);
+  padding-left: 2rem; /* More breathing room */
+  padding-top: 1rem;
+  padding-bottom: 1rem;
   font-style: italic;
-  color: var(--ink-muted);
+  color: var(--ink);
+  background: var(--surface-elevated);
+  border-radius: 0.5rem;
+  margin: 2rem 0; /* Clear separation */
 }
 
 [dir="rtl"] .prose blockquote {
   border-left: none;
-  border-right: 4px solid var(--brand);
+  border-right: 4px solid var(--primary);
   padding-left: 0;
-  padding-right: 1.5rem;
+  padding-right: 2rem;
 }
 
 /* Loading States */
