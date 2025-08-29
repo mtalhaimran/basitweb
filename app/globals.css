@@ -368,6 +368,38 @@
     background: linear-gradient(135deg, var(--surface) 0%, var(--surface-muted) 50%, var(--brand-light) 100%);
   }
   
+  /* Enhanced Hero Section */
+  .hero-section {
+    min-height: 100vh;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .hero-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+      135deg,
+      rgba(0, 123, 140, 0.1) 0%,
+      rgba(0, 123, 140, 0.05) 50%,
+      transparent 100%
+    );
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  .hero-section .container {
+    position: relative;
+    z-index: 2;
+  }
+
   /* Grid Layouts */
   .portfolio-grid {
     display: grid;
