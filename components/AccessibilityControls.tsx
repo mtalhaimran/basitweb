@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Settings, Type, Spacing, Eye, Palette } from 'lucide-react';
+import { Settings, Type, Space as Spacing, Eye, Palette } from 'lucide-react';
 
 export function AccessibilityControls() {
   const [isVisible, setIsVisible] = useState(false);
