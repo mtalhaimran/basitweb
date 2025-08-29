@@ -49,7 +49,7 @@ export default function NewsletterPage() {
 
           <div className="max-w-lg mx-auto minimal-card">
             <h2 className="text-heading-2 urdu-heading text-center mb-8">سبسکرائب کریں</h2>
-            <NewsletterForm lang="ur" />
+            <NewsletterForm />
             
             <div className="mt-8 p-6 bg-gray-50 rounded-xl">
               <p className="text-caption urdu-text text-ink-muted text-center leading-relaxed"> {/* Use new ink-muted */}
