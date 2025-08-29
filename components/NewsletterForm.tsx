@@ -126,7 +126,7 @@ export function NewsletterForm({ compact = false, lang = 'en' }: NewsletterFormP
       <p className={`mt-6 text-caption text-gray-500 ${isUrdu ? 'urdu-text text-right' : ''}`}>
         {isUrdu 
           ? 'ہم آپ کا ای میل کبھی شیئر نہیں کریں گے۔ کسی بھی وقت ان سبسکرائب کریں۔'
-          : 'We'll never share your email. Unsubscribe at any time.'
+          : 'We\'ll never share your email. Unsubscribe at any time.'
         }
       </p>
     </div>
