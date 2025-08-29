@@ -1,6 +1,7 @@
 import './globals.css';
 import type { Metadata } from 'next';
 import { Inter, Noto_Nastaliq_Urdu, Noto_Naskh_Arabic } from 'next/font/google';
+import { AccessibilityControls } from '@/components/AccessibilityControls';
 
 const inter = Inter({ 
   subsets: ['latin'],
@@ -55,6 +56,7 @@ export default function RootLayout({
       </head>
       <body className={`${inter.variable} ${notoNastaliq.variable} ${notoNaskh.variable} font-urdu-body antialiased`}>
         {children}
+        <AccessibilityControls />
       </body>
     </html>
   );

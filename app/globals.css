@@ -765,12 +765,10 @@
 
 /* Large text treatment */
 .large-text {
-  font-size: clamp(1.125rem, 2.5vw, 1.375rem); /* More readable size */
-  line-height: 1.6; /* Improved readability */
+  font-size: clamp(1.25rem, 3vw, 1.75rem);
+  line-height: 1.4;
   font-weight: 400;
   color: var(--ink); /* Use new ink color */
-  max-width: 65ch; /* Optimal line length */
-  letter-spacing: 0.01em; /* Slight spacing for clarity */
 }
 
 /* Minimal navigation */
@@ -789,6 +787,97 @@
 .minimal-nav.scrolled {
   background: rgba(255, 255, 255, 0.95);
   box-shadow: var(--shadow-sm); /* Keep shadow */
+}
+
+/* Accessibility Settings Toggle */
+.accessibility-controls {
+  position: fixed;
+  top: 50%;
+  right: 1rem;
+  transform: translateY(-50%);
+  z-index: 40;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 1rem;
+  padding: 1rem;
+  box-shadow: var(--shadow-lg);
+  display: none; /* Hidden by default, can be toggled */
+}
+
+[dir="rtl"] .accessibility-controls {
+  right: auto;
+  left: 1rem;
+}
+
+.accessibility-controls.visible {
+  display: block;
+}
+
+.accessibility-controls button {
+  display: block;
+  width: 100%;
+  padding: 0.5rem;
+  margin-bottom: 0.5rem;
+  background: transparent;
+  border: 1px solid var(--line);
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.accessibility-controls button:hover {
+  background: var(--surface-elevated);
+  border-color: var(--primary);
+}
+
+.accessibility-controls button.active {
+  background: var(--primary);
+  color: white;
+  border-color: var(--primary);
+}
+
+/* Text size adjustments */
+.text-size-small {
+  font-size: 0.875rem !important;
+}
+
+.text-size-normal {
+  /* Default sizes */
+}
+
+.text-size-large {
+  font-size: 1.25rem !important;
+}
+
+.text-size-extra-large {
+  font-size: 1.5rem !important;
+}
+
+/* Line spacing adjustments */
+.line-spacing-normal {
+  line-height: 1.6 !important;
+}
+
+.line-spacing-relaxed {
+  line-height: 1.8 !important;
+}
+
+.line-spacing-loose {
+  line-height: 2 !important;
+}
+
+/* Letter spacing for dyslexia */
+.letter-spacing-normal {
+  letter-spacing: normal !important;
+}
+
+.letter-spacing-wide {
+  letter-spacing: 0.05em !important;
+}
+
+.letter-spacing-wider {
+  letter-spacing: 0.1em !important;
 }
 
 /* Dark mode adjustments */
