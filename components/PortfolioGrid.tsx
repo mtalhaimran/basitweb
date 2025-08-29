@@ -1,160 +1,135 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import { ArrowRight, BookOpen, PenTool, Mic, Calendar, ExternalLink } from 'lucide-react';
+import { ArrowRight, BookOpen, PenTool, Mic, Calendar, ExternalLink, Star, Award } from 'lucide-react';
 import { books, essays, series } from '@/lib/data/content';
 
-interface PortfolioGridProps {
-  lang?: 'en' | 'ur';
-}
-
-export function PortfolioGrid({ lang = 'en' }: PortfolioGridProps) {
-  const isUrdu = lang === 'ur';
-  
-  // Create featured portfolio items
+export function PortfolioGrid() {
   const featuredBooks = books.slice(0, 2);
   const featuredEssays = essays.slice(0, 3);
-  const featuredSeries = isUrdu ? [series] : [];
-
+  
   return (
-    <section className="py-20 hero-gradient" data-pagefind-body>
-      <div className="container">
-        {/* Hero Section */}
-        <div className={`grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center mb-24 ${
-          isUrdu ? 'lg:grid-cols-2' : ''
-        }`}>
-          {/* Portrait */}
-          <div className={`${isUrdu ? 'lg:order-2' : 'order-1'}`}>
-            <div className="relative">
-              <picture>
-                <source 
-                  media="(min-width: 1024px)" 
-                  srcSet="https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=600&h=800&fit=crop 600w"
-                  sizes="(min-width: 1024px) 600px"
-                />
-                <source 
-                  media="(min-width: 768px)" 
-                  srcSet="https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=500&h=600&fit=crop 500w"
-                  sizes="(min-width: 768px) 500px"
-                />
-                <Image
-                  src="https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=400&h=500&fit=crop"
-                  alt={isUrdu ? 'عبدالباسط ظفر - لکھاری اور کہانی گو' : 'Abdul Basit Zafar - Writer and Storyteller'}
-                  width={400}
-                  height={500}
-                  priority
-                  className="hero-image rounded-2xl shadow-xl w-full max-w-md mx-auto"
-                  unoptimized
-                />
-              </picture>
-              
-              {/* Decorative accent */}
-              <div className="absolute -bottom-4 -right-4 w-24 h-24 bg-brand/10 rounded-full blur-xl"></div>
+    <div className="min-h-screen">
+      {/* Hero Section */}
+      <section className="hero-section pt-32 pb-20">
+        <div className="container">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            {/* Portrait */}
+            <div className="order-2 lg:order-1">
+              <div className="relative">
+                <div className="aspect-[4/5] relative rounded-3xl overflow-hidden shadow-2xl">
+                  <Image
+                    src="https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=600&h=750&fit=crop"
+                    alt="Abdul Basit Zafar - Writer and Storyteller"
+                    fill
+                    className="hero-image object-cover"
+                    priority
+                    unoptimized
+                  />
+                </div>
+                
+                {/* Floating accent */}
+                <div className="absolute -bottom-6 -right-6 w-32 h-32 bg-red-100 rounded-full blur-2xl animate-float"></div>
+                <div className="absolute -top-6 -left-6 w-24 h-24 bg-red-50 rounded-full blur-xl animate-float" style={{animationDelay: '2s'}}></div>
+              </div>
             </div>
-          </div>
 
-          {/* Hero Content */}
-          <div className={`${isUrdu ? 'lg:order-1 text-right' : 'order-2'}`}>
-            <h1 className={`mb-6 text-balance ${
-              isUrdu ? 'urdu-display' : 'text-display-1'
-            }`}>
-              {isUrdu 
-                ? 'عبدالباسط ظفر'
-                : 'Abdul Basit Zafar'
-              }
-            </h1>
-            
-            <p className={`mb-8 text-pretty ${
-              isUrdu ? 'urdu-body text-ink-muted' : 'text-body-lg text-ink-muted'
-            }`}>
-              {isUrdu 
-                ? 'ایک لکھاری اور کہانی گو جو ٹیکنالوجی، ثقافت، اور انسانی تجربات کے درمیان پلوں کا کام کرتا ہے۔ کہانیاں جو دنیاوں کو جوڑتی ہیں۔'
-                : 'Writer and storyteller exploring the intersection of technology, culture, and human experience. Stories that connect worlds across languages and borders.'
-              }
-            </p>
+            {/* Hero Content */}
+            <div className="order-1 lg:order-2 text-center lg:text-left">
+              <div className="animate-fade-in">
+                <h1 className="text-display mb-8 text-gradient">
+                  Abdul Basit Zafar
+                </h1>
+                
+                <p className="text-body-lg text-gray-600 mb-10 max-w-lg mx-auto lg:mx-0">
+                  Writer and storyteller exploring the intersection of technology, culture, and human experience. 
+                  Stories that connect worlds across languages and borders.
+                </p>
 
-            <div className={`flex flex-col sm:flex-row gap-4 ${
-              isUrdu ? 'sm:flex-row-reverse' : ''
-            }`}>
-              <Link 
-                href={isUrdu ? '/ur/work' : '/work'}
-                className={`btn btn-primary ${isUrdu ? 'urdu-body-sm' : ''}`}
-              >
-                {isUrdu ? 'کام دیکھیں' : 'View Work'}
-                <ArrowRight className={`w-4 h-4 ${isUrdu ? 'mr-2 rotate-180' : 'ml-2'}`} />
-              </Link>
-              
-              <Link 
-                href={isUrdu ? '/ur/about' : '/about'}
-                className={`btn btn-secondary ${isUrdu ? 'urdu-body-sm' : ''}`}
-              >
-                {isUrdu ? 'تعارف' : 'About'}
-              </Link>
+                <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                  <Link 
+                    href="/work"
+                    className="btn btn-primary group"
+                  >
+                    View My Work
+                    <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                  </Link>
+                  
+                  <Link 
+                    href="/about"
+                    className="btn btn-secondary"
+                  >
+                    About Me
+                  </Link>
+                </div>
+              </div>
             </div>
           </div>
         </div>
+      </section>
 
-        {/* Featured Work Grid */}
-        <div className="space-y-16">
+      {/* Featured Work */}
+      <section className="py-20 bg-gray-50">
+        <div className="container">
           {/* Books Section */}
-          <div>
-            <div className={`flex items-center justify-between mb-8 ${isUrdu ? 'flex-row-reverse' : ''}`}>
-              <h2 className={`${isUrdu ? 'urdu-heading-2' : 'text-heading-2'}`}>
-                {isUrdu ? 'کتابیں' : 'Books'}
-              </h2>
+          <div className="mb-20">
+            <div className="flex items-center justify-between mb-12">
+              <div>
+                <h2 className="text-heading-2 mb-4">Latest Books</h2>
+                <p className="text-body text-gray-600">Novels exploring identity, technology, and human connection</p>
+              </div>
               <Link 
-                href={isUrdu ? '/ur/books' : '/books'}
-                className={`link text-sm ${isUrdu ? 'urdu-body-sm' : ''}`}
+                href="/books"
+                className="link text-sm font-medium group"
               >
-                {isUrdu ? 'تمام کتابیں' : 'View all'}
-                <ArrowRight className={`w-3 h-3 inline ${isUrdu ? 'mr-1 rotate-180' : 'ml-1'}`} />
+                View all books
+                <ArrowRight className="w-3 h-3 inline ml-1 group-hover:translate-x-1 transition-transform" />
               </Link>
             </div>
             
             <div className="portfolio-grid">
-              {featuredBooks.map((book) => (
+              {featuredBooks.map((book, index) => (
                 <article
                   key={book.id}
-                  className="portfolio-card group"
-                  data-pagefind-filter={`type:Book,year:${book.publishedYear}`}
+                  className="portfolio-card group animate-slide-up"
+                  style={{animationDelay: `${index * 100}ms`}}
                 >
-                  <div className={`flex items-start space-x-4 ${isUrdu ? 'flex-row-reverse space-x-reverse' : ''}`}>
+                  <div className="flex items-start space-x-6">
                     <div className="flex-shrink-0">
-                      <div className="w-16 h-20 bg-gradient-to-br from-brand/10 to-brand/5 rounded-lg flex items-center justify-center">
-                        <BookOpen className="w-8 h-8 text-brand" />
+                      <div className="w-20 h-24 bg-gradient-to-br from-red-100 to-red-50 rounded-xl flex items-center justify-center shadow-sm">
+                        <BookOpen className="w-10 h-10 text-red-600" />
                       </div>
                     </div>
                     
-                    <div className={`flex-1 min-w-0 ${isUrdu ? 'text-right' : ''}`}>
-                      <div className={`flex items-center space-x-2 mb-2 text-caption ${
-                        isUrdu ? 'flex-row-reverse space-x-reverse' : ''
-                      }`}>
-                        <span className={`uppercase tracking-wide font-medium ${
-                          isUrdu ? 'urdu-body-sm' : ''
-                        }`}>
-                          {isUrdu ? 'کتاب' : 'Book'}
-                        </span>
-                        <span>•</span>
-                        <span>{book.publishedYear}</span>
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center space-x-2 mb-3 text-caption">
+                        <span className="uppercase tracking-wide font-semibold text-red-600">Book</span>
+                        <span className="text-gray-400">•</span>
+                        <span className="text-gray-500">{book.publishedYear}</span>
+                        {book.buyLinks && (
+                          <>
+                            <span className="text-gray-400">•</span>
+                            <div className="flex items-center space-x-1">
+                              <Star className="w-3 h-3 text-red-500" />
+                              <span className="text-gray-500">Available</span>
+                            </div>
+                          </>
+                        )}
                       </div>
                       
-                      <h3 className={`portfolio-title mb-2 ${
-                        isUrdu ? 'urdu-heading-3' : 'text-heading-3'
-                      }`}>
-                        {isUrdu && book.titleUrdu ? book.titleUrdu : book.title}
+                      <h3 className="portfolio-title">
+                        {book.title}
                       </h3>
                       
-                      <p className={`text-ink-muted mb-4 line-clamp-2 ${
-                        isUrdu ? 'urdu-body-sm' : 'text-body-sm'
-                      }`}>
-                        {isUrdu && book.descriptionUrdu ? book.descriptionUrdu : book.description}
+                      <p className="text-gray-600 mb-6 leading-relaxed">
+                        {book.description}
                       </p>
 
                       <Link 
-                        href={`${isUrdu ? '/ur' : ''}/books/${book.slug}`}
-                        className={`link text-sm font-medium ${isUrdu ? 'urdu-body-sm' : ''}`}
+                        href={`/books/${book.slug}`}
+                        className="link text-sm font-semibold group"
                       >
-                        {isUrdu ? 'دیکھیں' : 'view'}
-                        <ArrowRight className={`w-3 h-3 inline ${isUrdu ? 'mr-1 rotate-180' : 'ml-1'}`} />
+                        view
+                        <ArrowRight className="w-3 h-3 inline ml-1 group-hover:translate-x-1 transition-transform" />
                       </Link>
                     </div>
                   </div>
@@ -164,152 +139,147 @@ export function PortfolioGrid({ lang = 'en' }: PortfolioGridProps) {
           </div>
 
           {/* Writing Section */}
-          <div>
-            <div className={`flex items-center justify-between mb-8 ${isUrdu ? 'flex-row-reverse' : ''}`}>
-              <h2 className={`${isUrdu ? 'urdu-heading-2' : 'text-heading-2'}`}>
-                {isUrdu ? 'حالیہ تحریریں' : 'Recent Writing'}
-              </h2>
+          <div className="mb-20">
+            <div className="flex items-center justify-between mb-12">
+              <div>
+                <h2 className="text-heading-2 mb-4">Recent Writing</h2>
+                <p className="text-body text-gray-600">Essays on technology, culture, and storytelling</p>
+              </div>
               <Link 
-                href={isUrdu ? '/ur/writing' : '/writing'}
-                className={`link text-sm ${isUrdu ? 'urdu-body-sm' : ''}`}
+                href="/writing"
+                className="link text-sm font-medium group"
               >
-                {isUrdu ? 'تمام تحریریں' : 'View all'}
-                <ArrowRight className={`w-3 h-3 inline ${isUrdu ? 'mr-1 rotate-180' : 'ml-1'}`} />
+                View all writing
+                <ArrowRight className="w-3 h-3 inline ml-1 group-hover:translate-x-1 transition-transform" />
               </Link>
             </div>
             
             <div className="writing-grid">
-              {featuredEssays.map((essay) => (
+              {featuredEssays.map((essay, index) => (
                 <article
                   key={essay.id}
-                  className="portfolio-card group"
-                  data-pagefind-filter={`type:Essay,year:${new Date(essay.publishedDate).getFullYear()}`}
+                  className="portfolio-card group animate-slide-up"
+                  style={{animationDelay: `${index * 100}ms`}}
                 >
-                  <div className={`flex items-center space-x-2 mb-3 text-caption ${
-                    isUrdu ? 'flex-row-reverse space-x-reverse' : ''
-                  }`}>
-                    <PenTool className="w-4 h-4 text-brand" />
-                    <span className={`uppercase tracking-wide font-medium ${
-                      isUrdu ? 'urdu-body-sm' : ''
-                    }`}>
-                      {isUrdu ? 'مضمون' : 'Essay'}
-                    </span>
-                    <span>•</span>
-                    <span>
-                      {new Date(essay.publishedDate).toLocaleDateString(isUrdu ? 'ur-PK' : 'en-US', {
+                  <div className="flex items-center space-x-2 mb-4 text-caption">
+                    <PenTool className="w-4 h-4 text-red-600" />
+                    <span className="uppercase tracking-wide font-semibold text-red-600">Essay</span>
+                    <span className="text-gray-400">•</span>
+                    <span className="text-gray-500">
+                      {new Date(essay.publishedDate).toLocaleDateString('en-US', {
                         year: 'numeric',
                         month: 'short'
                       })}
                     </span>
+                    <span className="text-gray-400">•</span>
+                    <span className="text-gray-500">{essay.readTime} min</span>
                   </div>
                   
-                  <h3 className={`portfolio-title mb-2 ${
-                    isUrdu ? 'urdu-heading-3' : 'text-heading-3'
-                  }`}>
-                    {isUrdu && essay.titleUrdu ? essay.titleUrdu : essay.title}
+                  <h3 className="portfolio-title">
+                    {essay.title}
                   </h3>
                   
-                  <p className={`text-ink-muted mb-4 line-clamp-2 ${
-                    isUrdu ? 'urdu-body-sm' : 'text-body-sm'
-                  }`}>
-                    {isUrdu && essay.descriptionUrdu ? essay.descriptionUrdu : essay.description}
+                  <p className="text-gray-600 mb-6 leading-relaxed">
+                    {essay.description}
                   </p>
 
-                  <div className={`flex items-center justify-between ${isUrdu ? 'flex-row-reverse' : ''}`}>
+                  <div className="flex items-center justify-between">
                     <Link 
-                      href={`${isUrdu ? '/ur' : ''}/writing/${essay.slug}`}
-                      className={`link text-sm font-medium ${isUrdu ? 'urdu-body-sm' : ''}`}
+                      href={`/writing/${essay.slug}`}
+                      className="link text-sm font-semibold group"
                     >
-                      {isUrdu ? 'پڑھیں' : 'read'}
-                      <ArrowRight className={`w-3 h-3 inline ${isUrdu ? 'mr-1 rotate-180' : 'ml-1'}`} />
+                      read
+                      <ArrowRight className="w-3 h-3 inline ml-1 group-hover:translate-x-1 transition-transform" />
                     </Link>
                     
-                    <span className={`text-caption ${isUrdu ? 'urdu-body-sm' : ''}`}>
-                      {essay.readTime} {isUrdu ? 'منٹ' : 'min'}
-                    </span>
+                    {essay.publication && (
+                      <div className="flex items-center space-x-1">
+                        <Award className="w-3 h-3 text-gray-400" />
+                        <span className="text-caption text-gray-500">{essay.publication}</span>
+                      </div>
+                    )}
                   </div>
                 </article>
               ))}
             </div>
           </div>
 
-          {/* Series Section (Urdu only) */}
-          {isUrdu && featuredSeries.length > 0 && (
-            <div>
-              <div className="flex items-center justify-between mb-8 flex-row-reverse">
-                <h2 className="urdu-heading-2">سلسلہ</h2>
-                <Link 
-                  href="/ur/bonn-ka-banjara"
-                  className="link text-sm urdu-body-sm"
-                >
-                  مکمل سلسلہ
-                  <ArrowRight className="w-3 h-3 inline mr-1 rotate-180" />
-                </Link>
+          {/* Series Section */}
+          <div>
+            <div className="flex items-center justify-between mb-12">
+              <div>
+                <h2 className="text-heading-2 mb-4">Featured Series</h2>
+                <p className="text-body text-gray-600">Ongoing narrative explorations</p>
               </div>
-              
-              <div className="portfolio-card">
-                <div className="flex items-start space-x-6 flex-row-reverse space-x-reverse">
-                  <div className="flex-shrink-0">
-                    <div className="w-20 h-20 bg-gradient-to-br from-brand/10 to-brand/5 rounded-xl flex items-center justify-center">
-                      <Mic className="w-10 h-10 text-brand" />
-                    </div>
+            </div>
+            
+            <div className="portfolio-card animate-slide-up">
+              <div className="flex items-start space-x-8">
+                <div className="flex-shrink-0">
+                  <div className="w-24 h-24 bg-gradient-to-br from-red-100 to-red-50 rounded-2xl flex items-center justify-center shadow-sm">
+                    <Mic className="w-12 h-12 text-red-600" />
+                  </div>
+                </div>
+                
+                <div className="flex-1">
+                  <div className="flex items-center space-x-2 mb-4 text-caption">
+                    <span className="uppercase tracking-wide font-semibold text-red-600">Series</span>
+                    <span className="text-gray-400">•</span>
+                    <span className="text-gray-500">{series.totalEntries} entries</span>
+                    <span className="text-gray-400">•</span>
+                    <span className="text-gray-500">Urdu</span>
                   </div>
                   
-                  <div className="flex-1 text-right">
-                    <div className="flex items-center space-x-2 mb-3 text-caption flex-row-reverse space-x-reverse">
-                      <span className="uppercase tracking-wide font-medium urdu-body-sm">
-                        سلسلہ
-                      </span>
-                      <span>•</span>
-                      <span className="urdu-body-sm">
-                        {series.totalEntries} حصے
-                      </span>
-                    </div>
-                    
-                    <h3 className="portfolio-title urdu-heading-2 mb-3">
-                      {series.titleUrdu}
-                    </h3>
-                    
-                    <p className="text-ink-muted mb-6 urdu-body">
-                      {series.descriptionUrdu}
-                    </p>
+                  <h3 className="text-heading-3 text-gray-900 mb-4">
+                    {series.title}
+                    <span className="urdu-heading-3 text-red-600 mr-4">{series.titleUrdu}</span>
+                  </h3>
+                  
+                  <p className="text-gray-600 mb-8 leading-relaxed max-w-2xl">
+                    {series.description}
+                  </p>
 
-                    <Link 
-                      href="/ur/bonn-ka-banjara"
-                      className="link text-sm font-medium urdu-body-sm"
-                    >
-                      شروع کریں
-                      <ArrowRight className="w-3 h-3 inline mr-1 rotate-180" />
-                    </Link>
-                  </div>
+                  <Link 
+                    href="/bonn-ka-banjara"
+                    className="btn btn-primary group"
+                  >
+                    Explore Series
+                    <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                  </Link>
                 </div>
               </div>
             </div>
-          )}
+          </div>
         </div>
+      </section>
 
-        {/* Call to Action */}
-        <div className={`text-center bg-subtle rounded-2xl p-12 ${isUrdu ? 'text-right' : ''}`}>
-          <h2 className={`mb-4 ${isUrdu ? 'urdu-heading-2' : 'text-heading-2'}`}>
-            {isUrdu ? 'مزید دریافت کریں' : 'Explore More'}
-          </h2>
-          <p className={`text-ink-muted mb-8 max-w-2xl mx-auto ${
-            isUrdu ? 'urdu-body' : 'text-body-lg'
-          }`}>
-            {isUrdu 
-              ? 'تمام کام، کہانیاں، اور خیالات کو دیکھنے کے لیے مکمل پورٹ فولیو دیکھیں۔'
-              : 'Browse the complete portfolio to discover all works, stories, and thoughts across cultures and languages.'
-            }
-          </p>
-          <Link 
-            href={isUrdu ? '/ur/work' : '/work'}
-            className={`btn btn-primary ${isUrdu ? 'urdu-body-sm' : ''}`}
-          >
-            {isUrdu ? 'تمام کام دیکھیں' : 'View All Work'}
-            <ExternalLink className={`w-4 h-4 ${isUrdu ? 'mr-2' : 'ml-2'}`} />
-          </Link>
+      {/* Call to Action */}
+      <section className="py-20">
+        <div className="container text-center">
+          <div className="max-w-3xl mx-auto">
+            <h2 className="text-heading-2 mb-6">Let's Connect</h2>
+            <p className="text-body-lg text-gray-600 mb-10">
+              Interested in collaborations, speaking engagements, or just want to discuss stories? 
+              I'd love to hear from you.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link 
+                href="/contact"
+                className="btn btn-primary group"
+              >
+                Get in Touch
+                <Mail className="w-4 h-4 ml-2" />
+              </Link>
+              <Link 
+                href="/newsletter"
+                className="btn btn-secondary"
+              >
+                Subscribe to Newsletter
+              </Link>
+            </div>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </div>
   );
 }

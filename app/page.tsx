@@ -5,11 +5,6 @@ import { PortfolioGrid } from '@/components/PortfolioGrid';
 export const metadata = {
   title: 'Abdul Basit Zafar - Writer & Storyteller',
   description: 'Portfolio of Abdul Basit Zafar - books, essays, and stories exploring technology, culture, and human experience.',
-  alternates: {
-    languages: {
-      'ur': '/ur'
-    }
-  },
   openGraph: {
     title: 'Abdul Basit Zafar - Writer & Storyteller',
     description: 'Portfolio of Abdul Basit Zafar - books, essays, and stories exploring technology, culture, and human experience.',
@@ -20,8 +15,7 @@ export const metadata = {
       alt: 'Abdul Basit Zafar - Writer & Storyteller'
     }],
     type: 'website',
-    locale: 'en_US',
-    alternateLocale: 'ur_PK'
+    locale: 'en_US'
   },
   twitter: {
     card: 'summary_large_image',
@@ -56,9 +50,9 @@ export default function Home() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       
-      <div className="min-h-screen flex flex-col">
+      <div className="min-h-screen">
         <Header />
-        <main id="main-content" className="flex-1">
+        <main id="main-content">
           <PortfolioGrid />
         </main>
         <Footer />

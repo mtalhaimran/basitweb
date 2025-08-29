@@ -79,13 +79,13 @@ export function AudioBlock({ src, transcript, title, lang = 'en' }: AudioBlockPr
   };
 
   return (
-    <div className="audio-controls my-8">
-      <div className={`flex items-center justify-between mb-6 ${isUrdu ? 'flex-row-reverse' : ''}`}>
+    <div className="audio-controls my-12 p-8">
+      <div className={`flex items-center justify-between mb-8 ${isUrdu ? 'flex-row-reverse' : ''}`}>
         <div className={`flex items-center space-x-3 ${isUrdu ? 'flex-row-reverse space-x-reverse' : ''}`}>
-          <div className="p-2 bg-brand/10 rounded-lg">
-            <Volume2 className="w-5 h-5 text-brand" />
+          <div className="p-3 bg-red-100 rounded-xl">
+            <Volume2 className="w-6 h-6 text-red-600" />
           </div>
-          <h3 className={`text-lg font-semibold ${isUrdu ? 'urdu-heading-3' : ''}`}>
+          <h3 className={`text-heading-4 ${isUrdu ? 'urdu-heading-3' : ''}`}>
             {title || (isUrdu ? 'آڈیو' : 'Audio')}
           </h3>
         </div>
@@ -93,7 +93,7 @@ export function AudioBlock({ src, transcript, title, lang = 'en' }: AudioBlockPr
         {transcript && (
           <button
             onClick={() => setShowTranscript(!showTranscript)}
-            className={`btn btn-ghost text-sm ${isUrdu ? 'urdu-body-sm' : ''}`}
+            className={`btn btn-secondary text-sm ${isUrdu ? 'urdu-body-sm' : ''}`}
           >
             <FileText className="w-4 h-4" />
             <span className={isUrdu ? 'mr-2' : 'ml-2'}>
@@ -107,31 +107,31 @@ export function AudioBlock({ src, transcript, title, lang = 'en' }: AudioBlockPr
       </div>
 
       {/* Audio Controls */}
-      <div className="space-y-4">
-        <div className={`flex items-center space-x-4 ${isUrdu ? 'flex-row-reverse space-x-reverse' : ''}`}>
+      <div className="space-y-6">
+        <div className={`flex items-center space-x-6 ${isUrdu ? 'flex-row-reverse space-x-reverse' : ''}`}>
           {/* Skip Back */}
           <button
             onClick={() => skipTime(-10)}
             disabled={!isLoaded}
-            className="btn btn-ghost p-2"
+            className="btn btn-ghost p-3 rounded-xl"
             aria-label={isUrdu ? '10 سیکنڈ پیچھے' : 'Skip back 10 seconds'}
           >
-            <SkipBack className="w-4 h-4" />
+            <SkipBack className="w-5 h-5" />
           </button>
 
           {/* Play/Pause */}
           <button
             onClick={togglePlayback}
             disabled={!isLoaded}
-            className="flex items-center justify-center w-12 h-12 bg-brand text-white rounded-full hover:bg-brand-hover disabled:opacity-50 transition-all focus-ring"
+            className="flex items-center justify-center w-16 h-16 bg-red-600 text-white rounded-2xl hover:bg-red-700 disabled:opacity-50 transition-all focus-ring shadow-lg"
             aria-label={isUrdu ? (isPlaying ? 'رک جائیں' : 'چلائیں') : (isPlaying ? 'Pause' : 'Play')}
           >
             {!isLoaded ? (
-              <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
+              <div className="w-6 h-6 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
             ) : isPlaying ? (
-              <Pause className="w-5 h-5" />
+              <Pause className="w-6 h-6" />
             ) : (
-              <Play className="w-5 h-5 ml-0.5" />
+              <Play className="w-6 h-6 ml-1" />
             )}
           </button>
 
@@ -139,14 +139,14 @@ export function AudioBlock({ src, transcript, title, lang = 'en' }: AudioBlockPr
           <button
             onClick={() => skipTime(10)}
             disabled={!isLoaded}
-            className="btn btn-ghost p-2"
+            className="btn btn-ghost p-3 rounded-xl"
             aria-label={isUrdu ? '10 سیکنڈ آگے' : 'Skip forward 10 seconds'}
           >
-            <SkipForward className="w-4 h-4" />
+            <SkipForward className="w-5 h-5" />
           </button>
 
           {/* Progress Bar */}
-          <div className="flex-1 space-y-2">
+          <div className="flex-1 space-y-3">
             <input
               type="range"
               min="0"
@@ -154,10 +154,10 @@ export function AudioBlock({ src, transcript, title, lang = 'en' }: AudioBlockPr
               value={duration ? (currentTime / duration) * 100 : 0}
               onChange={handleSeek}
               disabled={!isLoaded}
-              className="w-full h-2 bg-line rounded-lg appearance-none cursor-pointer audio-player disabled:opacity-50"
+              className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer audio-player disabled:opacity-50"
               aria-label={isUrdu ? 'آڈیو پوزیشن' : 'Audio position'}
             />
-            <div className={`flex justify-between text-caption ${
+            <div className={`flex justify-between text-caption text-gray-500 ${
               isUrdu ? 'flex-row-reverse' : ''
             }`}>
               <span>{formatTime(currentTime)}</span>
@@ -169,10 +169,10 @@ export function AudioBlock({ src, transcript, title, lang = 'en' }: AudioBlockPr
           <a
             href={src}
             download
-            className="btn btn-ghost p-2"
+            className="btn btn-ghost p-3 rounded-xl"
             aria-label={isUrdu ? 'آڈیو ڈاؤن لوڈ کریں' : 'Download audio'}
           >
-            <Download className="w-4 h-4" />
+            <Download className="w-5 h-5" />
           </a>
         </div>
 
@@ -185,18 +185,18 @@ export function AudioBlock({ src, transcript, title, lang = 'en' }: AudioBlockPr
 
         {/* Transcript */}
         {transcript && showTranscript && (
-          <div className={`mt-6 p-6 bg-surface border border-line rounded-lg animate-slide-up ${
+          <div className={`mt-8 p-8 bg-gray-50 border border-gray-200 rounded-2xl animate-slide-up ${
             isUrdu ? 'text-right' : ''
           }`}>
-            <div className={`flex items-center space-x-2 mb-4 ${isUrdu ? 'flex-row-reverse space-x-reverse' : ''}`}>
-              <FileText className="w-4 h-4 text-brand" />
-              <h4 className={`text-sm font-semibold ${isUrdu ? 'urdu-heading-3' : ''}`}>
+            <div className={`flex items-center space-x-2 mb-6 ${isUrdu ? 'flex-row-reverse space-x-reverse' : ''}`}>
+              <FileText className="w-5 h-5 text-red-600" />
+              <h4 className={`text-heading-4 ${isUrdu ? 'urdu-heading-3' : ''}`}>
                 {isUrdu ? 'ٹرانسکرپٹ' : 'Transcript'}
               </h4>
             </div>
-            <div className={`prose ${isUrdu ? 'urdu-body' : 'text-body'}`}>
+            <div className={`prose max-w-none ${isUrdu ? 'urdu-body' : 'text-body'}`}>
               {transcript.split('\n').map((paragraph, index) => (
-                <p key={index} className="mb-4 last:mb-0">
+                <p key={index} className="mb-4 last:mb-0 text-gray-700 leading-relaxed">
                   {paragraph}
                 </p>
               ))}

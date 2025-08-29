@@ -6,13 +6,11 @@ import { X, Search, Command } from 'lucide-react';
 interface SearchOverlayProps {
   isOpen: boolean;
   onClose: () => void;
-  lang?: 'en' | 'ur';
 }
 
-export function SearchOverlay({ isOpen, onClose, lang = 'en' }: SearchOverlayProps) {
+export function SearchOverlay({ isOpen, onClose }: SearchOverlayProps) {
   const searchRef = useRef<HTMLDivElement>(null);
   const [isLoaded, setIsLoaded] = useState(false);
-  const isUrdu = lang === 'ur';
 
   useEffect(() => {
     if (isOpen && typeof window !== 'undefined') {
@@ -23,19 +21,7 @@ export function SearchOverlay({ isOpen, onClose, lang = 'en' }: SearchOverlayPro
             element: searchRef.current,
             showSubResults: true,
             showImages: false,
-            resetStyles: false,
-            translations: isUrdu ? {
-              placeholder: "تلاش کریں...",
-              clear_search: "تلاش صاف کریں",
-              load_more: "مزید لوڈ کریں",
-              search_label: "تلاش",
-              filters_label: "فلٹرز",
-              zero_results: "[SEARCH_TERM] کے لیے کوئی نتیجہ نہیں ملا",
-              many_results: "[SEARCH_TERM] کے لیے [COUNT] نتائج",
-              one_result: "[SEARCH_TERM] کے لیے [COUNT] نتیجہ",
-              alt_search: "کے لیے تلاش کریں",
-              search_suggestion: "کیا آپ [SEARCH_TERM] تلاش کر رہے ہیں؟"
-            } : undefined
+            resetStyles: false
           });
           setIsLoaded(true);
         } catch (error) {
@@ -62,7 +48,7 @@ export function SearchOverlay({ isOpen, onClose, lang = 'en' }: SearchOverlayPro
       document.removeEventListener('keydown', handleKeyDown);
       document.body.style.overflow = 'auto';
     };
-  }, [isOpen, onClose, isUrdu]);
+  }, [isOpen, onClose]);
 
   if (!isOpen) return null;
 
@@ -70,65 +56,43 @@ export function SearchOverlay({ isOpen, onClose, lang = 'en' }: SearchOverlayPro
     <div className="fixed inset-0 z-50 search-overlay animate-fade-in">
       <div className="fixed inset-0" onClick={onClose} />
       <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full max-w-2xl mx-4 animate-scale-in">
-        <div className="search-modal rounded-xl overflow-hidden">
+        <div className="search-modal">
           {/* Header */}
-          <div className={`flex items-center justify-between p-4 border-b border-line bg-subtle ${
-            isUrdu ? 'flex-row-reverse' : ''
-          }`}>
-            <div className={`flex items-center space-x-3 ${isUrdu ? 'flex-row-reverse space-x-reverse' : ''}`}>
-              <div className="p-2 bg-brand/10 rounded-lg">
-                <Search className="w-4 h-4 text-brand" />
+          <div className="flex items-center justify-between p-6 border-b border-gray-200">
+            <div className="flex items-center space-x-3">
+              <div className="p-2 bg-red-100 rounded-lg">
+                <Search className="w-5 h-5 text-red-600" />
               </div>
-              <h2 className={`text-lg font-semibold ${isUrdu ? 'urdu-heading-3' : ''}`}>
-                {isUrdu ? 'تلاش' : 'Search'}
-              </h2>
+              <h2 className="text-xl font-bold">Search</h2>
             </div>
             <button
               onClick={onClose}
-              className="btn btn-ghost p-2"
-              aria-label={isUrdu ? 'بند کریں' : 'Close search'}
+              className="btn-ghost p-2 rounded-lg"
+              aria-label="Close search"
             >
-              <X className="w-5 h-5" />
+              <X className="w-6 h-6" />
             </button>
           </div>
 
           {/* Search Content */}
-          <div className="p-6 min-h-[300px]">
+          <div className="p-6 min-h-[400px]">
             {!isLoaded && (
-              <div className={`text-center py-12 ${isUrdu ? 'urdu-body' : ''}`}>
-                <div className="loading-skeleton w-12 h-12 rounded-lg mx-auto mb-4"></div>
-                <p className="text-ink-muted">
-                  {isUrdu ? 'تلاش لوڈ ہو رہی ہے...' : 'Loading search...'}
-                </p>
+              <div className="text-center py-16">
+                <div className="loading-skeleton w-16 h-16 rounded-2xl mx-auto mb-6"></div>
+                <p className="text-gray-500">Loading search...</p>
               </div>
             )}
-            <div 
-              ref={searchRef} 
-              className={isUrdu ? 'text-right' : ''}
-              dir={isUrdu ? 'rtl' : 'ltr'}
-            />
+            <div ref={searchRef} />
           </div>
 
           {/* Footer */}
-          <div className={`px-6 py-4 border-t border-line bg-subtle text-caption ${
-            isUrdu ? 'text-right urdu-body-sm' : ''
-          }`}>
-            <div className={`flex items-center justify-between ${isUrdu ? 'flex-row-reverse' : ''}`}>
-              <div className={`flex items-center space-x-2 ${isUrdu ? 'flex-row-reverse space-x-reverse' : ''}`}>
-                <Command className="w-3 h-3" />
-                <span>
-                  {isUrdu 
-                    ? 'تلاش کے لیے ٹائپ کریں'
-                    : 'Type to search'
-                  }
-                </span>
+          <div className="px-6 py-4 border-t border-gray-200 bg-gray-50 text-caption text-gray-500">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center space-x-2">
+                <Command className="w-4 h-4" />
+                <span>Type to search</span>
               </div>
-              <span>
-                {isUrdu 
-                  ? 'بند کرنے کے لیے Esc دبائیں'
-                  : 'Press Esc to close'
-                }
-              </span>
+              <span>Press Esc to close</span>
             </div>
           </div>
         </div>
