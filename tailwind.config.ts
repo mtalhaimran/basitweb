@@ -44,7 +44,6 @@ const config: Config = {
         warning: '#D97706',
         error: '#DC2626',
       },
-      },
       fontSize: {
         'xs': ['0.75rem', { lineHeight: '1.5' }],
         'sm': ['0.875rem', { lineHeight: '1.5' }],
