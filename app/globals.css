@@ -98,7 +98,7 @@
 /* Base Styles */
 @layer base {
   * {
-    @apply border-line;
+    border-color: var(--line);
   }
   
   html {
