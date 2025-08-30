@@ -17,8 +17,8 @@ export default function AboutPage() {
       <main id="main-content" className="pt-32 pb-20" data-pagefind-body>
         <div className="container">
           <div className="text-center mb-20">
-            <h1 className="text-display urdu-display mb-8">تعارف</h1>
-            <p className="large-text urdu-text text-gray-600 max-w-3xl mx-auto">
+            <h1 className="text-display urdu-display mb-8 text-ink">تعارف</h1>
+            <p className="large-text urdu-text text-medium-contrast max-w-3xl mx-auto content-spacing">
               لکھاری اور کہانی گو جو ٹیکنالوجی، ثقافت، اور انسانی تجربات کے درمیان تعلق کو دریافت کرتا ہے۔
             </p>
           </div>
@@ -61,7 +61,7 @@ export default function AboutPage() {
             {/* Biography */}
             <div className="lg:col-span-2 text-right">
               <div className="prose max-w-none">
-                <div className="urdu-text text-gray-700 leading-loose space-y-8">
+                <div className="urdu-text text-medium-contrast leading-loose content-spacing prose-enhanced">
                   <p>
                     عبدالباسط ظفر ایک دو زبانی لکھاری ہے جس کا کام ڈیجیٹل اور ادبی دنیاوں کو جوڑتا ہے۔ 
                     پاکستان میں پیدا ہوا اور اب جرمنی میں مقیم، اس کی تحریریں ہجرت، ٹیکنالوجی، 
@@ -88,11 +88,11 @@ export default function AboutPage() {
                   </p>
 
                   <div className="bg-gray-50 rounded-2xl p-8 my-8">
-                    <h3 className="text-heading-3 urdu-heading mb-6 flex items-center space-x-2 space-x-reverse justify-end">
+                    <h3 className="text-heading-3 urdu-heading mb-6 flex items-center space-x-2 space-x-reverse justify-end text-ink">
                       <Award className="w-6 h-6 text-red-600" />
-                      <span className="text-ink">اعزازات</span> {/* Use new ink color */}
+                      <span>اعزازات</span>
                     </h3>
-                    <ul className="space-y-3 urdu-text">
+                    <ul className="space-y-4 urdu-text text-medium-contrast content-spacing">
                       <li>• بین الاقوامی ادبی انعام کے لیے شارٹ لسٹ (2023)</li>
                       <li>• "30 انڈر 30" لکھاریوں میں شامل</li>
                       <li>• ڈیجیٹل کہانی گوئی انوویشن گرانٹ کے وصول کنندہ</li>

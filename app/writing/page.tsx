@@ -15,8 +15,8 @@ export default function WritingPage() {
       <main id="main-content" className="pt-32 pb-20" data-pagefind-body>
         <div className="container">
           <div className="text-center mb-20">
-            <h1 className="text-display urdu-display mb-8">تحریریں</h1>
-            <p className="large-text urdu-text text-gray-600 max-w-3xl mx-auto">
+            <h1 className="text-display urdu-display mb-8 text-ink">تحریریں</h1>
+            <p className="large-text urdu-text text-medium-contrast max-w-3xl mx-auto content-spacing">
               مضامین اور تحریریں جو ٹیکنالوجی، ثقافت، اور انسانی تجربات کے درمیان تعلق کو دریافت کرتی ہیں۔
             </p>
           </div>

@@ -46,8 +46,8 @@ export default function WorkPage() {
       <main id="main-content" className="pt-32 pb-20" data-pagefind-body>
         <div className="container">
           <div className="text-center mb-20">
-            <h1 className="text-display urdu-display mb-8">تمام کام</h1>
-            <p className="large-text urdu-text text-gray-600 max-w-3xl mx-auto">
+            <h1 className="text-display urdu-display mb-8 text-ink">تمام کام</h1>
+            <p className="large-text urdu-text text-medium-contrast max-w-3xl mx-auto content-spacing">
               کتابوں، مضامین، تقاریر، اور میڈیا میں شرکت کا مکمل مجموعہ۔
             </p>
           </div>

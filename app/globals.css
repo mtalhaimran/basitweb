@@ -15,7 +15,7 @@
   
   /* Neutral Colors */
   --ink: #0B0B0F;
-  --ink-muted: #646472;
+  --ink-muted: #374151; /* Improved contrast from #646472 */
   --ink-light: #9CA3AF;
   
   /* Surface Colors */
@@ -27,6 +27,10 @@
   --line: #E9E9EE;
   --line-strong: #D1D5DB;
 
+  /* Accessibility Colors */
+  --text-high-contrast: #000000;
+  --text-medium-contrast: #374151;
+  --focus-ring: 0 0 0 3px var(--brand), 0 0 0 6px rgba(220, 38, 38, 0.2);
   /* Typography */
   --font-inter: 'Inter', system-ui, -apple-system, sans-serif;
   --font-urdu-display: 'Noto Nastaliq Urdu', serif;
@@ -118,13 +122,218 @@
     padding-right: 1.5rem;
   }
 
+  /* Grid Systems */
+  .portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    max-width: 1280px;
+    margin: 0 auto;
+  }
+
+  .work-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 1.5rem;
+    max-width: 1024px;
+    margin: 0 auto;
+  }
+
+  /* Card Components */
+  .minimal-card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 1rem;
+    padding: 1.5rem;
+    transition: all var(--transition-normal);
+  }
+
+  .minimal-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
+    border-color: var(--brand);
+  }
+
+  /* Button Components */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.75rem 1.5rem;
+    font-weight: 600;
+    border-radius: 0.75rem;
+    transition: all var(--transition-normal);
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+  }
+
+  .btn-primary {
+    background: var(--brand);
+    color: white;
+  }
+
+  .btn-primary:hover {
+    background: var(--brand-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 16px rgba(220, 38, 38, 0.3);
+  }
+
+  .btn-secondary {
+    background: var(--surface-muted);
+    color: var(--ink);
+    border: 1px solid var(--line);
+  }
+
+  .btn-secondary:hover {
+    background: var(--surface);
+    border-color: var(--brand);
+    transform: translateY(-2px);
+  }
   /* Typography Classes */
   .urdu-heading {
     font-family: var(--font-urdu-display);
+    line-height: 1.2;
+    letter-spacing: 0.02em;
   }
   
   .urdu-text {
     font-family: var(--font-urdu-body);
+    line-height: 1.8;
+    letter-spacing: 0.01em;
+  }
+
+  /* Typography Scale with Proper Hierarchy */
+  .text-display {
+    font-size: 3.75rem; /* 60px */
+    line-height: 1.1;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+
+  .text-heading-1 {
+    font-size: 2.25rem; /* 36px */
+    line-height: 1.2;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+
+  .text-heading-2 {
+    font-size: 1.875rem; /* 30px */
+    line-height: 1.3;
+    font-weight: 600;
+  }
+
+  .text-heading-3 {
+    font-size: 1.5rem; /* 24px */
+    line-height: 1.4;
+    font-weight: 600;
+  }
+
+  .text-heading-4 {
+    font-size: 1.25rem; /* 20px */
+    line-height: 1.4;
+    font-weight: 500;
+  }
+
+  .large-text {
+    font-size: 1.125rem; /* 18px */
+    line-height: 1.7;
+    font-weight: 400;
+  }
+
+  .text-caption {
+    font-size: 0.875rem; /* 14px */
+    line-height: 1.5;
+    font-weight: 400;
+  }
+
+  /* Urdu Typography Variants */
+  .urdu-display {
+    font-family: var(--font-urdu-display);
+    font-size: 3.75rem;
+    line-height: 1.2;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+  }
+
+  .urdu-heading {
+    font-family: var(--font-urdu-display);
+    line-height: 1.4;
+    letter-spacing: 0.01em;
+  }
+
+  .urdu-text {
+    font-family: var(--font-urdu-body);
+    line-height: 1.8;
+    letter-spacing: 0.01em;
+  }
+
+  /* Accessibility Enhancements */
+  .dyslexia-friendly {
+    font-family: 'OpenDyslexic', var(--font-inter);
+    letter-spacing: 0.12em;
+    word-spacing: 0.16em;
+    line-height: 2;
+  }
+
+  .high-contrast {
+    color: #000000;
+    background-color: #FFFFFF;
+  }
+
+  .large-text-mode {
+    font-size: 1.25em;
+    line-height: 2;
+  }
+
+  /* Focus Enhancement */
+  .enhanced-focus:focus {
+    outline: 3px solid var(--brand);
+    outline-offset: 3px;
+    box-shadow: 0 0 0 6px rgba(220, 38, 38, 0.2);
+  }
+
+  /* Reading Flow Improvements */
+  .prose-enhanced {
+    max-width: 65ch; /* Optimal reading width */
+    line-height: 1.75;
+    font-size: 1.125rem;
+  }
+
+  .prose-enhanced p {
+    margin-bottom: 1.5em;
+  }
+
+  .prose-enhanced h2 {
+    margin-top: 2em;
+    margin-bottom: 0.75em;
+  }
+
+  .prose-enhanced h3 {
+    margin-top: 1.5em;
+    margin-bottom: 0.5em;
+  }
+
+  /* Color Contrast Improvements */
+  .text-high-contrast {
+    color: #000000;
+  }
+
+  .text-medium-contrast {
+    color: #374151; /* Darker than ink-muted for better readability */
+  }
+
+  /* Spacing Improvements */
+  .content-spacing > * + * {
+    margin-top: 1.5rem;
+  }
+
+  .content-spacing h2 + * {
+    margin-top: 0.75rem;
+  }
+
+  .content-spacing h3 + * {
+    margin-top: 0.5rem;
   }
 
   /* Hero Section */

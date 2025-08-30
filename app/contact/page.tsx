@@ -47,8 +47,8 @@ export default function ContactPage() {
       <main id="main-content" className="pt-32 pb-20" data-pagefind-body>
         <div className="container">
           <div className="text-center mb-20">
-            <h1 className="text-display urdu-display mb-8">رابطہ</h1>
-            <p className="large-text urdu-text text-gray-600 max-w-3xl mx-auto">
+            <h1 className="text-display urdu-display mb-8 text-ink">رابطہ</h1>
+            <p className="large-text urdu-text text-medium-contrast max-w-3xl mx-auto content-spacing">
               تعاون، تقاریر، یا ادبی بحث میں دلچسپی ہے؟ میں آپ سے سننا پسند کروں گا۔
             </p>
           </div>
@@ -68,7 +68,7 @@ export default function ContactPage() {
                       <h3 className="text-heading-4 urdu-heading mb-2">ای میل</h3>
                       <a 
                         href="mailto:hello@abdulbasitzafar.com"
-                        className="link urdu-text focus-ring rounded"
+                        className="link urdu-text enhanced-focus rounded text-brand hover:text-brand-hover"
                       >
                         hello@abdulbasitzafar.com
                       </a>
@@ -81,7 +81,7 @@ export default function ContactPage() {
                     </div>
                     <div>
                       <h3 className="text-heading-4 urdu-heading mb-2">مقام</h3>
-                      <span className="urdu-text text-gray-600">بن، جرمنی</span>
+                      <span className="urdu-text text-medium-contrast">بن، جرمنی</span>
                     </div>
                   </div>
                 </div>
@@ -103,7 +103,7 @@ export default function ContactPage() {
                         <Icon className="w-6 h-6 text-red-600" />
                         <div className="text-right">
                           <h4 className="text-heading-4 urdu-heading">{social.name}</h4>
-                          <p className="text-caption urdu-text">{social.description}</p>
+                          <p className="text-caption urdu-text text-medium-contrast">{social.description}</p>
                         </div>
                       </a>
                     );
@@ -144,7 +144,7 @@ export default function ContactPage() {
           {/* Response Time Note */}
           <div className="mt-20 minimal-card text-right">
             <h3 className="text-heading-3 urdu-heading mb-4">جواب کا وقت</h3>
-            <p className="urdu-text text-gray-600 leading-relaxed">
+            <p className="urdu-text text-medium-contrast leading-relaxed prose-enhanced">
               میں تمام استفسارات کا جواب 48 گھنٹوں کے اندر دینے کی کوشش کرتا ہوں۔ 
               فوری تقاریر کی درخواستوں یا وقت کے حساس معاملات کے لیے، براہ کرم اپنے موضوع میں اس کا ذکر کریں۔
             </p>

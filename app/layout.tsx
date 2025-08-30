@@ -1,6 +1,8 @@
 import './globals.css';
 import type { Metadata } from 'next';
 import { Inter, Noto_Nastaliq_Urdu, Noto_Naskh_Arabic } from 'next/font/google';
+import { AccessibilityProvider } from '@/components/AccessibilityProvider';
+import { AccessibilityPanel } from '@/components/AccessibilityPanel';
 
 const inter = Inter({ 
   subsets: ['latin'],
@@ -54,7 +56,10 @@ export default function RootLayout({
         <link href="/pagefind/pagefind-ui.css" rel="stylesheet" />
       </head>
       <body className={`${inter.variable} ${notoNastaliq.variable} ${notoNaskh.variable} font-urdu-body antialiased`}>
-        {children}
+        <AccessibilityProvider>
+          {children}
+          <AccessibilityPanel />
+        </AccessibilityProvider>
       </body>
     </html>
   );
