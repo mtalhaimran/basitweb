@@ -10,7 +10,7 @@ interface PortfolioGridProps {
 
 export function PortfolioGrid({ lang = 'ur' }: PortfolioGridProps) {
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen pt-24 md:pt-32">
       <TemplateHero lang={lang} />
       <TemplateAbout lang={lang} />
       <TemplateTestimonial lang={lang} />
