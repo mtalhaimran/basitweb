@@ -3,13 +3,14 @@
 import { useEffect, useRef, useState } from 'react';
 import { X, Search, Command } from 'lucide-react';
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
+import ErrorBoundary from './ErrorBoundary';
 
 interface SearchOverlayProps {
   isOpen: boolean;
   onClose: () => void;
 }
 
-export function SearchOverlay({ isOpen, onClose }: SearchOverlayProps) {
+function SearchOverlayContent({ isOpen, onClose }: SearchOverlayProps) {
   const searchRef = useRef<HTMLDivElement>(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const shouldReduceMotion = useReducedMotion();
@@ -54,7 +55,7 @@ export function SearchOverlay({ isOpen, onClose }: SearchOverlayProps) {
   return (
     <AnimatePresence>
       {isOpen && (
-        <motion.div 
+        <motion.div
           className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -62,7 +63,7 @@ export function SearchOverlay({ isOpen, onClose }: SearchOverlayProps) {
           transition={{ duration: shouldReduceMotion ? 0 : 0.2 }}
         >
           <div className="fixed inset-0" onClick={onClose} />
-          <motion.div 
+          <motion.div
             className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full max-w-2xl mx-4"
             initial={{ scale: shouldReduceMotion ? 1 : 0.95, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
@@ -95,16 +96,16 @@ export function SearchOverlay({ isOpen, onClose }: SearchOverlayProps) {
               <div className="p-6 min-h-[400px]">
                 {!isLoaded && (
                   <div className="text-center py-16">
-                    <motion.div 
+                    <motion.div
                       className="w-16 h-16 rounded-2xl mx-auto mb-6 bg-surface-muted"
-                      animate={shouldReduceMotion ? {} : { 
+                      animate={shouldReduceMotion ? {} : {
                         scale: [1, 1.1, 1],
                         opacity: [0.5, 1, 0.5]
                       }}
-                      transition={{ 
-                        duration: 2, 
-                        repeat: Infinity, 
-                        ease: "easeInOut" 
+                      transition={{
+                        duration: 2,
+                        repeat: Infinity,
+                        ease: "easeInOut"
                       }}
                     />
                     <p className="text-ink-muted urdu-text">
@@ -135,8 +136,17 @@ export function SearchOverlay({ isOpen, onClose }: SearchOverlayProps) {
   );
 }
 
+export function SearchOverlay(props: SearchOverlayProps) {
+  return (
+    <ErrorBoundary>
+      <SearchOverlayContent {...props} />
+    </ErrorBoundary>
+  );
+}
+
 declare global {
   interface Window {
     PagefindUI: any;
   }
 }
+
