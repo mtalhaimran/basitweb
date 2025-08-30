@@ -1,33 +1,77 @@
 'use client';
+
 import Image from 'next/image';
 
-interface TemplateHeroProps { lang?: 'ur' | 'en' }
+interface TemplateHeroProps {
+  lang?: 'ur' | 'en';
+}
+
+// Define our text content outside the component for better organization
+const content = {
+  en: {
+    headline: "I'm Abdul Basit Zafar",
+    subheadline:
+      "A passionate Full-Stack Developer building modern, high-performance web applications.",
+    cta: "View My Work",
+  },
+  ur: {
+    headline: "میں عبدالباسط ظفر ہوں",
+    subheadline: "ایک پرجوش فل اسٹیک ڈیولپر جو جدید اور تیز رفتار ویب ایپلیکیشنز بناتا ہے۔",
+    cta: "میرا کام دیکھیں",
+  },
+};
 
 export function TemplateHero({ lang = 'ur' }: TemplateHeroProps) {
-  // Prefer setting dir on <html>, but this local fallback is OK:
   const isUrdu = lang === 'ur';
+  const currentContent = isUrdu ? content.ur : content.en;
 
   return (
     <section
-      className="relative h-[60vh] min-h-[400px] w-full overflow-visible"
-      // better to rely on <html dir="rtl|ltr">; keep this if you must localize
+      className="relative h-[70vh] min-h-[500px] w-full"
       dir={isUrdu ? 'rtl' : 'ltr'}
-      aria-label="Hero"
     >
+      {/* Background Image with Optimization */}
       <Image
         src="/images/hero.jpg"
-        alt=""             // keep empty if purely decorative
+        alt="A professional background image related to technology or coding"
         fill
-        priority           // good for LCP
-        sizes="100vw"      // avoids layout shifts on responsive
+        priority
         className="object-cover"
       />
-      <div className="absolute inset-0 bg-gradient-to-b from-black/60 to-black/40" />
-      <div className="relative z-10 flex h-full items-center justify-center">
-        {/* Put heading here; use text-start for RTL/LTR safety */}
-        {/* <h1 className="text-white text-3xl sm:text-4xl md:text-5xl text-start">
-            میں عبدالباسط ظفر ہوں…
-          </h1> */}
+
+      {/* Dark Overlay for better text readability */}
+      <div className="absolute inset-0 bg-black/60" />
+
+      {/* Content Container - Centered */}
+      <div className="relative z-10 flex h-full flex-col items-center justify-center text-center text-white p-4">
+        
+        {/* Main Headline (h1) */}
+        <h1
+          className={`text-4xl font-bold sm:text-5xl md:text-6xl ${
+            isUrdu ? 'urdu-heading' : ''
+          }`}
+        >
+          {currentContent.headline}
+        </h1>
+
+        {/* Sub-headline (p) */}
+        <p
+          className={`mt-4 max-w-2xl text-lg text-gray-200 md:text-xl ${
+            isUrdu ? 'urdu-text' : ''
+          }`}
+        >
+          {currentContent.subheadline}
+        </p>
+
+        {/* Call to Action Button */}
+        <a
+          href="#projects" // This should link to your projects/portfolio section
+          className={`mt-8 rounded-md bg-blue-600 px-8 py-3 text-lg font-semibold text-white transition hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 ${
+            isUrdu ? 'urdu-text' : ''
+          }`}
+        >
+          {currentContent.cta}
+        </a>
       </div>
     </section>
   );

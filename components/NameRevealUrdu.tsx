@@ -26,11 +26,8 @@ const DEFAULT_SECTIONS: Section[] = [
       { label: 'میرے بارے میں', href: '/about' },
       { label: 'رابطہ', href: '/contact' }
     ]
-  },
-  {
-    title: 'نمایاں',
-    items: [{ label: 'بن کا بنجارہ', href: '/bonn-ka-banjara' }]
   }
+  
 ];
 
 export default function NameRevealUrdu({ className, reducedMotion, sections = DEFAULT_SECTIONS }: Props) {
