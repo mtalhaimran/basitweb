@@ -3,40 +3,42 @@
 import Link from 'next/link';
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 import { useEffect, useRef, useState } from 'react';
+// Optional icons for nicer list items (feel free to remove if you don't use them)
+import { BookOpen, PenLine, Layers, User2, Mail, Sparkles } from 'lucide-react';
 
-type MenuItem = { label: string; href: string };
+type MenuItem = {
+  label: string;
+  href: string;
+  icon?: React.ReactNode;     // optional: <Icon className="w-3.5 h-3.5" />
+  thumb?: string;             // optional: /thumbs/xyz.jpg
+  badge?: string;             // optional: e.g. "New"
+};
 type Section = { title: string; items: MenuItem[] };
 
 type NameRevealProps = {
   className?: string;
-  /** Force reduced motion (otherwise we follow the user's OS setting) */
   reducedMotion?: boolean;
-  /** Optional: override the default sitemap sections */
-  sections?: Section[];
+  sections?: Section[];       // override the defaults if you want
 };
 
-// Default sitemap (edit labels/links here)
+/** Curated, minimal sitemap (no Languages block) */
 const DEFAULT_SECTIONS: Section[] = [
   {
     title: 'صفحہ جات',
     items: [
-      { label: 'ہوم', href: '/' },
-      { label: 'کام', href: '/work' },
-      { label: 'تحریریں', href: '/writing' },
-      { label: 'کتابیں', href: '/books' },
-      { label: 'میرے بارے میں', href: '/about' },
-      { label: 'رابطہ', href: '/contact' }
+      { label: 'ہوم', href: '/', icon: <Sparkles className="w-3.5 h-3.5" /> },
+      { label: 'کام', href: '/work', icon: <Layers className="w-3.5 h-3.5" /> },
+      { label: 'تحریریں', href: '/writing', icon: <PenLine className="w-3.5 h-3.5" /> },
+      { label: 'کتابیں', href: '/books', icon: <BookOpen className="w-3.5 h-3.5" /> },
+      { label: 'میرے بارے میں', href: '/about', icon: <User2 className="w-3.5 h-3.5" /> },
+      { label: 'رابطہ', href: '/contact', icon: <Mail className="w-3.5 h-3.5" /> }
     ]
   },
   {
-    title: 'سیریز',
-    items: [{ label: 'بن کا بنجارہ', href: '/bonn-ka-banjara' }]
-  },
-  {
-    title: 'زبانیں',
+    title: 'نمایاں',
     items: [
-      { label: 'اردو', href: '/' },
-      { label: 'English', href: '/en' }
+      { label: 'بن کا بنجارہ', href: '/bonn-ka-banjara' },
+      // مزید نمایاں سیریز/پروجیکٹس یہاں شامل کریں
     ]
   }
 ];
@@ -46,37 +48,32 @@ export default function NameRevealUrdu({
   reducedMotion,
   sections = DEFAULT_SECTIONS
 }: NameRevealProps) {
-  const [isOpen, setIsOpen] = useState(false);
-  const [textWidth, setTextWidth] = useState(0);
+  const [open, setOpen] = useState(false);
+  const [textW, setTextW] = useState(0);
   const textRef = useRef<HTMLSpanElement>(null);
   const wrapRef = useRef<HTMLDivElement>(null);
 
-  // Respect prefers-reduced-motion if not explicitly overridden
-  const prefersReduced =
-    reducedMotion ?? useReducedMotion();
+  const prefersReduced = reducedMotion ?? useReducedMotion();
 
-  // Measure full-name width (to move the circle across that distance)
+  // Measure the full-name width so the badge can travel that distance
   useEffect(() => {
     const measure = () => {
       const el = textRef.current;
       if (!el) return;
-      const rect = el.getBoundingClientRect();
-      setTextWidth(rect.width);
+      setTextW(el.getBoundingClientRect().width);
     };
     measure();
     window.addEventListener('resize', measure);
     return () => window.removeEventListener('resize', measure);
   }, []);
 
-  // Close on outside click & Escape
+  // Close on outside click / Escape
   useEffect(() => {
     const onDocClick = (e: MouseEvent) => {
       if (!wrapRef.current) return;
-      if (!wrapRef.current.contains(e.target as Node)) setIsOpen(false);
+      if (!wrapRef.current.contains(e.target as Node)) setOpen(false);
     };
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') setIsOpen(false);
-    };
+    const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') setOpen(false); };
     document.addEventListener('mousedown', onDocClick);
     document.addEventListener('keydown', onKey);
     return () => {
@@ -85,55 +82,50 @@ export default function NameRevealUrdu({
     };
   }, []);
 
-  // Animation settings
-  const duration = prefersReduced ? 0 : 0.28;
   const spring = { type: 'spring', stiffness: 380, damping: 30, mass: 0.6 };
-  const circleTravel = prefersReduced ? 0 : -(textWidth + 12); // RTL: negative X
+  const duration = prefersReduced ? 0 : 0.28;
+  const circleTravel = prefersReduced ? 0 : -(textW + 12); // RTL: negative X
 
   return (
     <div
       ref={wrapRef}
       dir="rtl"
       className={['relative inline-flex items-center gap-3 select-none', className].filter(Boolean).join(' ')}
-      // Hover (desktop) + focus open/close
-      onMouseEnter={() => setIsOpen(true)}
-      onMouseLeave={() => setIsOpen(false)}
-      onFocus={() => setIsOpen(true)}
-      onBlur={(e) => {
-        if (!wrapRef.current?.contains(e.relatedTarget as Node)) setIsOpen(false);
-      }}
+      onMouseEnter={() => setOpen(true)}
+      onMouseLeave={() => setOpen(false)}
+      onFocus={() => setOpen(true)}
+      onBlur={(e) => { if (!wrapRef.current?.contains(e.relatedTarget as Node)) setOpen(false); }}
     >
-      {/* Trigger: circular 'ب' badge (button for a11y + mobile tap) */}
+      {/* Trigger: round badge with 'ب' — spins 360° + slides when opening */}
       <motion.button
         type="button"
         aria-haspopup="menu"
-        aria-expanded={isOpen}
+        aria-expanded={open}
         aria-controls="name-sitemap-menu"
-        onClick={() => setIsOpen((v) => !v)} // tap/click toggle
+        onClick={() => setOpen(v => !v)}
         className="relative grid place-items-center rounded-full bg-brand text-white font-bold shadow-sm focus:outline-none focus:ring-2 focus:ring-brand/40"
-        style={{ width: 44, height: 44 }}
-        animate={prefersReduced ? { x: 0 } : { x: isOpen ? circleTravel : 0 }}
+        style={{ width: 48, height: 48 }}
+        animate={
+          prefersReduced
+            ? { x: 0, rotate: 0 }
+            : { x: open ? circleTravel : 0, rotate: open ? 360 : 0 }
+        }
         transition={prefersReduced ? { duration: 0 } : spring}
       >
         <span className="text-xl leading-none font-urdu-heading">ب</span>
       </motion.button>
 
-      {/* Full name (revealed on hover/tap) */}
+      {/* Full name reveal */}
       <div className="overflow-hidden pr-3">
         <motion.span
           ref={textRef}
-          className="inline-block text-3xl font-extrabold font-urdu-heading whitespace-nowrap"
-          style={{ originX: 1 }} // RTL: reveal from right edge
+          className="inline-block text-3xl md:text-4xl font-extrabold font-urdu-heading whitespace-nowrap"
+          style={{ originX: 1 }} // reveal from right edge (RTL)
           initial={false}
           animate={
             prefersReduced
-              ? { opacity: 1, scaleX: isOpen ? 1 : 0 }
-              : {
-                  opacity: isOpen ? 1 : 0.2,
-                  scaleX: isOpen ? 1 : 0,
-                  filter: isOpen ? 'blur(0px)' : 'blur(0.8px)',
-                  letterSpacing: isOpen ? '0.02em' : '0.1em'
-                }
+              ? { opacity: 1, scaleX: open ? 1 : 0 }
+              : { opacity: open ? 1 : 0.2, scaleX: open ? 1 : 0, filter: open ? 'blur(0px)' : 'blur(0.8px)', letterSpacing: open ? '0.02em' : '0.1em' }
           }
           transition={{ duration, ...spring }}
         >
@@ -141,38 +133,65 @@ export default function NameRevealUrdu({
         </motion.span>
       </div>
 
-      {/* Dropdown sitemap (mega-menu style) */}
+      {/* Dropdown mega-menu (polished look) */}
       <AnimatePresence>
-        {isOpen && (
+        {open && (
           <motion.div
             id="name-sitemap-menu"
             role="menu"
             initial={{ opacity: 0, y: -8, scale: 0.98 }}
             animate={{ opacity: 1, y: 0, scale: 1, transition: { duration: 0.18 } }}
             exit={{ opacity: 0, y: -8, scale: 0.98, transition: { duration: 0.12 } }}
-            className="absolute top-full mt-3 right-0 z-50 w-[min(92vw,680px)] rounded-2xl border border-black/10 bg-white shadow-xl ring-1 ring-black/5 p-4"
+            className="absolute top-full mt-3 right-0 z-50 w-[min(92vw,760px)] overflow-hidden rounded-2xl border border-black/10 bg-white shadow-xl ring-1 ring-black/5"
           >
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              {sections.map((section) => (
-                <div key={section.title}>
-                  <h4 className="text-sm font-semibold text-ink/80 mb-2 urdu-text">{section.title}</h4>
-                  <ul className="space-y-1.5">
-                    {section.items.map((it) => (
-                      <li key={it.href}>
-                        <Link
-                          role="menuitem"
-                          href={it.href}
-                          className="group urdu-text inline-flex items-center gap-2 rounded-lg px-3 py-2 text-[15px] text-ink hover:bg-[rgba(0,0,0,0.035)] hover:text-brand focus:outline-none focus:ring-2 focus:ring-brand/30"
-                          onClick={() => setIsOpen(false)}
-                        >
-                          <span className="inline-block translate-y-[0.5px]">•</span>
-                          <span>{it.label}</span>
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              ))}
+            {/* Decorative header strip */}
+            <div className="h-1.5 w-full bg-gradient-to-l from-brand/30 via-brand/15 to-transparent" />
+
+            <div className="p-4 md:p-5 bg-white">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                {sections.map((section) => (
+                  <motion.div
+                    key={section.title}
+                    initial={{ opacity: 0, y: 6 }}
+                    animate={{ opacity: 1, y: 0, transition: { duration: 0.18 } }}
+                  >
+                    <div className="flex items-center justify-between mb-2">
+                      <h4 className="text-sm font-semibold text-ink/80 urdu-text">{section.title}</h4>
+                      <span className="text-[11px] px-2 py-0.5 rounded-full bg-surface-muted text-ink/70">{section.items.length}</span>
+                    </div>
+
+                    <ul className="space-y-1.5">
+                      {section.items.map((it) => (
+                        <li key={it.href}>
+                          <Link
+                            role="menuitem"
+                            href={it.href}
+                            onClick={() => setOpen(false)}
+                            className="group urdu-text w-full inline-flex items-center gap-2 rounded-lg px-3 py-2 text-[15px] text-ink hover:bg-[rgba(0,0,0,0.035)] hover:text-brand focus:outline-none focus:ring-2 focus:ring-brand/30"
+                          >
+                            {/* optional icon/thumb, else bullet */}
+                            {it.thumb ? (
+                              // thumbnail variant (small square)
+                              <img src={it.thumb} alt="" className="w-5 h-5 rounded object-cover" />
+                            ) : it.icon ? (
+                              <span className="text-ink/70 group-hover:text-brand">{it.icon}</span>
+                            ) : (
+                              <span className="inline-block translate-y-[0.5px]">•</span>
+                            )}
+
+                            <span className="flex-1">{it.label}</span>
+
+                            {/* optional badge */}
+                            {it.badge && (
+                              <span className="text-[10px] px-1.5 py-0.5 rounded bg-brand/10 text-brand">{it.badge}</span>
+                            )}
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </motion.div>
+                ))}
+              </div>
             </div>
           </motion.div>
         )}
