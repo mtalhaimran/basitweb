@@ -68,7 +68,7 @@ export function Header() {
       >
         <div className="container">
           {/* 3 columns: LEFT lang | CENTER nav | RIGHT ب + search */}
-          <div className="grid grid-cols-[auto_1fr_auto] items-center py-5">
+          <div className="grid grid-cols-3 items-center py-5">
             {/* LEFT — Language toggle (always left side) */}
             <div className="justify-self-start">
               <Link
@@ -82,7 +82,7 @@ export function Header() {
             </div>
 
             {/* CENTER — main nav (no center “Menu” button) */}
-            <nav className={`hidden md:flex items-center justify-center ${isUrduPage ? 'flex-row-reverse' : ''} gap-8`}>
+            <nav className={`hidden md:flex items-center justify-center ${isUrduPage ? 'flex-row-reverse' : ''} gap-8 justify-self-center`}>
               {navigation.map((item) => (
                 <Link key={item.href} href={item.href} className="template-nav-link urdu-text">
                   {item.name}
