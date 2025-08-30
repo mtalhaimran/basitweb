@@ -46,8 +46,8 @@ export function TemplateAbout({ lang = 'ur' }: TemplateAboutProps) {
 
   const itemVariants = {
     hidden: { opacity: 0, y: shouldReduceMotion ? 0 : 150 },
-    visible: { 
-      opacity: 1, 
+    visible: {
+      opacity: 1,
       y: 0,
       transition: {
         duration: shouldReduceMotion ? 0 : 0.8,
@@ -99,10 +99,10 @@ export function TemplateAbout({ lang = 'ur' }: TemplateAboutProps) {
           >
             <div className="flex gap-10 flex-row-reverse">
               {/* Portrait */}
-              <motion.div 
+              <motion.div
                 className="flex-1 max-w-sm"
                 variants={itemVariants}
-                whileHover={shouldReduceMotion ? {} : { 
+                whileHover={shouldReduceMotion ? {} : {
                   scale: 1.02,
                   transition: { duration: 0.3 }
                 }}
@@ -119,7 +119,7 @@ export function TemplateAbout({ lang = 'ur' }: TemplateAboutProps) {
                 </div>
                 
                 {/* Social Handle */}
-                <motion.div 
+                <motion.div
                   className="mt-6 text-right"
                   variants={itemVariants}
                 >
@@ -130,7 +130,7 @@ export function TemplateAbout({ lang = 'ur' }: TemplateAboutProps) {
               </motion.div>
 
               {/* Services */}
-              <motion.div 
+              <motion.div
                 className="flex-1"
                 variants={itemVariants}
               >
@@ -146,14 +146,14 @@ export function TemplateAbout({ lang = 'ur' }: TemplateAboutProps) {
                       initial={{ opacity: 0, scale: 0.5, y: 50 }}
                       whileInView={{ opacity: 1, scale: 1, y: 0 }}
                       viewport={{ once: true }}
-                      transition={{ 
-                        duration: shouldReduceMotion ? 0 : 0.5, 
+                      transition={{
+                        duration: shouldReduceMotion ? 0 : 0.5,
                         delay: shouldReduceMotion ? 0 : index * 0.05,
                         type: "spring",
                         bounce: 0.3
                       }}
-                      whileHover={shouldReduceMotion ? {} : { 
-                        scale: 1.05, 
+                      whileHover={shouldReduceMotion ? {} : {
+                        scale: 1.05,
                         y: -2,
                         transition: { duration: 0.2 }
                       }}

@@ -1,52 +1,34 @@
 'use client';
 
 import Link from 'next/link';
-import { useState, useEffect } from 'react';
-import { Search, Globe } from 'lucide-react';
+import { useState } from 'react';
+import { Search, Globe, Menu } from 'lucide-react';
 import { SearchOverlay } from './SearchOverlay';
-import { usePathname } from 'next/navigation';
+import NameRevealUrdu from './NameRevealUrdu';
+import { useLanguage } from '@/context/LanguageContext'; // Import the new hook
+import { motion, AnimatePresence } from 'framer-motion';
 
 export function Header() {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
-  const pathname = usePathname();
-  const isUrduPage = !pathname.startsWith('/en');
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { language, toggleLanguage } = useLanguage(); // Use the language context
+  const isUrduPage = language === 'ur';
 
-  // Effect for scroll and keyboard events
-  useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 20);
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
-        e.preventDefault();
-        setIsSearchOpen(true);
-      }
-      if (e.key === 'Escape') setIsSearchOpen(false);
-    };
-    window.addEventListener('scroll', handleScroll);
-    document.addEventListener('keydown', handleKeyDown);
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-      document.removeEventListener('keydown', handleKeyDown);
-    };
-  }, []);
-
-  // Define navigation links for both languages
   const navLinks = isUrduPage
     ? [
         { name: 'کام', href: '/work' },
         { name: 'تحریریں', href: '/writing' },
+        { name: 'پوسٹس', href: '/posts' },
         { name: 'میرے بارے میں', href: '/about' },
         { name: 'رابطہ', href: '/contact' },
       ]
     : [
-        { name: 'Work', href: '/en/work' },
-        { name: 'Writing', href: '/en/writing' },
+        { name: 'Work', href: '/work' },
+        { name: 'Writing', href: '/writing' },
+        { name: 'Posts', href: '/posts' },
         { name: 'About', href: '/about' },
-        { name: 'Contact', href: '/en/contact' },
+        { name: 'Contact', href: '/contact' },
       ];
-
-  const logoHref = isUrduPage ? '/' : '/en';
-  const langToggleHref = isUrduPage ? '/en' : '/';
 
   return (
     <>
@@ -54,50 +36,48 @@ export function Header() {
         {isUrduPage ? 'مرکزی مواد پر جائیں' : 'Skip to main content'}
       </a>
 
-      <header
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          isScrolled ? 'bg-surface/95 backdrop-blur-md shadow-sm border-b border-line' : 'bg-transparent'
-        }`}
-        dir={isUrduPage ? 'rtl' : 'ltr'}
-      >
-        <div className="container mx-auto flex items-center justify-between py-4">
-          {/* Left Side: Logo */}
-          <Link href={logoHref} className="text-2xl font-bold font-urdu-heading text-brand">
-            {isUrduPage ? 'عبدالباسط' : 'Abdul Basit'}
-          </Link>
+      <header className="fixed top-0 left-0 right-0 z-50 bg-surface shadow-sm border-b border-line">
+        <div className="container mx-auto flex items-center justify-between py-2">
+          <NameRevealUrdu />
 
-          {/* Center: Desktop Navigation */}
-          <nav className="hidden md:flex items-center gap-6">
+          <nav className={`hidden md:flex items-center gap-8 ${isUrduPage ? 'flex-row-reverse' : ''}`}>
             {navLinks.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className={`text-sm font-medium transition-colors hover:text-brand ${isUrduPage ? 'font-urdu-body' : 'font-sans'}`}
-              >
+              <Link key={item.href} href={item.href} className={`text-base font-semibold transition-colors hover:text-brand ${isUrduPage ? 'font-urdu-body' : 'font-sans'}`}>
                 {item.name}
               </Link>
             ))}
           </nav>
 
-          {/* Right Side: Actions */}
-          <div className="flex items-center gap-4">
-            <button
-              onClick={() => setIsSearchOpen(true)}
-              className="p-2 text-ink-muted hover:text-brand transition-colors"
-              aria-label={isUrduPage ? 'تلاش' : 'Search'}
-            >
+          <div className="flex items-center gap-2">
+            <button onClick={() => setIsSearchOpen(true)} className="p-2 text-ink-muted hover:text-brand" aria-label={isUrduPage ? 'تلاش' : 'Search'}>
               <Search className="h-5 w-5" />
             </button>
-            <Link
-              href={langToggleHref}
-              className="text-sm font-medium text-ink-muted hover:text-brand transition-colors"
-              hrefLang={isUrduPage ? 'en' : 'ur'}
-            >
+            {/* --- THIS IS THE NEW TOGGLE BUTTON --- */}
+            <button onClick={toggleLanguage} className="p-2 text-ink-muted hover:text-brand" aria-label="Toggle Language">
               <Globe className="h-5 w-5" />
-            </Link>
+            </button>
+            <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="p-2 text-ink-muted hover:text-brand md:hidden" aria-label={isUrduPage ? 'مینو کھولیں' : 'Open menu'}>
+              <Menu className="h-5 w-5" />
+            </button>
           </div>
         </div>
       </header>
+      
+      <AnimatePresence>
+        {isMenuOpen && (
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 z-40 bg-black/40 backdrop-blur-sm md:hidden" onClick={() => setIsMenuOpen(false)}>
+            <motion.div initial={{ y: '-100%' }} animate={{ y: '0%' }} exit={{ y: '-100%' }} transition={{ duration: 0.3, ease: 'easeInOut' }} className="fixed top-0 left-0 right-0 bg-surface shadow-lg p-4 pt-20" onClick={(e) => e.stopPropagation()}>
+              <nav className={`flex flex-col items-center gap-6 ${isUrduPage ? 'text-right' : 'text-left'}`}>
+                {navLinks.map((item) => (
+                  <Link key={item.href} href={item.href} onClick={() => setIsMenuOpen(false)} className={`text-lg font-semibold transition-colors hover:text-brand ${isUrduPage ? 'font-urdu-body' : 'font-sans'}`}>
+                    {item.name}
+                  </Link>
+                ))}
+              </nav>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       <SearchOverlay isOpen={isSearchOpen} onClose={() => setIsSearchOpen(false)} />
     </>
