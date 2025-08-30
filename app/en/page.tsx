@@ -1,7 +1,6 @@
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
 import { PortfolioGrid } from '@/components/PortfolioGrid';
-import { motion } from 'framer-motion';
 
 export const metadata = {
   title: 'Abdul Basit Zafar - Writer and Storyteller',
@@ -55,7 +54,7 @@ export default function EnglishHome() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       
-      <div className="min-h-screen" lang="en" dir="ltr">
+      <div className="min-h-screen">
         <Header />
         <main id="main-content">
           <PortfolioGrid lang="en" />

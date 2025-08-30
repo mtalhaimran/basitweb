@@ -1,14 +1,21 @@
-# عبدالباسط ظفر - Urdu-First Portfolio
+# عبدالباسط ظفر - Framer-Inspired Urdu Portfolio
 
-A bilingual portfolio website for writer Abdul Basit Zafar, featuring a red designer theme, heavy Framer Motion animations, and proper RTL support.
+A bilingual portfolio website inspired by the Framer "Exposa" template, featuring a warm beige background, red accents, heavy Framer Motion animations, and proper RTL support.
 
 ## 🎨 Design Features
 
-### Brand Identity
+### Brand Identity (Framer Template Inspired)
 - **Primary Color**: Red (#DC2626) for links, CTAs, and accents
-- **Typography**: Noto Nastaliq Urdu (headings) + Noto Naskh Arabic (body)
-- **Layout**: Urdu-first with RTL support, bilingual landing page
-- **Animations**: Heavy hover effects with Framer Motion
+- **Background**: Warm beige (#ECE1D5) inspired by the Framer template
+- **Typography**: Satoshi (headings) + Inter (body) + Noto fonts (Urdu)
+- **Layout**: Template-style asymmetrical grid with RTL support
+- **Animations**: Letter-by-letter reveals and scroll-triggered effects
+
+### Template Adaptations
+- **Grid System**: 3-column template grid adapted for Urdu content
+- **Card Design**: Clean project cards with hover lift effects
+- **Badge System**: Skill badges with border styling from template
+- **Navigation**: Minimal header with template-style underline animations
 
 ### Name Animation
 The hero features an animated name reveal:
@@ -20,9 +27,9 @@ The hero features an animated name reveal:
 ## 🚀 Tech Stack
 
 - **Framework**: Next.js 13 (App Router) with TypeScript
-- **Styling**: Tailwind CSS with custom red theme
-- **Animations**: Framer Motion for heavy hover effects
-- **Fonts**: Google Fonts (WOFF2) with performance optimization
+- **Styling**: Tailwind CSS with Framer template-inspired theme
+- **Animations**: Framer Motion for template-style effects
+- **Fonts**: Satoshi + Inter + Google Fonts (WOFF2) with performance optimization
 - **SEO**: Automatic sitemap.xml and robots.txt generation
 
 ## 📁 Project Structure
@@ -38,41 +45,38 @@ app/
 ├── writing/              # Essay pages
 ├── about/                # About page
 ├── contact/              # Contact page
-├── ur/bonn-ka-banjara/   # Urdu series
 ├── sitemap.ts           # Auto-generated sitemap
 └── robots.ts            # SEO robots configuration
 
 components/
-├── Header.tsx           # Animated navigation with name reveal
-├── Footer.tsx           # RTL footer with heavy hover effects
-├── PortfolioGrid.tsx    # Animated portfolio grid
-├── BookCard.tsx         # Book display with hover animations
-├── EssayCard.tsx        # Essay display with motion effects
+├── Header.tsx           # Template-style navigation
+├── Footer.tsx           # Minimal footer with template styling
+├── TemplateHero.tsx     # Main hero section with grid layout
+├── TemplateAbout.tsx    # About section with portrait
+├── TemplateTestimonial.tsx # Testimonial section
+├── PortfolioGrid.tsx    # Main portfolio layout
+├── BookCard.tsx         # Book display with template styling
+├── EssayCard.tsx        # Essay display with template styling
 ├── SearchOverlay.tsx    # Animated search modal
 └── NameRevealUrdu.tsx   # "ب" → "عبدالباسط ظفر" animation
 ```
 
-## 🎭 Animation System
+## 🎭 Template Animation System
 
-### Name Reveal Component
-```tsx
-import NameRevealUrdu from '@/components/NameRevealUrdu';
-
-// Usage
-<NameRevealUrdu className="text-ink" />
+### Letter Reveal Animation
+```css
+.letter-reveal {
+  opacity: 0.001;
+  filter: blur(10px);
+  transform: translateY(10px);
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
 ```
-
-**Animation Details:**
-- **Default State**: Shows circular "ب" badge
-- **Hover/Tap**: Reveals full name with spring animation
-- **Effects**: Scale, blur, letter-spacing, and circular motion
-- **Duration**: 280ms with spring physics
-- **Accessibility**: Respects `prefers-reduced-motion`
 
 ### Card Animations
 - **Hover**: Lift effect (-8px translateY) with shadow enhancement
-- **Scale**: Subtle scale (1.05) on interactive elements
-- **Underlines**: Animated underline wipe effects
+- **Scale**: Image scale (1.05) on card hover
+- **Badges**: Scale and lift effects on skill badges
 - **Stagger**: Sequential entrance animations for grids
 
 ### Performance Optimizations
@@ -83,12 +87,16 @@ import NameRevealUrdu from '@/components/NameRevealUrdu';
 
 ## 🌐 RTL Implementation
 
-### CSS Logical Properties
+### Template Grid RTL
 ```css
-/* Use logical properties for RTL support */
-margin-inline-start: 1rem;  /* Instead of margin-left */
-padding-inline-end: 2rem;   /* Instead of padding-right */
-border-inline-start: 1px;   /* Instead of border-left */
+[dir="rtl"] .template-grid {
+  direction: rtl;
+}
+
+[dir="rtl"] .template-grid > * {
+  direction: ltr;
+  text-align: right;
+}
 ```
 
 ### Tailwind RTL Utilities
@@ -98,19 +106,16 @@ border-inline-start: 1px;   /* Instead of border-left */
 
 // Text alignment
 <p className="text-right urdu-text">
-
-// Grid positioning (auto-reversed)
-<div className="md:col-start-8"> {/* Becomes col-start-1 in RTL */}
 ```
 
 ### Font Loading
 ```tsx
-// Optimized font loading
-const notoNastaliq = Noto_Nastaliq_Urdu({
-  subsets: ['arabic'],
+// Template-inspired font loading
+const satoshi = {
+  subsets: ['latin'],
   display: 'swap',
-  variable: '--font-urdu-heading'
-});
+  variable: '--font-satoshi'
+};
 ```
 
 ## 🔍 SEO Configuration
@@ -127,21 +132,15 @@ const notoNastaliq = Noto_Nastaliq_Urdu({
 - **Blocks**: AI crawlers (GPTBot, ChatGPT, etc.)
 - **Sitemap**: References auto-generated sitemap
 
-### Meta Tags
-- **Open Graph**: Proper images and descriptions
-- **Twitter Cards**: Summary with large image
-- **JSON-LD**: Structured data for rich snippets
-- **Hreflang**: Language alternatives
-
-## 🎨 Customization Guide
+## 🎨 Template Customization Guide
 
 ### Changing Colors
 ```css
 /* In globals.css */
 :root {
-  --brand: theme(colors.blue.600);     /* Change brand color */
-  --brand-hover: theme(colors.blue.700);
-  --brand-light: theme(colors.blue.50);
+  --brand: #DC2626;           /* Change brand color */
+  --brand-hover: #B91C1C;
+  --surface: #ECE1D5;         /* Template background */
 }
 ```
 
@@ -156,13 +155,13 @@ const spring = {
 };
 ```
 
-### RTL Utilities
+### Template Grid System
 ```css
-/* Add new RTL spacing */
-[dir="rtl"] .space-x-12 > :not([hidden]) ~ :not([hidden]) {
-  --tw-space-x-reverse: 1;
-  margin-right: calc(3rem * var(--tw-space-x-reverse));
-  margin-left: calc(3rem * calc(1 - var(--tw-space-x-reverse)));
+.template-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(200px, 1fr));
+  gap: 2.5rem;
+  max-width: 1200px;
 }
 ```
 
@@ -183,11 +182,6 @@ npm run dev
 npm run build
 ```
 
-### Add Search Indexing
-```bash
-npx -y pagefind --site out
-```
-
 ## 📊 Performance Targets
 
 - **LCP**: ≤ 2.5s (optimized hero image)
@@ -205,8 +199,7 @@ npx -y pagefind --site out
 
 ### Static Hosting
 1. Run `npm run build`
-2. Run `npx -y pagefind --site out`
-3. Upload `out/` directory
+2. Upload `out/` directory
 
 ## 📝 Content Management
 
@@ -216,12 +209,17 @@ Content is stored in `lib/data/content.ts`. Update with your:
 - Series entries
 - Social links and contact info
 
-## 🔧 Removed Features
+## 🔧 Template Features
 
-- ❌ Audio components and players
-- ❌ Accessibility settings panel
-- ❌ Newsletter signup forms
-- ❌ Settings buttons in headers/footers
+- ✅ Framer-inspired warm beige background
+- ✅ Template-style asymmetrical grid layout
+- ✅ Skill badges with border styling
+- ✅ Letter-by-letter text reveal animations
+- ✅ Project cards with hover lift effects
+- ✅ Minimal navigation with underline animations
+- ✅ RTL support for Urdu content
+- ✅ Bilingual landing page
+- ✅ Heavy Framer Motion animations
 
 ## 📄 License
 

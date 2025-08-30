@@ -1,5 +1,4 @@
 import type { Config } from 'tailwindcss';
-import colors from 'tailwindcss/colors';
 
 const config: Config = {
   darkMode: ['class'],
@@ -11,31 +10,39 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['Inter', 'system-ui', 'sans-serif'],
+        sans: ['Satoshi', 'system-ui', 'sans-serif'],
+        inter: ['Inter', 'system-ui', 'sans-serif'],
         'urdu-heading': ['Noto Nastaliq Urdu', 'serif'],
         'urdu-body': ['Noto Naskh Arabic', 'serif'],
       },
       colors: {
-        // Red Brand Theme
+        // Template-inspired color palette
         brand: {
-          DEFAULT: colors.red[600], // #DC2626
-          hover: colors.red[700], // #B91C1C
-          light: colors.red[50], // #FEF2F2
+          DEFAULT: '#DC2626', // Red-600
+          hover: '#B91C1C', // Red-700
+          light: '#FEF2F2', // Red-50
         },
         
-        // Semantic Palette
-        ink: '#0B0B0F',
-        'ink-muted': '#374151', // Improved contrast
-        'ink-light': '#9CA3AF',
-        surface: '#FFFFFF',
-        'surface-elevated': '#FAFAFA',
-        'surface-muted': '#F7F7FA',
-        line: '#E9E9EE',
-        'line-strong': '#D1D5DB',
+        // Template background colors
+        surface: {
+          DEFAULT: '#ECE1D5', // Template warm beige
+          elevated: '#F5F0E8',
+          muted: '#E5D9CC',
+          white: '#FFFFFF',
+        },
         
-        // Accessibility colors
-        'text-high-contrast': '#000000',
-        'text-medium-contrast': '#374151',
+        // Text colors
+        ink: {
+          DEFAULT: '#1F2937',
+          muted: '#6B7280',
+          light: '#9CA3AF',
+        },
+        
+        // Border colors
+        line: {
+          DEFAULT: '#D1D5DB',
+          strong: '#9CA3AF',
+        },
         
         // Semantic colors
         success: '#059669',
@@ -45,13 +52,13 @@ const config: Config = {
       fontSize: {
         'xs': ['0.75rem', { lineHeight: '1.5' }],
         'sm': ['0.875rem', { lineHeight: '1.5' }],
-        'base': ['1rem', { lineHeight: '1.7' }],
-        'lg': ['1.125rem', { lineHeight: '1.7' }],
-        'xl': ['1.25rem', { lineHeight: '1.6' }],
-        '2xl': ['1.5rem', { lineHeight: '1.5' }],
-        '3xl': ['1.875rem', { lineHeight: '1.4' }],
-        '4xl': ['2.25rem', { lineHeight: '1.3' }],
-        '5xl': ['3rem', { lineHeight: '1.2' }],
+        'base': ['1rem', { lineHeight: '1.6' }],
+        'lg': ['1.125rem', { lineHeight: '1.6' }],
+        'xl': ['1.25rem', { lineHeight: '1.5' }],
+        '2xl': ['1.5rem', { lineHeight: '1.4' }],
+        '3xl': ['1.875rem', { lineHeight: '1.3' }],
+        '4xl': ['2.25rem', { lineHeight: '1.2' }],
+        '5xl': ['3rem', { lineHeight: '1.1' }],
         '6xl': ['3.75rem', { lineHeight: '1.1' }],
         '7xl': ['4.5rem', { lineHeight: '1.1' }],
       },
@@ -61,36 +68,31 @@ const config: Config = {
         '128': '32rem',
       },
       maxWidth: {
-        prose: '72ch',
-        'container': '1280px',
+        'container': '1200px',
       },
       borderRadius: {
-        'sm': '0.5rem',
-        'md': '0.75rem',
-        'lg': '1rem',
-        'xl': '1.5rem',
-        '2xl': '2rem',
+        'sm': '0.25rem',
+        'md': '0.5rem',
+        'lg': '0.75rem',
+        'xl': '1rem',
+        '2xl': '1.5rem',
       },
       boxShadow: {
-        sm: '0 1px 3px 0 rgba(0, 0, 0, 0.08)',
-        md: '0 4px 8px 0 rgba(0, 0, 0, 0.08)',
-        lg: '0 8px 16px 0 rgba(0, 0, 0, 0.08)',
-        xl: '0 12px 24px 0 rgba(0, 0, 0, 0.08)',
-        '2xl': '0 20px 40px 0 rgba(0, 0, 0, 0.1)',
+        sm: '0 2px 4px 0 rgba(0, 0, 0, 0.06)',
+        md: '0 4px 8px 0 rgba(0, 0, 0, 0.1)',
+        lg: '0 8px 16px 0 rgba(0, 0, 0, 0.1)',
+        xl: '0 12px 24px 0 rgba(0, 0, 0, 0.1)',
+        '2xl': '0 20px 40px 0 rgba(0, 0, 0, 0.15)',
       },
       transitionDuration: {
         '150': '150ms',
         '200': '200ms',
         '300': '300ms',
       },
-      transitionTimingFunction: {
-        'out': 'cubic-bezier(0.4, 0, 0.2, 1)',
-        'in-out': 'cubic-bezier(0.4, 0, 0.2, 1)',
-      },
       animation: {
         'fade-in': 'fadeIn 200ms cubic-bezier(0.4, 0, 0.2, 1)',
         'slide-up': 'slideUp 200ms cubic-bezier(0.4, 0, 0.2, 1)',
-        'scale-in': 'scaleIn 150ms cubic-bezier(0.4, 0, 0.2, 1)',
+        'letter-reveal': 'letterReveal 600ms cubic-bezier(0.4, 0, 0.2, 1)',
       },
       keyframes: {
         fadeIn: {
@@ -101,9 +103,9 @@ const config: Config = {
           '0%': { opacity: '0', transform: 'translateY(20px)' },
           '100%': { opacity: '1', transform: 'translateY(0)' },
         },
-        scaleIn: {
-          '0%': { opacity: '0', transform: 'scale(0.95)' },
-          '100%': { opacity: '1', transform: 'scale(1)' },
+        letterReveal: {
+          '0%': { opacity: '0.001', filter: 'blur(10px)', transform: 'translateY(10px)' },
+          '100%': { opacity: '1', filter: 'blur(0px)', transform: 'translateY(0px)' },
         },
       },
     },
