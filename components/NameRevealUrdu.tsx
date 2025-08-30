@@ -26,18 +26,18 @@ const DEFAULT_SECTIONS: Section[] = [
   {
     title: 'صفحہ جات',
     items: [
-      { label: 'ہوم', href: '/', icon: <Sparkles className="w-3.5 h-3.5" /> },
-      { label: 'کام', href: '/work', icon: <Layers className="w-3.5 h-3.5" /> },
-      { label: 'تحریریں', href: '/writing', icon: <PenLine className="w-3.5 h-3.5" /> },
-      { label: 'کتابیں', href: '/books', icon: <BookOpen className="w-3.5 h-3.5" /> },
-      { label: 'میرے بارے میں', href: '/about', icon: <User2 className="w-3.5 h-3.5" /> },
-      { label: 'رابطہ', href: '/contact', icon: <Mail className="w-3.5 h-3.5" /> }
+      { label: 'Home', href: '/', icon: <Sparkles className="w-3.5 h-3.5" /> },
+      { label: 'Work', href: '/work', icon: <Layers className="w-3.5 h-3.5" /> },
+      { label: 'Writing', href: '/writing', icon: <PenLine className="w-3.5 h-3.5" /> },
+      { label: 'Books', href: '/books', icon: <BookOpen className="w-3.5 h-3.5" /> },
+      { label: 'About', href: '/about', icon: <User2 className="w-3.5 h-3.5" /> },
+      { label: 'Contact', href: '/contact', icon: <Mail className="w-3.5 h-3.5" /> }
     ]
   },
   {
     title: 'نمایاں',
     items: [
-      { label: 'بن کا بنجارہ', href: '/bonn-ka-banjara' },
+      { label: 'Bonn-ka-Banjara', href: '/bonn-ka-banjara' },
       // مزید نمایاں سیریز/پروجیکٹس یہاں شامل کریں
     ]
   }
