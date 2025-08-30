@@ -143,7 +143,11 @@ export default function WorkPage() {
                       <p className="text-gray-600 text-sm mb-4">{talk.description}</p>
                       <div className="text-caption urdu-text">
                         <p>{talk.event} • {talk.location}</p>
-                        <p>{new Date(talk.date).toLocaleDateString('ur-PK')}</p>
+                        <p>
+                          {new Intl.DateTimeFormat('ur-PK', {
+                            timeZone: 'UTC'
+                          }).format(new Date(talk.date))}
+                        </p>
                       </div>
                     </div>
                   ))}
@@ -162,7 +166,11 @@ export default function WorkPage() {
                       <p className="text-gray-600 text-sm mb-4">{item.excerpt}</p>
                       <div className="text-caption urdu-text">
                         <p>{item.publication}</p>
-                        <p>{new Date(item.date).toLocaleDateString('ur-PK')}</p>
+                        <p>
+                          {new Intl.DateTimeFormat('ur-PK', {
+                            timeZone: 'UTC'
+                          }).format(new Date(item.date))}
+                        </p>
                       </div>
                     </div>
                   ))}

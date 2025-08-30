@@ -59,7 +59,9 @@ export default function BonnKaBanjaraPage() {
                       <div className="flex items-center space-x-2 space-x-reverse">
                         <Calendar className="w-4 h-4 text-gray-400" />
                         <span className="text-caption urdu-body-sm text-gray-500">
-                          {new Date(entry.publishedDate).toLocaleDateString('ur-PK')}
+                          {new Intl.DateTimeFormat('ur-PK', {
+                            timeZone: 'UTC'
+                          }).format(new Date(entry.publishedDate))}
                         </span>
                       </div>
                       
