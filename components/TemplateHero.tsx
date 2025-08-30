@@ -89,7 +89,10 @@ export function TemplateHero({ lang = 'ur' }: TemplateHeroProps) {
             <motion.div variants={itemVariants} className="mb-16">
               <h2 className="text-2xl md:text-3xl font-extrabold mb-10 urdu-heading">{isUrdu ? 'پروجیکٹس' : 'PROJECTS'}</h2>
 
-              <NameRevealUrdu className="text-ink" />
+              {/* Name Reveal */}
+              <div className="mb-12">
+                <NameRevealUrdu className="text-ink" />
+              </div>
 
               {/* CTAs */}
               <div className="flex gap-6 justify-end">
