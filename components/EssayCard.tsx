@@ -19,7 +19,7 @@ export function EssayCard({ essay }: EssayCardProps) {
   return (
     <motion.article
       className="project-card group"
-      data-pagefind-filter={`type:Essay${validDate ? `,year:${d.getFullYear()}` : ''}`}
+      data-pagefind-filter={`type:Essay${validDate ? `,year:${d.getUTCFullYear()}` : ''}`}
       data-pagefind-meta={`title:${essay.title},date:${essay.publishedDate}`}
       whileHover={shouldReduceMotion ? {} : { 
         y: -6,
@@ -32,7 +32,12 @@ export function EssayCard({ essay }: EssayCardProps) {
             <Calendar className="w-3 h-3 text-brand" />
             <span className="template-caption urdu-text">
               {validDate
-                ? new Intl.DateTimeFormat('ur-PK', { year: 'numeric', month: 'short', day: 'numeric' }).format(d)
+                ? new Intl.DateTimeFormat('ur-PK', {
+                    timeZone: 'UTC',
+                    year: 'numeric',
+                    month: 'short',
+                    day: 'numeric'
+                  }).format(d)
                 : ''}
             </span>
           </div>

@@ -82,11 +82,14 @@ export default function EssayPage({ params }: EssayPageProps) {
               <div className="flex flex-wrap items-center gap-6 text-sm text-muted-foreground">
                 <div className="flex items-center space-x-2">
                   <Calendar className="w-4 h-4" />
-                  <span>{new Date(essay.publishedDate).toLocaleDateString('en-US', {
-                    year: 'numeric',
-                    month: 'long',
-                    day: 'numeric'
-                  })}</span>
+                  <span>
+                    {new Intl.DateTimeFormat('en-US', {
+                      timeZone: 'UTC',
+                      year: 'numeric',
+                      month: 'long',
+                      day: 'numeric'
+                    }).format(new Date(essay.publishedDate))}
+                  </span>
                 </div>
                 
                 <div className="flex items-center space-x-2">

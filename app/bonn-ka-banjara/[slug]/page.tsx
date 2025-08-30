@@ -101,11 +101,12 @@ export default function SeriesEntryPage({ params }: SeriesEntryPageProps) {
                 <div className="flex items-center space-x-2 space-x-reverse">
                   <Calendar className="w-4 h-4" />
                   <span className="urdu-body-sm">
-                    {new Date(entry.publishedDate).toLocaleDateString('ur-PK', {
+                    {new Intl.DateTimeFormat('ur-PK', {
+                      timeZone: 'UTC',
                       year: 'numeric',
                       month: 'long',
                       day: 'numeric'
-                    })}
+                    }).format(new Date(entry.publishedDate))}
                   </span>
                 </div>
               </div>
