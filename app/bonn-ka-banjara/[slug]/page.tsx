@@ -2,7 +2,6 @@ import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
-import { AudioBlock } from '@/components/AudioBlock';
 import { series } from '@/lib/data/content';
 import { Calendar, ArrowRight, ArrowLeft, Home } from 'lucide-react';
 
@@ -89,8 +88,8 @@ export default function SeriesEntryPage({ params }: SeriesEntryPageProps) {
                   بن کا بنجارہ - حصہ {entry.order}
                 </span>
               </div>
-              
-              <h1 className="urdu-display text-gray-900 mb-8">
+
+              <h1 className="section-heading text-3xl sm:text-4xl md:text-5xl urdu-display text-gray-900">
                 {entry.titleUrdu}
               </h1>
               
@@ -111,16 +110,6 @@ export default function SeriesEntryPage({ params }: SeriesEntryPageProps) {
                 </div>
               </div>
             </header>
-
-            {/* Audio */}
-            {entry.audio && (
-              <AudioBlock 
-                src={entry.audio.src}
-                transcript={entry.audio.transcript}
-                title="آڈیو ورژن"
-                lang="ur"
-              />
-            )}
 
             {/* Content */}
             <div className="prose max-w-none text-right mb-16">

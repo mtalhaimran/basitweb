@@ -53,7 +53,8 @@ export default function NameRevealUrdu({
   const textRef = useRef<HTMLSpanElement>(null);
   const wrapRef = useRef<HTMLDivElement>(null);
 
-  const prefersReduced = reducedMotion ?? useReducedMotion();
+  const systemReduced = useReducedMotion();
+  const prefersReduced = reducedMotion ?? systemReduced;
 
   // Measure the full-name width so the badge can travel that distance
   useEffect(() => {

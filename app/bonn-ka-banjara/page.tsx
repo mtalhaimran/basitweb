@@ -36,7 +36,7 @@ export default function BonnKaBanjaraPage() {
           <div className="container">
             {/* Hero Section */}
             <div className="text-center mb-20">
-              <h1 className="urdu-display text-red-600 mb-6">
+              <h1 className="section-heading text-3xl sm:text-4xl md:text-5xl urdu-display text-red-600">
                 بن کا بنجارہ
               </h1>
               <p className="urdu-body text-gray-600 max-w-3xl mx-auto">
@@ -71,7 +71,7 @@ export default function BonnKaBanjaraPage() {
                       </div>
                     </div>
 
-                    <h2 className="urdu-heading-2 text-gray-900 mb-4 group-hover:text-red-600 transition-colors">
+                    <h2 className="section-heading urdu-heading-2 text-gray-900 group-hover:text-red-600 transition-colors">
                       {entry.titleUrdu}
                     </h2>
                     

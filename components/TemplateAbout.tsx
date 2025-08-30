@@ -59,27 +59,30 @@ export function TemplateAbout({ lang = 'ur' }: TemplateAboutProps) {
   return (
     <section className="py-24 bg-surface">
       <div className="container">
-        <div className="template-grid">
+        <motion.h2
+          className="section-heading urdu-heading"
+          variants={itemVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+        >
+          {isUrdu ? 'میرے بارے میں' : 'ABOUT ME'}
+        </motion.h2>
+
+        <div className="template-grid mt-10">
           {/* Left Column */}
-          <motion.div 
+          <motion.div
             className="col-span-1 text-right"
             variants={containerVariants}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-100px" }}
           >
-            <motion.h2 
-              className="template-heading mb-10 urdu-heading"
-              variants={itemVariants}
-            >
-              {isUrdu ? 'میرے بارے میں' : 'ABOUT ME'}
-            </motion.h2>
-            
-            <motion.p 
+            <motion.p
               className="template-body urdu-text max-w-sm mr-auto leading-relaxed"
               variants={itemVariants}
             >
-              {isUrdu 
+              {isUrdu
                 ? 'میں نے ڈی ٹی سی کمپنیوں، وینچر فنڈز، اور ملٹی نیشنل کارپوریشنز کے لیے تخلیقی ڈائریکٹر، حکمت عملی ساز، لکھاری، مشیر، اور سرمایہ کار کے طور پر خدمات انجام دیں۔'
                 : 'I served as a creative director, strategist, writer, advisor, and investor to DTC companies, venture funds, and multinational corporations.'
               }
@@ -87,7 +90,7 @@ export function TemplateAbout({ lang = 'ur' }: TemplateAboutProps) {
           </motion.div>
 
           {/* Right Column */}
-          <motion.div 
+          <motion.div
             className="col-span-2"
             variants={containerVariants}
             initial="hidden"
