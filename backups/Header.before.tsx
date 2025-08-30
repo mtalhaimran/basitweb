@@ -67,9 +67,9 @@ export function Header() {
         transition={{ duration: shouldReduceMotion ? 0 : 0.6, ease: 'easeOut' }}
       >
         <div className="container">
-          {/* 3 columns: LEFT lang | CENTER nav | RIGHT ب + search */}
+          {/* 3-column grid: LEFT lang toggle | CENTER nav | RIGHT ب + search */}
           <div className="grid grid-cols-[auto_1fr_auto] items-center py-5">
-            {/* LEFT — Language toggle (always left side) */}
+            {/* LEFT — language toggle (always on the left) */}
             <div className="justify-self-start">
               <Link
                 href={isUrduPage ? '/en' : '/'}
@@ -81,7 +81,7 @@ export function Header() {
               </Link>
             </div>
 
-            {/* CENTER — main nav (no center “Menu” button) */}
+            {/* CENTER — main nav (no “Menu” button) */}
             <nav className={`hidden md:flex items-center justify-center ${isUrduPage ? 'flex-row-reverse' : ''} gap-8`}>
               {navigation.map((item) => (
                 <Link key={item.href} href={item.href} className="template-nav-link urdu-text">
@@ -90,7 +90,7 @@ export function Header() {
               ))}
             </nav>
 
-            {/* RIGHT — ب (dropdown trigger) + Search */}
+            {/* RIGHT — ب (dropdown menu trigger) + Search */}
             <div className="justify-self-end flex items-center gap-3">
               <NameRevealUrdu className="text-brand" />
               <button

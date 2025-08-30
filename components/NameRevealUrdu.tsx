@@ -3,60 +3,49 @@
 import Link from 'next/link';
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 import { useEffect, useRef, useState } from 'react';
-// Optional icons for nicer list items (feel free to remove if you don't use them)
 import { BookOpen, PenLine, Layers, User2, Mail, Sparkles } from 'lucide-react';
 
-type MenuItem = {
-  label: string;
-  href: string;
-  icon?: React.ReactNode;     // optional: <Icon className="w-3.5 h-3.5" />
-  thumb?: string;             // optional: /thumbs/xyz.jpg
-  badge?: string;             // optional: e.g. "New"
-};
+type MenuItem = { label: string; href: string };
 type Section = { title: string; items: MenuItem[] };
 
-type NameRevealProps = {
+type Props = {
   className?: string;
   reducedMotion?: boolean;
-  sections?: Section[];       // override the defaults if you want
+  sections?: Section[];
 };
 
-/** Curated, minimal sitemap (no Languages block) */
 const DEFAULT_SECTIONS: Section[] = [
   {
     title: 'صفحہ جات',
     items: [
-      { label: 'ہوم', href: '/', icon: <Sparkles className="w-3.5 h-3.5" /> },
-      { label: 'کام', href: '/work', icon: <Layers className="w-3.5 h-3.5" /> },
-      { label: 'تحریریں', href: '/writing', icon: <PenLine className="w-3.5 h-3.5" /> },
-      { label: 'کتابیں', href: '/books', icon: <BookOpen className="w-3.5 h-3.5" /> },
-      { label: 'میرے بارے میں', href: '/about', icon: <User2 className="w-3.5 h-3.5" /> },
-      { label: 'رابطہ', href: '/contact', icon: <Mail className="w-3.5 h-3.5" /> }
+      { label: 'ہوم', href: '/' },
+      { label: 'کام', href: '/work' },
+      { label: 'تحریریں', href: '/writing' },
+      { label: 'پوسٹس', href: '/posts' },
+      { label: 'کتابیں', href: '/books' },
+      { label: 'میرے بارے میں', href: '/about' },
+      { label: 'رابطہ', href: '/contact' }
     ]
   },
   {
     title: 'نمایاں',
-    items: [
-      { label: 'بن کا بنجارہ', href: '/bonn-ka-banjara' },
-      // مزید نمایاں سیریز/پروجیکٹس یہاں شامل کریں
-    ]
+    items: [{ label: 'بن کا بنجارہ', href: '/bonn-ka-banjara' }]
   }
 ];
 
-export default function NameRevealUrdu({
-  className,
-  reducedMotion,
-  sections = DEFAULT_SECTIONS
-}: NameRevealProps) {
+export default function NameRevealUrdu({ className, reducedMotion, sections = DEFAULT_SECTIONS }: Props) {
   const [open, setOpen] = useState(false);
   const [textW, setTextW] = useState(0);
   const textRef = useRef<HTMLSpanElement>(null);
   const wrapRef = useRef<HTMLDivElement>(null);
+  const triggerRef = useRef<HTMLButtonElement>(null);
 
-  const systemReduced = useReducedMotion();
-  const prefersReduced = reducedMotion ?? systemReduced;
+  // viewport-anchored menu position (right/top)
+  const [menuTop, setMenuTop] = useState<number>(80); // default fallback
 
-  // Measure the full-name width so the badge can travel that distance
+  const prefersReduced = reducedMotion ?? useReducedMotion();
+
+  // measure full name width so the circle travels the exact distance
   useEffect(() => {
     const measure = () => {
       const el = textRef.current;
@@ -68,7 +57,36 @@ export default function NameRevealUrdu({
     return () => window.removeEventListener('resize', measure);
   }, []);
 
-  // Close on outside click / Escape
+  // compute fixed menu top position from trigger
+  const updateMenuTop = () => {
+    const btn = triggerRef.current;
+    if (!btn) return;
+    const rect = btn.getBoundingClientRect();
+    setMenuTop(rect.bottom + 12); // 12px gap below the badge
+  };
+
+  // open/close with hover intent (avoid flicker)
+  const openTimer = useRef<number | null>(null);
+  const closeTimer = useRef<number | null>(null);
+  const openWithDelay = () => {
+    if (closeTimer.current) window.clearTimeout(closeTimer.current);
+    openTimer.current = window.setTimeout(() => {
+      updateMenuTop();
+      setOpen(true);
+    }, 80);
+  };
+  const closeWithDelay = () => {
+    if (openTimer.current) window.clearTimeout(openTimer.current);
+    closeTimer.current = window.setTimeout(() => setOpen(false), 140);
+  };
+
+  // cleanup timers
+  useEffect(() => () => {
+    if (openTimer.current) window.clearTimeout(openTimer.current);
+    if (closeTimer.current) window.clearTimeout(closeTimer.current);
+  }, []);
+
+  // close on outside click / Esc
   useEffect(() => {
     const onDocClick = (e: MouseEvent) => {
       if (!wrapRef.current) return;
@@ -77,9 +95,13 @@ export default function NameRevealUrdu({
     const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') setOpen(false); };
     document.addEventListener('mousedown', onDocClick);
     document.addEventListener('keydown', onKey);
+    window.addEventListener('scroll', updateMenuTop, true);
+    window.addEventListener('resize', updateMenuTop);
     return () => {
       document.removeEventListener('mousedown', onDocClick);
       document.removeEventListener('keydown', onKey);
+      window.removeEventListener('scroll', updateMenuTop, true);
+      window.removeEventListener('resize', updateMenuTop);
     };
   }, []);
 
@@ -92,18 +114,21 @@ export default function NameRevealUrdu({
       ref={wrapRef}
       dir="rtl"
       className={['relative inline-flex items-center gap-3 select-none', className].filter(Boolean).join(' ')}
-      onMouseEnter={() => setOpen(true)}
-      onMouseLeave={() => setOpen(false)}
-      onFocus={() => setOpen(true)}
-      onBlur={(e) => { if (!wrapRef.current?.contains(e.relatedTarget as Node)) setOpen(false); }}
+      onMouseEnter={openWithDelay}
+      onMouseLeave={closeWithDelay}
+      onFocus={openWithDelay}
+      onBlur={(e) => {
+        if (!wrapRef.current?.contains(e.relatedTarget as Node)) closeWithDelay();
+      }}
     >
-      {/* Trigger: round badge with 'ب' — spins 360° + slides when opening */}
+      {/* trigger: circular ب */}
       <motion.button
+        ref={triggerRef}
         type="button"
         aria-haspopup="menu"
         aria-expanded={open}
         aria-controls="name-sitemap-menu"
-        onClick={() => setOpen(v => !v)}
+        onClick={() => { updateMenuTop(); setOpen((v) => !v); }} // tap/click toggle
         className="relative grid place-items-center rounded-full bg-brand text-white font-bold shadow-sm focus:outline-none focus:ring-2 focus:ring-brand/40"
         style={{ width: 48, height: 48 }}
         animate={
@@ -116,12 +141,12 @@ export default function NameRevealUrdu({
         <span className="text-xl leading-none font-urdu-heading">ب</span>
       </motion.button>
 
-      {/* Full name reveal */}
+      {/* full name reveal */}
       <div className="overflow-hidden pr-3">
         <motion.span
           ref={textRef}
           className="inline-block text-3xl md:text-4xl font-extrabold font-urdu-heading whitespace-nowrap"
-          style={{ originX: 1 }} // reveal from right edge (RTL)
+          style={{ originX: 1 }}
           initial={false}
           animate={
             prefersReduced
@@ -134,7 +159,7 @@ export default function NameRevealUrdu({
         </motion.span>
       </div>
 
-      {/* Dropdown mega-menu (polished look) */}
+      {/* dropdown menu: FIXED to viewport right */}
       <AnimatePresence>
         {open && (
           <motion.div
@@ -143,24 +168,24 @@ export default function NameRevealUrdu({
             initial={{ opacity: 0, y: -8, scale: 0.98 }}
             animate={{ opacity: 1, y: 0, scale: 1, transition: { duration: 0.18 } }}
             exit={{ opacity: 0, y: -8, scale: 0.98, transition: { duration: 0.12 } }}
-            className="absolute top-full mt-3 right-0 z-50 w-[min(92vw,760px)] overflow-hidden rounded-2xl border border-black/10 bg-white shadow-xl ring-1 ring-black/5"
+            // ⬇️ fixed to viewport right, under the trigger vertically
+            style={{ position: 'fixed' as const, top: menuTop, right: 16 }}
+            className="z-[70] w-[min(92vw,780px)] overflow-hidden rounded-2xl border border-black/10 bg-white shadow-xl ring-1 ring-black/5"
+            // keep open while hovering inside the menu to avoid flicker
+            onMouseEnter={() => {
+              if (closeTimer.current) window.clearTimeout(closeTimer.current);
+            }}
+            onMouseLeave={closeWithDelay}
           >
-            {/* Decorative header strip */}
             <div className="h-1.5 w-full bg-gradient-to-l from-brand/30 via-brand/15 to-transparent" />
-
-            <div className="p-4 md:p-5 bg-white">
+            <div className="p-4 md:p-5">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 {sections.map((section) => (
-                  <motion.div
-                    key={section.title}
-                    initial={{ opacity: 0, y: 6 }}
-                    animate={{ opacity: 1, y: 0, transition: { duration: 0.18 } }}
-                  >
-                    <div className="flex items-center justify-between mb-2">
+                  <div key={section.title}>
+                    <div className="mb-2 flex items-center justify-between">
                       <h4 className="text-sm font-semibold text-ink/80 urdu-text">{section.title}</h4>
                       <span className="text-[11px] px-2 py-0.5 rounded-full bg-surface-muted text-ink/70">{section.items.length}</span>
                     </div>
-
                     <ul className="space-y-1.5">
                       {section.items.map((it) => (
                         <li key={it.href}>
@@ -168,29 +193,15 @@ export default function NameRevealUrdu({
                             role="menuitem"
                             href={it.href}
                             onClick={() => setOpen(false)}
-                            className="group urdu-text w-full inline-flex items-center gap-2 rounded-lg px-3 py-2 text-[15px] text-ink hover:bg-[rgba(0,0,0,0.035)] hover:text-brand focus:outline-none focus:ring-2 focus:ring-brand/30"
+                            className="group urdu-text inline-flex items-center gap-2 rounded-lg px-3 py-2 text-[15px] text-ink hover:bg-[rgba(0,0,0,0.035)] hover:text-brand focus:outline-none focus:ring-2 focus:ring-brand/30"
                           >
-                            {/* optional icon/thumb, else bullet */}
-                            {it.thumb ? (
-                              // thumbnail variant (small square)
-                              <img src={it.thumb} alt="" className="w-5 h-5 rounded object-cover" />
-                            ) : it.icon ? (
-                              <span className="text-ink/70 group-hover:text-brand">{it.icon}</span>
-                            ) : (
-                              <span className="inline-block translate-y-[0.5px]">•</span>
-                            )}
-
-                            <span className="flex-1">{it.label}</span>
-
-                            {/* optional badge */}
-                            {it.badge && (
-                              <span className="text-[10px] px-1.5 py-0.5 rounded bg-brand/10 text-brand">{it.badge}</span>
-                            )}
+                            <span className="inline-block translate-y-[0.5px]">•</span>
+                            <span>{it.label}</span>
                           </Link>
                         </li>
                       ))}
                     </ul>
-                  </motion.div>
+                  </div>
                 ))}
               </div>
             </div>
