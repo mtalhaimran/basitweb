@@ -1,6 +1,8 @@
 import { MetadataRoute } from 'next';
 import { books, essays, series } from '@/lib/data/content';
 
+export const dynamic = 'force-static';
+
 // Private routes to exclude from sitemap
 const PRIVATE_ROUTES = [
   '/admin',
