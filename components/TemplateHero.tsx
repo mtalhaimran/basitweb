@@ -41,7 +41,7 @@ export function TemplateHero({ lang = 'ur' }: TemplateHeroProps) {
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-3"> {/* was: template-grid */}
           {/* Left Column */}
           <motion.div
-            className="lg:col-span-1 text-right"
+            className={`lg:col-span-1 ${isUrdu ? 'text-right' : 'text-left'}`}
             variants={containerVariants}
             initial="hidden"
             animate={isLoaded ? 'visible' : 'hidden'}
@@ -51,14 +51,14 @@ export function TemplateHero({ lang = 'ur' }: TemplateHeroProps) {
             </motion.div>
 
             <motion.div variants={itemVariants} className="mb-10">
-              <p className="text-ink-muted urdu-text max-w-sm leading-relaxed ml-auto">{/* was: mr-auto (flip for rtl) */}
+              <p className={`text-ink-muted urdu-text max-w-sm leading-relaxed ${isUrdu ? 'ml-auto' : 'mr-auto'}`}> 
                 {isUrdu
                   ? 'عبدالباسط ظفر ایک لکھاری، برانڈ حکمت عملی ساز، اور تخلیقی ڈائریکٹر ہے جو افراد اور برانڈز کے ساتھ مل کر دلکش کہانی گوئی، مقصدی تخلیقی منصوبہ بندی، اور کمیونٹی پر مبنی ترقی کا کام کرتا ہے۔'
                   : 'Abdul Basit Zafar is a writer, brand strategist, and creative director who collaborates with individuals and brands looking for compelling storytelling, purposeful creative planning, and community-focused development.'}
               </p>
             </motion.div>
 
-            <motion.div className="flex flex-wrap gap-2 justify-end" variants={itemVariants}>
+            <motion.div className={`flex flex-wrap gap-2 ${isUrdu ? 'justify-end' : 'justify-start'}`} variants={itemVariants}>
               {(isUrdu ? skillsUrdu : skills).map((skill, i) => (
                 <motion.span
                   key={skill}
@@ -81,7 +81,7 @@ export function TemplateHero({ lang = 'ur' }: TemplateHeroProps) {
 
           {/* Right Column */}
           <motion.div
-            className="lg:col-span-2 text-right"
+            className={`lg:col-span-2 ${isUrdu ? 'text-right' : 'text-left'}`}
             variants={containerVariants}
             initial="hidden"
             animate={isLoaded ? 'visible' : 'hidden'}
@@ -95,7 +95,7 @@ export function TemplateHero({ lang = 'ur' }: TemplateHeroProps) {
               </div>
 
               {/* CTAs */}
-              <div className="flex gap-6 justify-end">
+              <div className={`flex gap-6 ${isUrdu ? 'justify-end' : 'justify-start'}`}>
                 <motion.div whileHover={shouldReduceMotion ? {} : { scale: 1.05, y: -2 }} whileTap={shouldReduceMotion ? {} : { scale: 0.95 }}>
                   <Link
                     href="/work"
