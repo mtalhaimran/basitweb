@@ -13,7 +13,7 @@ export function TemplateHero({ lang = 'ur' }: TemplateHeroProps) {
   return (
     <section className="relative h-[60vh] min-h-[400px] w-full" dir={isUrdu ? 'rtl' : 'ltr'}>
       <Image
-        src="https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=1600&h=900&fit=crop"
+        src="/images/hero.jpg"
         alt=""
         fill
         priority

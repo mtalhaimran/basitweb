@@ -36,13 +36,25 @@ export function Header() {
     };
   }, []);
 
-  const navigation = [
+  const navUrdu = [
     { name: 'کام', href: '/work' },
-    { name: 'کتابیں', href: '/books' },
     { name: 'تحریریں', href: '/writing' },
-    { name: 'تعارف', href: '/about' },
+    { name: 'مراسلے', href: '/posts' },
+    { name: 'کتابیں', href: '/books' },
+    { name: 'میرے بارے میں', href: '/about' },
     { name: 'رابطہ', href: '/contact' }
   ];
+
+  const navEnglish = [
+    { name: 'Work', href: '/en/work' },
+    { name: 'Writing', href: '/en/writing' },
+    { name: 'Posts', href: '/en/posts' },
+    { name: 'Books', href: '/en/books' },
+    { name: 'About', href: '/en/about' },
+    { name: 'Contact', href: '/en/contact' }
+  ];
+
+  const navigation = isUrduPage ? navUrdu : navEnglish;
 
   return (
     <>

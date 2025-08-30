@@ -1,4 +1,5 @@
 import type { Config } from 'tailwindcss';
+import colors from 'tailwindcss/colors';
 
 const config: Config = {
   darkMode: ['class'],
@@ -16,45 +17,34 @@ const config: Config = {
         'urdu-body': ['Noto Naskh Arabic', 'serif'],
       },
       colors: {
-        // Template-inspired color palette
-        brand: {
-          DEFAULT: '#DC2626', // Red-600
-          hover: '#B91C1C', // Red-700
-          light: '#FEF2F2', // Red-50
-        },
-        
-        // Template background colors
+        brand: colors.red[600],
+        'brand-hover': colors.red[700],
+        'brand-light': colors.red[50],
         surface: {
-          DEFAULT: '#ECE1D5', // Template warm beige
+          DEFAULT: '#ECE1D5',
           elevated: '#F5F0E8',
           muted: '#E5D9CC',
           white: '#FFFFFF',
         },
-        
-        // Text colors
         ink: {
           DEFAULT: '#1F2937',
           muted: '#6B7280',
           light: '#9CA3AF',
         },
-        
-        // Border colors
         line: {
           DEFAULT: '#D1D5DB',
           strong: '#9CA3AF',
         },
-        
-        // Semantic colors
-        success: '#059669',
-        warning: '#D97706',
-        error: '#DC2626',
+        success: colors.green[600],
+        warning: colors.amber[600],
+        error: colors.red[600],
       },
       fontSize: {
-        'xs': ['0.75rem', { lineHeight: '1.5' }],
-        'sm': ['0.875rem', { lineHeight: '1.5' }],
-        'base': ['1rem', { lineHeight: '1.6' }],
-        'lg': ['1.125rem', { lineHeight: '1.6' }],
-        'xl': ['1.25rem', { lineHeight: '1.5' }],
+        xs: ['0.75rem', { lineHeight: '1.5' }],
+        sm: ['0.875rem', { lineHeight: '1.5' }],
+        base: ['1rem', { lineHeight: '1.6' }],
+        lg: ['1.125rem', { lineHeight: '1.6' }],
+        xl: ['1.25rem', { lineHeight: '1.5' }],
         '2xl': ['1.5rem', { lineHeight: '1.4' }],
         '3xl': ['1.875rem', { lineHeight: '1.3' }],
         '4xl': ['2.25rem', { lineHeight: '1.2' }],
@@ -63,18 +53,18 @@ const config: Config = {
         '7xl': ['4.5rem', { lineHeight: '1.1' }],
       },
       spacing: {
-        '18': '4.5rem',
-        '88': '22rem',
-        '128': '32rem',
+        18: '4.5rem',
+        88: '22rem',
+        128: '32rem',
       },
       maxWidth: {
-        'container': '1200px',
+        container: '1200px',
       },
       borderRadius: {
-        'sm': '0.25rem',
-        'md': '0.5rem',
-        'lg': '0.75rem',
-        'xl': '1rem',
+        sm: '0.25rem',
+        md: '0.5rem',
+        lg: '0.75rem',
+        xl: '1rem',
         '2xl': '1.5rem',
       },
       boxShadow: {
@@ -85,9 +75,9 @@ const config: Config = {
         '2xl': '0 20px 40px 0 rgba(0, 0, 0, 0.15)',
       },
       transitionDuration: {
-        '150': '150ms',
-        '200': '200ms',
-        '300': '300ms',
+        150: '150ms',
+        200: '200ms',
+        300: '300ms',
       },
       animation: {
         'fade-in': 'fadeIn 200ms cubic-bezier(0.4, 0, 0.2, 1)',

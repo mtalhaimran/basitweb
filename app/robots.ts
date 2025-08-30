@@ -4,42 +4,24 @@ export const dynamic = 'force-static';
 
 export default function robots(): MetadataRoute.Robots {
   const baseUrl = 'https://abdulbasitzafar.com';
-  
+
   return {
-    rules: [
-      {
-        userAgent: '*',
-        allow: '/',
-        disallow: [
-          '/admin/',
-          '/api/',
-          '/private/',
-          '/dashboard/',
-          '/draft/',
-          '/preview/',
-          '/test/',
-          '/_next/',
-          '/pagefind/',
-        ],
-      },
-      {
-        userAgent: 'GPTBot',
-        disallow: '/',
-      },
-      {
-        userAgent: 'ChatGPT-User',
-        disallow: '/',
-      },
-      {
-        userAgent: 'CCBot',
-        disallow: '/',
-      },
-      {
-        userAgent: 'anthropic-ai',
-        disallow: '/',
-      },
-    ],
+    rules: {
+      userAgent: '*',
+      allow: '/',
+      disallow: [
+        '/api/*',
+        '/admin/*',
+        '/dashboard/*',
+        '/drafts/*',
+        '/preview',
+        '/private/*',
+        '/_next/*',
+        '/404',
+        '/500'
+      ]
+    },
     sitemap: `${baseUrl}/sitemap.xml`,
-    host: baseUrl,
+    host: baseUrl
   };
 }

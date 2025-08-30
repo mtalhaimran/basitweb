@@ -1,66 +1,16 @@
-import { Header } from '@/components/Header';
-import { Footer } from '@/components/Footer';
-import { PortfolioGrid } from '@/components/PortfolioGrid';
-
-export const metadata = {
-  title: 'عبدالباسط ظفر - لکھاری اور کہانی گو',
-  description: 'عبدالباسط ظفر کا پورٹ فولیو - کتابیں، مضامین، اور کہانیاں جو ٹیکنالوجی، ثقافت، اور انسانی تجربات کو دریافت کرتی ہیں۔',
-  openGraph: {
-    title: 'عبدالباسط ظفر - لکھاری اور کہانی گو',
-    description: 'عبدالباسط ظفر کا پورٹ فولیو - کتابیں، مضامین، اور کہانیاں',
-    images: [{
-      url: 'https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=1200&h=630&fit=crop',
-      width: 1200,
-      height: 630,
-      alt: 'عبدالباسط ظفر - لکھاری اور کہانی گو'
-    }],
-    type: 'website',
-    locale: 'ur_PK'
-  },
-  twitter: {
-    card: 'summary_large_image',
-    creator: '@abdulbasitzafar'
-  },
-  alternates: {
-    canonical: 'https://abdulbasitzafar.com',
-    languages: {
-      'ur': 'https://abdulbasitzafar.com',
-      'en': 'https://abdulbasitzafar.com/en'
-    }
-  }
-};
-
-const jsonLd = {
-  '@context': 'https://schema.org',
-  '@type': 'Person',
-  name: 'عبدالباسط ظفر',
-  alternateName: 'Abdul Basit Zafar',
-  jobTitle: 'لکھاری اور کہانی گو',
-  url: 'https://abdulbasitzafar.com',
-  image: 'https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=400',
-  sameAs: [
-    'https://twitter.com/abdulbasitzafar',
-    'https://linkedin.com/in/abdulbasitzafar'
-  ],
-  knowsLanguage: ['اردو', 'انگریزی', 'جرمن'],
-  description: 'لکھاری اور کہانی گو جو ٹیکنالوجی، ثقافت، اور انسانی تجربات کے درمیان تعلق کو دریافت کرتا ہے۔'
-};
+import Image from 'next/image';
+import NameRevealUrdu from '@/components/NameRevealUrdu';
 
 export default function Home() {
   return (
-    <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
-      
-      <div className="min-h-screen">
-        <Header />
-        <main id="main-content">
-          <PortfolioGrid lang="ur" />
-        </main>
-        <Footer />
+    <main className="relative h-screen">
+      <Image src="/images/hero.jpg" alt="" fill priority className="object-cover" />
+      <div className="absolute inset-0 bg-black/40" />
+      <div className="relative z-10 flex flex-col items-center justify-center h-full text-center text-white space-y-6" dir="rtl">
+        <NameRevealUrdu className="text-white" />
+        <p className="text-xl font-urdu-body">میں عبدالباسط ظفر ہوں، لکھاری اور کہانی گو۔</p>
+        <p className="text-sm">I'm Abdul Basit, a writer and storyteller.</p>
       </div>
-    </>
+    </main>
   );
 }

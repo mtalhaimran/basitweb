@@ -1,19 +1,12 @@
-'use client';
+import WorkCard from './WorkCard';
+import { work } from '@/lib/data/work';
 
-import { TemplateHero } from './TemplateHero';
-import { TemplateAbout } from './TemplateAbout';
-import { TemplateTestimonial } from './TemplateTestimonial';
-
-interface PortfolioGridProps {
-  lang?: 'ur' | 'en';
-}
-
-export function PortfolioGrid({ lang = 'ur' }: PortfolioGridProps) {
+export default function PortfolioGrid() {
   return (
-    <div className="min-h-screen pt-24 md:pt-32">
-      <TemplateHero lang={lang} />
-      <TemplateAbout lang={lang} />
-      <TemplateTestimonial lang={lang} />
+    <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      {work.map((item) => (
+        <WorkCard key={item.slug} item={item} />
+      ))}
     </div>
   );
 }
