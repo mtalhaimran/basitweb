@@ -2,18 +2,24 @@
 
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
-import { Search, Menu, X } from 'lucide-react';
+import { Search, Menu, X, Globe } from 'lucide-react';
 import { SearchOverlay } from './SearchOverlay';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
+import NameRevealUrdu from './NameRevealUrdu';
+import { usePathname } from 'next/navigation';
 
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
+  const pathname = usePathname();
+  
+  // Check if we're on the landing page (bilingual)
+  const isLandingPage = pathname === '/' || pathname === '/en';
+  const isUrduPage = !pathname.startsWith('/en');
 
   const navigation = [
-    { name: 'ہوم', href: '/' },
     { name: 'کام', href: '/work' },
     { name: 'کتابیں', href: '/books' },
     { name: 'تحریریں', href: '/writing' },
@@ -49,33 +55,13 @@ export function Header() {
     };
   }, []);
 
-  // Animation variants for the logo
-  const logoVariants = {
-    hidden: { 
-      opacity: 0, 
-      x: 30,
-      scale: 0.9
-    },
-    visible: { 
-      opacity: 1, 
-      x: 0,
-      scale: 1,
-      transition: {
-        duration: 0.8,
-        ease: [0.25, 0.46, 0.45, 0.94],
-        delay: 0.2
-      }
-    }
-  };
-
-  // Stagger animation for navigation items
   const navVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
         staggerChildren: 0.1,
-        delayChildren: 0.5
+        delayChildren: 0.3
       }
     }
   };
@@ -95,28 +81,29 @@ export function Header() {
   return (
     <>
       <a href="#main-content" className="skip-link">
-        مین کنٹینٹ پر جائیں
+        {isUrduPage ? 'مین کنٹینٹ پر جائیں' : 'Skip to main content'}
       </a>
 
       <motion.header 
-        className={`minimal-nav ${isScrolled ? 'scrolled' : ''}`}
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+          isScrolled 
+            ? 'bg-white/95 backdrop-blur-md border-b border-gray-200 shadow-sm' 
+            : 'bg-transparent'
+        }`}
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{ duration: 0.6, ease: "easeOut" }}
       >
-        <div className="container">
+        <div className="container mx-auto px-6">
           <div className="flex h-20 items-center justify-between">
-            {/* Logo with Animation */}
+            {/* Logo with Name Reveal Animation */}
             <motion.div
-              variants={logoVariants}
-              initial="hidden"
-              animate={isLoaded ? "visible" : "hidden"}
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
             >
-              <Link 
-                href="/" 
-                className="text-2xl font-bold text-ink hover:text-primary transition-colors duration-200 focus-ring rounded-lg urdu-heading"
-              >
-                عبدالباسط ظفر
+              <Link href="/" className="focus-ring rounded-lg">
+                <NameRevealUrdu className="text-ink" />
               </Link>
             </motion.div>
 
@@ -132,9 +119,15 @@ export function Header() {
                 <motion.div key={item.href} variants={navItemVariants}>
                   <Link
                     href={item.href}
-                    className="nav-link urdu-text"
+                    className="relative text-ink-muted hover:text-ink transition-colors duration-200 font-medium urdu-text group"
                   >
-                    {item.name}
+                    <span className="relative z-10">{item.name}</span>
+                    <motion.div
+                      className="absolute bottom-0 left-0 right-0 h-0.5 bg-brand origin-right"
+                      initial={{ scaleX: 0 }}
+                      whileHover={{ scaleX: 1 }}
+                      transition={{ duration: 0.3, ease: "easeOut" }}
+                    />
                   </Link>
                 </motion.div>
               ))}
@@ -147,60 +140,112 @@ export function Header() {
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.5, delay: 0.8 }}
             >
-              <button
+              {/* Language Toggle (only on landing page) */}
+              {isLandingPage && (
+                <motion.div
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <Link
+                    href={isUrduPage ? '/en' : '/'}
+                    className="flex items-center space-x-2 space-x-reverse px-3 py-2 text-sm font-medium text-ink-muted hover:text-ink transition-colors rounded-lg border border-line hover:border-brand group"
+                    hrefLang={isUrduPage ? 'en' : 'ur'}
+                  >
+                    <Globe className="w-4 h-4 group-hover:rotate-12 transition-transform" />
+                    <span>{isUrduPage ? 'English' : 'اردو'}</span>
+                  </Link>
+                </motion.div>
+              )}
+
+              {/* Search Button */}
+              <motion.button
                 onClick={() => setIsSearchOpen(true)}
-                className="btn-ghost p-3 rounded-lg group"
-                aria-label="تلاش"
+                className="flex items-center space-x-2 space-x-reverse px-3 py-2 text-ink-muted hover:text-ink transition-colors rounded-lg hover:bg-surface-muted group"
+                aria-label={isUrduPage ? 'تلاش' : 'Search'}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
               >
-                <Search className="w-5 h-5" />
-                <span className="hidden sm:inline text-xs text-gray-500 mr-2 urdu-text">
+                <Search className="w-5 h-5 group-hover:rotate-12 transition-transform" />
+                <span className="hidden sm:inline text-xs text-ink-muted urdu-text">
                   ⌘K
                 </span>
-              </button>
+              </motion.button>
 
               {/* Mobile Menu Button */}
-              <button
+              <motion.button
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
-                className="lg:hidden btn-ghost p-3 rounded-lg"
-                aria-label="مینو کھولیں"
+                className="lg:hidden p-3 text-ink-muted hover:text-ink transition-colors rounded-lg hover:bg-surface-muted"
+                aria-label={isUrduPage ? 'مینو کھولیں' : 'Open menu'}
                 aria-expanded={isMenuOpen}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
               >
-                {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-              </button>
+                <AnimatePresence mode="wait">
+                  {isMenuOpen ? (
+                    <motion.div
+                      key="close"
+                      initial={{ rotate: -90, opacity: 0 }}
+                      animate={{ rotate: 0, opacity: 1 }}
+                      exit={{ rotate: 90, opacity: 0 }}
+                      transition={{ duration: 0.2 }}
+                    >
+                      <X className="w-6 h-6" />
+                    </motion.div>
+                  ) : (
+                    <motion.div
+                      key="menu"
+                      initial={{ rotate: 90, opacity: 0 }}
+                      animate={{ rotate: 0, opacity: 1 }}
+                      exit={{ rotate: -90, opacity: 0 }}
+                      transition={{ duration: 0.2 }}
+                    >
+                      <Menu className="w-6 h-6" />
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </motion.button>
             </motion.div>
           </div>
 
           {/* Mobile Navigation */}
-          {isMenuOpen && (
-            <motion.nav 
-              className="lg:hidden border-t border-gray-200 glass-effect"
-              role="navigation"
-              aria-label="موبائل نیویگیشن"
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: 'auto' }}
-              exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: 0.3 }}
-            >
-              <div className="py-6 space-y-2 text-right">
-                {navigation.map((item, index) => (
-                  <motion.div
-                    key={item.href}
-                    initial={{ opacity: 0, x: 20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.3, delay: index * 0.1 }}
-                  >
-                    <Link
-                      href={item.href}
-                      className="block px-4 py-3 text-base font-medium hover:bg-gray-50 rounded-lg transition-colors focus-ring urdu-text"
-                      onClick={() => setIsMenuOpen(false)}
+          <AnimatePresence>
+            {isMenuOpen && (
+              <motion.nav 
+                className="lg:hidden border-t border-line bg-white/95 backdrop-blur-md"
+                role="navigation"
+                aria-label={isUrduPage ? 'موبائل نیویگیشن' : 'Mobile navigation'}
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: 'auto' }}
+                exit={{ opacity: 0, height: 0 }}
+                transition={{ duration: 0.3, ease: "easeOut" }}
+              >
+                <div className="py-6 space-y-2 text-right">
+                  {navigation.map((item, index) => (
+                    <motion.div
+                      key={item.href}
+                      initial={{ opacity: 0, x: 20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ duration: 0.3, delay: index * 0.1 }}
                     >
-                      {item.name}
-                    </Link>
-                  </motion.div>
-                ))}
-              </div>
-            </motion.nav>
-          )}
+                      <Link
+                        href={item.href}
+                        className="block px-4 py-3 text-base font-medium text-ink-muted hover:text-ink hover:bg-surface-muted rounded-lg transition-all duration-200 focus-ring urdu-text group"
+                        onClick={() => setIsMenuOpen(false)}
+                      >
+                        <motion.span
+                          className="relative"
+                          whileHover={{ x: -8 }}
+                          transition={{ duration: 0.2 }}
+                        >
+                          {item.name}
+                        </motion.span>
+                      </Link>
+                    </motion.div>
+                  ))}
+                </div>
+              </motion.nav>
+            )}
+          </AnimatePresence>
         </div>
       </motion.header>
 

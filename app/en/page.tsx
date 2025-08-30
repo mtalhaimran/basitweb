@@ -3,26 +3,26 @@ import { Footer } from '@/components/Footer';
 import { PortfolioGrid } from '@/components/PortfolioGrid';
 
 export const metadata = {
-  title: 'عبدالباسط ظفر - لکھاری اور کہانی گو',
-  description: 'عبدالباسط ظفر کا پورٹ فولیو - کتابیں، مضامین، اور کہانیاں جو ٹیکنالوجی، ثقافت، اور انسانی تجربات کو دریافت کرتی ہیں۔',
+  title: 'Abdul Basit Zafar - Writer and Storyteller',
+  description: 'Abdul Basit Zafar\'s portfolio - books, essays, and stories exploring technology, culture, and human experience.',
   openGraph: {
-    title: 'عبدالباسط ظفر - لکھاری اور کہانی گو',
-    description: 'عبدالباسط ظفر کا پورٹ فولیو - کتابیں، مضامین، اور کہانیاں',
+    title: 'Abdul Basit Zafar - Writer and Storyteller',
+    description: 'Abdul Basit Zafar\'s portfolio - books, essays, and stories',
     images: [{
       url: 'https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=1200&h=630&fit=crop',
       width: 1200,
       height: 630,
-      alt: 'عبدالباسط ظفر - لکھاری اور کہانی گو'
+      alt: 'Abdul Basit Zafar - Writer and Storyteller'
     }],
     type: 'website',
-    locale: 'ur_PK'
+    locale: 'en_US'
   },
   twitter: {
     card: 'summary_large_image',
     creator: '@abdulbasitzafar'
   },
   alternates: {
-    canonical: 'https://abdulbasitzafar.com',
+    canonical: 'https://abdulbasitzafar.com/en',
     languages: {
       'ur': 'https://abdulbasitzafar.com',
       'en': 'https://abdulbasitzafar.com/en'
@@ -33,20 +33,20 @@ export const metadata = {
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Person',
-  name: 'عبدالباسط ظفر',
-  alternateName: 'Abdul Basit Zafar',
-  jobTitle: 'لکھاری اور کہانی گو',
+  name: 'Abdul Basit Zafar',
+  alternateName: 'عبدالباسط ظفر',
+  jobTitle: 'Writer and Storyteller',
   url: 'https://abdulbasitzafar.com',
   image: 'https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=400',
   sameAs: [
     'https://twitter.com/abdulbasitzafar',
     'https://linkedin.com/in/abdulbasitzafar'
   ],
-  knowsLanguage: ['اردو', 'انگریزی', 'جرمن'],
-  description: 'لکھاری اور کہانی گو جو ٹیکنالوجی، ثقافت، اور انسانی تجربات کے درمیان تعلق کو دریافت کرتا ہے۔'
+  knowsLanguage: ['English', 'Urdu', 'German'],
+  description: 'Writer and storyteller exploring the intersection of technology, culture, and human experience.'
 };
 
-export default function Home() {
+export default function EnglishHome() {
   return (
     <>
       <script

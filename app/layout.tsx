@@ -1,7 +1,6 @@
 import './globals.css';
 import type { Metadata } from 'next';
 import { Inter, Noto_Nastaliq_Urdu, Noto_Naskh_Arabic } from 'next/font/google';
-import { AccessibilityControls } from '@/components/AccessibilityControls';
 
 const inter = Inter({ 
   subsets: ['latin'],
@@ -48,7 +47,7 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return ( // Set default language to Urdu and RTL for the entire site
+  return (
     <html lang="ur" dir="rtl" className={`${inter.variable} ${notoNastaliq.variable} ${notoNaskh.variable}`}>
       <head>
         <script defer src="/pagefind/pagefind-ui.js"></script>
@@ -56,7 +55,6 @@ export default function RootLayout({
       </head>
       <body className={`${inter.variable} ${notoNastaliq.variable} ${notoNaskh.variable} font-urdu-body antialiased`}>
         {children}
-        <AccessibilityControls />
       </body>
     </html>
   );

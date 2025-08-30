@@ -1,10 +1,22 @@
 import { MetadataRoute } from 'next';
 import { books, essays, series } from '@/lib/data/content';
 
+// Private routes to exclude from sitemap
+const PRIVATE_ROUTES = [
+  '/admin',
+  '/dashboard',
+  '/api',
+  '/private',
+  '/draft',
+  '/preview',
+  '/test'
+];
+
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://abdulbasitzafar.com';
   
   const routes: MetadataRoute.Sitemap = [
+    // Main pages (Urdu)
     {
       url: baseUrl,
       lastModified: new Date(),
@@ -12,11 +24,25 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 1,
       alternates: {
         languages: {
-          en: baseUrl,
-          ur: `${baseUrl}/ur`
+          en: `${baseUrl}/en`,
+          ur: baseUrl
         }
       }
     },
+    // English landing page
+    {
+      url: `${baseUrl}/en`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.9,
+      alternates: {
+        languages: {
+          en: `${baseUrl}/en`,
+          ur: baseUrl
+        }
+      }
+    },
+    // Main navigation pages
     {
       url: `${baseUrl}/work`,
       lastModified: new Date(),
@@ -47,12 +73,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'monthly',
       priority: 0.6,
     },
-    {
-      url: `${baseUrl}/ur`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.9,
-    },
+    // Urdu series
     {
       url: `${baseUrl}/ur/bonn-ka-banjara`,
       lastModified: new Date(),
@@ -91,5 +112,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     });
   });
 
-  return routes;
+  // Filter out private routes
+  return routes.filter(route => 
+    !PRIVATE_ROUTES.some(privateRoute => 
+      route.url.includes(privateRoute)
+    )
+  );
 }

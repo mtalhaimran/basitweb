@@ -1,4 +1,5 @@
 import type { Config } from 'tailwindcss';
+import colors from 'tailwindcss/colors';
 
 const config: Config = {
   darkMode: ['class'],
@@ -15,30 +16,21 @@ const config: Config = {
         'urdu-body': ['Noto Naskh Arabic', 'serif'],
       },
       colors: {
-        // New Palette: Deep Teal / Elegant Neutrals
-        primary: {
-          DEFAULT: 'var(--primary)',
-          hover: 'var(--primary-hover)',
-          light: 'var(--primary-light)',
-          50: 'var(--primary-50)',
-          100: 'var(--primary-100)',
-          200: 'var(--primary-200)',
-          300: 'var(--primary-300)',
-          400: 'var(--primary-400)',
-          500: 'var(--primary-500)',
-          600: 'var(--primary-600)',
-          700: 'var(--primary-700)',
-          800: 'var(--primary-800)',
-          900: 'var(--primary-900)',
-        },
-        ink: 'var(--ink)',
-        'ink-muted': 'var(--ink-muted)',
-        'ink-light': 'var(--ink-light)',
-        surface: 'var(--surface)',
-        'surface-elevated': 'var(--surface-elevated)',
-        'surface-muted': 'var(--surface-muted)',
-        line: 'var(--line)',
-        'line-strong': 'var(--line-strong)',
+        // Red Brand Theme
+        brand: colors.red[600], // #DC2626
+        'brand-hover': colors.red[700], // #B91C1C
+        'brand-light': colors.red[50], // #FEF2F2
+        
+        // Semantic Palette
+        ink: '#0B0B0F',
+        'ink-muted': '#646472',
+        'ink-light': '#9CA3AF',
+        surface: '#FFFFFF',
+        'surface-elevated': '#FAFAFA',
+        'surface-muted': '#F7F7FA',
+        line: '#E9E9EE',
+        'line-strong': '#D1D5DB',
+        
         // Semantic colors
         success: '#059669',
         warning: '#D97706',
@@ -47,14 +39,15 @@ const config: Config = {
       fontSize: {
         'xs': ['0.75rem', { lineHeight: '1.5' }],
         'sm': ['0.875rem', { lineHeight: '1.5' }],
-        'base': ['1rem', { lineHeight: '1.625' }],
-        'lg': ['1.125rem', { lineHeight: '1.625' }],
-        'xl': ['1.25rem', { lineHeight: '1.5' }],
-        '2xl': ['1.5rem', { lineHeight: '1.375' }],
-        '3xl': ['1.875rem', { lineHeight: '1.375' }],
-        '4xl': ['2.25rem', { lineHeight: '1.25' }],
-        '5xl': ['3rem', { lineHeight: '1.25' }],
-        '6xl': ['3.75rem', { lineHeight: '1.25' }],
+        'base': ['1rem', { lineHeight: '1.7' }],
+        'lg': ['1.125rem', { lineHeight: '1.7' }],
+        'xl': ['1.25rem', { lineHeight: '1.6' }],
+        '2xl': ['1.5rem', { lineHeight: '1.5' }],
+        '3xl': ['1.875rem', { lineHeight: '1.4' }],
+        '4xl': ['2.25rem', { lineHeight: '1.3' }],
+        '5xl': ['3rem', { lineHeight: '1.2' }],
+        '6xl': ['3.75rem', { lineHeight: '1.1' }],
+        '7xl': ['4.5rem', { lineHeight: '1.1' }],
       },
       spacing: {
         '18': '4.5rem',
@@ -72,7 +65,7 @@ const config: Config = {
         'xl': '1.5rem',
         '2xl': '2rem',
       },
-      boxShadow: { // Softer shadows for elegant feel
+      boxShadow: {
         sm: '0 1px 3px 0 rgba(0, 0, 0, 0.08)',
         md: '0 4px 8px 0 rgba(0, 0, 0, 0.08)',
         lg: '0 8px 16px 0 rgba(0, 0, 0, 0.08)',
