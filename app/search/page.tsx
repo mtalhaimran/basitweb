@@ -22,8 +22,8 @@ export default function SearchPage() {
       <Header />
       <main id="main-content" className="flex-1 py-16">
         <div className="container mx-auto px-4 max-w-4xl">
-          <div className="mb-12">
-            <h1 className="text-4xl font-bold mb-6">Search</h1>
+          <div className="mb-12 text-center">
+            <h1 className="section-heading text-3xl sm:text-4xl md:text-5xl">Search</h1>
             <p className="text-xl text-muted-foreground">
               Search through all books, essays, and stories.
             </p>

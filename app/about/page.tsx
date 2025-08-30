@@ -1,6 +1,5 @@
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
-import { AudioBlock } from '@/components/AudioBlock';
 import Image from 'next/image';
 import { MapPin, Award, BookOpen, Users, ArrowUpRight } from 'lucide-react';
 import Link from 'next/link';
@@ -17,7 +16,7 @@ export default function AboutPage() {
       <main id="main-content" className="pt-32 pb-20" data-pagefind-body>
         <div className="container">
           <div className="text-center mb-20">
-            <h1 className="text-display urdu-display mb-8 text-ink">تعارف</h1>
+            <h1 className="section-heading text-3xl sm:text-4xl md:text-5xl urdu-display text-ink">تعارف</h1>
             <p className="large-text urdu-text text-medium-contrast max-w-3xl mx-auto content-spacing">
               لکھاری اور کہانی گو جو ٹیکنالوجی، ثقافت، اور انسانی تجربات کے درمیان تعلق کو دریافت کرتا ہے۔
             </p>
@@ -69,21 +68,14 @@ export default function AboutPage() {
                   </p>
 
                   <p>
-                    ان کا پہلا ناول "یادوں کے سائے" جدید پاکستان میں مہاجر تجربے کی نفیس تصویر کشی 
+                    ان کا پہلا ناول &quot;یادوں کے سائے&quot; جدید پاکستان میں مہاجر تجربے کی نفیس تصویر کشی
                     کے لیے تنقیدی پذیرائی حاصل کر چکا ہے۔ ان کے مضامین ٹیک جرنلز سے لے کر ادبی 
                     رسائل تک مختلف اشاعات میں شائع ہوئے ہیں۔
                   </p>
 
-                  <AudioBlock 
-                    src="/audio/about-intro-urdu.mp3"
-                    transcript="السلام علیکم، میں عبدالباسط ہوں۔ میں ایسی کہانیاں لکھتا ہوں جو دنیاوں کے درمیان رہتی ہیں - زبانوں، ثقافتوں، اور ان ڈیجیٹل جگہوں کے درمیان جو ہم سب کو جوڑتی ہیں۔"
-                    title="تعارف - آڈیو"
-                    lang="ur"
-                  />
-
                   <p>
                     اردو اور انگریزی دونوں میں لکھتے ہوئے، عبدالباسط کثیر لسانی کہانی گوئی کی
-                    بھرپوری کو محفوظ اور منانے کی کوشش کرتا ہے۔ ان کا اردو سلسلہ "بن کا بنجارہ" 
+                      بھرپوری کو محفوظ اور منانے کی کوشش کرتا ہے۔ ان کا اردو سلسلہ &quot;بن کا بنجارہ&quot;
                     جرمنی میں ایک آوارہ کے تجربات کو بیان کرتا ہے۔
                   </p>
 
@@ -94,7 +86,7 @@ export default function AboutPage() {
                     </h3>
                     <ul className="space-y-4 urdu-text text-medium-contrast content-spacing">
                       <li>• بین الاقوامی ادبی انعام کے لیے شارٹ لسٹ (2023)</li>
-                      <li>• "30 انڈر 30" لکھاریوں میں شامل</li>
+                        <li>• &quot;30 انڈر 30&quot; لکھاریوں میں شامل</li>
                       <li>• ڈیجیٹل کہانی گوئی انوویشن گرانٹ کے وصول کنندہ</li>
                     </ul>
                   </div>

@@ -186,8 +186,7 @@ components/
 ├── BookCard.tsx         # Book display component
 ├── EssayCard.tsx        # Essay display component
 ├── SearchOverlay.tsx    # Search modal with Pagefind
-├── NewsletterForm.tsx   # Mailchimp integration
-└── AudioBlock.tsx       # Audio player with transcript
+└── NewsletterForm.tsx   # Mailchimp integration
 
 styles/
 ├── globals.css          # Design tokens and base styles
