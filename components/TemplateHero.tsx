@@ -6,12 +6,11 @@ interface TemplateHeroProps {
   lang?: 'ur' | 'en';
 }
 
-// Define our text content outside the component for better organization
+// Organized content for both languages
 const content = {
   en: {
     headline: "I'm Abdul Basit Zafar",
-    subheadline:
-      "A passionate Full-Stack Developer building modern, high-performance web applications.",
+    subheadline: "A passionate full-stack developer building modern, high-performance web applications.",
     cta: "View My Work",
   },
   ur: {
@@ -30,7 +29,7 @@ export function TemplateHero({ lang = 'ur' }: TemplateHeroProps) {
       className="relative h-[70vh] min-h-[500px] w-full"
       dir={isUrdu ? 'rtl' : 'ltr'}
     >
-      {/* Background Image with Optimization */}
+      {/* Background Image */}
       <Image
         src="/images/hero.jpg"
         alt="A professional background image related to technology or coding"
@@ -39,36 +38,24 @@ export function TemplateHero({ lang = 'ur' }: TemplateHeroProps) {
         className="object-cover"
       />
 
-      {/* Dark Overlay for better text readability */}
+      {/* Dark Overlay for Readability */}
       <div className="absolute inset-0 bg-black/60" />
 
-      {/* Content Container - Centered */}
-      <div className="relative z-10 flex h-full flex-col items-center justify-center text-center text-white p-4">
+      {/* Centered Content */}
+      <div className="relative z-10 flex h-full flex-col items-center justify-center p-4 text-center text-white">
         
-        {/* Main Headline (h1) */}
-        <h1
-          className={`text-4xl font-bold sm:text-5xl md:text-6xl ${
-            isUrdu ? 'urdu-heading' : ''
-          }`}
-        >
+        <h1 className={`text-4xl font-bold sm:text-5xl md:text-6xl ${isUrdu ? 'font-urdu-heading' : ''}`}>
           {currentContent.headline}
         </h1>
 
-        {/* Sub-headline (p) */}
-        <p
-          className={`mt-4 max-w-2xl text-lg text-gray-200 md:text-xl ${
-            isUrdu ? 'urdu-text' : ''
-          }`}
-        >
+        <p className={`mt-4 max-w-2xl text-lg text-gray-200 md:text-xl ${isUrdu ? 'font-urdu-body' : ''}`}>
           {currentContent.subheadline}
         </p>
 
         {/* Call to Action Button */}
         <a
-          href="#projects" // This should link to your projects/portfolio section
-          className={`mt-8 rounded-md bg-blue-600 px-8 py-3 text-lg font-semibold text-white transition hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 ${
-            isUrdu ? 'urdu-text' : ''
-          }`}
+          href={isUrdu ? "/work" : "/en/work"} // Links to the correct work page
+          className={`mt-8 rounded-md bg-brand px-8 py-3 text-lg font-semibold text-white transition hover:bg-brand-hover focus:outline-none focus:ring-2 focus:ring-brand/50 focus:ring-offset-2 ${isUrdu ? 'font-urdu-body' : ''}`}
         >
           {currentContent.cta}
         </a>
