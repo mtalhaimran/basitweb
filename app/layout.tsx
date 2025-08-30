@@ -1,9 +1,9 @@
 import './globals.css';
 import type { Metadata } from 'next';
 import { Inter, Noto_Nastaliq_Urdu, Noto_Naskh_Arabic } from 'next/font/google';
-import Script from 'next/script';
 import { AccessibilityProvider } from '@/components/AccessibilityProvider';
 import { AccessibilityPanel } from '@/components/AccessibilityPanel';
+import { PagefindScript } from '@/components/PagefindScript';
 
 const inter = Inter({ 
   subsets: ['latin'],
@@ -53,13 +53,7 @@ export default function RootLayout({
   return (
     <html lang="ur" dir="rtl" className={`${inter.variable} ${notoNastaliq.variable} ${notoNaskh.variable}`}>
       <head>
-        <Script
-          src="/pagefind/pagefind-ui.js"
-          strategy="lazyOnload"
-          onError={(e) => {
-            console.error('Failed to load Pagefind UI', e);
-          }}
-        />
+        <PagefindScript />
         <link href="/pagefind/pagefind-ui.css" rel="stylesheet" />
       </head>
       <body className={`${inter.variable} ${notoNastaliq.variable} ${notoNaskh.variable} font-urdu-body antialiased`}>
