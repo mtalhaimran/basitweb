@@ -35,8 +35,8 @@ export default function BonnKaBanjaraPage() {
         <main id="main-content" className="pt-32 pb-20" data-pagefind-body>
           <div className="container">
             {/* Hero Section */}
-            <div className="text-center mb-20 text-right">
-              <h1 className="urdu-display text-primary mb-6">
+            <div className="text-center mb-20">
+              <h1 className="section-heading text-3xl sm:text-4xl md:text-5xl urdu-display text-primary">
                 بن کا بنجارہ
               </h1>
               <p className="urdu-text text-gray-600 max-w-3xl mx-auto">
@@ -59,7 +59,9 @@ export default function BonnKaBanjaraPage() {
                       <div className="flex items-center space-x-2 space-x-reverse">
                         <Calendar className="w-4 h-4 text-gray-400" />
                         <span className="text-caption urdu-text text-gray-500">
-                          {new Date(entry.publishedDate).toLocaleDateString('ur-PK')}
+                          {new Intl.DateTimeFormat('ur-PK', {
+                            timeZone: 'UTC'
+                          }).format(new Date(entry.publishedDate))}
                         </span>
                       </div>
                       
@@ -71,7 +73,7 @@ export default function BonnKaBanjaraPage() {
                       </div>
                     </div>
 
-                    <h2 className="text-heading-2 urdu-heading text-gray-900 mb-4 group-hover:text-primary transition-colors">
+                    <h2 className="section-heading urdu-heading text-gray-900 group-hover:text-primary transition-colors">
                       {entry.titleUrdu}
                     </h2>
                     

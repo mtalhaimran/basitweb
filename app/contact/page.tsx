@@ -47,7 +47,7 @@ export default function ContactPage() {
       <main id="main-content" className="pt-32 pb-20" data-pagefind-body>
         <div className="container">
           <div className="text-center mb-20">
-            <h1 className="text-display urdu-display mb-8 text-ink">رابطہ</h1>
+            <h1 className="section-heading text-3xl sm:text-4xl md:text-5xl urdu-display text-ink">رابطہ</h1>
             <p className="large-text urdu-text text-medium-contrast max-w-3xl mx-auto content-spacing">
               تعاون، تقاریر، یا ادبی بحث میں دلچسپی ہے؟ میں آپ سے سننا پسند کروں گا۔
             </p>
@@ -57,7 +57,7 @@ export default function ContactPage() {
             {/* Contact Information */}
             <div className="space-y-8 text-right">
               <div>
-                <h2 className="text-heading-2 urdu-heading mb-8">رابطے کی معلومات</h2>
+                <h2 className="section-heading urdu-heading mb-8">رابطے کی معلومات</h2>
                 
                 <div className="space-y-6">
                   <div className="flex items-center space-x-4 space-x-reverse justify-end">
@@ -88,7 +88,7 @@ export default function ContactPage() {
               </div>
 
               <div>
-                <h3 className="text-heading-3 urdu-heading mb-6">سوشل میڈیا</h3>
+                <h3 className="section-heading urdu-heading mb-6">سوشل میڈیا</h3>
                 <div className="space-y-4">
                   {socialLinks.map((social) => {
                     const Icon = social.icon;
@@ -115,7 +115,7 @@ export default function ContactPage() {
             {/* Collaboration Types */}
             <div className="space-y-8">
               <div className="text-right">
-                <h2 className="text-heading-2 urdu-heading mb-8">میں کیا تلاش کر رہا ہوں</h2>
+                <h2 className="section-heading urdu-heading mb-8">میں کیا تلاش کر رہا ہوں</h2>
                 
                 <div className="space-y-6">
                   {collaborationTypes.map((type) => {
@@ -143,7 +143,7 @@ export default function ContactPage() {
 
           {/* Response Time Note */}
           <div className="mt-20 minimal-card text-right">
-            <h3 className="text-heading-3 urdu-heading mb-4">جواب کا وقت</h3>
+            <h3 className="section-heading urdu-heading mb-4">جواب کا وقت</h3>
             <p className="urdu-text text-medium-contrast leading-relaxed prose-enhanced">
               میں تمام استفسارات کا جواب 48 گھنٹوں کے اندر دینے کی کوشش کرتا ہوں۔ 
               فوری تقاریر کی درخواستوں یا وقت کے حساس معاملات کے لیے، براہ کرم اپنے موضوع میں اس کا ذکر کریں۔

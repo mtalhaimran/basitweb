@@ -2,6 +2,7 @@ import './globals.css';
 import type { Metadata } from 'next';
 import { AccessibilityProvider } from '@/components/AccessibilityProvider';
 import { AccessibilityPanel } from '@/components/AccessibilityPanel';
+import { PagefindScript } from '@/components/PagefindScript';
 
 export const metadata: Metadata = {
   title: 'عبدالباسط ظفر - لکھاری اور کہانی گو',
@@ -33,7 +34,7 @@ export default function RootLayout({
   return (
     <html lang="ur" dir="rtl">
       <head>
-        <script defer src="/pagefind/pagefind-ui.js"></script>
+        <PagefindScript />
         <link href="/pagefind/pagefind-ui.css" rel="stylesheet" />
       </head>
       <body className="font-urdu-body antialiased">

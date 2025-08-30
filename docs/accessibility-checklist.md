@@ -26,7 +26,6 @@
 ### Keyboard Shortcuts
 - [x] Search overlay: Cmd/Ctrl+K to open, Escape to close
 - [x] Mobile menu: Escape to close
-- [x] Audio player: Space bar for play/pause (when focused)
 
 ## Semantic HTML ✅
 
@@ -53,7 +52,6 @@
 ### Live Regions
 - [x] Newsletter form status updates announced
 - [x] Search results changes announced
-- [x] Audio player state changes announced
 
 ## Language Support ✅
 
@@ -82,20 +80,6 @@
 - [x] Proper aspect ratios maintained
 - [x] Loading states for slow connections
 - [x] Fallback images for broken links
-
-## Audio Accessibility ✅
-
-### Controls
-- [x] Keyboard accessible play/pause controls
-- [x] Seek bar operable with keyboard
-- [x] Skip forward/backward buttons (10 seconds)
-- [x] Volume control accessible
-
-### Transcripts
-- [x] Full transcripts available for all audio content
-- [x] Transcript toggle clearly labeled
-- [x] Transcript text properly formatted and readable
-- [x] Synchronized with audio playback
 
 ## Motion & Animation ✅
 
@@ -158,7 +142,6 @@
 ### User Testing
 - [ ] Test with users who rely on assistive technology
 - [ ] Verify Urdu content readability with native speakers
-- [ ] Test audio features with hearing-impaired users
 - [ ] Validate navigation patterns with diverse users
 
 ## Component-Specific Requirements
@@ -174,12 +157,6 @@
 - [x] Descriptive headings for each work
 - [x] Clear "view" links with context
 - [x] Proper reading order maintained
-
-### Audio Block
-- [x] All controls keyboard accessible
-- [x] Play state clearly indicated
-- [x] Progress bar operable with keyboard
-- [x] Transcript always available
 
 ### Footer
 - [x] Logical link grouping

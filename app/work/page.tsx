@@ -46,7 +46,7 @@ export default function WorkPage() {
       <main id="main-content" className="pt-32 pb-20" data-pagefind-body>
         <div className="container">
           <div className="text-center mb-20">
-            <h1 className="text-display urdu-display mb-8 text-ink">تمام کام</h1>
+            <h1 className="section-heading text-3xl sm:text-4xl md:text-5xl urdu-display text-ink">تمام کام</h1>
             <p className="large-text urdu-text text-medium-contrast max-w-3xl mx-auto content-spacing">
               کتابوں، مضامین، تقاریر، اور میڈیا میں شرکت کا مکمل مجموعہ۔
             </p>
@@ -80,7 +80,7 @@ export default function WorkPage() {
             {/* Books */}
             {filteredContent.books.length > 0 && (
               <section>
-                <h2 className="text-heading-2 urdu-heading mb-12 text-right">کتابیں</h2>
+                <h2 className="section-heading urdu-heading mb-12 text-right">کتابیں</h2>
                 <div className="portfolio-grid"> {/* Use new grid styling */}
                   {filteredContent.books.map((book, index) => (
                     <div key={book.id} className="animate-slide-up" style={{animationDelay: `${index * 100}ms`}}>
@@ -94,7 +94,7 @@ export default function WorkPage() {
             {/* Essays */}
             {filteredContent.essays.length > 0 && (
               <section>
-                <h2 className="text-heading-2 urdu-heading mb-12 text-right">مضامین</h2>
+                <h2 className="section-heading urdu-heading mb-12 text-right">مضامین</h2>
                 <div className="work-grid"> {/* Use new grid styling */}
                   {filteredContent.essays.map((essay, index) => (
                     <div key={essay.id} className="animate-slide-up" style={{animationDelay: `${index * 100}ms`}}>
@@ -108,7 +108,7 @@ export default function WorkPage() {
             {/* Series */}
             {filteredContent.series.length > 0 && (
               <section>
-                <h2 className="text-heading-2 urdu-heading mb-12 text-right">سلسلہ</h2>
+                <h2 className="section-heading urdu-heading mb-12 text-right">سلسلہ</h2>
                 <div className="minimal-card animate-slide-up">
                   <div className="text-right">
                     <h3 className="text-heading-3 urdu-heading mb-4">{series.titleUrdu}</h3>
@@ -135,7 +135,7 @@ export default function WorkPage() {
             {/* Talks */}
             {filteredContent.talks.length > 0 && (
               <section>
-                <h2 className="text-heading-2 urdu-heading mb-12 text-right">تقاریر</h2>
+                <h2 className="section-heading urdu-heading mb-12 text-right">تقاریر</h2>
                 <div className="work-grid"> {/* Use new grid styling */}
                   {filteredContent.talks.map((talk, index) => (
                     <div key={talk.id} className="minimal-card animate-slide-up text-right" style={{animationDelay: `${index * 100}ms`}}>
@@ -143,7 +143,11 @@ export default function WorkPage() {
                       <p className="text-gray-600 text-sm mb-4">{talk.description}</p>
                       <div className="text-caption urdu-text">
                         <p>{talk.event} • {talk.location}</p>
-                        <p>{new Date(talk.date).toLocaleDateString('ur-PK')}</p>
+                        <p>
+                          {new Intl.DateTimeFormat('ur-PK', {
+                            timeZone: 'UTC'
+                          }).format(new Date(talk.date))}
+                        </p>
                       </div>
                     </div>
                   ))}
@@ -154,7 +158,7 @@ export default function WorkPage() {
             {/* Press */}
             {filteredContent.press.length > 0 && (
               <section>
-                <h2 className="text-heading-2 urdu-heading mb-12 text-right">پریس</h2>
+                <h2 className="section-heading urdu-heading mb-12 text-right">پریس</h2>
                 <div className="work-grid"> {/* Use new grid styling */}
                   {filteredContent.press.map((item, index) => (
                     <div key={item.id} className="minimal-card animate-slide-up text-right" style={{animationDelay: `${index * 100}ms`}}>
@@ -162,7 +166,11 @@ export default function WorkPage() {
                       <p className="text-gray-600 text-sm mb-4">{item.excerpt}</p>
                       <div className="text-caption urdu-text">
                         <p>{item.publication}</p>
-                        <p>{new Date(item.date).toLocaleDateString('ur-PK')}</p>
+                        <p>
+                          {new Intl.DateTimeFormat('ur-PK', {
+                            timeZone: 'UTC'
+                          }).format(new Date(item.date))}
+                        </p>
                       </div>
                     </div>
                   ))}

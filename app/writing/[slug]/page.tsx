@@ -1,7 +1,6 @@
 import { notFound } from 'next/navigation';
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
-import { AudioBlock } from '@/components/AudioBlock';
 import { essays } from '@/lib/data/content';
 import { Calendar, Clock, Building, Tag } from 'lucide-react';
 
@@ -74,7 +73,7 @@ export default function EssayPage({ params }: EssayPageProps) {
           <article className="container mx-auto px-4 max-w-4xl">
             {/* Header */}
             <header className="mb-12">
-              <h1 className="text-4xl md:text-5xl font-bold mb-6">{essay.title}</h1>
+              <h1 className="section-heading text-3xl sm:text-4xl md:text-5xl">{essay.title}</h1>
               <p className="text-xl text-muted-foreground leading-relaxed mb-6">
                 {essay.description}
               </p>
@@ -83,11 +82,14 @@ export default function EssayPage({ params }: EssayPageProps) {
               <div className="flex flex-wrap items-center gap-6 text-sm text-muted-foreground">
                 <div className="flex items-center space-x-2">
                   <Calendar className="w-4 h-4" />
-                  <span>{new Date(essay.publishedDate).toLocaleDateString('en-US', {
-                    year: 'numeric',
-                    month: 'long',
-                    day: 'numeric'
-                  })}</span>
+                  <span>
+                    {new Intl.DateTimeFormat('en-US', {
+                      timeZone: 'UTC',
+                      year: 'numeric',
+                      month: 'long',
+                      day: 'numeric'
+                    }).format(new Date(essay.publishedDate))}
+                  </span>
                 </div>
                 
                 <div className="flex items-center space-x-2">
@@ -116,15 +118,6 @@ export default function EssayPage({ params }: EssayPageProps) {
                 ))}
               </div>
             </header>
-
-            {/* Audio */}
-            {essay.audio && (
-              <AudioBlock 
-                src={essay.audio.src}
-                transcript={essay.audio.transcript}
-                title="Listen to Essay"
-              />
-            )}
 
             {/* Content */}
             <div className="prose prose-lg max-w-none">

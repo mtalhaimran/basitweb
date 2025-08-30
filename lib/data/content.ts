@@ -15,10 +15,6 @@ export interface Book {
     local?: string;
   };
   excerpt?: string;
-  audio?: {
-    src: string;
-    transcript?: string;
-  };
 }
 
 export interface Essay {
@@ -33,10 +29,6 @@ export interface Essay {
   readTime: number;
   tags: string[];
   content: string;
-  audio?: {
-    src: string;
-    transcript?: string;
-  };
 }
 
 export interface SeriesEntry {
@@ -50,10 +42,6 @@ export interface SeriesEntry {
   seriesSlug: string;
   order: number;
   content: string;
-  audio?: {
-    src: string;
-    transcript?: string;
-  };
 }
 
 export interface Series {
@@ -83,11 +71,7 @@ export const books: Book[] = [
       amazon: 'https://amazon.com/shadows-memory',
       bookshop: 'https://bookshop.org/shadows-memory'
     },
-    excerpt: 'The streets of Lahore whispered stories that only the old walls could remember...',
-    audio: {
-      src: '/audio/shadows-excerpt.mp3',
-      transcript: 'The streets of Lahore whispered stories that only the old walls could remember. Each brick held a memory, each corner a secret passed down through generations of storytellers.'
-    }
+    excerpt: 'The streets of Lahore whispered stories that only the old walls could remember...'
   },
   {
     id: 'digital-nomad-tales',

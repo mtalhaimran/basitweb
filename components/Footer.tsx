@@ -121,7 +121,10 @@ export function Footer() {
           {/* Copyright */}
           <motion.div variants={itemVariants}>
             <p className="template-caption urdu-text">
-              © {new Date().getFullYear()} عبدالباسط ظفر۔
+              © {new Intl.DateTimeFormat('ur-PK', {
+                timeZone: 'UTC',
+                year: 'numeric'
+              }).format(new Date())} عبدالباسط ظفر۔
             </p>
           </motion.div>
         </motion.div>

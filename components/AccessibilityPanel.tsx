@@ -4,8 +4,9 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Settings, X, Eye, Type, Contrast, Zap } from 'lucide-react';
 import { useAccessibility } from './AccessibilityProvider';
+import ErrorBoundary from './ErrorBoundary';
 
-export function AccessibilityPanel() {
+function AccessibilityPanelContent() {
   const [isOpen, setIsOpen] = useState(false);
   const { settings, updateSetting, resetSettings } = useAccessibility();
 
@@ -143,3 +144,13 @@ export function AccessibilityPanel() {
     </>
   );
 }
+
+export function AccessibilityPanel() {
+  return (
+    <ErrorBoundary>
+      <AccessibilityPanelContent />
+    </ErrorBoundary>
+  );
+}
+
+

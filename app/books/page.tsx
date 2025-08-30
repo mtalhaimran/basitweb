@@ -15,7 +15,7 @@ export default function BooksPage() {
       <main id="main-content" className="pt-32 pb-20" data-pagefind-body>
         <div className="container">
           <div className="text-center mb-20">
-            <h1 className="text-display urdu-display mb-8 text-ink">کتابیں</h1>
+            <h1 className="section-heading text-3xl sm:text-4xl md:text-5xl urdu-display text-ink">کتابیں</h1>
             <p className="large-text urdu-text text-medium-contrast max-w-3xl mx-auto content-spacing">
               ناولز اور کہانیوں کا مجموعہ جو شناخت، ٹیکنالوجی، اور مختلف ثقافتوں میں انسانی تجربات کو دریافت کرتا ہے۔
             </p>

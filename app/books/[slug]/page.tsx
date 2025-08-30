@@ -1,7 +1,6 @@
 import { notFound } from 'next/navigation';
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
-import { AudioBlock } from '@/components/AudioBlock';
 import { books } from '@/lib/data/content';
 import Image from 'next/image';
 import { ExternalLink, Calendar, Building, Hash } from 'lucide-react';
@@ -116,7 +115,7 @@ export default function BookPage({ params }: BookPageProps) {
               {/* Book Details */}
               <div className="lg:col-span-2">
                 <div className="mb-8">
-                  <h1 className="text-4xl md:text-5xl font-bold mb-4">{book.title}</h1>
+                  <h1 className="section-heading text-3xl sm:text-4xl md:text-5xl">{book.title}</h1>
                   <p className="text-xl text-muted-foreground leading-relaxed">{book.description}</p>
                 </div>
 
@@ -151,19 +150,10 @@ export default function BookPage({ params }: BookPageProps) {
                   )}
                 </div>
 
-                {/* Audio Preview */}
-                {book.audio && (
-                  <AudioBlock 
-                    src={book.audio.src}
-                    transcript={book.audio.transcript}
-                    title="Book Preview"
-                  />
-                )}
-
                 {/* Excerpt */}
                 {book.excerpt && (
                   <div className="prose prose-lg max-w-none">
-                    <h2 className="text-2xl font-bold mb-4">Excerpt</h2>
+                    <h2 className="section-heading">Excerpt</h2>
                     <blockquote className="border-l-4 border-primary pl-6 italic text-muted-foreground text-lg leading-relaxed">
                       {book.excerpt}
                     </blockquote>
