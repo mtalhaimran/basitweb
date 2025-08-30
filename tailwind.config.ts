@@ -17,19 +17,25 @@ const config: Config = {
       },
       colors: {
         // Red Brand Theme
-        brand: colors.red[600], // #DC2626
-        'brand-hover': colors.red[700], // #B91C1C
-        'brand-light': colors.red[50], // #FEF2F2
+        brand: {
+          DEFAULT: colors.red[600], // #DC2626
+          hover: colors.red[700], // #B91C1C
+          light: colors.red[50], // #FEF2F2
+        },
         
         // Semantic Palette
         ink: '#0B0B0F',
-        'ink-muted': '#646472',
+        'ink-muted': '#374151', // Improved contrast
         'ink-light': '#9CA3AF',
         surface: '#FFFFFF',
         'surface-elevated': '#FAFAFA',
         'surface-muted': '#F7F7FA',
         line: '#E9E9EE',
         'line-strong': '#D1D5DB',
+        
+        // Accessibility colors
+        'text-high-contrast': '#000000',
+        'text-medium-contrast': '#374151',
         
         // Semantic colors
         success: '#059669',

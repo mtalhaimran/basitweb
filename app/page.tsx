@@ -57,7 +57,7 @@ export default function Home() {
       <div className="min-h-screen">
         <Header />
         <main id="main-content">
-          <PortfolioGrid />
+          <PortfolioGrid lang="ur" />
         </main>
         <Footer />
       </div>

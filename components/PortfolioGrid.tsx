@@ -7,10 +7,14 @@ import { books, essays, series } from '@/lib/data/content';
 import { motion, useReducedMotion } from 'framer-motion';
 import { usePathname } from 'next/navigation';
 
-export function PortfolioGrid() {
+interface PortfolioGridProps {
+  lang?: 'ur' | 'en';
+}
+
+export function PortfolioGrid({ lang = 'ur' }: PortfolioGridProps) {
   const pathname = usePathname();
   const isLandingPage = pathname === '/' || pathname === '/en';
-  const isUrduPage = !pathname.startsWith('/en');
+  const isUrduPage = lang === 'ur';
   const shouldReduceMotion = useReducedMotion();
   
   const featuredBooks = books.slice(0, 2);
@@ -85,34 +89,52 @@ export function PortfolioGrid() {
             {isLandingPage ? (
               <div className="space-y-12">
                 {/* Urdu Section */}
-                <motion.div
-                  className="text-right"
-                  initial={{ opacity: 0, x: shouldReduceMotion ? 0 : 50 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: shouldReduceMotion ? 0 : 1, delay: shouldReduceMotion ? 0 : 0.5 }}
-                >
-                  <h1 className="text-6xl md:text-7xl font-bold mb-6 font-urdu-heading">
-                    عبدالباسط ظفر
-                  </h1>
-                  <p className="text-xl md:text-2xl mb-8 text-white/90 leading-relaxed font-urdu-body max-w-3xl mr-auto">
-                    لکھاری اور کہانی گو جو ٹیکنالوجی، ثقافت، اور انسانی تجربات کے درمیان کہانیوں کے ذریعے پل بناتا ہے
-                  </p>
-                </motion.div>
+                {isUrduPage ? (
+                  <motion.div
+                    className="text-right"
+                    initial={{ opacity: 0, x: shouldReduceMotion ? 0 : 50 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: shouldReduceMotion ? 0 : 1, delay: shouldReduceMotion ? 0 : 0.5 }}
+                  >
+                    <h1 className="text-6xl md:text-7xl font-bold mb-6 font-urdu-heading">
+                      عبدالباسط ظفر
+                    </h1>
+                    <p className="text-xl md:text-2xl mb-8 text-white/90 leading-relaxed font-urdu-body max-w-3xl mr-auto">
+                      لکھاری اور کہانی گو جو ٹیکنالوجی، ثقافت، اور انسانی تجربات کے درمیان کہانیوں کے ذریعے پل بناتا ہے
+                    </p>
+                  </motion.div>
+                ) : (
+                  <motion.div
+                    className="text-left"
+                    initial={{ opacity: 0, x: shouldReduceMotion ? 0 : -50 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: shouldReduceMotion ? 0 : 1, delay: shouldReduceMotion ? 0 : 0.5 }}
+                  >
+                    <h1 className="text-6xl md:text-7xl font-bold mb-6">
+                      Abdul Basit Zafar
+                    </h1>
+                    <p className="text-xl md:text-2xl mb-8 text-white/90 leading-relaxed max-w-3xl">
+                      Writer and storyteller bridging technology, culture, and human experience through narratives that connect worlds across languages and borders
+                    </p>
+                  </motion.div>
+                )}
 
                 {/* English Section */}
-                <motion.div
-                  className="text-left"
-                  initial={{ opacity: 0, x: shouldReduceMotion ? 0 : -50 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: shouldReduceMotion ? 0 : 1, delay: shouldReduceMotion ? 0 : 0.7 }}
-                >
-                  <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white/95">
-                    Abdul Basit Zafar
-                  </h2>
-                  <p className="text-lg md:text-xl text-white/80 leading-relaxed max-w-3xl">
-                    Writer and storyteller bridging technology, culture, and human experience through narratives that connect worlds across languages and borders
-                  </p>
-                </motion.div>
+                {isUrduPage && (
+                  <motion.div
+                    className="text-left"
+                    initial={{ opacity: 0, x: shouldReduceMotion ? 0 : -50 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: shouldReduceMotion ? 0 : 1, delay: shouldReduceMotion ? 0 : 0.7 }}
+                  >
+                    <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white/95">
+                      Abdul Basit Zafar
+                    </h2>
+                    <p className="text-lg md:text-xl text-white/80 leading-relaxed max-w-3xl">
+                      Writer and storyteller bridging technology, culture, and human experience through narratives that connect worlds across languages and borders
+                    </p>
+                  </motion.div>
+                )}
 
                 {/* CTAs */}
                 <motion.div 
@@ -130,7 +152,9 @@ export function PortfolioGrid() {
                       href="/work"
                       className="inline-flex items-center px-8 py-4 bg-brand text-white font-semibold rounded-xl hover:bg-red-700 transition-all duration-200 shadow-lg hover:shadow-xl group"
                     >
-                      <span className="urdu-text">میرا کام دیکھیں</span>
+                      <span className={isUrduPage ? "urdu-text" : ""}>
+                        {isUrduPage ? 'میرا کام دیکھیں' : 'View My Work'}
+                      </span>
                       <ArrowUpRight className="w-5 h-5 mr-2 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
                     </Link>
                   </motion.div>
@@ -144,7 +168,9 @@ export function PortfolioGrid() {
                       href="/about"
                       className="inline-flex items-center px-8 py-4 bg-white/10 text-white font-semibold rounded-xl hover:bg-white/20 transition-all duration-200 backdrop-blur-sm border border-white/20 hover:border-white/40"
                     >
-                      <span className="urdu-text">تعارف</span>
+                      <span className={isUrduPage ? "urdu-text" : ""}>
+                        {isUrduPage ? 'تعارف' : 'About'}
+                      </span>
                     </Link>
                   </motion.div>
                 </motion.div>
@@ -200,10 +226,13 @@ export function PortfolioGrid() {
             >
               <div>
                 <h2 className="text-4xl font-bold mb-4 text-ink font-urdu-heading">
-                  تازہ کتابیں
+                  {isUrduPage ? 'تازہ کتابیں' : 'Latest Books'}
                 </h2>
                 <p className="text-xl text-ink-muted font-urdu-body">
-                  شناخت، ٹیکنالوجی، اور انسانی رشتوں کو دریافت کرنے والے ناول
+                  {isUrduPage 
+                    ? 'شناخت، ٹیکنالوجی، اور انسانی رشتوں کو دریافت کرنے والے ناول'
+                    : 'Novels exploring identity, technology, and human connections'
+                  }
                 </p>
               </div>
               <motion.div
@@ -214,7 +243,9 @@ export function PortfolioGrid() {
                   href="/books"
                   className="inline-flex items-center text-brand hover:text-red-700 font-medium transition-colors group"
                 >
-                  <span className="urdu-text">تمام کتابیں</span>
+                  <span className={isUrduPage ? "urdu-text" : ""}>
+                    {isUrduPage ? 'تمام کتابیں' : 'All Books'}
+                  </span>
                   <ArrowUpRight className="w-4 h-4 mr-2 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
                 </Link>
               </motion.div>
@@ -252,11 +283,11 @@ export function PortfolioGrid() {
                       </div>
                       
                       <h3 className="text-2xl font-bold mb-4 text-ink font-urdu-heading group-hover:text-brand transition-colors">
-                        {book.titleUrdu || book.title}
+                        {isUrduPage ? (book.titleUrdu || book.title) : book.title}
                       </h3>
                       
                       <p className="text-ink-muted mb-6 leading-relaxed font-urdu-body">
-                        {book.descriptionUrdu || book.description}
+                        {isUrduPage ? (book.descriptionUrdu || book.description) : book.description}
                       </p>
 
                       <motion.div
@@ -267,7 +298,9 @@ export function PortfolioGrid() {
                           href={`/books/${book.slug}`}
                           className="inline-flex items-center text-brand hover:text-red-700 font-medium transition-colors group"
                         >
-                          <span className="urdu-text">دیکھیں</span>
+                          <span className={isUrduPage ? "urdu-text" : ""}>
+                            {isUrduPage ? 'دیکھیں' : 'View'}
+                          </span>
                           <ArrowUpRight className="w-4 h-4 mr-2 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
                         </Link>
                       </motion.div>

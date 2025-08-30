@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import { Search, Menu, X, Globe } from 'lucide-react';
 import { SearchOverlay } from './SearchOverlay';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 import NameRevealUrdu from './NameRevealUrdu';
 import { usePathname } from 'next/navigation';
 
@@ -14,6 +14,7 @@ export function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
   const pathname = usePathname();
+  const shouldReduceMotion = useReducedMotion();
   
   // Check if we're on the landing page (bilingual)
   const isLandingPage = pathname === '/' || pathname === '/en';
@@ -60,19 +61,19 @@ export function Header() {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.3
+        staggerChildren: shouldReduceMotion ? 0 : 0.1,
+        delayChildren: shouldReduceMotion ? 0 : 0.3
       }
     }
   };
 
   const navItemVariants = {
-    hidden: { opacity: 0, y: -10 },
+    hidden: { opacity: 0, y: shouldReduceMotion ? 0 : -10 },
     visible: { 
       opacity: 1, 
       y: 0,
       transition: {
-        duration: 0.4,
+        duration: shouldReduceMotion ? 0 : 0.4,
         ease: "easeOut"
       }
     }
@@ -90,17 +91,17 @@ export function Header() {
             ? 'bg-white/95 backdrop-blur-md border-b border-gray-200 shadow-sm' 
             : 'bg-transparent'
         }`}
-        initial={{ y: -100 }}
+        initial={{ y: shouldReduceMotion ? 0 : -100 }}
         animate={{ y: 0 }}
-        transition={{ duration: 0.6, ease: "easeOut" }}
+        transition={{ duration: shouldReduceMotion ? 0 : 0.6, ease: "easeOut" }}
       >
         <div className="container mx-auto px-6">
           <div className="flex h-20 items-center justify-between">
             {/* Logo with Name Reveal Animation */}
             <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
+              initial={{ opacity: 0, scale: shouldReduceMotion ? 1 : 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+              transition={{ duration: shouldReduceMotion ? 0 : 0.8, delay: shouldReduceMotion ? 0 : 0.2, ease: "easeOut" }}
             >
               <Link href="/" className="focus-ring rounded-lg">
                 <NameRevealUrdu className="text-ink" />
@@ -125,8 +126,8 @@ export function Header() {
                     <motion.div
                       className="absolute bottom-0 left-0 right-0 h-0.5 bg-brand origin-right"
                       initial={{ scaleX: 0 }}
-                      whileHover={{ scaleX: 1 }}
-                      transition={{ duration: 0.3, ease: "easeOut" }}
+                      whileHover={shouldReduceMotion ? {} : { scaleX: 1 }}
+                      transition={{ duration: shouldReduceMotion ? 0 : 0.3, ease: "easeOut" }}
                     />
                   </Link>
                 </motion.div>
@@ -136,15 +137,15 @@ export function Header() {
             {/* Actions */}
             <motion.div 
               className="flex items-center space-x-4 space-x-reverse"
-              initial={{ opacity: 0, scale: 0.8 }}
+              initial={{ opacity: 0, scale: shouldReduceMotion ? 1 : 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5, delay: 0.8 }}
+              transition={{ duration: shouldReduceMotion ? 0 : 0.5, delay: shouldReduceMotion ? 0 : 0.8 }}
             >
               {/* Language Toggle (only on landing page) */}
               {isLandingPage && (
                 <motion.div
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
+                  whileHover={shouldReduceMotion ? {} : { scale: 1.05 }}
+                  whileTap={shouldReduceMotion ? {} : { scale: 0.95 }}
                 >
                   <Link
                     href={isUrduPage ? '/en' : '/'}
@@ -162,8 +163,8 @@ export function Header() {
                 onClick={() => setIsSearchOpen(true)}
                 className="flex items-center space-x-2 space-x-reverse px-3 py-2 text-ink-muted hover:text-ink transition-colors rounded-lg hover:bg-surface-muted group"
                 aria-label={isUrduPage ? 'تلاش' : 'Search'}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
+                whileHover={shouldReduceMotion ? {} : { scale: 1.05 }}
+                whileTap={shouldReduceMotion ? {} : { scale: 0.95 }}
               >
                 <Search className="w-5 h-5 group-hover:rotate-12 transition-transform" />
                 <span className="hidden sm:inline text-xs text-ink-muted urdu-text">
@@ -177,27 +178,27 @@ export function Header() {
                 className="lg:hidden p-3 text-ink-muted hover:text-ink transition-colors rounded-lg hover:bg-surface-muted"
                 aria-label={isUrduPage ? 'مینو کھولیں' : 'Open menu'}
                 aria-expanded={isMenuOpen}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
+                whileHover={shouldReduceMotion ? {} : { scale: 1.05 }}
+                whileTap={shouldReduceMotion ? {} : { scale: 0.95 }}
               >
                 <AnimatePresence mode="wait">
                   {isMenuOpen ? (
                     <motion.div
                       key="close"
-                      initial={{ rotate: -90, opacity: 0 }}
+                      initial={{ rotate: shouldReduceMotion ? 0 : -90, opacity: 0 }}
                       animate={{ rotate: 0, opacity: 1 }}
-                      exit={{ rotate: 90, opacity: 0 }}
-                      transition={{ duration: 0.2 }}
+                      exit={{ rotate: shouldReduceMotion ? 0 : 90, opacity: 0 }}
+                      transition={{ duration: shouldReduceMotion ? 0 : 0.2 }}
                     >
                       <X className="w-6 h-6" />
                     </motion.div>
                   ) : (
                     <motion.div
                       key="menu"
-                      initial={{ rotate: 90, opacity: 0 }}
+                      initial={{ rotate: shouldReduceMotion ? 0 : 90, opacity: 0 }}
                       animate={{ rotate: 0, opacity: 1 }}
-                      exit={{ rotate: -90, opacity: 0 }}
-                      transition={{ duration: 0.2 }}
+                      exit={{ rotate: shouldReduceMotion ? 0 : -90, opacity: 0 }}
+                      transition={{ duration: shouldReduceMotion ? 0 : 0.2 }}
                     >
                       <Menu className="w-6 h-6" />
                     </motion.div>
@@ -217,15 +218,15 @@ export function Header() {
                 initial={{ opacity: 0, height: 0 }}
                 animate={{ opacity: 1, height: 'auto' }}
                 exit={{ opacity: 0, height: 0 }}
-                transition={{ duration: 0.3, ease: "easeOut" }}
+                transition={{ duration: shouldReduceMotion ? 0 : 0.3, ease: "easeOut" }}
               >
                 <div className="py-6 space-y-2 text-right">
                   {navigation.map((item, index) => (
                     <motion.div
                       key={item.href}
-                      initial={{ opacity: 0, x: 20 }}
+                      initial={{ opacity: 0, x: shouldReduceMotion ? 0 : 20 }}
                       animate={{ opacity: 1, x: 0 }}
-                      transition={{ duration: 0.3, delay: index * 0.1 }}
+                      transition={{ duration: shouldReduceMotion ? 0 : 0.3, delay: shouldReduceMotion ? 0 : index * 0.1 }}
                     >
                       <Link
                         href={item.href}
@@ -234,7 +235,7 @@ export function Header() {
                       >
                         <motion.span
                           className="relative"
-                          whileHover={{ x: -8 }}
+                          whileHover={shouldReduceMotion ? {} : { x: -8 }}
                           transition={{ duration: 0.2 }}
                         >
                           {item.name}
