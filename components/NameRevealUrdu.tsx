@@ -3,151 +3,116 @@
 import Link from 'next/link';
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 import { useEffect, useRef, useState } from 'react';
+import { usePathname } from 'next/navigation';
 
 type MenuItem = { label: string; href: string };
 type Section = { title: string; items: MenuItem[] };
 
-type Props = {
-  className?: string;
-};
-
-// Updated sections to include "بن کا بنجارہ"
 const DEFAULT_SECTIONS: Section[] = [
   {
     title: 'صفحہ جات',
     items: [
-      { label: 'ہوم', href: '/' },
-      { label: 'کام', href: '/work' },
-      { label: 'تحریریں', href: '/writing' },
-      { label: 'پوسٹس', href: '/posts' },
-      { label: 'کتابیں', href: '/books' },
-      { label: 'میرے بارے میں', href: '/about' },
-      { label: 'رابطہ', href: '/contact' }
-    ]
+        { label: 'کام', href: '/work' },
+        { label: 'تحریریں', href: '/writing' },
+        { label: 'پوسٹس', href: '/posts' },
+        { label: 'کتابیں', href: '/books' },
+        { label: 'میرے بارے میں', href: '/about' },
+        { label: 'رابطہ', href: '/contact' },
+    ],
   },
   {
     title: 'نمایاں',
-    items: [{ label: 'بن کا بنجارہ', href: '/bonn-ka-banjara' }] // Corrected link
-  }
+    items: [{ label: 'بن کا بنجارہ', href: '/bonn-ka-banjara' }],
+  },
 ];
 
-export default function NameRevealUrdu({ className }: Props) {
+export default function NameRevealUrdu({ className }: { className?: string }) {
   const [open, setOpen] = useState(false);
-  const [textW, setTextW] = useState(0);
-  const textRef = useRef<HTMLSpanElement>(null);
   const wrapRef = useRef<HTMLDivElement>(null);
+  const pathname = usePathname();
+  const isUrduPage = !pathname.startsWith('/en');
+  const homeHref = isUrduPage ? '/' : '/en';
   const prefersReduced = useReducedMotion();
 
-  // measure full name width for animation
-  useEffect(() => {
-    const measure = () => {
-      const el = textRef.current;
-      if (el) setTextW(el.getBoundingClientRect().width);
-    };
-    measure();
-    window.addEventListener('resize', measure);
-    return () => window.removeEventListener('resize', measure);
-  }, []);
-
-  // open/close with hover intent
+  // Timers for hover intent
   const openTimer = useRef<NodeJS.Timeout>();
   const closeTimer = useRef<NodeJS.Timeout>();
-
   const openWithDelay = () => {
     if (closeTimer.current) clearTimeout(closeTimer.current);
-    openTimer.current = setTimeout(() => setOpen(true), 80);
+    openTimer.current = setTimeout(() => setOpen(true), 100);
   };
   const closeWithDelay = () => {
     if (openTimer.current) clearTimeout(openTimer.current);
-    closeTimer.current = setTimeout(() => setOpen(false), 140);
+    closeTimer.current = setTimeout(() => setOpen(false), 200);
   };
 
-  useEffect(() => {
-    const onDocClick = (e: MouseEvent) => {
-      if (wrapRef.current && !wrapRef.current.contains(e.target as Node)) {
-        setOpen(false);
-      }
-    };
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') setOpen(false);
-    };
-    document.addEventListener('mousedown', onDocClick);
-    document.addEventListener('keydown', onKey);
-    return () => {
-      document.removeEventListener('mousedown', onDocClick);
-      document.removeEventListener('keydown', onKey);
-      if (openTimer.current) clearTimeout(openTimer.current);
-      if (closeTimer.current) clearTimeout(closeTimer.current);
-    };
-  }, []);
-
   const spring = { type: 'spring', stiffness: 380, damping: 30, mass: 0.6 };
-  const duration = prefersReduced ? 0 : 0.28;
-  const circleTravel = prefersReduced ? 0 : -(textW + 12); // RTL: negative X
 
   return (
     <div
       ref={wrapRef}
       dir="rtl"
-      className={['relative inline-flex items-center gap-3 select-none', className].filter(Boolean).join(' ')}
+      className={['relative inline-flex items-center gap-4', className].join(' ')}
       onMouseEnter={openWithDelay}
       onMouseLeave={closeWithDelay}
     >
-      {/* trigger: circular ب */}
-      <motion.button
-        type="button"
-        aria-haspopup="menu"
-        aria-expanded={open}
-        onClick={() => setOpen((v) => !v)}
-        className="relative grid place-items-center rounded-full bg-brand text-white font-bold shadow-sm focus:outline-none focus:ring-2 focus:ring-brand/40"
-        style={{ width: 48, height: 48 }}
-        animate={prefersReduced ? {} : { x: open ? circleTravel : 0, rotate: open ? 360 : 0 }}
-        transition={prefersReduced ? { duration: 0 } : spring}
-      >
-        <span className="text-xl leading-none font-urdu-heading">ب</span>
-      </motion.button>
-
-      {/* full name reveal */}
-      <div className="overflow-hidden pr-3">
+      {/* --- MODIFIED SECTION --- */}
+      {/* This container now holds both the button and the revealed name */}
+      <div className="relative flex items-center">
+        {/* Revealed Name (positioned absolutely behind the button) */}
         <motion.span
-          ref={textRef}
-          className="inline-block text-3xl md:text-4xl font-extrabold font-urdu-heading whitespace-nowrap"
+          className="pointer-events-none absolute right-0 text-3xl font-extrabold font-urdu-heading whitespace-nowrap text-brand"
           style={{ originX: 1 }}
           initial={false}
-          animate={prefersReduced ? { opacity: 1, scaleX: open ? 1 : 0 } : { opacity: open ? 1 : 0.2, scaleX: open ? 1 : 0, filter: open ? 'blur(0px)' : 'blur(0.8px)', letterSpacing: open ? '0.02em' : '0.1em' }}
-          transition={{ duration, ...spring }}
+          animate={{
+            opacity: open ? 1 : 0,
+            x: open ? '60px' : '0px', // Pushes the name out from behind the button
+          }}
+          transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
         >
           عبدالباسط ظفر
         </motion.span>
+        
+        {/* 'Ba' button is now always on top and only rotates */}
+        <Link href={homeHref} aria-label="Homepage" className="relative z-10">
+          <motion.div
+            aria-haspopup="menu"
+            aria-expanded={open}
+            className="grid h-12 w-12 place-items-center rounded-full bg-brand text-white font-bold shadow-md focus:outline-none focus:ring-2 focus:ring-brand/50"
+            animate={{ rotate: open ? 360 : 0 }}
+            transition={prefersReduced ? { duration: 0 } : spring}
+          >
+            <span className="text-xl leading-none font-urdu-heading">ب</span>
+          </motion.div>
+        </Link>
       </div>
 
-      {/* Dropdown Menu: Positioned relative to the button */}
       <AnimatePresence>
         {open && (
           <motion.div
             role="menu"
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 10 }}
+            initial={{ opacity: 0, y: 15, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 15, scale: 0.95 }}
             transition={{ duration: 0.2, ease: 'easeOut' }}
-            className="absolute top-full right-0 mt-3 z-50 w-[min(92vw,400px)] origin-top-right rounded-2xl border border-line bg-surface-white shadow-xl ring-1 ring-black/5"
+            className="absolute top-full right-0 mt-3 z-[60] w-[min(90vw,450px)] origin-top-right rounded-2xl border border-line bg-surface-white/80 backdrop-blur-lg shadow-2xl ring-1 ring-black/5"
           >
-            <div className="h-1.5 w-full bg-gradient-to-l from-brand/30 via-brand/15 to-transparent" />
-            <div className="p-4">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {/* Dropdown content remains the same */}
+            <div className="p-5">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-4">
                 {DEFAULT_SECTIONS.map((section) => (
                   <div key={section.title}>
-                    <h4 className="mb-2 text-sm font-semibold text-ink/80 urdu-text">{section.title}</h4>
-                    <ul className="space-y-1">
-                      {section.items.map((it) => (
-                        <li key={it.href}>
+                    <h4 className="mb-3 text-sm font-semibold text-ink/70 urdu-text tracking-wider">{section.title}</h4>
+                    <ul className="space-y-2">
+                      {section.items.map((item) => (
+                        <li key={item.href}>
                           <Link
                             role="menuitem"
-                            href={it.href}
+                            href={item.href}
                             onClick={() => setOpen(false)}
-                            className="group urdu-text block rounded-lg px-3 py-1.5 text-base text-ink hover:bg-surface-elevated hover:text-brand"
+                            className="group urdu-text block rounded-lg px-3 py-2 text-base font-medium text-ink transition-colors hover:bg-brand-light hover:text-brand"
                           >
-                            <span>{it.label}</span>
+                            <span>{item.label}</span>
                           </Link>
                         </li>
                       ))}
