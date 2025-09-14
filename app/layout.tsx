@@ -12,7 +12,7 @@ export default async function RootLayout({
   const locale = await getCurrentLocale();
 
   return (
-    // The dir attribute is removed to keep LTR layout for both languages
+    // The 'dir' attribute is removed here to prevent layout flipping
     <html lang={locale}>
       <body className="font-urdu-body bg-surface text-ink antialiased">
         <ClientProvider locale={locale}>

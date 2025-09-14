@@ -8,6 +8,7 @@ export default function NameRevealUrdu({ className }: { className?: string }) {
   const [open, setOpen] = useState(false);
   const [textWidth, setTextWidth] = useState(0);
   const textRef = useRef<HTMLSpanElement>(null);
+  const homeHref = '/'; // Always link to the root
 
   useEffect(() => {
     const measure = () => {
@@ -39,9 +40,8 @@ export default function NameRevealUrdu({ className }: { className?: string }) {
       onMouseEnter={openWithDelay}
       onMouseLeave={closeWithDelay}
     >
-      {/* This structure forces the name to reveal to the left */}
       <div className="flex items-center flex-row-reverse gap-4">
-        <Link href="/" aria-label="Homepage" className="relative z-10">
+        <Link href={homeHref} aria-label="Homepage" className="relative z-10">
           <motion.div
             aria-haspopup="menu"
             aria-expanded={open}
@@ -67,7 +67,7 @@ export default function NameRevealUrdu({ className }: { className?: string }) {
         </motion.div>
       </div>
       
-      {/* Dropdown can be re-enabled here if needed */}
+      {/* The dropdown can be re-added here if you want it */}
     </div>
   );
 }
