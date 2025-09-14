@@ -1,7 +1,7 @@
 import './globals.css';
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
-import { getCurrentLocale } from '../locales/server';
+import { getCurrentLocale, setStaticParamsLocale } from '../locales/server';
 import ClientProvider from '../context/ClientProvider';
 
 export default async function RootLayout({
@@ -9,7 +9,9 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const locale = await getCurrentLocale();
+  // Ensure locale is available during static pre-rendering
+  setStaticParamsLocale('en');
+  const locale = (await getCurrentLocale()) || 'en';
 
   return (
     // The 'dir' attribute is removed here to prevent layout flipping
