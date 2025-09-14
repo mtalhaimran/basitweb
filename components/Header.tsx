@@ -5,14 +5,14 @@ import { useState } from 'react';
 import { Search, Globe } from 'lucide-react';
 import { SearchOverlay } from './SearchOverlay';
 import NameRevealUrdu from './NameRevealUrdu';
-import { useI18n, useChangeLocale, useCurrentLocale } from '../locales/client';
+import { useI18n } from '../locales/client';
+import { useLanguage } from '@/context/LanguageContext';
 
 export function Header() {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const t = useI18n();
-  const changeLocale = useChangeLocale();
-  const currentLocale = useCurrentLocale();
-  const isUrduPage = currentLocale === 'ur';
+  const { language, setLanguage } = useLanguage();
+  const isUrduPage = language === 'ur';
 
   // "Bonn ka Banjara" is now included
   const navLinks = [
@@ -27,9 +27,9 @@ export function Header() {
     <header className="fixed top-0 left-0 right-0 z-50 bg-surface shadow-sm border-b border-line">
       <div className="container mx-auto grid grid-cols-3 items-center py-2">
         <div className="justify-self-start">
-          <button 
-            onClick={() => changeLocale(isUrduPage ? 'en' : 'ur')} 
-            className="flex items-center gap-2 p-2 text-sm font-medium text-ink-muted transition-colors rounded-lg hover:bg-surface-elevated hover:text-brand" 
+          <button
+            onClick={() => setLanguage(isUrduPage ? 'en' : 'ur')}
+            className="flex items-center gap-2 p-2 text-sm font-medium text-ink-muted transition-colors rounded-lg hover:bg-surface-elevated hover:text-brand"
             aria-label="Toggle Language"
           >
             <Globe className="h-5 w-5" />
