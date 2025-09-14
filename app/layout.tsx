@@ -1,24 +1,28 @@
-'use client';
 import './globals.css';
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
-import type { Metadata } from 'next';
-import { LanguageProvider } from '../context/LanguageContext';
+import { getCurrentLocale } from '../locales/server';
+import ClientProvider from '../context/ClientProvider';
 
-export default function RootLayout({
+// Make the RootLayout an async function
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  // Await the result of the function to get the actual string value
+  const locale = await getCurrentLocale();
+
   return (
-    <LanguageProvider>
-      <html lang="ur" dir="rtl">
-        <body className="font-urdu-body bg-surface text-ink antialiased">
+    <html lang={locale}>
+      <body className="font-urdu-body bg-surface text-ink antialiased">
+        {/* Now, the 'locale' variable is a string, not a Promise */}
+        <ClientProvider locale={locale}>
           <Header />
-          {children}
+          <main>{children}</main>
           <Footer />
-        </body>
-      </html>
-    </LanguageProvider>
+        </ClientProvider>
+      </body>
+    </html>
   );
 }

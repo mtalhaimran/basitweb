@@ -1,0 +1,22 @@
+{
+  "home": {
+    "headline": "Abdul Basit Zafar",
+    "subheadline": "Writer and Storyteller",
+    "intro": "Based in Bonn, Germany, I explore the intersection of technology, culture, and human experience. My writing bridges the digital and literary worlds.",
+    "milestone1_year": "2018",
+    "milestone1_text": "The Journey to Germany Began.",
+    "milestone2_year": "2021",
+    "milestone2_text": "Published the First Novel.",
+    "milestone3_year": "2024",
+    "milestone3_text": "Launched the Bonn ka Banjara Series.",
+    "quote": "Every story is a journey, and every word is a step.",
+    "cta": "Explore My Work"
+  },
+  "nav": {
+    "work": "Work",
+    "writing": "Writing",
+    "posts": "Posts",
+    "about": "About Me",
+    "bonn": "Bonn ka Banjara"
+  }
+}
