@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { TimelineIcon } from '@/components/TimelineIcon';
+import { useLanguage } from '@/context/LanguageContext';
 
 // Animation variants for sections that fade/slide in
 const sectionVariants = {
