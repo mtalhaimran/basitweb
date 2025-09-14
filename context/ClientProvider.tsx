@@ -12,7 +12,7 @@ export default function ClientProvider({
 }) {
   return (
     <I18nProviderClient locale={locale} fallback={<>Loading...</>}>
-      <LanguageProvider>{children}</LanguageProvider>
+      <LanguageProvider initialLanguage={locale}>{children}</LanguageProvider>
     </I18nProviderClient>
   );
 }
