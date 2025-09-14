@@ -1,7 +1,7 @@
 'use client';
 
 import { createContext, useContext, useState } from 'react';
-import { useChangeLocale } from '@/locales/client';
+import { useChangeLocale, useCurrentLocale } from '@/locales/client';
 
 interface LanguageContextValue {
   language: string;
@@ -14,13 +14,15 @@ export function LanguageProvider({
   initialLanguage,
   children,
 }: {
-  initialLanguage: string;
+  initialLanguage?: string;
   children: React.ReactNode;
 }) {
+  const currentLocale = useCurrentLocale();
   const changeLocale = useChangeLocale();
-  const [language, setLanguage] = useState(initialLanguage);
+  const [language, setLanguage] = useState(initialLanguage ?? currentLocale ?? 'en');
 
   function handleSetLanguage(lang: string) {
+    if (!lang) return;
     setLanguage(lang);
     changeLocale(lang);
   }

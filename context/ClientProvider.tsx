@@ -7,12 +7,14 @@ export default function ClientProvider({
   locale,
   children,
 }: {
-  locale: string;
+  locale?: string;
   children: React.ReactNode;
 }) {
+  const safeLocale = locale ?? 'en';
+
   return (
-    <I18nProviderClient locale={locale} fallback={<>Loading...</>}>
-      <LanguageProvider initialLanguage={locale}>{children}</LanguageProvider>
+    <I18nProviderClient locale={safeLocale} fallback={<>Loading...</>}>
+      <LanguageProvider initialLanguage={safeLocale}>{children}</LanguageProvider>
     </I18nProviderClient>
   );
 }
