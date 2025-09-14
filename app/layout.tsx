@@ -10,8 +10,8 @@ export default async function RootLayout({
   children: React.ReactNode;
 }) {
   // Ensure locale is available during static pre-rendering
-  setStaticParamsLocale('ur');
-  const locale = await getCurrentLocale();
+  setStaticParamsLocale('en');
+  const locale = (await getCurrentLocale()) || 'en';
 
   return (
     // The 'dir' attribute is removed here to prevent layout flipping

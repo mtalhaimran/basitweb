@@ -1,6 +1,7 @@
 'use client';
 
 import { I18nProviderClient } from '../locales/client';
+import { LanguageProvider } from './LanguageContext';
 
 export default function ClientProvider({
   locale,
@@ -11,7 +12,7 @@ export default function ClientProvider({
 }) {
   return (
     <I18nProviderClient locale={locale} fallback={<>Loading...</>}>
-      {children}
+      <LanguageProvider>{children}</LanguageProvider>
     </I18nProviderClient>
   );
 }
