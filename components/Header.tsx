@@ -14,12 +14,13 @@ export function Header() {
   const currentLocale = useCurrentLocale();
   const isUrduPage = currentLocale === 'ur';
 
+  // "Bonn ka Banjara" is now included
   const navLinks = [
     { name: t('nav.work'), href: '/work' },
     { name: t('nav.writing'), href: '/writing' },
     { name: t('nav.posts'), href: '/posts' },
     { name: t('nav.about'), href: '/about' },
-    { name: t('nav.bonn'), href: '/bonn-ka-banjara' }, // Added Bonn ka Banjara
+    { name: t('nav.bonn'), href: '/bonn-ka-banjara' },
   ];
 
   return (
@@ -36,7 +37,8 @@ export function Header() {
           </button>
         </div>
 
-        <nav className={`hidden md:flex items-center justify-center gap-8 justify-self-center`}>
+        {/* Removed flex-row-reverse to keep nav LTR */}
+        <nav className="hidden md:flex items-center justify-center gap-8 justify-self-center">
           {navLinks.map((item) => (
             <Link key={item.href} href={item.href} className={`text-base font-semibold transition-colors hover:text-brand ${isUrduPage ? 'font-urdu-body' : 'font-sans'}`}>
               {item.name}

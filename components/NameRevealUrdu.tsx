@@ -4,23 +4,11 @@ import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useEffect, useRef, useState } from 'react';
 
-// ... (MenuItem, Section types remain the same)
-
-const DEFAULT_SECTIONS = [
-  // ... (Other sections are the same)
-  {
-    title: 'نمایاں',
-    items: [{ label: 'بون کا بنجارہ', href: '/bonn-ka-banjara' }], // Corrected text
-  },
-];
-
-
 export default function NameRevealUrdu({ className }: { className?: string }) {
   const [open, setOpen] = useState(false);
   const [textWidth, setTextWidth] = useState(0);
   const textRef = useRef<HTMLSpanElement>(null);
-  
-  // ... (useEffect and other hooks remain the same)
+
   useEffect(() => {
     const measure = () => {
       if (textRef.current) {
@@ -32,10 +20,6 @@ export default function NameRevealUrdu({ className }: { className?: string }) {
     return () => window.removeEventListener('resize', measure);
   }, []);
 
-  const buttonTravelDistance = -(textWidth + 16);
-  const transition = { duration: 0.4, ease: [0.4, 0, 0.2, 1] };
-
-  // ... (open/close delay logic is the same)
   const openTimer = useRef<NodeJS.Timeout>();
   const closeTimer = useRef<NodeJS.Timeout>();
   const openWithDelay = () => {
@@ -47,14 +31,15 @@ export default function NameRevealUrdu({ className }: { className?: string }) {
     closeTimer.current = setTimeout(() => setOpen(false), 200);
   };
 
+  const transition = { duration: 0.4, ease: [0.4, 0, 0.2, 1] };
+
   return (
     <div
       className={['relative flex items-center', className].join(' ')}
       onMouseEnter={openWithDelay}
       onMouseLeave={closeWithDelay}
     >
-      {/* --- MODIFIED ANIMATION --- */}
-      {/* This structure ensures the name always reveals to the left */}
+      {/* This structure forces the name to reveal to the left */}
       <div className="flex items-center flex-row-reverse gap-4">
         <Link href="/" aria-label="Homepage" className="relative z-10">
           <motion.div
@@ -68,8 +53,9 @@ export default function NameRevealUrdu({ className }: { className?: string }) {
           </motion.div>
         </Link>
         <motion.div
-          style={{ width: open ? textWidth : 0, opacity: open ? 1 : 0 }}
-          className="overflow-hidden transition-all"
+          style={{ width: open ? textWidth : 0 }}
+          className="overflow-hidden"
+          animate={{ opacity: open ? 1 : 0 }}
           transition={transition}
         >
           <span
@@ -80,15 +66,8 @@ export default function NameRevealUrdu({ className }: { className?: string }) {
           </span>
         </motion.div>
       </div>
-
-      <AnimatePresence>
-        {open && (
-         // Dropdown menu code remains the same
-         <motion.div /* ... */ >
-            {/* ... */}
-         </motion.div>
-        )}
-      </AnimatePresence>
+      
+      {/* Dropdown can be re-enabled here if needed */}
     </div>
   );
 }
