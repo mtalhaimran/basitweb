@@ -1,7 +1,7 @@
 'use client';
 
 import { createContext, useContext, useState } from 'react';
-import { useChangeLocale } from '@/locales/client';
+import { useRouter, usePathname } from 'next/navigation';
 
 interface LanguageContextValue {
   language: string;
@@ -17,13 +17,23 @@ export function LanguageProvider({
   initialLanguage?: string;
   children: React.ReactNode;
 }) {
-  const changeLocale = useChangeLocale();
-  const [language, setLanguage] = useState(initialLanguage ?? 'en');
+  const router = useRouter();
+  const pathname = usePathname();
+  const [language, setLanguage] = useState(initialLanguage ?? 'ur');
 
   function handleSetLanguage(lang: string) {
     if (!lang) return;
+    const basePath =
+      pathname.replace(new RegExp(`^/${language}`), '') || '/';
     setLanguage(lang);
-    changeLocale(lang);
+    const newPath =
+      lang === 'ur'
+        ? basePath
+        : basePath === '/'
+          ? `/${lang}`
+          : `/${lang}${basePath}`;
+    router.push(newPath);
+    router.refresh();
   }
 
   return (
