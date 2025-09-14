@@ -1,4 +1,4 @@
-import { createI18nServer } from 'next-international/server';
+import { createI18nServer, setStaticParamsLocale } from 'next-international/server';
 import { cache } from 'react';
 
 export const { getI18n, getScopedI18n, getStaticParams, getCurrentLocale } = createI18nServer(
@@ -11,3 +11,5 @@ export const { getI18n, getScopedI18n, getStaticParams, getCurrentLocale } = cre
     cache: cache,
   },
 );
+
+export { setStaticParamsLocale };
