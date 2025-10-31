@@ -1,56 +1,60 @@
 import { defineConfig } from "tinacms";
 
-// Your hosting provider likely exposes this as an environment variable
-const branch =
-  process.env.GITHUB_BRANCH ||
-  process.env.VERCEL_GIT_COMMIT_REF ||
-  process.env.HEAD ||
-  "main";
-
 export default defineConfig({
-  branch,
+  // whichever branch you keep your content on
+  branch:
+    process.env.GITHUB_BRANCH ||
+    process.env.VERCEL_GIT_COMMIT_REF ||
+    process.env.HEAD ||
+    "main",
 
-  // Get this from tina.io
-  clientId: process.env.NEXT_PUBLIC_TINA_CLIENT_ID,
-  // Get this from tina.io
-  token: process.env.TINA_TOKEN,
+  /** ──────────────────────────────
+   *  SELF-HOSTED / LOCAL SETTINGS
+   *  ────────────────────────────── */
+  contentApiUrlOverride: "http://localhost:4001/graphql",
 
   build: {
     outputFolder: "admin",
     publicFolder: "public",
   },
+
   media: {
-    tina: {
-      mediaRoot: "",
-      publicFolder: "public",
-    },
+    // keep uploads inside /public/images
+    store: { name: "local" },
+    publicFolder: "public",
+    mediaRoot: "images",
   },
-  // See docs on content modeling for more info on how to setup new content models: https://tina.io/docs/schema/
+
+  /** ──────────────────────────────
+   *  CONTENT SCHEMA
+   *  ────────────────────────────── */
   schema: {
     collections: [
       {
         name: "post",
         label: "Posts",
         path: "content/posts",
-        fields: [
-          {
-            type: "string",
-            name: "title",
-            label: "Title",
-            isTitle: true,
-            required: true,
-          },
-          {
-            type: "rich-text",
-            name: "body",
-            label: "Body",
-            isBody: true,
-          },
-        ],
+        format: "md",
         ui: {
-          // This is an DEMO router. You can remove this to fit your site
-          router: ({ document }) => `/demo/blog/${document._sys.filename}`,
+          // make Tina’s “View on site” button point to /posts/[slug]
+          router: ({ document }) => `/posts/${document._sys.filename}`,
+          filename: {
+            slugify: (values) =>
+              (values?.title || "untitled")
+                .toString()
+                .toLowerCase()
+                .replace(/\s+/g, "-")
+                .replace(/[^a-z0-9\-]/g, ""),
+          },
         },
+        fields: [
+          { type: "string", name: "title", label: "Title", isTitle: true, required: true },
+          { type: "datetime", name: "date", label: "Date", required: true },
+          { type: "string", name: "categories", label: "Categories", list: true },
+          { type: "string", name: "tags", label: "Tags", list: true },
+          { type: "image", name: "coverImage", label: "Cover Image" },
+          { type: "rich-text", name: "body", label: "Body", isBody: true },
+        ],
       },
     ],
   },
