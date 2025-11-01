@@ -81,11 +81,12 @@ export default function NameRevealUrdu({ className = '', showDropdown = false }:
       onMouseEnter={openWithDelay}
       onMouseLeave={closeWithDelay}
       onTouchStart={openWithDelay}
+      style={{ zIndex: 200 }}
     >
       <div className={`flex items-center gap-4 ${isUrduPage ? 'flex-row' : 'flex-row-reverse'}`}>
         <motion.div
-          style={{ width: open ? textWidth : 0 }}
-          className="overflow-hidden"
+          style={{ width: open ? textWidth : 0, zIndex: 150 }}
+          className="overflow-hidden relative"
           animate={{ opacity: open ? 1 : 0 }}
           transition={transition}
         >
