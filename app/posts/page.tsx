@@ -1,15 +1,21 @@
+import { getI18n, getCurrentLocale } from '@/locales/server';
+
 export const dynamic = 'force-static';
 
 export default async function PostsPage() {
+  const t = await getI18n();
+  const locale = (await getCurrentLocale()) || 'ur';
+  const isUrdu = locale === 'ur';
+
   return (
     <div className="min-h-screen bg-surface pt-20">
-      <div className="container mx-auto px-4 py-12" dir="rtl">
+      <div className="container mx-auto px-4 py-12" dir={isUrdu ? 'rtl' : 'ltr'}>
         <div className="max-w-4xl mx-auto">
-          <h1 className="text-4xl font-bold mb-8 text-ink font-urdu-heading text-right">
-            پوسٹس
+          <h1 className={`text-4xl font-bold mb-8 text-ink ${isUrdu ? 'font-urdu-heading text-right' : ''}`}>
+            {isUrdu ? 'پوسٹس' : 'Posts'}
           </h1>
-          <p className="text-lg text-ink-muted font-urdu-body text-right">
-            بلاگ پوسٹس جلد دستیاب ہوں گی۔
+          <p className={`text-lg text-ink-muted ${isUrdu ? 'font-urdu-body text-right' : ''}`}>
+            {isUrdu ? 'بلاگ پوسٹس جلد دستیاب ہوں گی۔' : 'Blog posts coming soon.'}
           </p>
         </div>
       </div>

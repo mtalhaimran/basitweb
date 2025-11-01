@@ -2,15 +2,15 @@ import './global.css';
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
 import ClientProvider from '../context/ClientProvider';
+import { getCurrentLocale } from '../locales/server';
 
 export default async function RootLayout({ 
   children 
 }: { 
   children: React.ReactNode 
 }) {
-  // Default to Urdu - locale will be detected by middleware and client-side
-  const locale = 'ur';
-  const dir = 'rtl';
+  const locale = (await getCurrentLocale()) || 'ur';
+  const dir = locale === 'ur' ? 'rtl' : 'ltr';
 
   return (
     <html lang={locale} dir={dir} suppressHydrationWarning>
@@ -22,7 +22,7 @@ export default async function RootLayout({
           rel="stylesheet" 
         />
       </head>
-      <body className="font-urdu-body bg-surface text-ink antialiased">
+      <body className={locale === 'ur' ? 'font-urdu-body bg-surface text-ink antialiased' : 'font-inter bg-surface text-ink antialiased'}>
         <ClientProvider locale={locale}>
           <Header />
           <main id="main-content">{children}</main>

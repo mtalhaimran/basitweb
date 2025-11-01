@@ -37,6 +37,7 @@ export function Header() {
     { name: 'تحریریں', href: '/writing' },
     { name: 'پوسٹس', href: '/posts' },
     { name: 'کتابیں', href: '/books' },
+    { name: 'بون کا بنجارہ', href: '/bonn-ka-banjara' },
     { name: 'میرے بارے میں', href: '/about' },
     { name: 'رابطہ', href: '/contact' }
   ];
@@ -62,18 +63,31 @@ export function Header() {
         transition={{ duration: shouldReduceMotion ? 0 : 0.6, ease: 'easeOut' }}
       >
         <div className="container">
-          <div className="grid grid-cols-[auto_1fr_auto] items-center py-5">
-            {/* LEFT — language toggle */}
-            <div className="justify-self-start">
-              <Link
-                href={isUrduPage ? '/en' : '/'}
-                className="flex items-center gap-2 px-3 py-2 text-sm font-medium text-brand hover:text-white transition-colors rounded-lg border-2 border-brand hover:bg-brand"
-                hrefLang={isUrduPage ? 'en' : 'ur'}
-              >
-                <Globe className="w-4 h-4" />
-                <span>{isUrduPage ? 'English' : 'اردو'}</span>
-              </Link>
-            </div>
+          <div className={`grid items-center py-5 ${isUrduPage ? 'grid-cols-[auto_1fr_auto]' : 'grid-cols-[auto_1fr_auto]'}`}>
+            {/* First Column - NameReveal + Search for Urdu, Language toggle for English */}
+            {isUrduPage ? (
+              <div className="justify-self-start flex items-center gap-3">
+                <NameRevealUrdu className="text-brand" />
+                <button
+                  onClick={() => setIsSearchOpen(true)}
+                  className="p-3 text-brand hover:text-brand-hover transition-colors rounded-lg hover:bg-surface-elevated"
+                  aria-label="تلاش"
+                >
+                  <Search className="w-5 h-5" />
+                </button>
+              </div>
+            ) : (
+              <div className="justify-self-start">
+                <Link
+                  href="/"
+                  className="flex items-center gap-2 px-3 py-2 text-sm font-medium text-brand hover:text-white transition-colors rounded-lg border-2 border-brand hover:bg-brand"
+                  hrefLang="ur"
+                >
+                  <Globe className="w-4 h-4" />
+                  <span>اردو</span>
+                </Link>
+              </div>
+            )}
 
             {/* CENTER — main nav */}
             <nav className={`hidden md:flex items-center justify-center ${isUrduPage ? 'flex-row-reverse' : ''} gap-8`}>
@@ -84,17 +98,30 @@ export function Header() {
               ))}
             </nav>
 
-            {/* RIGHT — NameReveal + Search */}
-            <div className="justify-self-end flex items-center gap-3">
-              <NameRevealUrdu className="text-brand" />
-              <button
-                onClick={() => setIsSearchOpen(true)}
-                className="p-3 text-brand hover:text-brand-hover transition-colors rounded-lg hover:bg-surface-elevated"
-                aria-label={isUrduPage ? 'تلاش' : 'Search'}
-              >
-                <Search className="w-5 h-5" />
-              </button>
-            </div>
+            {/* Third Column - Language toggle for Urdu, NameReveal + Search for English */}
+            {isUrduPage ? (
+              <div className="justify-self-end">
+                <Link
+                  href="/en"
+                  className="flex items-center gap-2 px-3 py-2 text-sm font-medium text-brand hover:text-white transition-colors rounded-lg border-2 border-brand hover:bg-brand"
+                  hrefLang="en"
+                >
+                  <Globe className="w-4 h-4" />
+                  <span>English</span>
+                </Link>
+              </div>
+            ) : (
+              <div className="justify-self-end flex items-center gap-3">
+                <NameRevealUrdu className="text-brand" />
+                <button
+                  onClick={() => setIsSearchOpen(true)}
+                  className="p-3 text-brand hover:text-brand-hover transition-colors rounded-lg hover:bg-surface-elevated"
+                  aria-label="Search"
+                >
+                  <Search className="w-5 h-5" />
+                </button>
+              </div>
+            )}
           </div>
         </div>
       </motion.header>
