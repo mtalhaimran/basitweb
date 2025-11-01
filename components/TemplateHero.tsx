@@ -1,25 +1,45 @@
 'use client';
 
 import Image from 'next/image';
-import NameRevealUrdu from './NameRevealUrdu';
 
 interface TemplateHeroProps { lang?: 'ur' | 'en'; }
 
 export function TemplateHero({ lang = 'ur' }: TemplateHeroProps) {
   const isUrdu = lang === 'ur';
 
+  const nameUrdu = "عبدالباسط ظفر";
+  const subtitleUrdu = "لکھاری اور کہانی گو";
+  const introUrdu = "جرمنی کے شہر بون میں مقیم، میں ٹیکنالوجی، ثقافت، اور انسانی تجربے کے درمیان تعلق کو دریافت کرتا ہوں۔";
+
+  const nameEnglish = "Abdul Basit Zafar";
+  const subtitleEnglish = "Writer and Storyteller";
+  const introEnglish = "Based in Bonn, Germany, I explore the intersection of technology, culture, and human experience.";
+
+  const name = isUrdu ? nameUrdu : nameEnglish;
+  const subtitle = isUrdu ? subtitleUrdu : subtitleEnglish;
+  const intro = isUrdu ? introUrdu : introEnglish;
+
   return (
-    <section className="relative h-[60vh] min-h-[400px] w-full overflow-visible" dir={isUrdu ? 'rtl' : 'ltr'}>
+    <section className="relative h-[80vh] min-h-[600px] w-full overflow-visible" dir={isUrdu ? 'rtl' : 'ltr'}>
       <Image src="/images/hero.jpg" alt="" fill priority className="object-cover" />
       <div className="absolute inset-0 bg-gradient-to-b from-black/60 to-black/40" />
-
-      {/* TOP-RIGHT TRIGGER */}
-      <div className="absolute top-6 right-6 z-20">
-        <NameRevealUrdu className="text-white" />
+      
+      {/* Center text content on the image */}
+      <div className="relative z-10 flex h-full items-center justify-center">
+        <div className={`container px-4 ${isUrdu ? 'text-right' : 'text-left'}`}>
+          <div className="max-w-3xl mx-auto">
+            <h1 className={`text-6xl md:text-7xl font-bold mb-4 text-white ${isUrdu ? 'font-urdu-heading' : ''}`}>
+              {name}
+            </h1>
+            <p className={`text-2xl md:text-3xl text-white/90 mb-6 ${isUrdu ? 'font-urdu-body' : ''}`}>
+              {subtitle}
+            </p>
+            <p className={`text-lg md:text-xl text-white/80 leading-relaxed ${isUrdu ? 'font-urdu-body' : ''}`}>
+              {intro}
+            </p>
+          </div>
+        </div>
       </div>
-
-      {/* (optional) center text/content goes here; remove if you don't need it */}
-      {/* <div className="relative z-10 flex h-full items-center justify-center"></div> */}
     </section>
   );
 }

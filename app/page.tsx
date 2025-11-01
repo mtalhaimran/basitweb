@@ -17,9 +17,6 @@ export default async function HomePage() {
             <h1 className="text-5xl font-bold mb-4 text-ink font-urdu-heading text-right">
               {t.home.headline}
             </h1>
-            <p className="text-2xl text-ink-muted mb-8 font-urdu-body text-right">
-              {t.home.subheadline}
-            </p>
             <p className="text-lg leading-relaxed text-ink mb-12 font-urdu-body text-right">
               {t.home.intro}
             </p>

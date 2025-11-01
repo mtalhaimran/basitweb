@@ -3,30 +3,54 @@
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useEffect, useRef, useState } from 'react';
+import { usePathname } from 'next/navigation';
 
 interface NameRevealUrduProps {
   className?: string;
+  showDropdown?: boolean;
 }
 
-export default function NameRevealUrdu({ className = '' }: NameRevealUrduProps) {
+export default function NameRevealUrdu({ className = '', showDropdown = false }: NameRevealUrduProps) {
   const [open, setOpen] = useState(false);
   const [textWidth, setTextWidth] = useState(0);
   const textRef = useRef<HTMLSpanElement>(null);
-  const homeHref = '/'; // Always link to the root
+  const homeHref = '/';
+  const pathname = usePathname();
+  const isUrduPage = !pathname.startsWith('/en');
+
+  const navUrdu = [
+    { name: 'کام', href: '/work' },
+    { name: 'تحریریں', href: '/writing' },
+    { name: 'پوسٹس', href: '/posts' },
+    { name: 'کتابیں', href: '/books' },
+    { name: 'بون کا بنجارہ', href: '/bonn-ka-banjara' },
+    { name: 'میرے بارے میں', href: '/about' },
+    { name: 'رابطہ', href: '/contact' }
+  ];
+
+  const navEnglish = [
+    { name: 'Work', href: '/work' },
+    { name: 'Writing', href: '/writing' },
+    { name: 'Posts', href: '/en/posts' },
+    { name: 'Books', href: '/books' },
+    { name: 'Bonn ka Banjara', href: '/bonn-ka-banjara' },
+    { name: 'About', href: '/about' },
+    { name: 'Contact', href: '/contact' }
+  ];
+
+  const navigation = isUrduPage ? navUrdu : navEnglish;
 
   useEffect(() => {
     const measure = () => {
       if (textRef.current) {
         const width = textRef.current.getBoundingClientRect().width;
-        setTextWidth(width + 20); // Add some padding
+        setTextWidth(width + 20);
       }
     };
     
-    // Wait for fonts to load
     if (document.fonts && document.fonts.ready) {
       document.fonts.ready.then(measure);
     } else {
-      // Fallback
       setTimeout(measure, 500);
     }
     
@@ -77,12 +101,45 @@ export default function NameRevealUrdu({ className = '' }: NameRevealUrduProps) 
         >
           <span
             ref={textRef}
-            className="block text-3xl font-extrabold font-urdu-heading whitespace-nowrap text-brand"
+            className="block text-3xl font-extrabold font-urdu-heading whitespace-nowrap"
+            style={{ color: 'inherit' }}
           >
             عبدالباسط ظفر
           </span>
         </motion.div>
       </div>
+
+      {/* Dropdown Menu */}
+      {showDropdown && (
+        <AnimatePresence>
+          {open && (
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.2 }}
+              className={`absolute top-full mt-2 bg-surface-white rounded-lg shadow-lg border border-line overflow-hidden min-w-[200px] ${
+                isUrduPage ? 'right-0' : 'left-0'
+              }`}
+              style={{ zIndex: 100 }}
+            >
+              <nav className="py-2">
+                {navigation.map((item) => (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    className={`block px-6 py-3 text-ink hover:bg-surface hover:text-brand transition-colors ${
+                      isUrduPage ? 'text-right font-urdu-body' : 'text-left'
+                    }`}
+                  >
+                    {item.name}
+                  </Link>
+                ))}
+              </nav>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      )}
     </div>
   );
 }
