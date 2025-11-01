@@ -1,9 +1,23 @@
 import { tinaClient, TinaPost } from './tinaClient';
 
 const POSTS_QUERY = `#graphql
-  query ListPosts($first: Int = 100) {
-    postConnection: postConnection(first: $first) {
-      edges { node { _sys { filename } title date tags categories coverImage locale } }
+  query ListPosts($first: Int = 100, $locale: String) {
+    postConnection(
+      first: $first
+      filter: { locale: { eq: $locale } }
+      sort: "date"
+    ) {
+      edges { 
+        node { 
+          _sys { filename } 
+          title 
+          date 
+          tags 
+          categories 
+          coverImage 
+          locale 
+        } 
+      }
     }
   }
 `;
@@ -23,19 +37,40 @@ const POST_QUERY = `#graphql
   }
 `;
 
-export async function listPosts(locale: string = 'ur') {
-  const res = await tinaClient.request(POSTS_QUERY, { variables: { first: 100 } });
-  let items: TinaPost[] = res?.postConnection?.edges?.map((e: any) => e.node) ?? [];
-  // Urdu-first: if a post has no locale, treat as Urdu
-  if (locale) {
-    items = items.filter((p: any) => p.locale ? p.locale === locale : locale === 'ur');
+export async function listPosts(locale: string = 'ur'): Promise {
+  try {
+    const res = await tinaClient.request(POSTS_QUERY, { 
+      variables: { 
+        first: 100,
+        locale: locale 
+      } 
+    });
+    
+    let items: TinaPost[] = res?.postConnection?.edges?.map((e: any) => e.node) ?? [];
+    
+    // Sort by date descending
+    items.sort((a: any, b: any) => {
+      const dateA = new Date(a.date || 0).getTime();
+      const dateB = new Date(b.date || 0).getTime();
+      return dateB - dateA;
+    });
+    
+    return items;
+  } catch (error) {
+    console.error('Error fetching posts:', error);
+    return [];
   }
-  items.sort((a: any, b: any) => (b.date || '').localeCompare(a.date || ''));
-  return items;
 }
 
-export async function getPostBySlug(slug: string) {
-  const relativePath = `${slug}.md`;
-  const res = await tinaClient.request(POST_QUERY, { variables: { relativePath } });
-  return res?.post as TinaPost | undefined;
+export async function getPostBySlug(slug: string): Promise {
+  try {
+    const relativePath = `${slug}.md`;
+    const res = await tinaClient.request(POST_QUERY, { 
+      variables: { relativePath } 
+    });
+    return res?.post as TinaPost | undefined;
+  } catch (error) {
+    console.error('Error fetching post:', error);
+    return undefined;
+  }
 }

@@ -1,5 +1,4 @@
-import { createI18nServer, setStaticParamsLocale } from 'next-international/server';
-import { cache } from 'react';
+import { createI18nServer } from 'next-international/server';
 
 export const { getI18n, getScopedI18n, getStaticParams, getCurrentLocale } = createI18nServer(
   {
@@ -7,9 +6,6 @@ export const { getI18n, getScopedI18n, getStaticParams, getCurrentLocale } = cre
     ur: () => import('./ur.json'),
   },
   {
-    // Make sure the cache is used during build-time rendering
-    cache: cache,
-  },
+    fallbackLocale: 'ur',
+  }
 );
-
-export { setStaticParamsLocale };

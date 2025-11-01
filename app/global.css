@@ -1,11 +1,80 @@
-/* app/globals.css */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* You can keep any custom global styles you had */
-html,
-body {
+/* Font Definitions */
+@layer base {
+  :root {
+    --font-inter: 'Inter', system-ui, -apple-system, sans-serif;
+    --font-urdu-heading: 'Noto Nastaliq Urdu', serif;
+    --font-urdu-body: 'Noto Naskh Arabic', serif;
+  }
+}
+
+/* Base Styles */
+html {
   scroll-behavior: smooth;
-  font-family: var(--font-satoshi), var(--font-inter), var(--font-noto), sans-serif;
+}
+
+body {
+  font-family: var(--font-inter);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Urdu Typography */
+.urdu-text {
+  font-family: var(--font-urdu-body);
+  line-height: 1.8;
+  letter-spacing: 0.01em;
+  text-align: right;
+  direction: rtl;
+}
+
+.urdu-heading {
+  font-family: var(--font-urdu-heading);
+  line-height: 1.6;
+  font-weight: 600;
+}
+
+/* RTL Support */
+[dir="rtl"] {
+  text-align: right;
+}
+
+[dir="rtl"] .flex {
+  flex-direction: row-reverse;
+}
+
+[dir="ltr"] {
+  text-align: left;
+}
+
+/* Skip Link for Accessibility */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: var(--brand);
+  color: white;
+  padding: 8px;
+  text-decoration: none;
+  z-index: 100;
+}
+
+.skip-link:focus {
+  top: 0;
+}
+
+/* Container */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+@media (max-width: 640px) {
+  .container {
+    padding: 0 1rem;
+  }
 }
