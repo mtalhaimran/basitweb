@@ -42,12 +42,7 @@ export function Header() {
   ];
 
   const navEnglish = [
-    { name: 'Work', href: '/en/work' },
-    { name: 'Writing', href: '/en/writing' },
-    { name: 'Posts', href: '/en/posts' },
-    { name: 'Books', href: '/en/books' },
-    { name: 'About', href: '/en/about' },
-    { name: 'Contact', href: '/en/contact' }
+    { name: 'Posts', href: '/en/posts' }
   ];
 
   const navigation = isUrduPage ? navUrdu : navEnglish;
