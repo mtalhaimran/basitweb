@@ -1,62 +1,62 @@
-import { TemplateHero } from '@/components/TemplateHero';
-import { getTranslations, type Locale } from '@/lib/i18n';
-
 export const dynamic = 'force-static';
 
 export default async function HomePage() {
-  const locale: Locale = 'ur';
-  const t = getTranslations(locale);
-  const isUrdu = true;
-
   return (
-    <>
-      <TemplateHero lang={locale} />
-      <div className="min-h-screen bg-surface">
-        <div className="container mx-auto px-4 py-12" dir="rtl">
-          <div className="max-w-4xl mx-auto">
-            <h1 className="text-5xl font-bold mb-4 text-ink font-urdu-heading text-right">
-              {t.home.headline}
+    <div className="min-h-screen bg-[#0a0a0a]">
+      {/* Hero Section */}
+      <section className="pt-32 pb-20 px-6">
+        <div className="container mx-auto max-w-6xl">
+          <div className="text-center space-y-8">
+            {/* Main Headline */}
+            <h1 className="text-5xl md:text-7xl font-bold text-white leading-tight">
+              The best way to track
+              <br />
+              user feedback
             </h1>
-            <p className="text-2xl text-ink-muted mb-8 font-urdu-body text-right">
-              {t.home.subheadline}
+            
+            {/* Sub-headline */}
+            <p className="text-xl md:text-2xl text-gray-400 max-w-3xl mx-auto leading-relaxed">
+              Noora helps you build better products by letting you centralize, 
+              and act on, user feedback.
             </p>
-            <p className="text-lg leading-relaxed text-ink mb-12 font-urdu-body text-right">
-              {t.home.intro}
-            </p>
-
-            {/* Milestones */}
-            <div className="space-y-6 mb-12">
-              {[1, 2, 3].map((i) => (
-                <div key={i} className="flex items-center gap-4 flex-row-reverse">
-                  <span className="text-brand font-bold">
-                    {t.home[`milestone${i}_year` as keyof typeof t.home]}
-                  </span>
-                  <span className="text-ink font-urdu-body">
-                    {t.home[`milestone${i}_text` as keyof typeof t.home]}
-                  </span>
-                </div>
-              ))}
-            </div>
-
-            {/* Quote */}
-            <blockquote className="border-r-4 pr-6 border-brand py-2 mb-12">
-              <p className="text-xl italic text-ink-muted font-urdu-body text-right">
-                "{t.home.quote}"
-              </p>
-            </blockquote>
-
-            {/* CTA */}
-            <div className="text-right">
+            
+            {/* CTA Button */}
+            <div className="pt-4">
               <a 
-                href="/work" 
-                className="inline-block rounded-xl border-2 border-brand px-6 py-3 text-brand hover:bg-brand hover:text-white transition-colors font-medium font-urdu-body"
+                href="#get-started" 
+                className="inline-block px-8 py-4 text-lg font-medium text-white bg-blue-600 hover:bg-blue-700 rounded-lg transition-colors"
               >
-                {t.home.cta}
+                Get started for free
               </a>
             </div>
           </div>
         </div>
-      </div>
-    </>
+      </section>
+
+      {/* Trusted By Section */}
+      <section className="py-16 px-6 border-t border-white/10">
+        <div className="container mx-auto max-w-6xl">
+          <p className="text-center text-sm text-gray-500 mb-8 uppercase tracking-wider">
+            Trusted by the world&apos;s best product teams
+          </p>
+          
+          {/* Logo Grid */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 items-center justify-items-center opacity-50">
+            <div className="w-32 h-12 bg-gray-800 rounded flex items-center justify-center">
+              <span className="text-gray-600 font-semibold">Company</span>
+            </div>
+            <div className="w-32 h-12 bg-gray-800 rounded flex items-center justify-center">
+              <span className="text-gray-600 font-semibold">Brand</span>
+            </div>
+            <div className="w-32 h-12 bg-gray-800 rounded flex items-center justify-center">
+              <span className="text-gray-600 font-semibold">Studio</span>
+            </div>
+            <div className="w-32 h-12 bg-gray-800 rounded flex items-center justify-center">
+              <span className="text-gray-600 font-semibold">Team</span>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
   );
 }

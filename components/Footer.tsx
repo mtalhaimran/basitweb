@@ -9,22 +9,22 @@ export function Footer() {
   
   const socialLinks = [
     { 
-      name: 'ٹویٹر', 
-      href: 'https://twitter.com/abdulbasitzafar', 
+      name: 'Twitter', 
+      href: 'https://twitter.com/noora', 
       icon: Twitter,
-      label: 'ٹویٹر پر فالو کریں'
+      label: 'Follow us on Twitter'
     },
     { 
-      name: 'لنکڈان', 
-      href: 'https://linkedin.com/in/abdulbasitzafar', 
+      name: 'LinkedIn', 
+      href: 'https://linkedin.com/company/noora', 
       icon: Linkedin,
-      label: 'لنکڈان پر جڑیں'
+      label: 'Connect on LinkedIn'
     },
     { 
-      name: 'ای میل', 
-      href: 'mailto:hello@abdulbasitzafar.com', 
+      name: 'Email', 
+      href: 'mailto:hello@noora.com', 
       icon: Mail,
-      label: 'ای میل بھیجیں'
+      label: 'Send us an email'
     }
   ];
 
@@ -52,7 +52,7 @@ export function Footer() {
   };
   
   return (
-    <footer className="bg-surface border-t border-line" data-pagefind-ignore>
+    <footer className="bg-[#0a0a0a] border-t border-white/10" data-pagefind-ignore>
       <div className="container py-20">
         {/* Logo Section */}
         <motion.div 
@@ -63,8 +63,8 @@ export function Footer() {
           viewport={{ once: true }}
         >
           <motion.div variants={itemVariants}>
-            <div className="w-32 h-6 mx-auto mb-8 bg-brand rounded-sm flex items-center justify-center">
-              <span className="text-white font-bold text-sm tracking-wider">EXPOSA</span>
+            <div className="w-32 h-6 mx-auto mb-8 bg-blue-600 rounded-sm flex items-center justify-center">
+              <span className="text-white font-bold text-sm tracking-wider">NOORA</span>
             </div>
           </motion.div>
         </motion.div>
@@ -80,10 +80,10 @@ export function Footer() {
           {/* Email */}
           <motion.div variants={itemVariants}>
             <Link
-              href="mailto:hello@abdulbasitzafar.com"
-              className="template-link urdu-text"
+              href="mailto:hello@noora.com"
+              className="text-sm text-gray-400 hover:text-white transition-colors"
             >
-              hello@abdulbasitzafar.com
+              hello@noora.com
             </Link>
           </motion.div>
 
@@ -108,10 +108,10 @@ export function Footer() {
                     href={social.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="template-link"
+                    className="text-sm text-gray-400 hover:text-white transition-colors"
                     aria-label={social.label}
                   >
-                    <span className="urdu-text text-sm">{social.name}</span>
+                    <span className="text-sm">{social.name}</span>
                   </Link>
                 </motion.div>
               );
@@ -120,11 +120,8 @@ export function Footer() {
 
           {/* Copyright */}
           <motion.div variants={itemVariants}>
-            <p className="template-caption urdu-text">
-              © {new Intl.DateTimeFormat('ur-PK', {
-                timeZone: 'UTC',
-                year: 'numeric'
-              }).format(new Date())} عبدالباسط ظفر۔
+            <p className="text-sm text-gray-500">
+              © {new Date().getFullYear()} Noora. All rights reserved.
             </p>
           </motion.div>
         </motion.div>

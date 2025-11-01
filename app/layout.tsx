@@ -1,5 +1,5 @@
 import './global.css';
-import { Header } from '@/components/Header';
+import { Header } from '@/components/shared/header';
 import { Footer } from '@/components/Footer';
 import ClientProvider from '../context/ClientProvider';
 
@@ -10,19 +10,19 @@ export default async function RootLayout({
 }) {
   // Default to Urdu locale
   const locale = 'ur';
-  const dir = 'rtl';
+  const dir = 'ltr';
 
   return (
-    <html lang={locale} dir={dir} suppressHydrationWarning>
+    <html lang="en" dir={dir} suppressHydrationWarning>
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
         <link 
-          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Nastaliq+Urdu:wght@400;500;600;700&family=Noto+Naskh+Arabic:wght@400;500;600;700&display=swap" 
+          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" 
           rel="stylesheet" 
         />
       </head>
-      <body className="font-urdu-body bg-surface text-ink antialiased">
+      <body className="font-sans bg-[#0a0a0a] text-white antialiased">
         <ClientProvider locale={locale}>
           <Header />
           <main id="main-content">{children}</main>
