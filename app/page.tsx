@@ -12,25 +12,35 @@ export default async function HomePage() {
     <>
       <TemplateHero lang={locale} />
       <div className="min-h-screen bg-surface">
-        <div className="container mx-auto px-4 py-12" dir="rtl">
-          <div className="max-w-4xl mx-auto">
-            <h1 className="text-5xl font-bold mb-4 text-ink font-urdu-heading text-right">
-              {t.home.headline}
-            </h1>
-            <p className="text-lg leading-relaxed text-ink mb-12 font-urdu-body text-right">
-              {t.home.intro}
-            </p>
-
-            {/* Milestones */}
-            <div className="space-y-6 mb-12">
+        <div className="container mx-auto px-4 py-16" dir="rtl">
+          <div className="max-w-6xl mx-auto">
+            {/* Milestones Timeline with Images */}
+            <div className="space-y-12 mb-16">
               {[1, 2, 3].map((i) => (
-                <div key={i} className="flex items-center gap-4 flex-row-reverse">
-                  <span className="text-brand font-bold">
-                    {t.home[`milestone${i}_year` as keyof typeof t.home]}
-                  </span>
-                  <span className="text-ink font-urdu-body">
-                    {t.home[`milestone${i}_text` as keyof typeof t.home]}
-                  </span>
+                <div key={i} className={`flex items-center gap-8 ${i % 2 === 0 ? 'flex-row' : 'flex-row-reverse'}`}>
+                  {/* Image Placeholder */}
+                  <div className="flex-shrink-0 w-64 h-64 bg-surface-elevated rounded-lg shadow-md flex items-center justify-center border-2 border-line">
+                    <div className="text-center">
+                      <div className="text-6xl mb-2 text-brand font-urdu-heading">
+                        {t.home[`milestone${i}_year` as keyof typeof t.home]}
+                      </div>
+                      <div className="text-sm text-ink-muted font-urdu-body px-4">
+                        [صورت یہاں رکھیں]
+                      </div>
+                    </div>
+                  </div>
+                  
+                  {/* Timeline Content */}
+                  <div className="flex-1">
+                    <div className={`bg-surface-white rounded-lg p-6 shadow-sm border-r-4 border-brand ${i % 2 === 0 ? 'text-right' : 'text-right'}`}>
+                      <h3 className="text-3xl font-bold text-brand mb-3 font-urdu-heading">
+                        {t.home[`milestone${i}_year` as keyof typeof t.home]}
+                      </h3>
+                      <p className="text-lg text-ink font-urdu-body leading-relaxed">
+                        {t.home[`milestone${i}_text` as keyof typeof t.home]}
+                      </p>
+                    </div>
+                  </div>
                 </div>
               ))}
             </div>

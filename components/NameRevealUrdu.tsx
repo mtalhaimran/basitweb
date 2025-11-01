@@ -80,19 +80,7 @@ export default function NameRevealUrdu({ className = '', showDropdown = false }:
       onMouseLeave={closeWithDelay}
       onTouchStart={openWithDelay}
     >
-      <div className="flex items-center flex-row-reverse gap-4">
-        <Link href={homeHref} aria-label="Homepage" className="relative z-10">
-          <motion.div
-            aria-haspopup="menu"
-            aria-expanded={open}
-            className="grid h-12 w-12 place-items-center rounded-full bg-brand text-white font-bold shadow-md cursor-pointer"
-            animate={{ rotate: open ? 360 : 0 }}
-            transition={transition}
-          >
-            <span className="text-xl leading-none font-urdu-heading">ب</span>
-          </motion.div>
-        </Link>
-        
+      <div className={`flex items-center gap-4 ${isUrduPage ? 'flex-row' : 'flex-row-reverse'}`}>
         <motion.div
           style={{ width: open ? textWidth : 0 }}
           className="overflow-hidden"
@@ -101,12 +89,24 @@ export default function NameRevealUrdu({ className = '', showDropdown = false }:
         >
           <span
             ref={textRef}
-            className="block text-3xl font-extrabold font-urdu-heading whitespace-nowrap"
+            className={`block text-3xl font-extrabold font-urdu-heading whitespace-nowrap ${isUrduPage ? 'text-right' : 'text-left'}`}
             style={{ color: 'inherit' }}
           >
             عبدالباسط ظفر
           </span>
         </motion.div>
+        
+        <Link href={homeHref} aria-label="Homepage" className="relative z-10">
+          <motion.div
+            aria-haspopup="menu"
+            aria-expanded={open}
+            className="grid h-12 w-12 place-items-center rounded-full bg-brand text-white font-bold shadow-md cursor-pointer flex-shrink-0"
+            animate={{ rotate: open ? 360 : 0 }}
+            transition={transition}
+          >
+            <span className="text-xl leading-none font-urdu-heading">ب</span>
+          </motion.div>
+        </Link>
       </div>
 
       {/* Dropdown Menu */}
@@ -118,8 +118,8 @@ export default function NameRevealUrdu({ className = '', showDropdown = false }:
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -10 }}
               transition={{ duration: 0.2 }}
-              className={`absolute top-full mt-2 bg-surface-white rounded-lg shadow-lg border border-line overflow-hidden min-w-[200px] ${
-                isUrduPage ? 'right-0' : 'left-0'
+              className={`absolute top-full mt-2 bg-surface-white rounded-lg shadow-lg border border-line overflow-hidden min-w-[220px] ${
+                isUrduPage ? 'left-0' : 'right-0'
               }`}
               style={{ zIndex: 100 }}
             >
