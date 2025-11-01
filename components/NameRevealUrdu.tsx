@@ -23,6 +23,7 @@ export default function NameRevealUrdu({ className = '', showDropdown = false }:
     { name: 'تحریریں', href: '/writing' },
     { name: 'پوسٹس', href: '/posts' },
     { name: 'کتابیں', href: '/books' },
+    { name: 'گیلری', href: '/gallery' },
     { name: 'بون کا بنجارہ', href: '/bonn-ka-banjara' },
     { name: 'میرے بارے میں', href: '/about' },
     { name: 'رابطہ', href: '/contact' }
@@ -33,6 +34,7 @@ export default function NameRevealUrdu({ className = '', showDropdown = false }:
     { name: 'Writing', href: '/writing' },
     { name: 'Posts', href: '/en/posts' },
     { name: 'Books', href: '/books' },
+    { name: 'Gallery', href: '/gallery' },
     { name: 'Bonn ka Banjara', href: '/bonn-ka-banjara' },
     { name: 'About', href: '/about' },
     { name: 'Contact', href: '/contact' }

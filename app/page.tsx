@@ -14,36 +14,67 @@ export default async function HomePage() {
       <div className="min-h-screen bg-surface">
         <div className="container mx-auto px-4 py-16" dir="rtl">
           <div className="max-w-6xl mx-auto">
-            {/* Milestones Timeline with Images */}
-            <div className="space-y-12 mb-16">
-              {[1, 2, 3].map((i) => (
-                <div key={i} className={`flex items-center gap-8 ${i % 2 === 0 ? 'flex-row' : 'flex-row-reverse'}`}>
-                  {/* Image Placeholder */}
-                  <div className="flex-shrink-0 w-64 h-64 bg-surface-elevated rounded-lg shadow-md flex items-center justify-center border-2 border-line">
-                    <div className="text-center">
-                      <div className="text-6xl mb-2 text-brand font-urdu-heading">
-                        {t.home[`milestone${i}_year` as keyof typeof t.home]}
-                      </div>
-                      <div className="text-sm text-ink-muted font-urdu-body px-4">
-                        [صورت یہاں رکھیں]
-                      </div>
+            {/* Books Section */}
+            <section className="mb-16">
+              <h2 className="text-4xl font-bold text-ink mb-8 text-right font-urdu-heading">
+                کتابیں
+              </h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {/* Book Card 1 */}
+                <a 
+                  href="/books/book-1" 
+                  className="group block bg-surface-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-2"
+                >
+                  <div className="aspect-[3/4] bg-surface-elevated relative overflow-hidden">
+                    <div className="absolute inset-0 flex items-center justify-center text-ink-muted font-urdu-body">
+                      [کتاب کی تصویر]
                     </div>
+                    <div className="absolute inset-0 bg-brand/0 group-hover:bg-brand/10 transition-colors duration-300" />
                   </div>
-                  
-                  {/* Timeline Content */}
-                  <div className="flex-1">
-                    <div className={`bg-surface-white rounded-lg p-6 shadow-sm border-r-4 border-brand ${i % 2 === 0 ? 'text-right' : 'text-right'}`}>
-                      <h3 className="text-3xl font-bold text-brand mb-3 font-urdu-heading">
-                        {t.home[`milestone${i}_year` as keyof typeof t.home]}
-                      </h3>
-                      <p className="text-lg text-ink font-urdu-body leading-relaxed">
-                        {t.home[`milestone${i}_text` as keyof typeof t.home]}
-                      </p>
+                  <div className="p-4">
+                    <h3 className="text-xl font-bold text-ink group-hover:text-brand transition-colors font-urdu-heading text-right">
+                      کتاب کا عنوان
+                    </h3>
+                  </div>
+                </a>
+
+                {/* Book Card 2 */}
+                <a 
+                  href="/books/book-2" 
+                  className="group block bg-surface-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-2"
+                >
+                  <div className="aspect-[3/4] bg-surface-elevated relative overflow-hidden">
+                    <div className="absolute inset-0 flex items-center justify-center text-ink-muted font-urdu-body">
+                      [کتاب کی تصویر]
                     </div>
+                    <div className="absolute inset-0 bg-brand/0 group-hover:bg-brand/10 transition-colors duration-300" />
                   </div>
-                </div>
-              ))}
-            </div>
+                  <div className="p-4">
+                    <h3 className="text-xl font-bold text-ink group-hover:text-brand transition-colors font-urdu-heading text-right">
+                      کتاب کا عنوان
+                    </h3>
+                  </div>
+                </a>
+
+                {/* Book Card 3 */}
+                <a 
+                  href="/books/book-3" 
+                  className="group block bg-surface-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-2"
+                >
+                  <div className="aspect-[3/4] bg-surface-elevated relative overflow-hidden">
+                    <div className="absolute inset-0 flex items-center justify-center text-ink-muted font-urdu-body">
+                      [کتاب کی تصویر]
+                    </div>
+                    <div className="absolute inset-0 bg-brand/0 group-hover:bg-brand/10 transition-colors duration-300" />
+                  </div>
+                  <div className="p-4">
+                    <h3 className="text-xl font-bold text-ink group-hover:text-brand transition-colors font-urdu-heading text-right">
+                      کتاب کا عنوان
+                    </h3>
+                  </div>
+                </a>
+              </div>
+            </section>
 
             {/* Quote */}
             <blockquote className="border-r-4 pr-6 border-brand py-2 mb-12">
