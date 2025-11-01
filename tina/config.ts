@@ -11,23 +11,24 @@ export default defineConfig({
   /** ──────────────────────────────
    *  SELF-HOSTED / LOCAL SETTINGS
    *  ────────────────────────────── */
-  contentApiUrlOverride: "http://localhost:4001/graphql",
+  // Use env var if present, fall back to local dev server
+  contentApiUrlOverride:
+    process.env.TINA_CONTENT_API_URL || "http://localhost:4001/graphql",
 
+  /** Where Tina will build its admin UI */
   build: {
     outputFolder: "admin",
     publicFolder: "public",
   },
 
+  /** Media store + path */
   media: {
-    // keep uploads inside /public/images
-    store: { name: "local" },
-    publicFolder: "public",
-    mediaRoot: "images",
+    tina: {
+      mediaRoot: "images",
+      publicFolder: "public",
+    },
   },
 
-  /** ──────────────────────────────
-   *  CONTENT SCHEMA
-   *  ────────────────────────────── */
   schema: {
     collections: [
       {
@@ -35,8 +36,12 @@ export default defineConfig({
         label: "Posts",
         path: "content/posts",
         format: "md",
+
+        // UI niceties for editors
         ui: {
-          // make Tina’s “View on site” button point to /posts/[slug]
+          // Default all new content to Urdu
+          defaultItem: { locale: "ur" },
+          // Make Tina’s “View on site” button point to /posts/[slug]
           router: ({ document }) => `/posts/${document._sys.filename}`,
           filename: {
             slugify: (values) =>
@@ -47,12 +52,29 @@ export default defineConfig({
                 .replace(/[^a-z0-9\-]/g, ""),
           },
         },
+
         fields: [
           { type: "string", name: "title", label: "Title", isTitle: true, required: true },
           { type: "datetime", name: "date", label: "Date", required: true },
+
+          // Optional, keep if you use them
           { type: "string", name: "categories", label: "Categories", list: true },
           { type: "string", name: "tags", label: "Tags", list: true },
+
+          // Optional cover
           { type: "image", name: "coverImage", label: "Cover Image" },
+
+          // New: locale (Urdu-first)
+          {
+            type: "string",
+            name: "locale",
+            label: "Locale",
+            options: ["ur", "en"],
+            ui: { component: "select" },
+            required: false
+          },
+
+          // Main body
           { type: "rich-text", name: "body", label: "Body", isBody: true },
         ],
       },

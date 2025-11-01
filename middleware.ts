@@ -1,20 +1,17 @@
 import { createI18nMiddleware } from 'next-international/middleware';
-import { NextRequest } from 'next/server';
+import type { NextRequest } from 'next/server';
 
-const I18nMiddleware = createI18nMiddleware({
+const I18n = createI18nMiddleware({
   locales: ['en', 'ur'],
   defaultLocale: 'ur',
-  // No prefix for the default locale (Urdu)
-  urlMapping: [
-    { locale: 'en', hrefLang: 'en-US' },
-    { locale: 'ur', hrefLang: 'ur-PK' },
-  ],
 });
 
 export function middleware(request: NextRequest) {
-  return I18nMiddleware(request);
+  return I18n(request);
 }
 
 export const config = {
-  matcher: ['/((?!api|static|.*\\..*|_next).*)'],
+  matcher: [
+    '/((?!api|_next/static|_next/image|favicon.ico|.*\\.(?:png|jpg|jpeg|gif|svg|webp)|admin|admin/.*).*)',
+  ],
 };

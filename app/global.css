@@ -1,0 +1,11 @@
+/* app/globals.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* You can keep any custom global styles you had */
+html,
+body {
+  scroll-behavior: smooth;
+  font-family: var(--font-satoshi), var(--font-inter), var(--font-noto), sans-serif;
+}

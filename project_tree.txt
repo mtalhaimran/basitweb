@@ -1,0 +1,714 @@
+.
+├── .bolt
+│   ├── config.json
+│   ├── ignore
+│   └── prompt
+├── .DS_Store
+├── .env.local
+├── .env.local.backup
+├── .eslintrc.json
+├── .gitignore
+├── app
+│   ├── about
+│   │   └── page.tsx
+│   ├── bonn-ka-banjara
+│   │   ├── [slug]
+│   │   │   └── page.tsx
+│   │   └── page.tsx
+│   ├── books
+│   │   ├── [slug]
+│   │   │   └── page.tsx
+│   │   └── page.tsx
+│   ├── contact
+│   │   └── page.tsx
+│   ├── globals.css
+│   ├── layout.tsx
+│   ├── page.tsx
+│   ├── posts
+│   │   ├── [slug]
+│   │   │   └── page.tsx
+│   │   └── page.tsx
+│   ├── robots.ts
+│   ├── sitemap.ts
+│   ├── work
+│   │   ├── [slug]
+│   │   │   └── page.tsx
+│   │   └── page.tsx
+│   └── writing
+│       ├── [slug]
+│       │   └── page.tsx
+│       └── page.tsx
+├── backups
+│   ├── Header.before.tsx
+│   └── TemplateHero.before.tsx
+├── components
+│   ├── AccessibilityPanel.tsx
+│   ├── AccessibilityProvider.tsx
+│   ├── ErrorBoundary.tsx
+│   ├── EssayCard.tsx
+│   ├── Footer.tsx
+│   ├── Header.tsx
+│   ├── NameRevealUrdu.tsx
+│   ├── PagefindScript.tsx
+│   ├── PortfolioGrid.tsx
+│   ├── PostCard.tsx
+│   ├── PostList.tsx
+│   ├── SearchOverlay.tsx
+│   ├── SectionHeading.tsx
+│   ├── TimelineIcon.tsx
+│   ├── ui
+│   │   ├── accordion.tsx
+│   │   ├── alert-dialog.tsx
+│   │   ├── alert.tsx
+│   │   ├── aspect-ratio.tsx
+│   │   ├── avatar.tsx
+│   │   ├── badge.tsx
+│   │   ├── breadcrumb.tsx
+│   │   ├── button.tsx
+│   │   ├── calendar.tsx
+│   │   ├── card.tsx
+│   │   ├── carousel.tsx
+│   │   ├── chart.tsx
+│   │   ├── checkbox.tsx
+│   │   ├── collapsible.tsx
+│   │   ├── command.tsx
+│   │   ├── context-menu.tsx
+│   │   ├── dialog.tsx
+│   │   ├── drawer.tsx
+│   │   ├── dropdown-menu.tsx
+│   │   ├── form.tsx
+│   │   ├── hover-card.tsx
+│   │   ├── input-otp.tsx
+│   │   ├── input.tsx
+│   │   ├── label.tsx
+│   │   ├── menubar.tsx
+│   │   ├── navigation-menu.tsx
+│   │   ├── pagination.tsx
+│   │   ├── popover.tsx
+│   │   ├── progress.tsx
+│   │   ├── radio-group.tsx
+│   │   ├── resizable.tsx
+│   │   ├── scroll-area.tsx
+│   │   ├── select.tsx
+│   │   ├── separator.tsx
+│   │   ├── sheet.tsx
+│   │   ├── skeleton.tsx
+│   │   ├── slider.tsx
+│   │   ├── sonner.tsx
+│   │   ├── switch.tsx
+│   │   ├── table.tsx
+│   │   ├── tabs.tsx
+│   │   ├── textarea.tsx
+│   │   ├── toast.tsx
+│   │   ├── toaster.tsx
+│   │   ├── toggle-group.tsx
+│   │   ├── toggle.tsx
+│   │   └── tooltip.tsx
+│   ├── WorkCard.tsx
+│   └── WritingList.tsx
+├── components.json
+├── content
+│   ├── .DS_Store
+│   ├── posts
+│   │   ├── bonn-ka-banjara-post-1.md
+│   │   ├── bonn-ka-banjara-post-10.md
+│   │   ├── bonn-ka-banjara-post-100.md
+│   │   ├── bonn-ka-banjara-post-101.md
+│   │   ├── bonn-ka-banjara-post-102.md
+│   │   ├── bonn-ka-banjara-post-103.md
+│   │   ├── bonn-ka-banjara-post-104.md
+│   │   ├── bonn-ka-banjara-post-105.md
+│   │   ├── bonn-ka-banjara-post-106.md
+│   │   ├── bonn-ka-banjara-post-107.md
+│   │   ├── bonn-ka-banjara-post-108.md
+│   │   ├── bonn-ka-banjara-post-109.md
+│   │   ├── bonn-ka-banjara-post-11.md
+│   │   ├── bonn-ka-banjara-post-110.md
+│   │   ├── bonn-ka-banjara-post-111.md
+│   │   ├── bonn-ka-banjara-post-112.md
+│   │   ├── bonn-ka-banjara-post-113.md
+│   │   ├── bonn-ka-banjara-post-114.md
+│   │   ├── bonn-ka-banjara-post-115.md
+│   │   ├── bonn-ka-banjara-post-116.md
+│   │   ├── bonn-ka-banjara-post-117.md
+│   │   ├── bonn-ka-banjara-post-118.md
+│   │   ├── bonn-ka-banjara-post-119.md
+│   │   ├── bonn-ka-banjara-post-12.md
+│   │   ├── bonn-ka-banjara-post-120.md
+│   │   ├── bonn-ka-banjara-post-121.md
+│   │   ├── bonn-ka-banjara-post-122.md
+│   │   ├── bonn-ka-banjara-post-123.md
+│   │   ├── bonn-ka-banjara-post-124.md
+│   │   ├── bonn-ka-banjara-post-125.md
+│   │   ├── bonn-ka-banjara-post-126.md
+│   │   ├── bonn-ka-banjara-post-127.md
+│   │   ├── bonn-ka-banjara-post-128.md
+│   │   ├── bonn-ka-banjara-post-129.md
+│   │   ├── bonn-ka-banjara-post-13.md
+│   │   ├── bonn-ka-banjara-post-130.md
+│   │   ├── bonn-ka-banjara-post-131.md
+│   │   ├── bonn-ka-banjara-post-132.md
+│   │   ├── bonn-ka-banjara-post-133.md
+│   │   ├── bonn-ka-banjara-post-134.md
+│   │   ├── bonn-ka-banjara-post-135.md
+│   │   ├── bonn-ka-banjara-post-136.md
+│   │   ├── bonn-ka-banjara-post-137.md
+│   │   ├── bonn-ka-banjara-post-138.md
+│   │   ├── bonn-ka-banjara-post-139.md
+│   │   ├── bonn-ka-banjara-post-14.md
+│   │   ├── bonn-ka-banjara-post-140.md
+│   │   ├── bonn-ka-banjara-post-141.md
+│   │   ├── bonn-ka-banjara-post-142.md
+│   │   ├── bonn-ka-banjara-post-143.md
+│   │   ├── bonn-ka-banjara-post-15.md
+│   │   ├── bonn-ka-banjara-post-16.md
+│   │   ├── bonn-ka-banjara-post-17.md
+│   │   ├── bonn-ka-banjara-post-18.md
+│   │   ├── bonn-ka-banjara-post-19.md
+│   │   ├── bonn-ka-banjara-post-2.md
+│   │   ├── bonn-ka-banjara-post-20-1.md
+│   │   ├── bonn-ka-banjara-post-20-2.md
+│   │   ├── bonn-ka-banjara-post-20-3.md
+│   │   ├── bonn-ka-banjara-post-20-4.md
+│   │   ├── bonn-ka-banjara-post-20-5.md
+│   │   ├── bonn-ka-banjara-post-20-6.md
+│   │   ├── bonn-ka-banjara-post-20-7.md
+│   │   ├── bonn-ka-banjara-post-20-8.md
+│   │   ├── bonn-ka-banjara-post-20-9.md
+│   │   ├── bonn-ka-banjara-post-21.md
+│   │   ├── bonn-ka-banjara-post-22.md
+│   │   ├── bonn-ka-banjara-post-23.md
+│   │   ├── bonn-ka-banjara-post-24.md
+│   │   ├── bonn-ka-banjara-post-25.md
+│   │   ├── bonn-ka-banjara-post-26.md
+│   │   ├── bonn-ka-banjara-post-27.md
+│   │   ├── bonn-ka-banjara-post-28.md
+│   │   ├── bonn-ka-banjara-post-29.md
+│   │   ├── bonn-ka-banjara-post-3.md
+│   │   ├── bonn-ka-banjara-post-30.md
+│   │   ├── bonn-ka-banjara-post-31.md
+│   │   ├── bonn-ka-banjara-post-32.md
+│   │   ├── bonn-ka-banjara-post-33.md
+│   │   ├── bonn-ka-banjara-post-34.md
+│   │   ├── bonn-ka-banjara-post-35.md
+│   │   ├── bonn-ka-banjara-post-36.md
+│   │   ├── bonn-ka-banjara-post-37.md
+│   │   ├── bonn-ka-banjara-post-38.md
+│   │   ├── bonn-ka-banjara-post-39.md
+│   │   ├── bonn-ka-banjara-post-4.md
+│   │   ├── bonn-ka-banjara-post-40.md
+│   │   ├── bonn-ka-banjara-post-41.md
+│   │   ├── bonn-ka-banjara-post-42.md
+│   │   ├── bonn-ka-banjara-post-43.md
+│   │   ├── bonn-ka-banjara-post-44.md
+│   │   ├── bonn-ka-banjara-post-45.md
+│   │   ├── bonn-ka-banjara-post-46.md
+│   │   ├── bonn-ka-banjara-post-47.md
+│   │   ├── bonn-ka-banjara-post-48.md
+│   │   ├── bonn-ka-banjara-post-49.md
+│   │   ├── bonn-ka-banjara-post-5.md
+│   │   ├── bonn-ka-banjara-post-50.md
+│   │   ├── bonn-ka-banjara-post-51.md
+│   │   ├── bonn-ka-banjara-post-52.md
+│   │   ├── bonn-ka-banjara-post-53.md
+│   │   ├── bonn-ka-banjara-post-54.md
+│   │   ├── bonn-ka-banjara-post-55.md
+│   │   ├── bonn-ka-banjara-post-56.md
+│   │   ├── bonn-ka-banjara-post-57.md
+│   │   ├── bonn-ka-banjara-post-58.md
+│   │   ├── bonn-ka-banjara-post-59.md
+│   │   ├── bonn-ka-banjara-post-6.md
+│   │   ├── bonn-ka-banjara-post-60.md
+│   │   ├── bonn-ka-banjara-post-61.md
+│   │   ├── bonn-ka-banjara-post-62.md
+│   │   ├── bonn-ka-banjara-post-63.md
+│   │   ├── bonn-ka-banjara-post-64.md
+│   │   ├── bonn-ka-banjara-post-65.md
+│   │   ├── bonn-ka-banjara-post-66.md
+│   │   ├── bonn-ka-banjara-post-67.md
+│   │   ├── bonn-ka-banjara-post-68.md
+│   │   ├── bonn-ka-banjara-post-69.md
+│   │   ├── bonn-ka-banjara-post-7.md
+│   │   ├── bonn-ka-banjara-post-70.md
+│   │   ├── bonn-ka-banjara-post-71.md
+│   │   ├── bonn-ka-banjara-post-72.md
+│   │   ├── bonn-ka-banjara-post-73.md
+│   │   ├── bonn-ka-banjara-post-74.md
+│   │   ├── bonn-ka-banjara-post-75.md
+│   │   ├── bonn-ka-banjara-post-76.md
+│   │   ├── bonn-ka-banjara-post-77.md
+│   │   ├── bonn-ka-banjara-post-78.md
+│   │   ├── bonn-ka-banjara-post-79.md
+│   │   ├── bonn-ka-banjara-post-8.md
+│   │   ├── bonn-ka-banjara-post-80.md
+│   │   ├── bonn-ka-banjara-post-81.md
+│   │   ├── bonn-ka-banjara-post-82.md
+│   │   ├── bonn-ka-banjara-post-83.md
+│   │   ├── bonn-ka-banjara-post-84.md
+│   │   ├── bonn-ka-banjara-post-85.md
+│   │   ├── bonn-ka-banjara-post-86.md
+│   │   ├── bonn-ka-banjara-post-87.md
+│   │   ├── bonn-ka-banjara-post-88.md
+│   │   ├── bonn-ka-banjara-post-89.md
+│   │   ├── bonn-ka-banjara-post-9.md
+│   │   ├── bonn-ka-banjara-post-90.md
+│   │   ├── bonn-ka-banjara-post-91.md
+│   │   ├── bonn-ka-banjara-post-92.md
+│   │   ├── bonn-ka-banjara-post-93.md
+│   │   ├── bonn-ka-banjara-post-94.md
+│   │   ├── bonn-ka-banjara-post-95.md
+│   │   ├── bonn-ka-banjara-post-96.md
+│   │   ├── bonn-ka-banjara-post-97.md
+│   │   ├── bonn-ka-banjara-post-98.md
+│   │   ├── bonn-ka-banjara-post-99.md
+│   │   └── hello-world.md
+│   └── users
+│       └── index.json
+├── context
+│   ├── ClientProvider.tsx
+│   └── LanguageContext.tsx
+├── docs
+│   ├── accessibility-checklist.md
+│   ├── accessibility-improvements.md
+│   ├── image-optimization-guide.md
+│   └── style-guide.md
+├── hooks
+│   └── use-toast.ts
+├── lib
+│   ├── data
+│   │   ├── content.ts
+│   │   ├── posts.ts
+│   │   ├── work.ts
+│   │   └── writing.ts
+│   ├── utils
+│   │   └── seo.ts
+│   └── utils.ts
+├── locales
+│   ├── client.ts
+│   ├── en.json
+│   ├── server.ts
+│   └── ur.json
+├── middleware.ts
+├── next-env.d.ts
+├── next.config.js
+├── out
+│   ├── _next
+│   │   ├── _o45Wv-fY3RTTdRYJrxOZ
+│   │   └── static
+│   │       ├── _o45Wv-fY3RTTdRYJrxOZ
+│   │       ├── chunks
+│   │       └── css
+│   ├── .DS_Store
+│   ├── 404
+│   │   └── index.html
+│   ├── 404.html
+│   ├── about
+│   │   ├── index.html
+│   │   └── index.txt
+│   ├── bonn-ka-banjara
+│   │   ├── index.html
+│   │   ├── index.txt
+│   │   └── placeholder
+│   │       ├── index.html
+│   │       └── index.txt
+│   ├── books
+│   │   ├── index.html
+│   │   ├── index.txt
+│   │   └── placeholder
+│   │       ├── index.html
+│   │       └── index.txt
+│   ├── contact
+│   │   ├── index.html
+│   │   └── index.txt
+│   ├── images
+│   │   └── hero.jpg
+│   ├── index.html
+│   ├── index.txt
+│   ├── pagefind
+│   │   ├── filter
+│   │   │   └── ur_293b28f.pf_filter
+│   │   ├── fragment
+│   │   │   ├── ur_10d5e4c.pf_fragment
+│   │   │   ├── ur_18b2fa1.pf_fragment
+│   │   │   ├── ur_36991cd.pf_fragment
+│   │   │   ├── ur_5b29dd1.pf_fragment
+│   │   │   ├── ur_5b4615b.pf_fragment
+│   │   │   ├── ur_5e1ccff.pf_fragment
+│   │   │   ├── ur_657f503.pf_fragment
+│   │   │   ├── ur_6f137e5.pf_fragment
+│   │   │   ├── ur_775f7f7.pf_fragment
+│   │   │   ├── ur_78a4cd6.pf_fragment
+│   │   │   ├── ur_82af491.pf_fragment
+│   │   │   ├── ur_8d2d539.pf_fragment
+│   │   │   ├── ur_90966d5.pf_fragment
+│   │   │   ├── ur_91a54b6.pf_fragment
+│   │   │   ├── ur_a06bf62.pf_fragment
+│   │   │   ├── ur_b792521.pf_fragment
+│   │   │   ├── ur_bb7419d.pf_fragment
+│   │   │   ├── ur_c747fd8.pf_fragment
+│   │   │   ├── ur_d1c2172.pf_fragment
+│   │   │   ├── ur_d28c8c5.pf_fragment
+│   │   │   ├── ur_d3ea70f.pf_fragment
+│   │   │   ├── ur_da24d89.pf_fragment
+│   │   │   ├── ur_da25dbd.pf_fragment
+│   │   │   ├── ur_e699817.pf_fragment
+│   │   │   ├── ur_e7fa588.pf_fragment
+│   │   │   ├── ur_f1784cb.pf_fragment
+│   │   │   ├── ur_f91c5c0.pf_fragment
+│   │   │   └── ur_fa103f8.pf_fragment
+│   │   ├── index
+│   │   │   └── ur_4b8aee5.pf_index
+│   │   ├── pagefind-entry.json
+│   │   ├── pagefind-highlight.js
+│   │   ├── pagefind-modular-ui.css
+│   │   ├── pagefind-modular-ui.js
+│   │   ├── pagefind-ui.css
+│   │   ├── pagefind-ui.js
+│   │   ├── pagefind.js
+│   │   ├── pagefind.ur_e9d2fc3264.pf_meta
+│   │   └── wasm.unknown.pagefind
+│   ├── posts
+│   │   ├── index.html
+│   │   ├── index.txt
+│   │   └── pehla-post
+│   │       ├── index.html
+│   │       └── index.txt
+│   ├── robots.txt
+│   ├── sitemap.xml
+│   ├── work
+│   │   ├── index.html
+│   │   ├── index.txt
+│   │   └── sample-project
+│   │       ├── index.html
+│   │       └── index.txt
+│   └── writing
+│       ├── index.html
+│       ├── index.txt
+│       └── pehla-essay
+│           ├── index.html
+│           └── index.txt
+├── package-lock.json
+├── package.json
+├── pages
+│   ├── api
+│   └── demo
+│       └── blog
+│           └── [filename].tsx
+├── postcss.config.js
+├── project_tree.txt
+├── public
+│   ├── .DS_Store
+│   ├── images
+│   │   ├── عدم،-کہ-یون.jpg
+│   │   ├── دھن-اور-دہن.jpg
+│   │   ├── ب-کا-دم.jpg
+│   │   ├── رات-کی-بات.jpg
+│   │   ├── تصور-شیخ-1.jpg
+│   │   ├── الف-لیلوی-225x300.jpg
+│   │   ├── تصور-شیخ-300x300.jpg
+│   │   ├── قوس-قزح.jpg
+│   │   ├── تصور-شیخ.jpg
+│   │   ├── الف-لیلوی.jpg
+│   │   ├── کوا-کہانی.jpg
+│   │   ├── ج.jpg
+│   │   ├── 1-1-1024x1024.jpg
+│   │   ├── 1-1.jpg
+│   │   ├── 10-1024x1024.jpg
+│   │   ├── 10.jpg
+│   │   ├── 100-169x300.jpg
+│   │   ├── 100.jpg
+│   │   ├── 10351379_346174322197916_2061677427787627489_n-300x154.jpg
+│   │   ├── 10351379_346174322197916_2061677427787627489_n.jpg
+│   │   ├── 105-300x225.jpg
+│   │   ├── 105.jpg
+│   │   ├── 106-300x300.jpg
+│   │   ├── 106.jpg
+│   │   ├── 107.jpg
+│   │   ├── 108-1024x768.jpg
+│   │   ├── 108.jpg
+│   │   ├── 11-1-1024x1024.jpg
+│   │   ├── 11-1.jpg
+│   │   ├── 110-300x182.jpg
+│   │   ├── 110.jpg
+│   │   ├── 112-300x182.jpg
+│   │   ├── 112.jpg
+│   │   ├── 113-225x300.jpg
+│   │   ├── 113.jpg
+│   │   ├── 114-300x203.jpg
+│   │   ├── 114.jpg
+│   │   ├── 116-300x225.jpg
+│   │   ├── 116.jpg
+│   │   ├── 119-300x300.jpg
+│   │   ├── 119.jpg
+│   │   ├── 12-1.jpg
+│   │   ├── 128-1-300x254.jpg
+│   │   ├── 128-1.jpg
+│   │   ├── 128-300x150.jpg
+│   │   ├── 128.jpg
+│   │   ├── 134-200x300.jpg
+│   │   ├── 134.jpg
+│   │   ├── 135-e1717489057610.jpg
+│   │   ├── 13938289_670095999805745_8582732955961987621_o_670095999805745.jpg
+│   │   ├── 17834073_805391339609543_5726618083666090711_o-e1717488964130.jpg
+│   │   ├── 2-1-1024x1024.jpg
+│   │   ├── 2-1.jpg
+│   │   ├── 2019-05-31-01.47.59.jpg
+│   │   ├── 20190824_121651-1000x1024.jpeg
+│   │   ├── 20190824_121651.jpeg
+│   │   ├── 20190824_122458-scaled.jpeg
+│   │   ├── 20190824_131731-300x225.jpeg
+│   │   ├── 20190824_131731-scaled.jpeg
+│   │   ├── 20190824_204120-300x225.jpeg
+│   │   ├── 20190824_204120-scaled.jpeg
+│   │   ├── 20190824_205724-1024x742.jpeg
+│   │   ├── 20190824_205724.jpeg
+│   │   ├── 21-300x226.jpg
+│   │   ├── 21.jpg
+│   │   ├── 24-300x243.jpg
+│   │   ├── 24.jpg
+│   │   ├── 27-300x300.jpg
+│   │   ├── 27.jpg
+│   │   ├── 29-300x225.jpg
+│   │   ├── 29.jpg
+│   │   ├── 3-1-1024x1024.jpg
+│   │   ├── 3-1.jpg
+│   │   ├── 3-scaled-e1732684788609.jpg
+│   │   ├── 322112372_556093669734076_956199441138603232_n.jpg
+│   │   ├── 342429728_201419425979351_8923769395343216043_n-300x225.jpg
+│   │   ├── 342429728_201419425979351_8923769395343216043_n.jpg
+│   │   ├── 39-300x225.jpg
+│   │   ├── 39.jpg
+│   │   ├── 4-1-1024x1024.jpg
+│   │   ├── 4-1.jpg
+│   │   ├── 4-scaled-e1732684730242.jpg
+│   │   ├── 5-768x384.jpg
+│   │   ├── 5-scaled-e1732684758317.jpg
+│   │   ├── 52-200x300.jpg
+│   │   ├── 52.jpg
+│   │   ├── 524841-1480211851.jpg
+│   │   ├── 57-300x169.jpg
+│   │   ├── 57.jpg
+│   │   ├── 6-1-1024x1024.jpg
+│   │   ├── 6-1.jpg
+│   │   ├── 68-171x300.jpg
+│   │   ├── 68.jpg
+│   │   ├── 7-1-1024x1024.jpg
+│   │   ├── 7-1.jpg
+│   │   ├── 74-300x198.jpg
+│   │   ├── 74.jpg
+│   │   ├── 75-300x203.jpg
+│   │   ├── 75.jpg
+│   │   ├── 77-300x212.jpg
+│   │   ├── 77.jpg
+│   │   ├── 8-1-1024x1024.jpg
+│   │   ├── 8-1.jpg
+│   │   ├── 85-1024x461.jpg
+│   │   ├── 85.jpg
+│   │   ├── 9-1-1024x1024.jpg
+│   │   ├── 9-1.jpg
+│   │   ├── aaghosh-me-hun-768x1024.jpg
+│   │   ├── aaghosh-me-hun.jpg
+│   │   ├── Agape-1-225x300.jpg
+│   │   ├── Agape-1.jpg
+│   │   ├── Agape-2-300x225.jpg
+│   │   ├── Agape-2.jpg
+│   │   ├── Agape-3.jpg
+│   │   ├── Agape-4-225x300.jpg
+│   │   ├── Agape-4.jpg
+│   │   ├── Aladin-Tepe-Konya-2011-225x300.jpg
+│   │   ├── Aladin-Tepe-Konya-2011.jpg
+│   │   ├── Arzurum-Turkiye-2014-300x200.jpg
+│   │   ├── Arzurum-Turkiye-2014.jpg
+│   │   ├── Bab-i-Dervaishan-Konya-2017-225x300.jpg
+│   │   ├── Bab-i-Dervaishan-Konya-2017.jpg
+│   │   ├── Bari-Imam-2021-300x225.jpg
+│   │   ├── Bari-Imam-2021-scaled.jpg
+│   │   ├── basit-with-Taya-1024x1024.jpg
+│   │   ├── basit-with-Taya.jpg
+│   │   ├── Bed-Godesberg-Germany-2022-300x225.jpg
+│   │   ├── Bed-Godesberg-Germany-2022.jpg
+│   │   ├── BKB-150-x-150.jpg
+│   │   ├── BKB-circle-e1686422560955.png
+│   │   ├── BKB.jpg
+│   │   ├── Black-Cat-Lahore-1-300x225.jpg
+│   │   ├── Black-Minimalist-Live-Podcast-YouTube-Thumbnail-1-300x169.jpg
+│   │   ├── Black-Minimalist-Live-Podcast-YouTube-Thumbnail-1.jpg
+│   │   ├── Black-sea-2015-225x300.jpg
+│   │   ├── Black-sea-2015.jpg
+│   │   ├── BON5-1.gif
+│   │   ├── Bursa-2016-225x300.jpg
+│   │   ├── Bursa-2016.jpg
+│   │   ├── Bursa-Osmangazi-2015-300x200.jpg
+│   │   ├── Bursa-Osmangazi-2015.jpg
+│   │   ├── Coptic-Monastery-The-Colourful-Church-2024-e1732684929960.jpg
+│   │   ├── Demirkoy-2018-300x233.jpg
+│   │   ├── Demirkoy-2018.jpg
+│   │   ├── DSC_0211-scaled.jpg
+│   │   ├── DSC00972-300x200.jpg
+│   │   ├── DSC00972-scaled.jpg
+│   │   ├── DSC01620x-1024x808.jpeg
+│   │   ├── DSC01620x-scaled.jpeg
+│   │   ├── DSC04658-1002x1024.jpeg
+│   │   ├── DSC04658.jpeg
+│   │   ├── DSC05140-300x216.jpeg
+│   │   ├── DSC05140-scaled.jpeg
+│   │   ├── DSC05427-300x243.jpeg
+│   │   ├── DSC05427.jpeg
+│   │   ├── DSC05861-1-1-scaled.jpeg
+│   │   ├── DSC05861-1-1024x502.jpeg
+│   │   ├── DSC05861-1-scaled.jpeg
+│   │   ├── DSC06607-scaled.jpeg
+│   │   ├── e294e825-bc91-4f6d-a8d6-7fa208a2483b-212x300.jpg
+│   │   ├── e294e825-bc91-4f6d-a8d6-7fa208a2483b.jpg
+│   │   ├── Hatay-State-Assembly-Building-2022-225x300.jpg
+│   │   ├── Hatay-State-Assembly-Building-2022.jpg
+│   │   ├── hero.jpg
+│   │   ├── IMG_0013-2-rotated.jpeg
+│   │   ├── IMG_0013-2.jpeg
+│   │   ├── IMG_0040-2-300x200.jpg
+│   │   ├── IMG_0040-2-scaled.jpg
+│   │   ├── IMG_20230509_153557.jpg
+│   │   ├── IMG_2731-scaled.jpg
+│   │   ├── IMG_3116-300x247.jpg
+│   │   ├── IMG_3116-scaled.jpg
+│   │   ├── IMG_3357.jpeg
+│   │   ├── IMG_4382-300x200.jpeg
+│   │   ├── IMG_4382-scaled.jpeg
+│   │   ├── IMG_6117-300x200.jpeg
+│   │   ├── IMG_6117-scaled.jpeg
+│   │   ├── IMG_6312-300x200.jpeg
+│   │   ├── IMG_6312-scaled.jpeg
+│   │   ├── IMG_6740-1024x864.jpeg
+│   │   ├── IMG_6740.jpeg
+│   │   ├── IMG_7024-1024x683.jpeg
+│   │   ├── IMG_7024-e1689069460538.jpeg
+│   │   ├── IMG_8065-e1689530525764.jpeg
+│   │   ├── IMG_8191-scaled.jpg
+│   │   ├── IMG_9466-300x225.jpg
+│   │   ├── IMG_9466-scaled.jpg
+│   │   ├── IMG-20190930-WA0169-300x200.jpeg
+│   │   ├── IMG-20190930-WA0169.jpeg
+│   │   ├── IMG-20190930-WA0170-300x224.jpeg
+│   │   ├── IMG-20190930-WA0170.jpeg
+│   │   ├── IMG-20190930-WA0171.jpeg
+│   │   ├── Kalyam-Shareef-2008-300x186.jpeg
+│   │   ├── Kalyam-Shareef-2008.jpeg
+│   │   ├── kya-kaha-300x173.jpg
+│   │   ├── kya-kaha.jpg
+│   │   ├── mashad-Iran-300x270.jpg
+│   │   ├── mashad-Iran.jpg
+│   │   ├── Niederosterreich-2016-300x200.jpg
+│   │   ├── Niederosterreich-2016.jpg
+│   │   ├── Pamukkale-2012-300x225.jpg
+│   │   ├── Pamukkale-2012.jpg
+│   │   ├── Piya-Dais-2021.jpg
+│   │   ├── Piya-Dais-Lahore-300x169.jpeg
+│   │   ├── Piya-Dais-Lahore-scaled.jpeg
+│   │   ├── post-37-ilm-ka-pyasa-300x169.jpg
+│   │   ├── post-37-ilm-ka-pyasa.jpg
+│   │   ├── post-44-300x225.jpg
+│   │   ├── post-44.jpg
+│   │   ├── post-66-300x225.jpg
+│   │   ├── post-66.jpg
+│   │   ├── post-80-edited.jpg
+│   │   ├── post-80.jpg
+│   │   ├── post-99-300x225.jpg
+│   │   ├── post-99.jpg
+│   │   ├── Prof._Dr._Mustafa_Ozturk_cropped.jpg
+│   │   ├── raat-ki-baat-e1703167331908-300x188.jpg
+│   │   ├── raat-ki-baat-e1703167331908.jpg
+│   │   ├── safr-e-sirat.jpg
+│   │   ├── sigmand-freud-300x200.jpg
+│   │   ├── sigmand-freud.jpg
+│   │   ├── Thandiani-Galyat-KPK-2021-300x225.jpg
+│   │   ├── Thandiani-Galyat-KPK-2021.jpg
+│   │   ├── The-other-Prophet--scaled.jpg
+│   │   ├── The-other-Prophet-1-1-edited-scaled.jpg
+│   │   ├── The-other-Prophet-1-1-scaled.jpg
+│   │   ├── the-other-prophet-639x1024.jpg
+│   │   ├── the-other-prophet-scaled.jpg
+│   │   ├── Topkapi-Sarayi-Istanbul-طوپقپو-سرايى-225x300.jpg
+│   │   ├── Topkapi-Sarayi-Istanbul-طوپقپو-سرايى.jpg
+│   │   ├── Untitled-150-×-150-px.png
+│   │   ├── Untitled-72-×-36-in-300x150.png
+│   │   ├── Untitled-72-×-36-in.png
+│   │   ├── Untitled-design-1.png
+│   │   ├── Untitled-Presentation-169-1024x576.png
+│   │   ├── Untitled-Presentation-169.png
+│   │   ├── Victor-Emmanuel-II-Monument-Roma-2023-225x300.jpg
+│   │   ├── Victor-Emmanuel-II-Monument-Roma-2023.jpg
+│   │   ├── WHATSAPP-IMAGE-2019-04-24-AT-17.41.053-2.jpeg
+│   │   ├── WHATSAPP-IMAGE-2019-06-24-AT-22.59.55-2.jpeg
+│   │   ├── WhatsApp-Image-2023-05-04-at-12.07.36-e1683340534524.jpg
+│   │   ├── WhatsApp-Image-2023-06-10-at-10.22.31-1.jpg
+│   │   ├── WhatsApp-Image-2023-06-10-at-10.22.31.jpg
+│   │   ├── WhatsApp-Image-2023-07-09-at-17.47.36-300x200.jpg
+│   │   ├── WhatsApp-Image-2023-07-09-at-17.47.36.jpg
+│   │   ├── WhatsApp-Image-2025-04-19-at-13.00.48_b26d25fd.jpg
+│   │   ├── yazdan-190x300.jpg
+│   │   └── yazdan.jpg
+│   └── pagefind
+│       ├── filter
+│       │   └── ur_293b28f.pf_filter
+│       ├── fragment
+│       │   ├── ur_10d5e4c.pf_fragment
+│       │   ├── ur_18b2fa1.pf_fragment
+│       │   ├── ur_36991cd.pf_fragment
+│       │   ├── ur_5b29dd1.pf_fragment
+│       │   ├── ur_5b4615b.pf_fragment
+│       │   ├── ur_5e1ccff.pf_fragment
+│       │   ├── ur_657f503.pf_fragment
+│       │   ├── ur_6f137e5.pf_fragment
+│       │   ├── ur_775f7f7.pf_fragment
+│       │   ├── ur_78a4cd6.pf_fragment
+│       │   ├── ur_82af491.pf_fragment
+│       │   ├── ur_8d2d539.pf_fragment
+│       │   ├── ur_90966d5.pf_fragment
+│       │   ├── ur_91a54b6.pf_fragment
+│       │   ├── ur_a06bf62.pf_fragment
+│       │   ├── ur_b792521.pf_fragment
+│       │   ├── ur_bb7419d.pf_fragment
+│       │   ├── ur_c747fd8.pf_fragment
+│       │   ├── ur_d1c2172.pf_fragment
+│       │   ├── ur_d28c8c5.pf_fragment
+│       │   ├── ur_d3ea70f.pf_fragment
+│       │   ├── ur_da24d89.pf_fragment
+│       │   ├── ur_da25dbd.pf_fragment
+│       │   ├── ur_e699817.pf_fragment
+│       │   ├── ur_e7fa588.pf_fragment
+│       │   ├── ur_f1784cb.pf_fragment
+│       │   ├── ur_f91c5c0.pf_fragment
+│       │   └── ur_fa103f8.pf_fragment
+│       ├── index
+│       │   └── ur_4b8aee5.pf_index
+│       ├── pagefind-entry.json
+│       ├── pagefind-highlight.js
+│       ├── pagefind-modular-ui.css
+│       ├── pagefind-modular-ui.js
+│       ├── pagefind-ui.css
+│       ├── pagefind-ui.js
+│       ├── pagefind.js
+│       ├── pagefind.ur_e9d2fc3264.pf_meta
+│       └── wasm.unknown.pagefind
+├── README.md
+├── tailwind.config.ts
+├── tina
+│   ├── __generated__
+│   │   ├── _graphql.json
+│   │   ├── _lookup.json
+│   │   ├── _schema.json
+│   │   ├── client.ts
+│   │   ├── config.prebuild.jsx
+│   │   ├── databaseClient.ts
+│   │   ├── frags.gql
+│   │   ├── queries.gql
+│   │   ├── schema.gql
+│   │   ├── static-media.json
+│   │   └── types.ts
+│   ├── .gitignore
+│   ├── config.ts
+│   ├── database.ts
+│   └── tina-lock.json
+└── tsconfig.json
+
+65 directories, 647 files
