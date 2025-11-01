@@ -5,7 +5,15 @@ export const dynamic = 'force-static';
 
 export default async function HomePage() {
   const t = await getI18n();
-  const locale = (await getCurrentLocale()) || 'ur';
+  
+  // Safely get locale with fallback
+  let locale = 'ur';
+  try {
+    locale = (await getCurrentLocale()) || 'ur';
+  } catch (error) {
+    locale = 'ur';
+  }
+  
   const isUrdu = locale === 'ur';
 
   return (

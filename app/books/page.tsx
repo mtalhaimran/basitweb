@@ -4,7 +4,14 @@ export const dynamic = 'force-static';
 
 export default async function BooksPage() {
   const t = await getI18n();
-  const locale = (await getCurrentLocale()) || 'ur';
+  
+  let locale = 'ur';
+  try {
+    locale = (await getCurrentLocale()) || 'ur';
+  } catch (error) {
+    locale = 'ur';
+  }
+  
   const isUrdu = locale === 'ur';
 
   return (

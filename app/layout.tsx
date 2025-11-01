@@ -9,7 +9,15 @@ export default async function RootLayout({
 }: { 
   children: React.ReactNode 
 }) {
-  const locale = (await getCurrentLocale()) || 'ur';
+  // Safely get locale with fallback to avoid notFound() error
+  let locale = 'ur';
+  try {
+    locale = (await getCurrentLocale()) || 'ur';
+  } catch (error) {
+    // If locale detection fails, default to Urdu
+    locale = 'ur';
+  }
+  
   const dir = locale === 'ur' ? 'rtl' : 'ltr';
 
   return (
