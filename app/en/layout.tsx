@@ -3,5 +3,10 @@ export default function EnLayout({
 }: { 
   children: React.ReactNode 
 }) {
-  return children;
+  // English layout should override the parent RTL direction
+  return (
+    <div dir="ltr" lang="en" className="font-inter">
+      {children}
+    </div>
+  );
 }

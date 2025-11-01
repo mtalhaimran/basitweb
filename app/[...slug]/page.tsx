@@ -1,6 +1,6 @@
-import { getI18n, getCurrentLocale } from '@/locales/server';
 import { getPageContent, isValidPage, pageContent } from '@/lib/pageContent';
 import { notFound } from 'next/navigation';
+import { type Locale } from '@/lib/i18n';
 
 export const dynamic = 'force-static';
 
@@ -13,18 +13,9 @@ export async function generateStaticParams() {
 }
 
 export default async function DynamicPage({ params }: { params: { slug: string[] } }) {
-  const t = await getI18n();
-  
-  // Get locale with fallback
-  let locale: 'ur' | 'en' = 'ur';
-  try {
-    const currentLocale = await getCurrentLocale();
-    locale = (currentLocale === 'en' ? 'en' : 'ur') as 'ur' | 'en';
-  } catch (error) {
-    locale = 'ur';
-  }
-  
-  const isUrdu = locale === 'ur';
+  // Default to Urdu locale
+  const locale: Locale = 'ur';
+  const isUrdu = true;
   
   // Get the page slug (first segment)
   const pageSlug = params.slug?.[0] || '';

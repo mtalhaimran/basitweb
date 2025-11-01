@@ -43,7 +43,13 @@ export function Header() {
   ];
 
   const navEnglish = [
-    { name: 'Posts', href: '/en/posts' }
+    { name: 'Work', href: '/work' },
+    { name: 'Writing', href: '/writing' },
+    { name: 'Posts', href: '/en/posts' },
+    { name: 'Books', href: '/books' },
+    { name: 'Bonn ka Banjara', href: '/bonn-ka-banjara' },
+    { name: 'About', href: '/about' },
+    { name: 'Contact', href: '/contact' }
   ];
 
   const navigation = isUrduPage ? navUrdu : navEnglish;

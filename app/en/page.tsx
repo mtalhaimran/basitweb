@@ -1,10 +1,11 @@
-import { getI18n } from '@/locales/server';
 import { TemplateHero } from '@/components/TemplateHero';
+import { getTranslations, type Locale } from '@/lib/i18n';
 
 export const dynamic = 'force-static';
 
 export default async function EnHomePage() {
-  const t = await getI18n();
+  const locale: Locale = 'en';
+  const t = getTranslations(locale);
 
   return (
     <>
@@ -13,13 +14,13 @@ export default async function EnHomePage() {
         <div className="container mx-auto px-4 py-12" dir="ltr">
           <div className="max-w-4xl mx-auto">
             <h1 className="text-5xl font-bold mb-4 text-ink">
-              {t('home.headline')}
+              {t.home.headline}
             </h1>
             <p className="text-2xl text-ink-muted mb-8">
-              {t('home.subheadline')}
+              {t.home.subheadline}
             </p>
             <p className="text-lg leading-relaxed text-ink mb-12">
-              {t('home.intro')}
+              {t.home.intro}
             </p>
 
             {/* Milestones */}
@@ -27,10 +28,10 @@ export default async function EnHomePage() {
               {[1, 2, 3].map((i) => (
                 <div key={i} className="flex items-center gap-4">
                   <span className="text-brand font-bold">
-                    {t(`home.milestone${i}_year` as any)}
+                    {t.home[`milestone${i}_year` as keyof typeof t.home]}
                   </span>
                   <span className="text-ink">
-                    {t(`home.milestone${i}_text` as any)}
+                    {t.home[`milestone${i}_text` as keyof typeof t.home]}
                   </span>
                 </div>
               ))}
@@ -39,7 +40,7 @@ export default async function EnHomePage() {
             {/* Quote */}
             <blockquote className="border-l-4 pl-6 border-brand py-2 mb-12">
               <p className="text-xl italic text-ink-muted">
-                "{t('home.quote')}"
+                "{t.home.quote}"
               </p>
             </blockquote>
 
