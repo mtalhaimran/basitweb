@@ -7,6 +7,9 @@ const defaultLocale = 'ur';
 // Paths that should bypass locale handling
 const publicPaths = ['/api', '/_next', '/static', '/admin', '/robots.txt', '/sitemap.xml', '/favicon.ico'];
 
+// English pages that exist
+const englishPages = ['/posts', '/page'];
+
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
@@ -15,7 +18,26 @@ export function middleware(request: NextRequest) {
     return NextResponse.next();
   }
 
-  // Check if pathname already has a locale
+  // Handle /en routes - redirect to Urdu if page doesn't exist in English
+  if (pathname.startsWith('/en/')) {
+    const pathWithoutEn = pathname.replace('/en', '');
+    
+    // Check if this English page exists
+    const englishPageExists = englishPages.some(page => 
+      pathWithoutEn.startsWith(page) || pathWithoutEn === page
+    );
+    
+    if (!englishPageExists) {
+      // Redirect to Urdu version
+      const url = request.nextUrl.clone();
+      url.pathname = pathWithoutEn || '/';
+      return NextResponse.redirect(url);
+    }
+    
+    return NextResponse.next();
+  }
+
+  // Check if pathname already has a locale (but not /en which we handled above)
   const pathnameHasLocale = locales.some(
     locale => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`
   );
@@ -24,17 +46,8 @@ export function middleware(request: NextRequest) {
     return NextResponse.next();
   }
 
-  // Redirect root to /ur
-  if (pathname === '/') {
-    const url = request.nextUrl.clone();
-    url.pathname = `/${defaultLocale}`;
-    return NextResponse.redirect(url);
-  }
-
-  // Redirect other paths to /ur/path
-  const url = request.nextUrl.clone();
-  url.pathname = `/${defaultLocale}${pathname}`;
-  return NextResponse.redirect(url);
+  // All other paths proceed normally (Urdu is default, no /ur prefix needed)
+  return NextResponse.next();
 }
 
 export const config = {

@@ -1,6 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import Image from 'next/image';
+import { SearchButton } from '@/components/SearchButton';
 
 export const dynamic = 'force-static';
 
@@ -100,9 +101,12 @@ export default async function BonnKaBanjaraPage() {
       <div className="container mx-auto px-4 py-12" dir="rtl">
         <div className="max-w-6xl mx-auto">
           <div className="mb-12 text-right">
-            <h1 className="text-5xl font-bold mb-4 text-ink font-urdu-heading">
-              بون کا بنجارہ
-            </h1>
+            <div className="flex items-center justify-between flex-row-reverse mb-4">
+              <h1 className="text-5xl font-bold text-ink font-urdu-heading">
+                بون کا بنجارہ
+              </h1>
+              <SearchButton locale="ur" />
+            </div>
             <p className="text-lg text-ink-muted font-urdu-body">
               بون شہر سے تعلق رکھنے والی کہانیاں اور تحریریں
             </p>

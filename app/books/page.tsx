@@ -1,5 +1,6 @@
 import { loadBooks } from '@/lib/utils/books';
 import { getImagePath } from '@/lib/utils/frontmatter';
+import { SearchButton } from '@/components/SearchButton';
 import Image from 'next/image';
 
 export const dynamic = 'force-static';
@@ -13,9 +14,12 @@ export default async function BooksPage() {
         <div className="max-w-7xl mx-auto">
           {/* Page Header */}
           <div className="mb-12 text-right">
-            <h1 className="text-5xl font-bold text-ink mb-4 font-urdu-heading">
-              کتابیں
-            </h1>
+            <div className="flex items-center justify-between flex-row-reverse mb-4">
+              <h1 className="text-5xl font-bold text-ink font-urdu-heading">
+                کتابیں
+              </h1>
+              <SearchButton locale="ur" />
+            </div>
             <p className="text-lg text-ink-muted font-urdu-body">
               مصنف کی تصانیف کا مجموعہ
             </p>

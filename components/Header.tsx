@@ -56,31 +56,35 @@ export function Header() {
                     href="/en"
                     className="flex items-center gap-2 px-3 py-2 text-sm font-medium text-brand hover:text-white transition-colors rounded-lg border-2 border-brand hover:bg-brand"
                     hrefLang="en"
+                    title="View English version (limited content)"
                   >
                     <Globe className="w-4 h-4" />
                     <span>English</span>
                   </Link>
-                  <button
-                    onClick={() => setIsSearchOpen(true)}
+                  <Link
+                    href="/search"
                     className="p-3 text-brand hover:text-brand-hover transition-colors rounded-lg hover:bg-surface-elevated"
                     aria-label="تلاش"
+                    title="تلاش (Ctrl+K)"
                   >
                     <Search className="w-5 h-5" />
-                  </button>
+                  </Link>
                 </>
               ) : (
                 <>
-                  <button
-                    onClick={() => setIsSearchOpen(true)}
+                  <Link
+                    href="/search"
                     className="p-3 text-brand hover:text-brand-hover transition-colors rounded-lg hover:bg-surface-elevated"
                     aria-label="Search"
+                    title="Search (Ctrl+K)"
                   >
                     <Search className="w-5 h-5" />
-                  </button>
+                  </Link>
                   <Link
                     href="/"
                     className="flex items-center gap-2 px-3 py-2 text-sm font-medium text-brand hover:text-white transition-colors rounded-lg border-2 border-brand hover:bg-brand"
                     hrefLang="ur"
+                    title="اردو ورژن دیکھیں"
                   >
                     <Globe className="w-4 h-4" />
                     <span>اردو</span>
