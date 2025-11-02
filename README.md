@@ -182,6 +182,53 @@ npm run dev
 npm run build
 ```
 
+### Run Tests
+```bash
+npm test              # Run all tests once
+npm run test:watch    # Run tests in watch mode
+npm run test:ui       # Run tests with UI
+```
+
+## 🧪 Testing
+
+This project uses **Vitest** and **React Testing Library** for testing.
+
+### Test Structure
+```
+components/__tests__/     # Component tests
+app/__tests__/           # Utility and integration tests
+```
+
+### Running Tests
+```bash
+npm test              # Run all tests once
+npm run test:watch    # Run tests in watch mode
+npm run test:ui       # Run tests with UI
+```
+
+### Writing Tests
+Tests are automatically discovered in `__tests__` directories or files ending with `.test.ts` or `.test.tsx`.
+
+Example test:
+```typescript
+import { describe, it, expect } from 'vitest';
+import { render, screen } from '@testing-library/react';
+import { MyComponent } from '../MyComponent';
+
+describe('MyComponent', () => {
+  it('renders correctly', () => {
+    render(<MyComponent />);
+    expect(screen.getByText('Hello')).toBeInTheDocument();
+  });
+});
+```
+
+### Test Coverage
+Current tests cover:
+- BooksSection component rendering and accessibility
+- Frontmatter parsing for gallery and books
+- Data structure validation
+
 ## 📊 Performance Targets
 
 - **LCP**: ≤ 2.5s (optimized hero image)
