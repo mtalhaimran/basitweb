@@ -52,12 +52,55 @@ function renderNode(node: Node, key?: number): React.ReactNode {
   }
 }
 
+// Component for TinaCMS rich text format
 export default function RichText({ body }: { body: any }) {
   if (!body) return null;
   const nodes: Node[] = Array.isArray(body?.children) ? body.children : Array.isArray(body) ? body : [body];
   return (
     <div className="prose prose-rtl max-w-none">
       {nodes.map((n, i) => renderNode(n, i))}
+    </div>
+  );
+}
+
+// Simple component for rendering plain markdown/text content
+export function SimpleMarkdown({ content }: { content: string }) {
+  if (!content) return null;
+  
+  // Simple markdown-like rendering for text content
+  const lines = content.split('\n');
+  
+  return (
+    <div className="space-y-4">
+      {lines.map((line, idx) => {
+        // Empty line
+        if (!line.trim()) {
+          return <br key={idx} />;
+        }
+        
+        // Headings
+        if (line.startsWith('# ')) {
+          return <h1 key={idx} className="text-4xl font-bold mb-4">{line.substring(2)}</h1>;
+        }
+        if (line.startsWith('## ')) {
+          return <h2 key={idx} className="text-3xl font-semibold mb-3">{line.substring(3)}</h2>;
+        }
+        if (line.startsWith('### ')) {
+          return <h3 key={idx} className="text-2xl font-semibold mb-2">{line.substring(4)}</h3>;
+        }
+        
+        // Blockquote
+        if (line.startsWith('> ')) {
+          return (
+            <blockquote key={idx} className="border-r-4 border-brand pr-4 italic text-ink-muted my-4">
+              {line.substring(2)}
+            </blockquote>
+          );
+        }
+        
+        // Regular paragraph
+        return <p key={idx} className="leading-8 text-lg">{line}</p>;
+      })}
     </div>
   );
 }

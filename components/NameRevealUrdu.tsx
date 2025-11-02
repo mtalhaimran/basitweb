@@ -85,8 +85,13 @@ export default function NameRevealUrdu({ className = '', showDropdown = false }:
     >
       <div className={`flex items-center gap-4 ${isUrduPage ? 'flex-row' : 'flex-row-reverse'}`}>
         <motion.div
-          style={{ width: open ? textWidth : 0, zIndex: 150 }}
-          className="overflow-hidden relative"
+          style={{ 
+            width: open ? textWidth : 0, 
+            zIndex: 150,
+            position: 'absolute',
+            [isUrduPage ? 'right' : 'left']: '60px'
+          }}
+          className="overflow-visible"
           animate={{ opacity: open ? 1 : 0 }}
           transition={transition}
         >
