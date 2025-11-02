@@ -203,11 +203,77 @@ npm run build
 
 ## 📝 Content Management
 
-Content is stored in `lib/data/content.ts`. Update with your:
-- Books data with Urdu translations
-- Essays and articles
-- Series entries
-- Social links and contact info
+This site uses **TinaCMS** for content management. Content is stored in markdown files in the `content/` directory.
+
+### Using TinaCMS
+
+1. **Start the development server with TinaCMS**:
+   ```bash
+   npm run dev
+   ```
+
+2. **Access the CMS**:
+   - Navigate to `/admin` in your browser
+   - Login with your GitHub credentials
+   - Edit content directly through the visual editor
+
+### Content Structure
+
+#### Posts (بون کا بنجارہ series)
+- Location: `content/posts/`
+- Create posts with category `bonn-ka-banjara` to appear on the Bonn ka Banjara page
+- Fields: title, date, locale, categories, tags, coverImage, body
+
+#### Books (کتابیں)
+- Location: `content/books/`
+- Displays on the homepage
+- Fields: title, coverImage, publishDate, locale, isbn, publisher, buyLink, description
+- Books with `buyLink` will be clickable and open in a new tab
+
+#### Gallery (گیلری)
+- Location: `content/gallery/`
+- Author photos and memories
+- Fields: title, image, date, caption, location
+- Images support hover overlay with caption and location
+
+#### Work/Portfolio
+- Location: `content/work/`
+- Professional work and projects
+- Fields: title, date, locale, category, coverImage, body
+
+#### Writing/Essays
+- Location: `content/writing/`
+- Long-form essays and articles
+- Fields: title, date, locale, tags, coverImage, body
+
+### Adding Content
+
+**Via TinaCMS (Recommended)**:
+1. Go to `/admin`
+2. Select the collection (Posts, Books, Gallery, etc.)
+3. Click "Create New"
+4. Fill in the fields and save
+
+**Via Files (Alternative)**:
+1. Create a new `.md` file in the appropriate `content/` directory
+2. Add frontmatter with required fields
+3. Write content in markdown
+4. Commit and push changes
+
+### Example: Adding a Book
+
+Create `content/books/my-new-book.md`:
+```markdown
+---
+title: "کتاب کا عنوان"
+coverImage: "book-cover.jpg"
+publishDate: 2024-01-15
+locale: "ur"
+buyLink: "https://example.com/buy"
+---
+
+کتاب کی تفصیل یہاں لکھیں۔
+```
 
 ## 🔧 Template Features
 

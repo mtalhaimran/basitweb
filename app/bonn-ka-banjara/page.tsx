@@ -1,5 +1,6 @@
 import fs from 'fs';
 import path from 'path';
+import Image from 'next/image';
 
 export const dynamic = 'force-static';
 
@@ -115,15 +116,17 @@ export default async function BonnKaBanjaraPage() {
                   href={`/posts/${post.slug}`}
                   className="group block bg-surface-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-2"
                 >
-                  <div className="aspect-video bg-surface-elevated relative overflow-hidden flex items-center justify-center">
+                  <div className="aspect-video bg-surface-elevated relative overflow-hidden">
                     {post.coverImage ? (
-                      <img 
-                        src={`/images/${post.coverImage}`} 
+                      <Image
+                        src={`/images/${post.coverImage}`}
                         alt={post.title}
-                        className="w-full h-full object-cover"
+                        fill
+                        className="object-cover"
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                       />
                     ) : (
-                      <div className="text-ink-muted font-urdu-body">
+                      <div className="absolute inset-0 flex items-center justify-center text-ink-muted font-urdu-body">
                         [تصویر]
                       </div>
                     )}
