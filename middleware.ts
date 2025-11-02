@@ -1,14 +1,11 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
-const locales = ['ur', 'en'];
-const defaultLocale = 'ur';
-
-// Paths that should bypass locale handling
+// Paths that should bypass middleware
 const publicPaths = ['/api', '/_next', '/static', '/admin', '/robots.txt', '/sitemap.xml', '/favicon.ico'];
 
-// English pages that exist
-const englishPages = ['/posts', '/page'];
+// Only /en landing page and /en/posts exist in English
+const validEnglishPaths = ['/en', '/en/posts'];
 
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
@@ -18,32 +15,19 @@ export function middleware(request: NextRequest) {
     return NextResponse.next();
   }
 
-  // Handle /en routes - redirect to Urdu if page doesn't exist in English
-  if (pathname.startsWith('/en/')) {
-    const pathWithoutEn = pathname.replace('/en', '');
-    
-    // Check if this English page exists
-    const englishPageExists = englishPages.some(page => 
-      pathWithoutEn.startsWith(page) || pathWithoutEn === page
+  // Handle /en routes - only allow /en and /en/posts, redirect everything else to Urdu
+  if (pathname.startsWith('/en')) {
+    // Check if this is a valid English path
+    const isValidEnglishPath = validEnglishPaths.some(validPath => 
+      pathname === validPath || (validPath === '/en/posts' && pathname.startsWith('/en/posts/'))
     );
     
-    if (!englishPageExists) {
-      // Redirect to Urdu version
+    if (!isValidEnglishPath) {
+      // Redirect to Urdu version (remove /en prefix)
       const url = request.nextUrl.clone();
-      url.pathname = pathWithoutEn || '/';
+      url.pathname = pathname.replace('/en', '') || '/';
       return NextResponse.redirect(url);
     }
-    
-    return NextResponse.next();
-  }
-
-  // Check if pathname already has a locale (but not /en which we handled above)
-  const pathnameHasLocale = locales.some(
-    locale => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`
-  );
-
-  if (pathnameHasLocale) {
-    return NextResponse.next();
   }
 
   // All other paths proceed normally (Urdu is default, no /ur prefix needed)
