@@ -21,12 +21,13 @@ async function getGalleryImages(): Promise<GalleryImage[]> {
   const images: GalleryImage[] = [];
   
   try {
-    // Load from TinaCMS content/gallery
+    // Load from TinaCMS content/gallery (both .md files and image files)
     const galleryDirectory = path.join(process.cwd(), 'content/gallery');
     
     if (fs.existsSync(galleryDirectory)) {
       const filenames = fs.readdirSync(galleryDirectory);
       
+      // Load .md files with frontmatter
       const cmsImages = filenames
         .filter(filename => filename.endsWith('.md'))
         .map(filename => {
@@ -46,6 +47,22 @@ async function getGalleryImages(): Promise<GalleryImage[]> {
         });
       
       images.push(...cmsImages);
+      
+      // Load direct image files (JPG, PNG, etc.)
+      const imageExtensions = ['.jpg', '.jpeg', '.png', '.gif', '.webp', '.JPG', '.JPEG', '.PNG'];
+      const directImages = filenames
+        .filter(filename => imageExtensions.some(ext => filename.endsWith(ext)))
+        .map((filename, index) => ({
+          slug: `direct-${filename.replace(/\.[^/.]+$/, '')}`,
+          title: filename.replace(/\.[^/.]+$/, '').replace(/_/g, ' '),
+          image: `/gallery/${filename}`,
+          caption: undefined,
+          location: undefined,
+          date: new Date().toISOString(),
+          source: 'cms' as const
+        }));
+      
+      images.push(...directImages);
     }
 
     // Load from public/gallery folder
