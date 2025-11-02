@@ -47,8 +47,8 @@ export function EnglishFallback({ urduPath, sectionName }: EnglishFallbackProps)
             Why is this content in Urdu only?
           </h2>
           <p className="text-ink-muted leading-relaxed">
-            Most of Abdul Basit Zafar's writings are in Urdu, reflecting the rich literary 
-            tradition and nuanced expression that the language offers. We're working on 
+            Most of Abdul Basit Zafar&apos;s writings are in Urdu, reflecting the rich literary 
+            tradition and nuanced expression that the language offers. We&apos;re working on 
             making selected works available in English, but we encourage you to experience 
             the original Urdu versions for the full depth of meaning.
           </p>

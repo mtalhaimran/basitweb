@@ -55,7 +55,7 @@ export default async function BooksPage() {
                       <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
                         <blockquote className="text-white font-urdu-body text-right">
                           <p className="text-lg leading-relaxed mb-2">
-                            "{book.quotes[0]}"
+                            &ldquo;{book.quotes[0]}&rdquo;
                           </p>
                           {book.quotes.length > 1 && (
                             <p className="text-sm text-white/80">

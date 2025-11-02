@@ -1,6 +1,6 @@
 'use client';
 
-import FlexSearch from 'flexsearch';
+import { Document } from 'flexsearch';
 
 export type SearchDoc = {
   id: string;
@@ -48,7 +48,7 @@ function normalizeUrdu(text: string): string {
 
 // Create FlexSearch index with custom tokenizer for Urdu
 export function createSearchIndex() {
-  const index = new FlexSearch.Document<SearchDoc>({
+  const index = new Document<SearchDoc>({
     document: {
       id: 'id',
       index: ['title', 'excerpt', 'tags', 'quotes', 'caption'],
@@ -73,7 +73,7 @@ export function createSearchIndex() {
 }
 
 export class SearchManager {
-  private index: FlexSearch.Document<SearchDoc>;
+  private index: Document<SearchDoc>;
   private docs: SearchDoc[] = [];
   private isInitialized = false;
 
