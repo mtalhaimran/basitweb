@@ -4,7 +4,7 @@ import fs from 'fs';
 import path from 'path';
 
 export interface SearchResult {
-  type: 'book' | 'snippet' | 'bonn-ka-banjara' | 'writing' | 'work';
+  type: 'book' | 'snippet' | 'bonn-ka-banjara' | 'work';
   id: string;
   title: string;
   excerpt: string;
@@ -66,13 +66,7 @@ export async function globalSearch(query: string, filters?: {
     results.push(...bonnResults.map(r => ({ ...r, type: 'bonn-ka-banjara' as const })));
   }
 
-  // Search writing
-  if (!filters?.type || filters.type.includes('writing')) {
-    const writingResults = await searchInDirectory('writing', searchTerm, filters);
-    results.push(...writingResults.map(r => ({ ...r, type: 'writing' as const })));
-  }
-
-  // Search work
+  // Search work (kaam)
   if (!filters?.type || filters.type.includes('work')) {
     const workResults = await searchInDirectory('work', searchTerm, filters);
     results.push(...workResults.map(r => ({ ...r, type: 'work' as const })));

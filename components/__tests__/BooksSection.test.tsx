@@ -31,35 +31,34 @@ describe('BooksSection', () => {
     expect(screen.getByText('Test Book 2')).toBeInTheDocument();
   });
 
-  it('renders book with buy link as clickable', () => {
+  it('renders "View All Books" link', () => {
     const books = [
       {
         slug: 'book-1',
-        title: 'Purchasable Book',
+        title: 'Test Book',
         buyLink: 'https://example.com/buy',
       },
     ];
 
     render(<BooksSection books={books} locale="ur" />);
     
-    const link = screen.getByRole('link', { name: /Purchase Purchasable Book/i });
-    expect(link).toHaveAttribute('href', 'https://example.com/buy');
-    expect(link).toHaveAttribute('target', '_blank');
-    expect(link).toHaveAttribute('rel', 'noopener noreferrer');
+    const viewAllLink = screen.getByText('تمام کتابیں دیکھیں ←');
+    expect(viewAllLink).toBeInTheDocument();
+    expect(viewAllLink.closest('a')).toHaveAttribute('href', '/books');
   });
 
-  it('renders book without buy link as non-clickable', () => {
+  it('renders book cards as links to books page', () => {
     const books = [
       {
         slug: 'book-1',
-        title: 'Non-Purchasable Book',
+        title: 'Book Title',
       },
     ];
 
     render(<BooksSection books={books} locale="ur" />);
     
-    expect(screen.getByText('Non-Purchasable Book')).toBeInTheDocument();
-    expect(screen.queryByRole('link')).not.toBeInTheDocument();
+    const bookLink = screen.getByRole('article', { name: 'Book: Book Title' });
+    expect(bookLink).toHaveAttribute('href', '/books');
   });
 
   it('has proper accessibility attributes', () => {
