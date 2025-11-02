@@ -2,6 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import Image from 'next/image';
 import { getTranslations, type Locale } from '@/lib/i18n';
+import { parseFrontmatter, getImagePath } from '@/lib/utils/frontmatter';
 
 export const dynamic = 'force-static';
 
@@ -12,31 +13,6 @@ interface GalleryImage {
   caption?: string;
   location?: string;
   date: string;
-}
-
-// Simple frontmatter parser
-function parseFrontmatter(content: string) {
-  const frontmatterRegex = /^---\s*\n([\s\S]*?)\n---\s*\n([\s\S]*)$/;
-  const match = content.match(frontmatterRegex);
-  
-  if (!match) {
-    return { data: {}, content };
-  }
-  
-  const [, frontmatter, body] = match;
-  const data: Record<string, any> = {};
-  
-  frontmatter.split('\n').forEach(line => {
-    const colonIndex = line.indexOf(':');
-    if (colonIndex > 0) {
-      const key = line.substring(0, colonIndex).trim();
-      let value: any = line.substring(colonIndex + 1).trim();
-      value = value.replace(/^["']|["']$/g, '');
-      data[key] = value;
-    }
-  });
-  
-  return { data, content: body };
 }
 
 async function getGalleryImages(): Promise<GalleryImage[]> {
@@ -105,7 +81,7 @@ export default async function GalleryPage() {
                 >
                   {image.image ? (
                     <Image
-                      src={image.image.startsWith('/') ? image.image : `/images/${image.image}`}
+                      src={getImagePath(image.image)}
                       alt={image.caption || image.title}
                       fill
                       className="object-cover transition-transform duration-300 group-hover:scale-105"

@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
+import { getImagePath } from '@/lib/utils/frontmatter';
 
 interface Book {
   slug: string;
@@ -71,7 +72,7 @@ function BookContent({ book }: { book: Book }) {
       <div className="aspect-[3/4] bg-surface-elevated relative overflow-hidden">
         {book.coverImage ? (
           <Image
-            src={book.coverImage.startsWith('/') ? book.coverImage : `/images/${book.coverImage}`}
+            src={getImagePath(book.coverImage)}
             alt={book.title}
             fill
             className="object-cover transition-transform duration-300 group-hover:scale-105"

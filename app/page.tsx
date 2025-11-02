@@ -3,6 +3,7 @@ import path from 'path';
 import { TemplateHero } from '@/components/TemplateHero';
 import { BooksSection } from '@/components/BooksSection';
 import { getTranslations, type Locale } from '@/lib/i18n';
+import { parseFrontmatter } from '@/lib/utils/frontmatter';
 
 export const dynamic = 'force-static';
 
@@ -11,31 +12,6 @@ interface Book {
   title: string;
   coverImage?: string;
   buyLink?: string;
-}
-
-// Simple frontmatter parser
-function parseFrontmatter(content: string) {
-  const frontmatterRegex = /^---\s*\n([\s\S]*?)\n---\s*\n([\s\S]*)$/;
-  const match = content.match(frontmatterRegex);
-  
-  if (!match) {
-    return { data: {}, content };
-  }
-  
-  const [, frontmatter, body] = match;
-  const data: Record<string, any> = {};
-  
-  frontmatter.split('\n').forEach(line => {
-    const colonIndex = line.indexOf(':');
-    if (colonIndex > 0) {
-      const key = line.substring(0, colonIndex).trim();
-      let value: any = line.substring(colonIndex + 1).trim();
-      value = value.replace(/^["']|["']$/g, '');
-      data[key] = value;
-    }
-  });
-  
-  return { data, content: body };
 }
 
 async function getBooks(): Promise<Book[]> {

@@ -1,29 +1,5 @@
 import { describe, it, expect } from 'vitest';
-
-// Test the frontmatter parser used in gallery and books
-function parseFrontmatter(content: string) {
-  const frontmatterRegex = /^---\s*\n([\s\S]*?)\n---\s*\n([\s\S]*)$/;
-  const match = content.match(frontmatterRegex);
-  
-  if (!match) {
-    return { data: {}, content };
-  }
-  
-  const [, frontmatter, body] = match;
-  const data: Record<string, any> = {};
-  
-  frontmatter.split('\n').forEach(line => {
-    const colonIndex = line.indexOf(':');
-    if (colonIndex > 0) {
-      const key = line.substring(0, colonIndex).trim();
-      let value: any = line.substring(colonIndex + 1).trim();
-      value = value.replace(/^["']|["']$/g, '');
-      data[key] = value;
-    }
-  });
-  
-  return { data, content: body };
-}
+import { parseFrontmatter, getImagePath } from '@/lib/utils/frontmatter';
 
 describe('Frontmatter Parser', () => {
   it('parses valid frontmatter', () => {
@@ -109,5 +85,23 @@ describe('Gallery Data Structure', () => {
     
     expect(galleryImage.caption).toBe('Optional caption');
     expect(galleryImage.location).toBe('Optional location');
+  });
+});
+
+describe('Image Path Utility', () => {
+  it('returns absolute path as-is', () => {
+    expect(getImagePath('/absolute/path.jpg')).toBe('/absolute/path.jpg');
+  });
+
+  it('prepends /images/ to relative paths', () => {
+    expect(getImagePath('relative.jpg')).toBe('/images/relative.jpg');
+  });
+
+  it('handles undefined gracefully', () => {
+    expect(getImagePath(undefined)).toBe('');
+  });
+
+  it('handles empty string', () => {
+    expect(getImagePath('')).toBe('');
   });
 });
