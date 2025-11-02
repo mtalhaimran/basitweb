@@ -39,8 +39,9 @@ async function getSnippet(slug: string): Promise<SnippetData | null> {
   }
 }
 
-export default async function SnippetDetailPage({ params }: { params: { slug: string } }) {
-  const snippet = await getSnippet(params.slug);
+export default async function SnippetDetailPage({ params }: { params: Promise<{ slug: string }> }) {
+  const resolvedParams = await params;
+  const snippet = await getSnippet(resolvedParams.slug);
 
   if (!snippet) {
     notFound();

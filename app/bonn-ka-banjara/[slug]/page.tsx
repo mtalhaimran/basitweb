@@ -41,8 +41,9 @@ async function getPost(slug: string): Promise<PostData | null> {
   }
 }
 
-export default async function BonnKaBanjaraDetailPage({ params }: { params: { slug: string } }) {
-  const post = await getPost(params.slug);
+export default async function BonnKaBanjaraDetailPage({ params }: { params: Promise<{ slug: string }> }) {
+  const resolvedParams = await params;
+  const post = await getPost(resolvedParams.slug);
 
   if (!post) {
     notFound();
