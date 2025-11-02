@@ -13,41 +13,64 @@ interface GalleryImage {
   caption?: string;
   location?: string;
   date: string;
+  source: 'cms' | 'folder';
 }
 
 async function getGalleryImages(): Promise<GalleryImage[]> {
+  const images: GalleryImage[] = [];
+  
   try {
+    // Load from TinaCMS content/gallery
     const galleryDirectory = path.join(process.cwd(), 'content/gallery');
     
-    if (!fs.existsSync(galleryDirectory)) {
-      return [];
+    if (fs.existsSync(galleryDirectory)) {
+      const filenames = fs.readdirSync(galleryDirectory);
+      
+      const cmsImages = filenames
+        .filter(filename => filename.endsWith('.md'))
+        .map(filename => {
+          const filePath = path.join(galleryDirectory, filename);
+          const fileContents = fs.readFileSync(filePath, 'utf8');
+          const { data } = parseFrontmatter(fileContents);
+          
+          return {
+            slug: filename.replace('.md', ''),
+            title: data.title || 'بے عنوان',
+            image: data.image || '',
+            caption: data.caption,
+            location: data.location,
+            date: data.date || new Date().toISOString(),
+            source: 'cms' as const
+          };
+        });
+      
+      images.push(...cmsImages);
     }
 
-    const filenames = fs.readdirSync(galleryDirectory);
-    
-    const images = filenames
-      .filter(filename => filename.endsWith('.md'))
-      .map(filename => {
-        const filePath = path.join(galleryDirectory, filename);
-        const fileContents = fs.readFileSync(filePath, 'utf8');
-        const { data } = parseFrontmatter(fileContents);
-        
-        return {
-          slug: filename.replace('.md', ''),
-          title: data.title || 'بے عنوان',
-          image: data.image || '',
-          caption: data.caption,
-          location: data.location,
-          date: data.date || new Date().toISOString()
-        };
-      })
-      .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
-
-    return images;
+    // Load from public/gallery folder
+    const publicGalleryManifest = path.join(process.cwd(), 'public/gallery/gallery-manifest.json');
+    if (fs.existsSync(publicGalleryManifest)) {
+      const manifestContent = fs.readFileSync(publicGalleryManifest, 'utf8');
+      const manifest = JSON.parse(manifestContent);
+      
+      const folderImages = manifest.images.map((img: any, index: number) => ({
+        slug: `gallery-${index}`,
+        title: img.title || `تصویر ${index + 1}`,
+        image: `/gallery/${img.filename}`,
+        caption: img.caption,
+        location: img.location,
+        date: img.date || new Date().toISOString(),
+        source: 'folder' as const
+      }));
+      
+      images.push(...folderImages);
+    }
   } catch (error) {
     console.error('Error loading gallery images:', error);
-    return [];
   }
+  
+  // Sort by date (newest first)
+  return images.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 }
 
 export default async function GalleryPage() {

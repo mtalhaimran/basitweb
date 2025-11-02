@@ -1,56 +1,22 @@
-import fs from 'fs';
-import path from 'path';
 import { TemplateHero } from '@/components/TemplateHero';
 import { BooksSection } from '@/components/BooksSection';
 import { getTranslations, type Locale } from '@/lib/i18n';
-import { parseFrontmatter } from '@/lib/utils/frontmatter';
+import { loadBooks } from '@/lib/utils/books';
 
 export const dynamic = 'force-static';
-
-interface Book {
-  slug: string;
-  title: string;
-  coverImage?: string;
-  buyLink?: string;
-}
-
-async function getBooks(): Promise<Book[]> {
-  try {
-    const booksDirectory = path.join(process.cwd(), 'content/books');
-    
-    if (!fs.existsSync(booksDirectory)) {
-      return [];
-    }
-
-    const filenames = fs.readdirSync(booksDirectory);
-    
-    const books = filenames
-      .filter(filename => filename.endsWith('.md'))
-      .map(filename => {
-        const filePath = path.join(booksDirectory, filename);
-        const fileContents = fs.readFileSync(filePath, 'utf8');
-        const { data } = parseFrontmatter(fileContents);
-        
-        return {
-          slug: filename.replace('.md', ''),
-          title: data.title || 'بے عنوان',
-          coverImage: data.coverImage,
-          buyLink: data.buyLink
-        };
-      })
-      .sort((a, b) => a.title.localeCompare(b.title));
-
-    return books;
-  } catch (error) {
-    console.error('Error loading books:', error);
-    return [];
-  }
-}
 
 export default async function HomePage() {
   const locale: Locale = 'ur';
   const t = getTranslations(locale);
-  const books = await getBooks();
+  const booksData = await loadBooks();
+  
+  // Transform books data for BooksSection component
+  const books = booksData.map(book => ({
+    slug: book.id,
+    title: book.title,
+    coverImage: book.coverImage,
+    buyLink: book.buyLink
+  }));
 
   return (
     <>
