@@ -3,7 +3,6 @@ import path from 'path';
 import Image from 'next/image';
 import { getTranslations, type Locale } from '@/lib/i18n';
 import { parseFrontmatter, getImagePath } from '@/lib/utils/frontmatter';
-import { SearchButton } from '@/components/SearchButton';
 
 export const dynamic = 'force-static';
 
@@ -98,16 +97,13 @@ export default async function GalleryPage() {
 
   return (
     <div className="min-h-screen bg-surface">
-      <div className="container mx-auto px-4 py-16" dir="rtl">
+      <div className="container mx-auto px-4 py-16 pt-32" dir="rtl">
         <div className="max-w-7xl mx-auto">
           {/* Page Header */}
           <div className="mb-12 text-right">
-            <div className="flex items-center justify-between flex-row-reverse mb-4">
-              <h1 className="text-5xl font-bold text-ink font-urdu-heading">
-                گیلری
-              </h1>
-              <SearchButton locale="ur" />
-            </div>
+            <h1 className="text-5xl font-bold text-ink font-urdu-heading mb-4">
+              گیلری
+            </h1>
             <p className="text-lg text-ink-muted font-urdu-body">
               ذاتی تصاویر اور یادیں
             </p>
