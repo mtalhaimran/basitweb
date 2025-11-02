@@ -17,7 +17,7 @@ interface PostData {
 
 async function getPost(slug: string): Promise<PostData | null> {
   try {
-    const postsDirectory = path.join(process.cwd(), 'content/posts');
+    const postsDirectory = path.join(process.cwd(), 'content/snippets');
     const filePath = path.join(postsDirectory, `${slug}.md`);
     
     if (!fs.existsSync(filePath)) {
