@@ -25,9 +25,9 @@ export default defineConfig({
   schema: {
     collections: [
       {
-        name: "post",
-        label: "Posts",
-        path: "content/posts",
+        name: "bonnKaBanjara",
+        label: "Bonn ka Banjara (بون کا بنجارہ)",
+        path: "content/bonn-ka-banjara",
         format: "md",
 
         ui: {
@@ -36,9 +36,8 @@ export default defineConfig({
             date: new Date().toISOString(),
           },
           router: ({ document }) => {
-            const locale = document.locale || 'ur';
             const slug = document._sys.filename;
-            return locale === 'ur' ? `/posts/${slug}` : `/en/posts/${slug}`;
+            return `/bonn-ka-banjara/${slug}`;
           },
           filename: {
             slugify: (values) =>
@@ -54,14 +53,14 @@ export default defineConfig({
           { 
             type: "string", 
             name: "title", 
-            label: "Title", 
+            label: "Title (عنوان)", 
             isTitle: true, 
             required: true 
           },
           { 
             type: "datetime", 
             name: "date", 
-            label: "Date", 
+            label: "Date (تاریخ)", 
             required: true,
             ui: {
               dateFormat: 'YYYY-MM-DD',
@@ -95,12 +94,86 @@ export default defineConfig({
           { 
             type: "image", 
             name: "coverImage", 
-            label: "Cover Image" 
+            label: "Cover Image (سرورق)" 
           },
           { 
             type: "rich-text", 
             name: "body", 
-            label: "Body", 
+            label: "Body (مواد)", 
+            isBody: true 
+          },
+        ],
+      },
+      {
+        name: "snippet",
+        label: "Snippets (مضامین)",
+        path: "content/snippets",
+        format: "md",
+
+        ui: {
+          defaultItem: { 
+            locale: "ur",
+            date: new Date().toISOString(),
+          },
+          router: ({ document }) => {
+            const slug = document._sys.filename;
+            return `/snippets/${slug}`;
+          },
+          filename: {
+            slugify: (values) =>
+              (values?.title || "untitled")
+                .toString()
+                .toLowerCase()
+                .replace(/\s+/g, "-")
+                .replace(/[^\u0600-\u06FFa-z0-9\-]/g, ""),
+          },
+        },
+
+        fields: [
+          { 
+            type: "string", 
+            name: "title", 
+            label: "Title (عنوان)", 
+            isTitle: true, 
+            required: true 
+          },
+          { 
+            type: "datetime", 
+            name: "date", 
+            label: "Date (تاریخ)", 
+            required: true,
+            ui: {
+              dateFormat: 'YYYY-MM-DD',
+            }
+          },
+          { 
+            type: "string", 
+            name: "locale", 
+            label: "Language",
+            required: true,
+            options: [
+              { value: "ur", label: "اردو (Urdu)" },
+              { value: "en", label: "English" }
+            ],
+            ui: { 
+              component: "select",
+            },
+          },
+          { 
+            type: "string", 
+            name: "tags", 
+            label: "Tags", 
+            list: true 
+          },
+          { 
+            type: "image", 
+            name: "coverImage", 
+            label: "Cover Image (سرورق)" 
+          },
+          { 
+            type: "rich-text", 
+            name: "body", 
+            label: "Body (مواد)", 
             isBody: true 
           },
         ],
@@ -191,7 +264,7 @@ export default defineConfig({
       },
       {
         name: "work",
-        label: "Work / Portfolio",
+        label: "Work / Kaam (کام)",
         path: "content/work",
         format: "md",
 
@@ -218,96 +291,14 @@ export default defineConfig({
           { 
             type: "string", 
             name: "title", 
-            label: "Title", 
+            label: "Title (عنوان)", 
             isTitle: true, 
             required: true 
           },
           { 
             type: "datetime", 
             name: "date", 
-            label: "Date", 
-            required: true,
-            ui: {
-              dateFormat: 'YYYY-MM-DD',
-            }
-          },
-          { 
-            type: "string", 
-            name: "locale", 
-            label: "Language",
-            required: true,
-            options: [
-              { value: "ur", label: "اردو (Urdu)" },
-              { value: "en", label: "English" }
-            ],
-            ui: { 
-              component: "select",
-            },
-          },
-          { 
-            type: "image", 
-            name: "coverImage", 
-            label: "Cover Image" 
-          },
-          { 
-            type: "string", 
-            name: "category", 
-            label: "Category",
-            options: [
-              { value: "software", label: "Software" },
-              { value: "writing", label: "Writing" },
-              { value: "research", label: "Research" },
-              { value: "other", label: "Other" }
-            ],
-            ui: { 
-              component: "select",
-            },
-          },
-          { 
-            type: "rich-text", 
-            name: "body", 
-            label: "Body", 
-            isBody: true 
-          },
-        ],
-      },
-      {
-        name: "writing",
-        label: "Writing / Essays",
-        path: "content/writing",
-        format: "md",
-
-        ui: {
-          defaultItem: { 
-            locale: "ur",
-            date: new Date().toISOString(),
-          },
-          router: ({ document }) => {
-            const slug = document._sys.filename;
-            return `/writing/${slug}`;
-          },
-          filename: {
-            slugify: (values) =>
-              (values?.title || "untitled")
-                .toString()
-                .toLowerCase()
-                .replace(/\s+/g, "-")
-                .replace(/[^\u0600-\u06FFa-z0-9\-]/g, ""),
-          },
-        },
-
-        fields: [
-          { 
-            type: "string", 
-            name: "title", 
-            label: "Title", 
-            isTitle: true, 
-            required: true 
-          },
-          { 
-            type: "datetime", 
-            name: "date", 
-            label: "Date", 
+            label: "Date (تاریخ)", 
             required: true,
             ui: {
               dateFormat: 'YYYY-MM-DD',
@@ -335,12 +326,26 @@ export default defineConfig({
           { 
             type: "image", 
             name: "coverImage", 
-            label: "Cover Image" 
+            label: "Cover Image (سرورق)" 
+          },
+          { 
+            type: "string", 
+            name: "category", 
+            label: "Category",
+            options: [
+              { value: "software", label: "Software" },
+              { value: "milestone", label: "Milestone" },
+              { value: "research", label: "Research" },
+              { value: "other", label: "Other" }
+            ],
+            ui: { 
+              component: "select",
+            },
           },
           { 
             type: "rich-text", 
             name: "body", 
-            label: "Body", 
+            label: "Body (مواد)", 
             isBody: true 
           },
         ],

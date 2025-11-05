@@ -12,13 +12,16 @@ export async function generateStaticParams() {
   }));
 }
 
-export default async function DynamicPage({ params }: { params: { slug: string[] } }) {
+export default async function DynamicPage({ params }: { params: Promise<{ slug: string[] }> }) {
   // Default to Urdu locale
   const locale: Locale = 'ur';
   const isUrdu = true;
   
+  // Await params to comply with Next.js 15
+  const resolvedParams = await params;
+  
   // Get the page slug (first segment)
-  const pageSlug = params.slug?.[0] || '';
+  const pageSlug = resolvedParams.slug?.[0] || '';
   
   // Check if page exists
   if (!isValidPage(pageSlug)) {

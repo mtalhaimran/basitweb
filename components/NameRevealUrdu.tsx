@@ -21,7 +21,7 @@ export default function NameRevealUrdu({ className = '', showDropdown = false }:
   const navUrdu = [
     { name: 'کام', href: '/work' },
     { name: 'تحریریں', href: '/writing' },
-    { name: 'پوسٹس', href: '/posts' },
+    { name: 'مضامین', href: '/snippets' },
     { name: 'کتابیں', href: '/books' },
     { name: 'گیلری', href: '/gallery' },
     { name: 'بون کا بنجارہ', href: '/bonn-ka-banjara' },
@@ -32,7 +32,7 @@ export default function NameRevealUrdu({ className = '', showDropdown = false }:
   const navEnglish = [
     { name: 'Work', href: '/work' },
     { name: 'Writing', href: '/writing' },
-    { name: 'Posts', href: '/en/posts' },
+    { name: 'Snippets', href: '/snippets' },
     { name: 'Books', href: '/books' },
     { name: 'Gallery', href: '/gallery' },
     { name: 'Bonn ka Banjara', href: '/bonn-ka-banjara' },
@@ -85,8 +85,13 @@ export default function NameRevealUrdu({ className = '', showDropdown = false }:
     >
       <div className={`flex items-center gap-4 ${isUrduPage ? 'flex-row' : 'flex-row-reverse'}`}>
         <motion.div
-          style={{ width: open ? textWidth : 0, zIndex: 150 }}
-          className="overflow-hidden relative"
+          style={{ 
+            width: open ? textWidth : 0, 
+            zIndex: 150,
+            position: 'absolute',
+            [isUrduPage ? 'right' : 'left']: '60px'
+          }}
+          className="overflow-visible"
           animate={{ opacity: open ? 1 : 0 }}
           transition={transition}
         >

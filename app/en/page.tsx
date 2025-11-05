@@ -40,7 +40,7 @@ export default async function EnHomePage() {
             {/* Quote */}
             <blockquote className="border-l-4 pl-6 border-brand py-2 mb-12">
               <p className="text-xl italic text-ink-muted">
-                "{t.home.quote}"
+                &ldquo;{t.home.quote}&rdquo;
               </p>
             </blockquote>
 
