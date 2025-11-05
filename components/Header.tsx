@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
-import { Search, Globe } from 'lucide-react';
+import { Search } from 'lucide-react';
 import { SearchOverlay } from './SearchOverlay';
 import { motion, useReducedMotion } from 'framer-motion';
 import NameRevealUrdu from './NameRevealUrdu';
@@ -14,19 +14,6 @@ export function Header() {
   const pathname = usePathname();
   const shouldReduceMotion = useReducedMotion();
   const isUrduPage = !pathname.startsWith('/en');
-  
-  // Determine language toggle link based on current page
-  const getLanguageToggleLink = () => {
-    if (pathname === '/') return '/en';
-    if (pathname === '/en') return '/';
-    if (pathname === '/about') return '/en/about';
-    if (pathname === '/en/about') return '/about';
-    // For other pages, just toggle to the landing page
-    return isUrduPage ? '/en' : '/';
-  };
-  
-  const languageToggleLink = getLanguageToggleLink();
-  const showLanguageToggle = pathname === '/' || pathname === '/en' || pathname === '/about' || pathname === '/en/about';
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 20);
@@ -61,19 +48,8 @@ export function Header() {
       >
         <div className="container">
           <div className="flex items-center justify-between py-5">
-            {/* Left side - Search and Language toggle */}
+            {/* Left side - Search button only */}
             <div className="flex items-center gap-3">
-              {showLanguageToggle && (
-                <Link
-                  href={languageToggleLink}
-                  className="flex items-center gap-2 px-3 py-2 text-sm font-medium text-brand hover:text-white transition-colors rounded-lg border-2 border-brand hover:bg-brand"
-                  hrefLang={isUrduPage ? "en" : "ur"}
-                  title={isUrduPage ? "View in English" : "اردو میں دیکھیں"}
-                >
-                  <Globe className="w-4 h-4" />
-                  <span>{isUrduPage ? 'English' : 'اردو'}</span>
-                </Link>
-              )}
               {isUrduPage && (
                 <Link
                   href="/search"
