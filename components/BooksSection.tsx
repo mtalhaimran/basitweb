@@ -103,7 +103,6 @@ function BookContent({ book }: { book: Book }) {
             target="_blank"
             rel="noopener noreferrer"
             className="inline-block w-full text-center rounded-lg border-2 border-brand px-4 py-2 text-brand hover:bg-brand hover:text-white transition-colors font-medium font-urdu-body"
-            onClick={(e) => e.stopPropagation()}
           >
             خریدیں
           </a>
