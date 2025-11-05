@@ -1,5 +1,6 @@
 import fs from 'fs';
 import path from 'path';
+import Image from 'next/image';
 
 export const dynamic = 'force-static';
 
@@ -54,7 +55,7 @@ function parseFrontmatter(content: string) {
 
 async function getBonnKaBanjaraPosts(): Promise<Post[]> {
   try {
-    const postsDirectory = path.join(process.cwd(), 'content/posts');
+    const postsDirectory = path.join(process.cwd(), 'content/bonn-ka-banjara');
     
     // Check if directory exists
     if (!fs.existsSync(postsDirectory)) {
@@ -64,7 +65,7 @@ async function getBonnKaBanjaraPosts(): Promise<Post[]> {
     const filenames = fs.readdirSync(postsDirectory);
     
     const posts = filenames
-      .filter(filename => filename.includes('bonn-ka-banjara') && filename.endsWith('.md'))
+      .filter(filename => filename.endsWith('.md'))
       .map(filename => {
         const filePath = path.join(postsDirectory, filename);
         const fileContents = fs.readFileSync(filePath, 'utf8');
@@ -95,11 +96,11 @@ export default async function BonnKaBanjaraPage() {
   const posts = await getBonnKaBanjaraPosts();
 
   return (
-    <div className="min-h-screen bg-surface pt-20">
+    <div className="min-h-screen bg-surface pt-32">
       <div className="container mx-auto px-4 py-12" dir="rtl">
         <div className="max-w-6xl mx-auto">
           <div className="mb-12 text-right">
-            <h1 className="text-5xl font-bold mb-4 text-ink font-urdu-heading">
+            <h1 className="text-5xl font-bold text-ink font-urdu-heading mb-4">
               بون کا بنجارہ
             </h1>
             <p className="text-lg text-ink-muted font-urdu-body">
@@ -112,18 +113,20 @@ export default async function BonnKaBanjaraPage() {
               {posts.map((post) => (
                 <a
                   key={post.slug}
-                  href={`/posts/${post.slug}`}
+                  href={`/bonn-ka-banjara/${post.slug}`}
                   className="group block bg-surface-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-2"
                 >
-                  <div className="aspect-video bg-surface-elevated relative overflow-hidden flex items-center justify-center">
+                  <div className="aspect-video bg-surface-elevated relative overflow-hidden">
                     {post.coverImage ? (
-                      <img 
-                        src={`/images/${post.coverImage}`} 
+                      <Image
+                        src={`/images/${post.coverImage}`}
                         alt={post.title}
-                        className="w-full h-full object-cover"
+                        fill
+                        className="object-cover"
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                       />
                     ) : (
-                      <div className="text-ink-muted font-urdu-body">
+                      <div className="absolute inset-0 flex items-center justify-center text-ink-muted font-urdu-body">
                         [تصویر]
                       </div>
                     )}

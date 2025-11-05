@@ -7,11 +7,13 @@
     "build": "tinacms build && next build",
     "start": "next start",
     "lint": "next lint",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:ui": "vitest --ui",
     "postinstall": "patch-package"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",
-    "@next/font": "^14.2.15",
     "@next/swc-wasm-nodejs": "13.5.1",
     "@radix-ui/react-accordion": "^1.2.0",
     "@radix-ui/react-alert-dialog": "^1.1.1",
@@ -53,6 +55,7 @@
     "embla-carousel-react": "^8.3.0",
     "eslint": "8.49.0",
     "eslint-config-next": "13.5.1",
+    "flexsearch": "^0.8.212",
     "framer-motion": "^12.23.12",
     "input-otp": "^1.2.4",
     "lodash": "^4.17.21",
@@ -80,9 +83,14 @@
     "zod": "^3.23.8"
   },
   "devDependencies": {
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.0",
     "@tinacms/cli": "^1.11.0",
     "@types/node": "^24.4.0",
-    "patch-package": "^8.0.1"
+    "@vitejs/plugin-react": "^5.1.0",
+    "jsdom": "^27.1.0",
+    "patch-package": "^8.0.1",
+    "vitest": "^4.0.6"
   },
   "overrides": {
     "dompurify": "^3.2.4",
