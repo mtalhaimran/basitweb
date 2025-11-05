@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
-import { Search, Globe } from 'lucide-react';
+import { Search } from 'lucide-react';
 import { SearchOverlay } from './SearchOverlay';
 import { motion, useReducedMotion } from 'framer-motion';
 import NameRevealUrdu from './NameRevealUrdu';
@@ -48,48 +48,18 @@ export function Header() {
       >
         <div className="container">
           <div className="flex items-center justify-between py-5">
-            {/* Left side - Search and Language toggle for RTL (Urdu) */}
+            {/* Left side - Search button only */}
             <div className="flex items-center gap-3">
-              {isUrduPage ? (
-                <>
-                  <Link
-                    href="/en"
-                    className="flex items-center gap-2 px-3 py-2 text-sm font-medium text-brand hover:text-white transition-colors rounded-lg border-2 border-brand hover:bg-brand"
-                    hrefLang="en"
-                  >
-                    <Globe className="w-4 h-4" />
-                    <span>English</span>
-                  </Link>
-                  <button
-                    onClick={() => setIsSearchOpen(true)}
-                    className="p-3 text-brand hover:text-brand-hover transition-colors rounded-lg hover:bg-surface-elevated"
-                    aria-label="تلاش"
-                  >
-                    <Search className="w-5 h-5" />
-                  </button>
-                </>
-              ) : (
-                <>
-                  <button
-                    onClick={() => setIsSearchOpen(true)}
-                    className="p-3 text-brand hover:text-brand-hover transition-colors rounded-lg hover:bg-surface-elevated"
-                    aria-label="Search"
-                  >
-                    <Search className="w-5 h-5" />
-                  </button>
-                  <Link
-                    href="/"
-                    className="flex items-center gap-2 px-3 py-2 text-sm font-medium text-brand hover:text-white transition-colors rounded-lg border-2 border-brand hover:bg-brand"
-                    hrefLang="ur"
-                  >
-                    <Globe className="w-4 h-4" />
-                    <span>اردو</span>
-                  </Link>
-                </>
-              )}
+              <button
+                onClick={() => setIsSearchOpen(true)}
+                className="p-3 text-brand hover:text-brand-hover transition-colors rounded-lg hover:bg-surface-elevated"
+                aria-label={isUrduPage ? 'تلاش' : 'Search'}
+              >
+                <Search className="w-5 h-5" />
+              </button>
             </div>
 
-            {/* Right side - NameReveal with dropdown for RTL (Urdu) */}
+            {/* Right side - NameReveal with dropdown */}
             <div className="flex items-center gap-3">
               <NameRevealUrdu className="text-brand" showDropdown={true} />
             </div>
