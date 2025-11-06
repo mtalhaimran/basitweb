@@ -21,14 +21,14 @@ export function TemplateHero({ lang = 'ur' }: TemplateHeroProps) {
   const intro = isUrdu ? introUrdu : introEnglish;
 
   return (
-    <section className="relative h-[70vh] min-h-[500px] w-full overflow-hidden" dir={isUrdu ? 'rtl' : 'ltr'}>
+    <section className="relative h-[80vh] min-h-[600px] w-full overflow-visible" dir={isUrdu ? 'rtl' : 'ltr'}>
       <Image src="/images/hero.jpg" alt="" fill priority className="object-cover" />
       <div className="absolute inset-0 bg-gradient-to-b from-black/60 to-black/40" />
       
-      {/* Content aligned to the right for RTL */}
-      <div className="relative z-10 flex h-full items-center justify-end">
+      {/* Center text content on the image */}
+      <div className="relative z-10 flex h-full items-center justify-center">
         <div className={`container px-4 ${isUrdu ? 'text-right' : 'text-left'}`}>
-          <div className="max-w-3xl">
+          <div className="max-w-3xl mx-auto">
             <motion.h1 
               className={`text-6xl md:text-7xl font-bold mb-4 text-white ${isUrdu ? 'font-urdu-heading' : ''}`}
               initial={{ opacity: 0, y: 30 }}

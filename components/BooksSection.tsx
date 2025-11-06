@@ -52,7 +52,7 @@ export function BooksSection({ books, locale = 'ur' }: BooksSectionProps) {
           کتابیں
         </h2>
       </motion.div>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {books.map((book, index) => (
           <motion.div
             key={book.slug}
@@ -72,7 +72,7 @@ export function BooksSection({ books, locale = 'ur' }: BooksSectionProps) {
 function BookContent({ book }: { book: Book }) {
   return (
     <motion.div 
-      className="group bg-surface-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 flex flex-col max-h-[520px]"
+      className="group bg-surface-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-all duration-300"
       whileHover={{ y: -8 }}
       role="article"
       aria-label={`Book: ${book.title}`}
@@ -93,22 +93,20 @@ function BookContent({ book }: { book: Book }) {
         )}
         <div className="absolute inset-0 bg-brand/0 group-hover:bg-brand/10 transition-colors duration-300" />
       </div>
-      <div className="p-6 flex flex-col gap-3 mt-auto">
-        <div className="flex items-end justify-between gap-3">
-          <h3 className="text-xl font-bold text-ink group-hover:text-brand transition-colors font-urdu-heading text-right flex-1">
-            {book.title}
-          </h3>
-          {book.buyLink && (
-            <a
-              href={book.buyLink}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-32 text-center rounded-xl border border-red-500 py-2 text-red-500 hover:bg-red-500 hover:text-white transition-colors font-medium font-urdu-body"
-            >
-              خریدیں
-            </a>
-          )}
-        </div>
+      <div className="p-6 flex flex-col gap-3">
+        <h3 className="text-xl font-bold text-ink group-hover:text-brand transition-colors font-urdu-heading text-right">
+          {book.title}
+        </h3>
+        {book.buyLink && (
+          <a
+            href={book.buyLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-block w-full text-center rounded-lg border-2 border-brand px-4 py-2 text-brand hover:bg-brand hover:text-white transition-colors font-medium font-urdu-body"
+          >
+            خریدیں
+          </a>
+        )}
       </div>
     </motion.div>
   );
