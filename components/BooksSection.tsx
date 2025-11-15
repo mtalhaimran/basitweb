@@ -77,7 +77,7 @@ function BookContent({ book }: { book: Book }) {
       role="article"
       aria-label={`Book: ${book.title}`}
     >
-      <div className="aspect-[3/4] bg-surface-elevated relative overflow-hidden">
+      <div className="aspect-video bg-surface-elevated relative overflow-hidden">
         {book.coverImage ? (
           <Image
             src={getImagePath(book.coverImage)}
@@ -93,20 +93,10 @@ function BookContent({ book }: { book: Book }) {
         )}
         <div className="absolute inset-0 bg-brand/0 group-hover:bg-brand/10 transition-colors duration-300" />
       </div>
-      <div className="p-6 flex flex-col gap-3">
-        <h3 className="text-xl font-bold text-ink group-hover:text-brand transition-colors font-urdu-heading text-right">
+      <div className="p-6">
+        <h3 className="text-2xl font-bold text-ink group-hover:text-brand transition-colors font-urdu-heading text-right">
           {book.title}
         </h3>
-        {book.buyLink && (
-          <a
-            href={book.buyLink}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-block w-full text-center rounded-lg border-2 border-brand px-4 py-2 text-brand hover:bg-brand hover:text-white transition-colors font-medium font-urdu-body"
-          >
-            خریدیں
-          </a>
-        )}
       </div>
     </motion.div>
   );

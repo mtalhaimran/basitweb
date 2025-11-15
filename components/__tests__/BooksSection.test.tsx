@@ -87,35 +87,4 @@ describe('BooksSection', () => {
     
     expect(screen.getByText('[کتاب کی تصویر]')).toBeInTheDocument();
   });
-
-  it('renders buy button when buyLink is provided', () => {
-    const books = [
-      {
-        slug: 'book-1',
-        title: 'Book With Buy Link',
-        buyLink: 'https://example.com/buy',
-      },
-    ];
-
-    render(<BooksSection books={books} locale="ur" />);
-    
-    const buyButton = screen.getByText('خریدیں');
-    expect(buyButton).toBeInTheDocument();
-    expect(buyButton.closest('a')).toHaveAttribute('href', 'https://example.com/buy');
-    expect(buyButton.closest('a')).toHaveAttribute('target', '_blank');
-    expect(buyButton.closest('a')).toHaveAttribute('rel', 'noopener noreferrer');
-  });
-
-  it('does not render buy button when buyLink is not provided', () => {
-    const books = [
-      {
-        slug: 'book-1',
-        title: 'Book Without Buy Link',
-      },
-    ];
-
-    render(<BooksSection books={books} locale="ur" />);
-    
-    expect(screen.queryByText('خریدیں')).not.toBeInTheDocument();
-  });
 });
