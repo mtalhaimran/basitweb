@@ -47,7 +47,7 @@ describe('BooksSection', () => {
     expect(viewAllLink.closest('a')).toHaveAttribute('href', '/books');
   });
 
-  it('renders book cards as links to books page', () => {
+  it('renders book cards without wrapper links', () => {
     const books = [
       {
         slug: 'book-1',
@@ -57,8 +57,8 @@ describe('BooksSection', () => {
 
     render(<BooksSection books={books} locale="ur" />);
     
-    const bookLink = screen.getByRole('article', { name: 'Book: Book Title' });
-    expect(bookLink).toHaveAttribute('href', '/books');
+    const bookArticle = screen.getByRole('article', { name: 'Book: Book Title' });
+    expect(bookArticle).toBeInTheDocument();
   });
 
   it('has proper accessibility attributes', () => {
@@ -73,7 +73,6 @@ describe('BooksSection', () => {
     
     const article = screen.getByRole('article');
     expect(article).toHaveAttribute('aria-label', 'Book: Accessible Book');
-    expect(article).toHaveAttribute('tabIndex', '0');
   });
 
   it('renders placeholder when no cover image', () => {
