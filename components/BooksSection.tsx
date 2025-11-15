@@ -34,9 +34,9 @@ export function BooksSection({ books, locale = 'ur' }: BooksSectionProps) {
   }
 
   return (
-    <section className="mb-16">
+    <section className="mb-16 mt-16">
       <motion.div 
-        className="flex justify-between items-center mb-8"
+        className="flex justify-between items-center mb-12"
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}

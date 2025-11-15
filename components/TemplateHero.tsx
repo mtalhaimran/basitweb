@@ -21,7 +21,7 @@ export function TemplateHero({ lang = 'ur' }: TemplateHeroProps) {
   const intro = isUrdu ? introUrdu : introEnglish;
 
   return (
-    <section className="relative h-[80vh] min-h-[600px] w-full overflow-visible" dir={isUrdu ? 'rtl' : 'ltr'}>
+    <section className="relative h-[80vh] min-h-[600px] w-full overflow-hidden" dir={isUrdu ? 'rtl' : 'ltr'}>
       <Image src="/images/hero.jpg" alt="" fill priority className="object-cover" />
       <div className="absolute inset-0 bg-gradient-to-b from-black/60 to-black/40" />
       
