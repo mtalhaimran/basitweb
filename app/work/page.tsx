@@ -127,7 +127,7 @@ export default async function WorkPage() {
           {/* Books Section */}
           {latestBooks.length > 0 && (
             <section className="mb-16">
-              <div className="flex justify-between items-center mb-8">
+              <div className="flex justify-between items-center mb-12">
                 <Link
                   href="/books"
                   className="text-brand hover:text-brand-hover font-urdu-body text-lg transition-colors"
@@ -175,7 +175,7 @@ export default async function WorkPage() {
           {/* Bonn Ka Banjara Section */}
           {bonnKaBanjaraPosts.length > 0 && (
             <section className="mb-16">
-              <div className="flex justify-between items-center mb-8">
+              <div className="flex justify-between items-center mb-12">
                 <Link
                   href="/bonn-ka-banjara"
                   className="text-brand hover:text-brand-hover font-urdu-body text-lg transition-colors"
@@ -233,7 +233,7 @@ export default async function WorkPage() {
           {/* Snippets/Mazmoon Section */}
           {snippets.length > 0 && (
             <section className="mb-16">
-              <div className="flex justify-between items-center mb-8">
+              <div className="flex justify-between items-center mb-12">
                 <Link
                   href="/snippets"
                   className="text-brand hover:text-brand-hover font-urdu-body text-lg transition-colors"

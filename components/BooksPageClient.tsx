@@ -16,7 +16,7 @@ export function BooksPageClient({ books }: BooksPageClientProps) {
         <div className="max-w-7xl mx-auto">
           {/* Page Header */}
           <motion.div 
-            className="mb-12 text-right"
+            className="mb-16 text-right"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
@@ -42,7 +42,7 @@ export function BooksPageClient({ books }: BooksPageClientProps) {
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                 >
                   {/* Book Cover */}
-                  <div className="aspect-[3/4] bg-surface-elevated relative overflow-hidden">
+                  <div className="aspect-video bg-surface-elevated relative overflow-hidden">
                     {book.coverImage ? (
                       <Image
                         src={getImagePath(book.coverImage)}
@@ -76,26 +76,14 @@ export function BooksPageClient({ books }: BooksPageClientProps) {
                   </div>
 
                   {/* Book Info */}
-                  <div className="p-6 flex flex-col gap-3">
-                    <h2 className="text-2xl font-bold text-ink mb-2 font-urdu-heading text-right">
+                  <div className="p-6">
+                    <h2 className="text-2xl font-bold text-ink font-urdu-heading text-right mb-3">
                       {book.title}
                     </h2>
                     {book.publisher && (
                       <p className="text-sm text-ink-muted font-urdu-body text-right">
                         {book.publisher}
                       </p>
-                    )}
-                    {book.buyLink && (
-                      <motion.a
-                        href={book.buyLink}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-block w-full text-center rounded-lg border-2 border-brand px-4 py-2 text-brand hover:bg-brand hover:text-white transition-colors font-medium font-urdu-body"
-                        whileHover={{ scale: 1.02 }}
-                        whileTap={{ scale: 0.98 }}
-                      >
-                        خریدیں
-                      </motion.a>
                     )}
                   </div>
                 </motion.div>
