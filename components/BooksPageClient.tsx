@@ -35,57 +35,38 @@ export function BooksPageClient({ books }: BooksPageClientProps) {
               {books.map((book, index) => (
                 <motion.div
                   key={book.id}
-                  className="group relative bg-surface-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-all duration-300"
                   initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
-                  whileHover={{ y: -8 }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                 >
-                  {/* Book Cover */}
-                  <div className="aspect-video bg-surface-elevated relative overflow-hidden">
-                    {book.coverImage ? (
-                      <Image
-                        src={getImagePath(book.coverImage)}
-                        alt={book.title}
-                        fill
-                        className="object-cover transition-transform duration-300 group-hover:scale-105"
-                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                      />
-                    ) : (
-                      <div className="absolute inset-0 flex items-center justify-center text-ink-muted font-urdu-body">
-                        [کتاب کی تصویر]
-                      </div>
-                    )}
-                    <div className="absolute inset-0 bg-brand/0 group-hover:bg-brand/10 transition-colors duration-300" />
-                    
-                    {/* Quote Overlay on Hover */}
-                    {book.quotes.length > 0 && (
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
-                        <blockquote className="text-white font-urdu-body text-right">
-                          <p className="text-lg leading-relaxed mb-2">
-                            &ldquo;{book.quotes[0]}&rdquo;
-                          </p>
-                          {book.quotes.length > 1 && (
-                            <p className="text-sm text-white/80">
-                              +{book.quotes.length - 1} مزید اقتباسات
-                            </p>
-                          )}
-                        </blockquote>
-                      </div>
-                    )}
-                  </div>
-
-                  {/* Book Info */}
-                  <div className="p-6">
-                    <h2 className="text-2xl font-bold text-ink font-urdu-heading text-right mb-3">
-                      {book.title}
-                    </h2>
-                    {book.publisher && (
-                      <p className="text-sm text-ink-muted font-urdu-body text-right">
-                        {book.publisher}
-                      </p>
-                    )}
-                  </div>
+                  <motion.div 
+                    className="group bg-surface-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-all duration-300"
+                    whileHover={{ y: -8 }}
+                    role="article"
+                    aria-label={`Book: ${book.title}`}
+                  >
+                    <div className="aspect-video bg-surface-elevated relative overflow-hidden">
+                      {book.coverImage ? (
+                        <Image
+                          src={getImagePath(book.coverImage)}
+                          alt={book.title}
+                          fill
+                          className="object-cover transition-transform duration-300 group-hover:scale-105"
+                          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                        />
+                      ) : (
+                        <div className="absolute inset-0 flex items-center justify-center text-ink-muted font-urdu-body">
+                          [کتاب کی تصویر]
+                        </div>
+                      )}
+                      <div className="absolute inset-0 bg-brand/0 group-hover:bg-brand/10 transition-colors duration-300" />
+                    </div>
+                    <div className="p-6">
+                      <h3 className="text-2xl font-bold text-ink group-hover:text-brand transition-colors font-urdu-heading text-right">
+                        {book.title}
+                      </h3>
+                    </div>
+                  </motion.div>
                 </motion.div>
               ))}
             </div>
