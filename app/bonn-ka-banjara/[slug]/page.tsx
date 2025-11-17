@@ -2,9 +2,9 @@ import fs from 'fs';
 import path from 'path';
 import { notFound } from 'next/navigation';
 import { parseFrontmatter } from '@/lib/utils/frontmatter';
+import { TinaMarkdown } from 'tinacms/dist/rich-text';
 import { SimpleMarkdown } from '@/components/RichText';
-import RichText from '@/components/RichText';
-import { MDXProvider } from '@/components/MDXProvider';
+import { mdxComponents } from '@/components/MDXProvider';
 
 export const dynamic = 'force-static';
 
@@ -95,15 +95,13 @@ export default async function BonnKaBanjaraDetailPage({ params }: { params: Prom
           </header>
 
           {/* Post Content */}
-          <MDXProvider>
-            <div className="prose prose-lg max-w-none text-right font-urdu-body">
-              {typeof post.body === 'string' ? (
-                <SimpleMarkdown content={post.body} />
-              ) : (
-                <RichText body={post.body} />
-              )}
-            </div>
-          </MDXProvider>
+          <div className="prose prose-lg max-w-none text-right font-urdu-body">
+            {typeof post.body === 'string' ? (
+              <SimpleMarkdown content={post.body} />
+            ) : (
+              <TinaMarkdown components={mdxComponents} content={post.body} />
+            )}
+          </div>
 
           {/* Tags */}
           {post.tags && post.tags.length > 0 && (

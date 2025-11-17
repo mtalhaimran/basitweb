@@ -2,9 +2,9 @@ import fs from 'fs';
 import path from 'path';
 import { notFound } from 'next/navigation';
 import { parseFrontmatter } from '@/lib/utils/frontmatter';
+import { TinaMarkdown } from 'tinacms/dist/rich-text';
 import { SimpleMarkdown } from '@/components/RichText';
-import RichText from '@/components/RichText';
-import { MDXProvider } from '@/components/MDXProvider';
+import { mdxComponents } from '@/components/MDXProvider';
 
 export const dynamic = 'force-static';
 
@@ -104,15 +104,13 @@ export default async function SnippetDetailPage({ params }: { params: Promise<{ 
           </header>
 
           {/* Snippet Content */}
-          <MDXProvider>
-            <div className="prose prose-lg max-w-none text-right font-urdu-body">
-              {typeof snippet.body === 'string' ? (
-                <SimpleMarkdown content={snippet.body} />
-              ) : (
-                <RichText body={snippet.body} />
-              )}
-            </div>
-          </MDXProvider>
+          <div className="prose prose-lg max-w-none text-right font-urdu-body">
+            {typeof snippet.body === 'string' ? (
+              <SimpleMarkdown content={snippet.body} />
+            ) : (
+              <TinaMarkdown components={mdxComponents} content={snippet.body} />
+            )}
+          </div>
 
           {/* Tags */}
           {snippet.tags && snippet.tags.length > 0 && (

@@ -2,9 +2,9 @@ import { loadBookById, loadBooks } from '@/lib/utils/books';
 import { getImagePath } from '@/lib/utils/frontmatter';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
+import { TinaMarkdown } from 'tinacms/dist/rich-text';
 import { SimpleMarkdown } from '@/components/RichText';
-import RichText from '@/components/RichText';
-import { MDXProvider } from '@/components/MDXProvider';
+import { mdxComponents } from '@/components/MDXProvider';
 
 export const dynamic = 'force-static';
 
@@ -75,15 +75,13 @@ export default async function BookDetailPage({ params }: { params: Promise<{ slu
                   <h2 className="text-3xl font-bold mb-4 text-ink font-urdu-heading text-right">
                     تفصیل
                   </h2>
-                  <MDXProvider>
-                    <div className="text-ink leading-relaxed">
-                      {typeof book.description === 'string' ? (
-                        <SimpleMarkdown content={book.description} />
-                      ) : (
-                        <RichText body={book.description} />
-                      )}
-                    </div>
-                  </MDXProvider>
+                  <div className="text-ink leading-relaxed">
+                    {typeof book.description === 'string' ? (
+                      <SimpleMarkdown content={book.description} />
+                    ) : (
+                      <TinaMarkdown components={mdxComponents} content={book.description} />
+                    )}
+                  </div>
                 </div>
               )}
 
