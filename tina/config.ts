@@ -373,6 +373,10 @@ export default defineConfig({
           defaultItem: { 
             date: new Date().toISOString(),
           },
+          router: ({ document }) => {
+            const slug = document._sys.filename;
+            return `/gallery/${slug}`;
+          },
           filename: {
             slugify: (values) =>
               (values?.title || "untitled")
