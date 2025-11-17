@@ -364,98 +364,10 @@ export default defineConfig({
         ],
       },
       {
-        name: "work",
-        label: "Work / Kaam (کام)",
-        path: "content/work",
-        format: "md",
-
-        ui: {
-          defaultItem: { 
-            locale: "ur",
-            date: new Date().toISOString(),
-          },
-          router: ({ document }) => {
-            const slug = document._sys.filename;
-            return `/work/${slug}`;
-          },
-          filename: {
-            slugify: (values) =>
-              (values?.title || "untitled")
-                .toString()
-                .toLowerCase()
-                .replace(/\s+/g, "-")
-                .replace(/[^\u0600-\u06FFa-z0-9\-]/g, ""),
-          },
-        },
-
-        fields: [
-          { 
-            type: "string", 
-            name: "title", 
-            label: "Title (عنوان)", 
-            isTitle: true, 
-            required: true 
-          },
-          { 
-            type: "datetime", 
-            name: "date", 
-            label: "Date (تاریخ)", 
-            required: true,
-            ui: {
-              dateFormat: 'YYYY-MM-DD',
-            }
-          },
-          { 
-            type: "string", 
-            name: "locale", 
-            label: "Language",
-            required: true,
-            options: [
-              { value: "ur", label: "اردو (Urdu)" },
-              { value: "en", label: "English" }
-            ],
-            ui: { 
-              component: "select",
-            },
-          },
-          { 
-            type: "string", 
-            name: "tags", 
-            label: "Tags", 
-            list: true 
-          },
-          { 
-            type: "image", 
-            name: "coverImage", 
-            label: "Cover Image (سرورق)" 
-          },
-          { 
-            type: "string", 
-            name: "category", 
-            label: "Category",
-            options: [
-              { value: "software", label: "Software" },
-              { value: "milestone", label: "Milestone" },
-              { value: "research", label: "Research" },
-              { value: "other", label: "Other" }
-            ],
-            ui: { 
-              component: "select",
-            },
-          },
-          { 
-            type: "rich-text", 
-            name: "body", 
-            label: "Body (مواد)", 
-            isBody: true 
-          },
-        ],
-      },
-      {
         name: "gallery",
         label: "Gallery",
         path: "content/gallery",
-        format: "md",
+        format: "mdx",
 
         ui: {
           defaultItem: { 
