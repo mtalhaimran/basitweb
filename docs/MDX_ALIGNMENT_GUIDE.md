@@ -1,5 +1,18 @@
 # MDX Text Alignment Components - Editor Guide
 
+## ⚠️ IMPORTANT LIMITATION
+
+**Current TinaCMS Configuration Issue**: TinaCMS with `format: "md"` (markdown format) does not properly save rich-text content with custom templates back to markdown files. The templates will appear in the editor, but **changes will not be saved**.
+
+**Recommended Solution**: Change the collection format from "md" to "json" in `tina/config.ts`. This requires:
+1. Changing `format: "md"` to `format: "json"` for collections using templates
+2. Migrating existing `.md` files to `.json` files
+3. Updating content structure to match JSON format
+
+**Alternative**: Use the templates only for new content created in JSON format, or manually edit markdown files to add alignment styling with CSS classes.
+
+Until the format is changed to JSON, the alignment components can be seen in the editor but **will not persist to files**.
+
 ## Overview
 This guide explains how to use custom text alignment components in the TinaCMS rich-text editor for Snippets, Bonn ka Banjara posts, and Books.
 
