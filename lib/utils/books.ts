@@ -2,6 +2,72 @@ import fs from 'fs';
 import path from 'path';
 import { parseFrontmatter } from './frontmatter';
 
+/**
+ * Parse MDX component syntax to TinaCMS rich-text format
+ * Example: <CenterText>\n  content\n</CenterText> -> TinaCMS AST
+ */
+function parseMDXToTina(mdxContent: string): any {
+  const children: any[] = [];
+  const lines = mdxContent.split('\n');
+  let i = 0;
+  
+  while (i < lines.length) {
+    const line = lines[i];
+    const trimmed = line.trim();
+    
+    // Check for opening MDX component tag
+    const componentMatch = trimmed.match(/^<(CenterText|RightAlign|LeftAlign)>$/);
+    if (componentMatch) {
+      const componentName = componentMatch[1];
+      i++; // Move to next line
+      
+      // Collect content until closing tag
+      const componentChildren: any[] = [];
+      while (i < lines.length) {
+        const contentLine = lines[i];
+        const contentTrimmed = contentLine.trim();
+        
+        // Check for closing tag
+        if (contentTrimmed === `</${componentName}>`) {
+          i++; // Move past closing tag
+          break;
+        }
+        
+        // Add content as paragraph
+        if (contentTrimmed) {
+          componentChildren.push({
+            type: 'p',
+            children: [{ type: 'text', text: contentTrimmed }]
+          });
+        }
+        i++;
+      }
+      
+      // Add component node
+      children.push({
+        type: 'mdxJsxFlowElement',
+        name: componentName,
+        children: componentChildren
+      });
+    } else if (trimmed) {
+      // Regular text - add as paragraph
+      children.push({
+        type: 'p',
+        children: [{ type: 'text', text: trimmed }]
+      });
+      i++;
+    } else {
+      // Empty line
+      i++;
+    }
+  }
+  
+  return {
+    type: 'root',
+    children
+  };
+}
+
 export interface BookQuote {
   text: string;
 }
@@ -39,15 +105,24 @@ export async function loadBooks(): Promise<Book[]> {
         const fileContent = fs.readFileSync(filePath, 'utf8');
         const { data, content } = parseFrontmatter(fileContent);
         
-        // Try to parse content as JSON (TinaCMS rich-text format)
+        // Determine content type:
+        // - If it starts with { or [, try to parse as JSON (TinaCMS rich-text format)
+        // - If it contains MDX components (e.g., <CenterText>), parse MDX syntax
+        // - Otherwise, keep as plain string
         let description: string | any = content || '';
-        if (content && (content.trim().startsWith('{') || content.trim().startsWith('['))) {
+        const trimmedContent = content.trim();
+        
+        if (trimmedContent && (trimmedContent.startsWith('{') || trimmedContent.startsWith('['))) {
+          // Try to parse as JSON (TinaCMS rich-text AST format)
           try {
             description = JSON.parse(content);
           } catch {
-            // If JSON parse fails, keep as string (plain markdown)
+            // If JSON parse fails, keep as string
             description = content;
           }
+        } else if (trimmedContent && (trimmedContent.includes('<CenterText>') || trimmedContent.includes('<RightAlign>') || trimmedContent.includes('<LeftAlign>'))) {
+          // Contains MDX components - parse to TinaCMS format
+          description = parseMDXToTina(content);
         }
         
         return {
