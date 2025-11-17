@@ -25,7 +25,7 @@ async function getSnippets(): Promise<Snippet[]> {
     const filenames = fs.readdirSync(snippetsDirectory);
     
     const snippets = filenames
-      .filter(filename => filename.endsWith('.md'))
+      .filter(filename => filename.endsWith('.mdx') || filename.endsWith('.md'))
       .map(filename => {
         const filePath = path.join(snippetsDirectory, filename);
         const fileContents = fs.readFileSync(filePath, 'utf8');
@@ -35,7 +35,7 @@ async function getSnippets(): Promise<Snippet[]> {
         const excerpt = content.replace(/[#*`]/g, '').trim().slice(0, 150) + '...';
         
         return {
-          slug: filename.replace('.md', ''),
+          slug: filename.replace(/\.(mdx|md)$/, ''),
           title: data.title as string || 'بے عنوان',
           date: data.date as string || new Date().toISOString(),
           tags: data.tags as string[] || [],
