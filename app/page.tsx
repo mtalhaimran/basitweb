@@ -2,6 +2,7 @@ import { TemplateHero } from '@/components/TemplateHero';
 import { BooksSection } from '@/components/BooksSection';
 import { getTranslations, type Locale } from '@/lib/i18n';
 import { loadBooks } from '@/lib/utils/books';
+import { AnimatedQuoteAndCTA } from '@/components/AnimatedQuoteAndCTA';
 
 export const dynamic = 'force-static';
 
@@ -14,8 +15,7 @@ export default async function HomePage() {
   const books = booksData.map(book => ({
     slug: book.id,
     title: book.title,
-    coverImage: book.coverImage,
-    buyLink: book.buyLink
+    coverImage: book.coverImage
   }));
 
   return (
@@ -27,22 +27,8 @@ export default async function HomePage() {
             {/* Books Section */}
             <BooksSection books={books} locale={locale} />
 
-            {/* Quote */}
-            <blockquote className="border-r-4 pr-6 border-brand py-2 mb-12">
-              <p className="text-xl italic text-ink-muted font-urdu-body text-right">
-                &ldquo;{t.home.quote}&rdquo;
-              </p>
-            </blockquote>
-
-            {/* CTA */}
-            <div className="text-right">
-              <a 
-                href="/work" 
-                className="inline-block rounded-xl border-2 border-brand px-6 py-3 text-brand hover:bg-brand hover:text-white transition-colors font-medium font-urdu-body"
-              >
-                {t.home.cta}
-              </a>
-            </div>
+            {/* Quote and CTA with animations */}
+            <AnimatedQuoteAndCTA quote={t.home.quote} cta={t.home.cta} />
           </div>
         </div>
       </div>

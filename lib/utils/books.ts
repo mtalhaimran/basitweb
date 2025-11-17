@@ -12,15 +12,13 @@ export interface Book {
   coverImage?: string;
   publishDate: string;
   locale: string;
-  isbn?: string;
   publisher?: string;
-  buyLink?: string;
   description?: string;
   quotes: string[];
 }
 
 /**
- * Load all books from the folder-based structure
+ * Load all books from markdown files
  */
 export async function loadBooks(): Promise<Book[]> {
   try {
@@ -30,6 +28,35 @@ export async function loadBooks(): Promise<Book[]> {
       return [];
     }
 
+    // First check for flat .md files (new TinaCMS structure)
+    const files = fs.readdirSync(booksDirectory);
+    const mdFiles = files.filter(file => file.endsWith('.md'));
+    
+    if (mdFiles.length > 0) {
+      // New flat file structure
+      const books: Book[] = mdFiles.map(filename => {
+        const filePath = path.join(booksDirectory, filename);
+        const fileContent = fs.readFileSync(filePath, 'utf8');
+        const { data, content } = parseFrontmatter(fileContent);
+        
+        return {
+          id: filename.replace('.md', ''),
+          title: data.title as string || 'بے عنوان',
+          coverImage: data.coverImage as string,
+          publishDate: data.publishDate as string || new Date().toISOString(),
+          locale: data.locale as string || 'ur',
+          publisher: data.publisher as string,
+          description: content || '',
+          quotes: (data.quotes as string[]) || []
+        };
+      });
+      
+      return books.sort((a, b) => 
+        new Date(b.publishDate).getTime() - new Date(a.publishDate).getTime()
+      );
+    }
+
+    // Fallback to old folder structure
     const bookFolders = fs.readdirSync(booksDirectory, { withFileTypes: true })
       .filter(dirent => dirent.isDirectory())
       .map(dirent => dirent.name);
@@ -63,9 +90,7 @@ export async function loadBooks(): Promise<Book[]> {
         coverImage: bookData.coverImage as string,
         publishDate: bookData.publishDate as string || new Date().toISOString(),
         locale: bookData.locale as string || 'ur',
-        isbn: bookData.isbn as string,
         publisher: bookData.publisher as string,
-        buyLink: bookData.buyLink as string,
         description: bookBody || bookData.description as string,
         quotes
       });
@@ -86,8 +111,10 @@ export async function loadBooks(): Promise<Book[]> {
  */
 export async function loadBookById(bookId: string): Promise<Book | null> {
   try {
+    // Decode the bookId in case it's percent-encoded (e.g., from URLs)
+    const decodedBookId = decodeURIComponent(bookId);
     const books = await loadBooks();
-    return books.find(book => book.id === bookId) || null;
+    return books.find(book => book.id === decodedBookId) || null;
   } catch (error) {
     console.error(`Error loading book ${bookId}:`, error);
     return null;
