@@ -37,8 +37,10 @@ interface SnippetData {
 
 async function getSnippet(slug: string): Promise<SnippetData | null> {
   try {
+    // Decode the slug in case it's percent-encoded (e.g., from URLs)
+    const decodedSlug = decodeURIComponent(slug);
     const snippetsDirectory = path.join(process.cwd(), 'content/snippets');
-    const filePath = path.join(snippetsDirectory, `${slug}.md`);
+    const filePath = path.join(snippetsDirectory, `${decodedSlug}.md`);
     
     if (!fs.existsSync(filePath)) {
       return null;

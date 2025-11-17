@@ -111,8 +111,10 @@ export async function loadBooks(): Promise<Book[]> {
  */
 export async function loadBookById(bookId: string): Promise<Book | null> {
   try {
+    // Decode the bookId in case it's percent-encoded (e.g., from URLs)
+    const decodedBookId = decodeURIComponent(bookId);
     const books = await loadBooks();
-    return books.find(book => book.id === bookId) || null;
+    return books.find(book => book.id === decodedBookId) || null;
   } catch (error) {
     console.error(`Error loading book ${bookId}:`, error);
     return null;
