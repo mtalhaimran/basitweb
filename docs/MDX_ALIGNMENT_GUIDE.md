@@ -3,6 +3,21 @@
 ## Overview
 This guide explains how to use custom text alignment components in the TinaCMS rich-text editor for Snippets and Bonn ka Banjara posts.
 
+## How to Access the Editor
+
+**Important**: Content editing is done through the **TinaCMS Admin Panel**, not through visual editing on the live pages.
+
+### To Edit Content:
+1. Navigate to `/admin` in your browser (e.g., `http://localhost:3000/admin`)
+2. You'll be redirected to the TinaCMS admin interface
+3. Select the collection you want to edit:
+   - **Snippets (مضامین)** - for snippet posts
+   - **Bonn ka Banjara (بون کا بنجارہ)** - for Bonn ka Banjara posts
+4. Click on an existing post to edit it, or create a new one
+
+### Note on Visual Editing
+The current implementation uses the **TinaCMS Admin Panel** for editing. The alignment components work within the admin panel's rich-text editor, not through on-page visual editing. If you try to edit directly on the published pages (e.g., `/snippets/[slug]`), you'll see a message that there's nothing to edit - this is expected behavior. All content editing should be done through the `/admin` panel.
+
 ## Available Components
 
 ### 1. CenterText - Center Aligned Text
@@ -32,12 +47,12 @@ Aligns text to the left, optimized for LTR languages like English.
 - Text alignment: Left
 - Direction: LTR (left-to-right)
 
-## How to Use in TinaCMS Editor
+## How to Use in TinaCMS Admin Editor
 
-> **Important**: The alignment components are only available in the **Visual Editor** mode. If you're in the raw text/markdown editor mode, you won't see the "+" button. Make sure to switch to the visual editor mode before adding alignment components.
+> **Important**: The alignment components are only available in the **Visual Editor** mode within the TinaCMS admin panel. If you're in the raw text/markdown editor mode, you won't see the "+" button.
 
-1. **Open the Content Editor**
-   - Navigate to the TinaCMS admin panel
+1. **Open the TinaCMS Admin Panel**
+   - Navigate to `/admin` in your browser (the main editing interface)
    - Select either "Snippets" or "Bonn ka Banjara" collection
    - Create a new post or edit an existing one
 
@@ -66,7 +81,16 @@ Aligns text to the left, optimized for LTR languages like English.
 
 ### I don't see the "+" button
 
-**Solution**: Make sure you're in the **Visual Editor** mode, not the raw text/markdown editor mode. The alignment component templates are only available in the visual editor. Look for an editor mode toggle in the TinaCMS interface.
+**Solution**: Make sure you're:
+1. In the **TinaCMS Admin Panel** at `/admin` (not on the published page)
+2. In the **Visual Editor** mode within the admin panel, not the raw text/markdown editor mode
+3. Looking at the "Body (مواد)" field - the alignment components only work in rich-text fields
+
+The alignment component templates are only available in the visual editor within the admin panel.
+
+### I see "Looks like there's nothing to edit on this page" when clicking on posts
+
+**Solution**: This is expected behavior. The published pages (like `/snippets/[slug]` or `/bonn-ka-banjara/[slug]`) are not configured for visual editing. You need to edit content through the **TinaCMS Admin Panel** at `/admin`. The message you're seeing indicates that on-page visual editing is not enabled for these pages - all editing happens in the admin panel.
 
 ### The templates don't appear in the list
 
