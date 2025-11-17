@@ -15,8 +15,7 @@ export default async function HomePage() {
   const books = booksData.map(book => ({
     slug: book.id,
     title: book.title,
-    coverImage: book.coverImage,
-    buyLink: book.buyLink
+    coverImage: book.coverImage
   }));
 
   return (
