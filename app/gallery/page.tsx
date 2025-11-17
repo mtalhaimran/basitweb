@@ -1,8 +1,8 @@
 import fs from 'fs';
 import path from 'path';
-import Image from 'next/image';
 import { getTranslations, type Locale } from '@/lib/i18n';
-import { parseFrontmatter, getImagePath } from '@/lib/utils/frontmatter';
+import { parseFrontmatter } from '@/lib/utils/frontmatter';
+import GalleryGrid from '@/components/GalleryGrid';
 
 export const dynamic = 'force-static';
 
@@ -111,49 +111,7 @@ export default async function GalleryPage() {
 
           {/* Gallery Grid */}
           {galleryImages.length > 0 ? (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {galleryImages.map((image) => (
-                <div
-                  key={image.slug}
-                  className="group relative aspect-square bg-surface-elevated rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-all duration-300"
-                  role="img"
-                  aria-label={image.caption || image.title}
-                >
-                  {image.image ? (
-                    <Image
-                      src={getImagePath(image.image)}
-                      alt={image.caption || image.title}
-                      fill
-                      className="object-cover transition-transform duration-300 group-hover:scale-105"
-                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                    />
-                  ) : (
-                    <div className="absolute inset-0 flex items-center justify-center text-ink-muted font-urdu-body">
-                      [{image.title}]
-                    </div>
-                  )}
-                  
-                  {/* Hover Overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <div className="absolute bottom-0 left-0 right-0 p-4">
-                      <h3 className="text-white font-urdu-heading text-xl text-right mb-1">
-                        {image.title}
-                      </h3>
-                      {image.caption && (
-                        <p className="text-white/90 font-urdu-body text-sm text-right mb-1">
-                          {image.caption}
-                        </p>
-                      )}
-                      {image.location && (
-                        <p className="text-white/80 font-urdu-body text-xs text-right">
-                          📍 {image.location}
-                        </p>
-                      )}
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
+            <GalleryGrid images={galleryImages} />
           ) : (
             <div className="text-center py-12">
               <p className="text-lg text-ink-muted font-urdu-body">
