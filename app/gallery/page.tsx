@@ -26,16 +26,16 @@ async function getGalleryImages(): Promise<GalleryImage[]> {
     if (fs.existsSync(galleryDirectory)) {
       const filenames = fs.readdirSync(galleryDirectory);
       
-      // Load .md files with frontmatter
+      // Load .md and .mdx files with frontmatter
       const cmsImages = filenames
-        .filter(filename => filename.endsWith('.md'))
+        .filter(filename => filename.endsWith('.md') || filename.endsWith('.mdx'))
         .map(filename => {
           const filePath = path.join(galleryDirectory, filename);
           const fileContents = fs.readFileSync(filePath, 'utf8');
           const { data } = parseFrontmatter(fileContents);
           
           return {
-            slug: filename.replace('.md', ''),
+            slug: filename.replace(/\.(md|mdx)$/, ''),
             title: data.title || 'بے عنوان',
             image: data.image || '',
             caption: data.caption,
