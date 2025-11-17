@@ -1,7 +1,7 @@
 # MDX Text Alignment Components - Editor Guide
 
 ## Overview
-This guide explains how to use custom text alignment components in the TinaCMS rich-text editor for Snippets and Bonn ka Banjara posts.
+This guide explains how to use custom text alignment components in the TinaCMS rich-text editor for Snippets, Bonn ka Banjara posts, and Books.
 
 ## How to Access the Editor
 
@@ -13,6 +13,7 @@ This guide explains how to use custom text alignment components in the TinaCMS r
 3. Select the collection you want to edit:
    - **Snippets (مضامین)** - for snippet posts
    - **Bonn ka Banjara (بون کا بنجارہ)** - for Bonn ka Banjara posts
+   - **Books (کتابیں)** - for book descriptions
 4. Click on an existing post to edit it, or create a new one
 
 ### Note on Visual Editing
@@ -53,7 +54,7 @@ Aligns text to the left, optimized for LTR languages like English.
 
 1. **Open the TinaCMS Admin Panel**
    - Navigate to `/admin` in your browser (the main editing interface)
-   - Select either "Snippets" or "Bonn ka Banjara" collection
+   - Select either "Snippets", "Bonn ka Banjara", or "Books" collection
    - Create a new post or edit an existing one
 
 2. **Switch to Visual Editor Mode** (if not already in it)
@@ -98,7 +99,14 @@ The alignment component templates are only available in the visual editor within
 1. Ensure you've saved the TinaCMS configuration changes
 2. Restart the TinaCMS development server (`npm run dev`)
 3. Clear your browser cache and refresh the page
-4. Verify you're editing a "Snippet" or "Bonn ka Banjara" post (templates are only configured for these collections)
+4. Verify you're editing a "Snippet", "Bonn ka Banjara", or "Books" post (templates are only configured for these collections)
+
+### Text disappears when adding alignment components
+
+**Solution**: This was a bug that has been fixed. The alignment components now properly preserve your content when you add them. If you still experience this:
+1. Make sure you're on the latest version of the code
+2. Try refreshing the page
+3. If content disappeared, use the browser back button or undo (Ctrl+Z / Cmd+Z) to restore it
 
 ## Examples
 

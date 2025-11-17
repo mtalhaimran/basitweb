@@ -24,6 +24,17 @@ function renderNode(node: Node, key?: number): React.ReactNode {
     const Component = mdxComponents[componentName as keyof typeof mdxComponents];
     
     if (Component) {
+      // For MDX templates, the children might be in node.children or node.props.children
+      const templateChildren = node.children || node.props?.children;
+      
+      // If children is a rich-text object, render it properly
+      if (templateChildren && typeof templateChildren === 'object' && templateChildren.children) {
+        const renderedChildren = Array.isArray(templateChildren.children) 
+          ? templateChildren.children.map((c: Node, i: number) => renderNode(c, i))
+          : renderNode(templateChildren.children);
+        return <Component key={key}>{renderedChildren}</Component>;
+      }
+      
       return <Component key={key}>{children}</Component>;
     }
   }
