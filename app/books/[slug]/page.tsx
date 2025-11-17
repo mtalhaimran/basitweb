@@ -1,9 +1,16 @@
-import { loadBookById } from '@/lib/utils/books';
+import { loadBookById, loadBooks } from '@/lib/utils/books';
 import { getImagePath } from '@/lib/utils/frontmatter';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
 
 export const dynamic = 'force-static';
+
+export async function generateStaticParams() {
+  const books = await loadBooks();
+  return books.map((book) => ({
+    slug: book.id,
+  }));
+}
 
 export default async function BookDetailPage({ params }: { params: Promise<{ slug: string }> }) {
   const resolvedParams = await params;
