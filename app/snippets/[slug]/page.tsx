@@ -3,6 +3,7 @@ import path from 'path';
 import { notFound } from 'next/navigation';
 import { parseFrontmatter } from '@/lib/utils/frontmatter';
 import { SimpleMarkdown } from '@/components/RichText';
+import { MDXProvider } from '@/components/MDXProvider';
 
 export const dynamic = 'force-static';
 
@@ -91,9 +92,11 @@ export default async function SnippetDetailPage({ params }: { params: Promise<{ 
           </header>
 
           {/* Snippet Content */}
-          <div className="prose prose-lg max-w-none text-right font-urdu-body">
-            <SimpleMarkdown content={snippet.body} />
-          </div>
+          <MDXProvider>
+            <div className="prose prose-lg max-w-none text-right font-urdu-body">
+              <SimpleMarkdown content={snippet.body} />
+            </div>
+          </MDXProvider>
 
           {/* Tags */}
           {snippet.tags && snippet.tags.length > 0 && (

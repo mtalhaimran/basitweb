@@ -1,4 +1,5 @@
 import React from 'react';
+import { mdxComponents } from './MDXProvider';
 
 type Node = any;
 
@@ -16,6 +17,16 @@ function renderNode(node: Node, key?: number): React.ReactNode {
   }
 
   const children = Array.isArray(node.children) ? node.children.map((c: Node, i: number) => renderNode(c, i)) : null;
+
+  // Handle MDX template components (CenterText, RightAlign, LeftAlign)
+  if (node.type === 'mdxJsxFlowElement' || node.name) {
+    const componentName = node.name;
+    const Component = mdxComponents[componentName as keyof typeof mdxComponents];
+    
+    if (Component) {
+      return <Component key={key}>{children}</Component>;
+    }
+  }
 
   switch (node.type) {
     case 'p':

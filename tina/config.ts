@@ -100,7 +100,42 @@ export default defineConfig({
             type: "rich-text", 
             name: "body", 
             label: "Body (مواد)", 
-            isBody: true 
+            isBody: true,
+            templates: [
+              {
+                name: 'CenterText',
+                label: 'Center Aligned Text',
+                fields: [
+                  {
+                    name: 'children',
+                    label: 'Content',
+                    type: 'rich-text',
+                  },
+                ],
+              },
+              {
+                name: 'RightAlign',
+                label: 'Right Aligned Text',
+                fields: [
+                  {
+                    name: 'children',
+                    label: 'Content',
+                    type: 'rich-text',
+                  },
+                ],
+              },
+              {
+                name: 'LeftAlign',
+                label: 'Left Aligned Text',
+                fields: [
+                  {
+                    name: 'children',
+                    label: 'Content',
+                    type: 'rich-text',
+                  },
+                ],
+              },
+            ],
           },
         ],
       },
@@ -174,7 +209,42 @@ export default defineConfig({
             type: "rich-text", 
             name: "body", 
             label: "Body (مواد)", 
-            isBody: true 
+            isBody: true,
+            templates: [
+              {
+                name: 'CenterText',
+                label: 'Center Aligned Text',
+                fields: [
+                  {
+                    name: 'children',
+                    label: 'Content',
+                    type: 'rich-text',
+                  },
+                ],
+              },
+              {
+                name: 'RightAlign',
+                label: 'Right Aligned Text',
+                fields: [
+                  {
+                    name: 'children',
+                    label: 'Content',
+                    type: 'rich-text',
+                  },
+                ],
+              },
+              {
+                name: 'LeftAlign',
+                label: 'Left Aligned Text',
+                fields: [
+                  {
+                    name: 'children',
+                    label: 'Content',
+                    type: 'rich-text',
+                  },
+                ],
+              },
+            ],
           },
         ],
       },
