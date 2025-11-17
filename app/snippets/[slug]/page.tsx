@@ -6,6 +6,27 @@ import { SimpleMarkdown } from '@/components/RichText';
 
 export const dynamic = 'force-static';
 
+export async function generateStaticParams() {
+  try {
+    const snippetsDirectory = path.join(process.cwd(), 'content/snippets');
+    
+    if (!fs.existsSync(snippetsDirectory)) {
+      return [];
+    }
+
+    const filenames = fs.readdirSync(snippetsDirectory);
+    
+    return filenames
+      .filter(filename => filename.endsWith('.md'))
+      .map(filename => ({
+        slug: filename.replace('.md', ''),
+      }));
+  } catch (error) {
+    console.error('Error generating static params for snippets:', error);
+    return [];
+  }
+}
+
 interface SnippetData {
   title: string;
   date: string;
