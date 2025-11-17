@@ -48,6 +48,7 @@ function parseMDXToTina(mdxContent: string): any {
         children.push({
           type: 'mdxJsxFlowElement',
           name: componentName,
+          attributes: [],
           children: componentChildren
         });
       }
