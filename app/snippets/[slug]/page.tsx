@@ -3,6 +3,7 @@ import path from 'path';
 import { notFound } from 'next/navigation';
 import { parseFrontmatter } from '@/lib/utils/frontmatter';
 import { SimpleMarkdown } from '@/components/RichText';
+import RichText from '@/components/RichText';
 import { MDXProvider } from '@/components/MDXProvider';
 
 export const dynamic = 'force-static';
@@ -33,7 +34,7 @@ interface SnippetData {
   date: string;
   tags?: string[];
   coverImage?: string;
-  body: string;
+  body: string | any; // Can be string (markdown) or object (TinaCMS rich-text)
 }
 
 async function getSnippet(slug: string): Promise<SnippetData | null> {
@@ -50,12 +51,23 @@ async function getSnippet(slug: string): Promise<SnippetData | null> {
     const fileContents = fs.readFileSync(filePath, 'utf8');
     const { data, content } = parseFrontmatter(fileContents);
     
+    // Try to parse content as JSON (TinaCMS rich-text format)
+    let body: string | any = content;
+    if (content.trim().startsWith('{') || content.trim().startsWith('[')) {
+      try {
+        body = JSON.parse(content);
+      } catch {
+        // If JSON parse fails, keep as string (plain markdown)
+        body = content;
+      }
+    }
+    
     return {
       title: data.title as string || 'بے عنوان',
       date: data.date as string || new Date().toISOString(),
       tags: data.tags as string[] || [],
       coverImage: data.coverImage as string,
-      body: content
+      body
     };
   } catch (error) {
     console.error('Error loading snippet:', error);
@@ -94,7 +106,11 @@ export default async function SnippetDetailPage({ params }: { params: Promise<{ 
           {/* Snippet Content */}
           <MDXProvider>
             <div className="prose prose-lg max-w-none text-right font-urdu-body">
-              <SimpleMarkdown content={snippet.body} />
+              {typeof snippet.body === 'string' ? (
+                <SimpleMarkdown content={snippet.body} />
+              ) : (
+                <RichText body={snippet.body} />
+              )}
             </div>
           </MDXProvider>
 

@@ -13,7 +13,7 @@ export interface Book {
   publishDate: string;
   locale: string;
   publisher?: string;
-  description?: string;
+  description?: string | any; // Can be string (markdown) or object (TinaCMS rich-text)
   quotes: string[];
 }
 
@@ -39,6 +39,17 @@ export async function loadBooks(): Promise<Book[]> {
         const fileContent = fs.readFileSync(filePath, 'utf8');
         const { data, content } = parseFrontmatter(fileContent);
         
+        // Try to parse content as JSON (TinaCMS rich-text format)
+        let description: string | any = content || '';
+        if (content && (content.trim().startsWith('{') || content.trim().startsWith('['))) {
+          try {
+            description = JSON.parse(content);
+          } catch {
+            // If JSON parse fails, keep as string (plain markdown)
+            description = content;
+          }
+        }
+        
         return {
           id: filename.replace('.md', ''),
           title: data.title as string || 'بے عنوان',
@@ -46,7 +57,7 @@ export async function loadBooks(): Promise<Book[]> {
           publishDate: data.publishDate as string || new Date().toISOString(),
           locale: data.locale as string || 'ur',
           publisher: data.publisher as string,
-          description: content || '',
+          description,
           quotes: (data.quotes as string[]) || []
         };
       });
@@ -76,6 +87,17 @@ export async function loadBooks(): Promise<Book[]> {
       const bookContent = fs.readFileSync(bookFilePath, 'utf8');
       const { data: bookData, content: bookBody } = parseFrontmatter(bookContent);
 
+      // Try to parse content as JSON (TinaCMS rich-text format)
+      let description: string | any = bookBody || bookData.description as string;
+      if (bookBody && (bookBody.trim().startsWith('{') || bookBody.trim().startsWith('['))) {
+        try {
+          description = JSON.parse(bookBody);
+        } catch {
+          // If JSON parse fails, keep as string (plain markdown)
+          description = bookBody;
+        }
+      }
+
       // Load quotes if available
       let quotes: string[] = [];
       if (fs.existsSync(quotesFilePath)) {
@@ -91,7 +113,7 @@ export async function loadBooks(): Promise<Book[]> {
         publishDate: bookData.publishDate as string || new Date().toISOString(),
         locale: bookData.locale as string || 'ur',
         publisher: bookData.publisher as string,
-        description: bookBody || bookData.description as string,
+        description,
         quotes
       });
     }

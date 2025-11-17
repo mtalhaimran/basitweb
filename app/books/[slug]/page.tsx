@@ -3,6 +3,7 @@ import { getImagePath } from '@/lib/utils/frontmatter';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import { SimpleMarkdown } from '@/components/RichText';
+import RichText from '@/components/RichText';
 import { MDXProvider } from '@/components/MDXProvider';
 
 export const dynamic = 'force-static';
@@ -76,7 +77,11 @@ export default async function BookDetailPage({ params }: { params: Promise<{ slu
                   </h2>
                   <MDXProvider>
                     <div className="text-ink leading-relaxed">
-                      <SimpleMarkdown content={book.description} />
+                      {typeof book.description === 'string' ? (
+                        <SimpleMarkdown content={book.description} />
+                      ) : (
+                        <RichText body={book.description} />
+                      )}
                     </div>
                   </MDXProvider>
                 </div>
