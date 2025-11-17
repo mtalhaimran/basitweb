@@ -33,7 +33,7 @@ function parseMDXToTina(mdxContent: string): any {
           break;
         }
         
-        // Add content as paragraph
+        // Add content as paragraph (skip empty lines)
         if (contentTrimmed) {
           componentChildren.push({
             type: 'p',
@@ -43,12 +43,14 @@ function parseMDXToTina(mdxContent: string): any {
         i++;
       }
       
-      // Add component node
-      children.push({
-        type: 'mdxJsxFlowElement',
-        name: componentName,
-        children: componentChildren
-      });
+      // Only add component node if it has content
+      if (componentChildren.length > 0) {
+        children.push({
+          type: 'mdxJsxFlowElement',
+          name: componentName,
+          children: componentChildren
+        });
+      }
     } else if (trimmed) {
       // Regular text - add as paragraph
       children.push({
@@ -57,7 +59,7 @@ function parseMDXToTina(mdxContent: string): any {
       });
       i++;
     } else {
-      // Empty line
+      // Empty line - skip
       i++;
     }
   }
