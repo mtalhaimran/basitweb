@@ -28,13 +28,13 @@ export async function loadBooks(): Promise<Book[]> {
       return [];
     }
 
-    // First check for flat .md files (new TinaCMS structure)
+    // First check for flat .md or .mdx files (new TinaCMS structure)
     const files = fs.readdirSync(booksDirectory);
-    const mdFiles = files.filter(file => file.endsWith('.md'));
+    const contentFiles = files.filter(file => file.endsWith('.md') || file.endsWith('.mdx'));
     
-    if (mdFiles.length > 0) {
+    if (contentFiles.length > 0) {
       // New flat file structure
-      const books: Book[] = mdFiles.map(filename => {
+      const books: Book[] = contentFiles.map(filename => {
         const filePath = path.join(booksDirectory, filename);
         const fileContent = fs.readFileSync(filePath, 'utf8');
         const { data, content } = parseFrontmatter(fileContent);
@@ -51,7 +51,7 @@ export async function loadBooks(): Promise<Book[]> {
         }
         
         return {
-          id: filename.replace('.md', ''),
+          id: filename.replace(/\.(md|mdx)$/, ''),
           title: data.title as string || 'بے عنوان',
           coverImage: data.coverImage as string,
           publishDate: data.publishDate as string || new Date().toISOString(),

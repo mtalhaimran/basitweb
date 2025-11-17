@@ -20,7 +20,12 @@ interface PostData {
 async function getPost(slug: string): Promise<PostData | null> {
   try {
     const postsDirectory = path.join(process.cwd(), 'content/bonn-ka-banjara');
-    const filePath = path.join(postsDirectory, `${slug}.md`);
+    
+    // Try .mdx first (new format), then fall back to .md (legacy)
+    let filePath = path.join(postsDirectory, `${slug}.mdx`);
+    if (!fs.existsSync(filePath)) {
+      filePath = path.join(postsDirectory, `${slug}.md`);
+    }
     
     if (!fs.existsSync(filePath)) {
       return null;

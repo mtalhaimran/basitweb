@@ -1,17 +1,8 @@
 # MDX Text Alignment Components - Editor Guide
 
-## ⚠️ IMPORTANT LIMITATION
+## ✅ MDX Format Enabled
 
-**Current TinaCMS Configuration Issue**: TinaCMS with `format: "md"` (markdown format) does not properly save rich-text content with custom templates back to markdown files. The templates will appear in the editor, but **changes will not be saved**.
-
-**Recommended Solution**: Change the collection format from "md" to "json" in `tina/config.ts`. This requires:
-1. Changing `format: "md"` to `format: "json"` for collections using templates
-2. Migrating existing `.md` files to `.json` files
-3. Updating content structure to match JSON format
-
-**Alternative**: Use the templates only for new content created in JSON format, or manually edit markdown files to add alignment styling with CSS classes.
-
-Until the format is changed to JSON, the alignment components can be seen in the editor but **will not persist to files**.
+The TinaCMS collections are now configured to use **MDX format**, which fully supports custom text alignment components. Changes you make in the TinaCMS editor will now be properly saved to `.mdx` files.
 
 ## Overview
 This guide explains how to use custom text alignment components in the TinaCMS rich-text editor for Snippets, Bonn ka Banjara posts, and Books.
@@ -63,7 +54,7 @@ Aligns text to the left, optimized for LTR languages like English.
 
 ## How to Use in TinaCMS Admin Editor
 
-> **Important**: The alignment components are only available in the **Visual Editor** mode within the TinaCMS admin panel. If you're in the raw text/markdown editor mode, you won't see the "+" button.
+> **Note**: The alignment components are available in the **Visual Editor** mode within the TinaCMS admin panel. If you're in the raw text/markdown editor mode, you won't see the "+" button.
 
 1. **Open the TinaCMS Admin Panel**
    - Navigate to `/admin` in your browser (the main editing interface)
@@ -87,9 +78,10 @@ Aligns text to the left, optimized for LTR languages like English.
    - You can use rich-text formatting (bold, italic, links, etc.) within the component
    - Nested content is fully supported
 
-5. **Preview and Save**
-   - Use the preview to see how your alignment looks
-   - Save your changes when satisfied
+5. **Save**
+   - Click the **Save** button
+   - Changes will be written to `.mdx` files in the content directory
+   - Refresh the published page to see your aligned text
 
 ## Troubleshooting
 
@@ -114,12 +106,13 @@ The alignment component templates are only available in the visual editor within
 3. Clear your browser cache and refresh the page
 4. Verify you're editing a "Snippet", "Bonn ka Banjara", or "Books" post (templates are only configured for these collections)
 
-### Text disappears when adding alignment components
+### Changes aren't saving
 
-**Solution**: This was a bug that has been fixed. The alignment components now properly preserve your content when you add them. If you still experience this:
-1. Make sure you're on the latest version of the code
-2. Try refreshing the page
-3. If content disappeared, use the browser back button or undo (Ctrl+Z / Cmd+Z) to restore it
+**Solution**:
+1. Make sure you're running `npm run dev` (not just `next dev`)
+2. Check the terminal for any errors when you click Save
+3. Verify the `.mdx` file was created/updated in the content directory
+4. If using existing `.md` files, they will be kept as-is until you edit and save them (which creates a new `.mdx` file)
 
 ## Examples
 

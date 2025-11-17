@@ -19,9 +19,9 @@ export async function generateStaticParams() {
     const filenames = fs.readdirSync(snippetsDirectory);
     
     return filenames
-      .filter(filename => filename.endsWith('.md'))
+      .filter(filename => filename.endsWith('.md') || filename.endsWith('.mdx'))
       .map(filename => ({
-        slug: filename.replace('.md', ''),
+        slug: filename.replace(/\.(md|mdx)$/, ''),
       }));
   } catch (error) {
     console.error('Error generating static params for snippets:', error);
@@ -42,7 +42,12 @@ async function getSnippet(slug: string): Promise<SnippetData | null> {
     // Decode the slug in case it's percent-encoded (e.g., from URLs)
     const decodedSlug = decodeURIComponent(slug);
     const snippetsDirectory = path.join(process.cwd(), 'content/snippets');
-    const filePath = path.join(snippetsDirectory, `${decodedSlug}.md`);
+    
+    // Try .mdx first (new format), then fall back to .md (legacy)
+    let filePath = path.join(snippetsDirectory, `${decodedSlug}.mdx`);
+    if (!fs.existsSync(filePath)) {
+      filePath = path.join(snippetsDirectory, `${decodedSlug}.md`);
+    }
     
     if (!fs.existsSync(filePath)) {
       return null;

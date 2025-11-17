@@ -28,7 +28,7 @@ export default defineConfig({
         name: "bonnKaBanjara",
         label: "Bonn ka Banjara (بون کا بنجارہ)",
         path: "content/bonn-ka-banjara",
-        format: "md",
+        format: "mdx",
 
         ui: {
           defaultItem: { 
@@ -143,7 +143,7 @@ export default defineConfig({
         name: "snippet",
         label: "Snippets (مضامین)",
         path: "content/snippets",
-        format: "md",
+        format: "mdx",
 
         ui: {
           defaultItem: { 
@@ -252,7 +252,7 @@ export default defineConfig({
         name: "book",
         label: "Books (کتابیں)",
         path: "content/books",
-        format: "md",
+        format: "mdx",
 
         ui: {
           defaultItem: { 
