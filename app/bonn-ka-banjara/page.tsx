@@ -65,7 +65,7 @@ async function getBonnKaBanjaraPosts(): Promise<Post[]> {
     const filenames = fs.readdirSync(postsDirectory);
     
     const posts = filenames
-      .filter(filename => filename.endsWith('.md'))
+      .filter(filename => filename.endsWith('.mdx') || filename.endsWith('.md'))
       .map(filename => {
         const filePath = path.join(postsDirectory, filename);
         const fileContents = fs.readFileSync(filePath, 'utf8');
@@ -75,7 +75,7 @@ async function getBonnKaBanjaraPosts(): Promise<Post[]> {
         const excerpt = content.replace(/[#*`]/g, '').trim().slice(0, 150) + '...';
         
         return {
-          slug: filename.replace('.md', ''),
+          slug: filename.replace(/\.(mdx|md)$/, ''),
           title: data.title || 'بے عنوان',
           date: data.date || new Date().toISOString(),
           categories: data.categories || [],

@@ -28,7 +28,7 @@ export default defineConfig({
         name: "bonnKaBanjara",
         label: "Bonn ka Banjara (بون کا بنجارہ)",
         path: "content/bonn-ka-banjara",
-        format: "md",
+        format: "mdx",
 
         ui: {
           defaultItem: { 
@@ -100,7 +100,42 @@ export default defineConfig({
             type: "rich-text", 
             name: "body", 
             label: "Body (مواد)", 
-            isBody: true 
+            isBody: true,
+            templates: [
+              {
+                name: 'CenterText',
+                label: 'Center Aligned Text',
+                fields: [
+                  {
+                    name: 'children',
+                    label: 'Content',
+                    type: 'rich-text',
+                  },
+                ],
+              },
+              {
+                name: 'RightAlign',
+                label: 'Right Aligned Text',
+                fields: [
+                  {
+                    name: 'children',
+                    label: 'Content',
+                    type: 'rich-text',
+                  },
+                ],
+              },
+              {
+                name: 'LeftAlign',
+                label: 'Left Aligned Text',
+                fields: [
+                  {
+                    name: 'children',
+                    label: 'Content',
+                    type: 'rich-text',
+                  },
+                ],
+              },
+            ],
           },
         ],
       },
@@ -108,7 +143,7 @@ export default defineConfig({
         name: "snippet",
         label: "Snippets (مضامین)",
         path: "content/snippets",
-        format: "md",
+        format: "mdx",
 
         ui: {
           defaultItem: { 
@@ -174,7 +209,42 @@ export default defineConfig({
             type: "rich-text", 
             name: "body", 
             label: "Body (مواد)", 
-            isBody: true 
+            isBody: true,
+            templates: [
+              {
+                name: 'CenterText',
+                label: 'Center Aligned Text',
+                fields: [
+                  {
+                    name: 'children',
+                    label: 'Content',
+                    type: 'rich-text',
+                  },
+                ],
+              },
+              {
+                name: 'RightAlign',
+                label: 'Right Aligned Text',
+                fields: [
+                  {
+                    name: 'children',
+                    label: 'Content',
+                    type: 'rich-text',
+                  },
+                ],
+              },
+              {
+                name: 'LeftAlign',
+                label: 'Left Aligned Text',
+                fields: [
+                  {
+                    name: 'children',
+                    label: 'Content',
+                    type: 'rich-text',
+                  },
+                ],
+              },
+            ],
           },
         ],
       },
@@ -182,7 +252,7 @@ export default defineConfig({
         name: "book",
         label: "Books (کتابیں)",
         path: "content/books",
-        format: "md",
+        format: "mdx",
 
         ui: {
           defaultItem: { 
@@ -254,95 +324,42 @@ export default defineConfig({
             type: "rich-text", 
             name: "body", 
             label: "Description (تفصیل)", 
-            isBody: true 
-          },
-        ],
-      },
-      {
-        name: "work",
-        label: "Work / Kaam (کام)",
-        path: "content/work",
-        format: "md",
-
-        ui: {
-          defaultItem: { 
-            locale: "ur",
-            date: new Date().toISOString(),
-          },
-          router: ({ document }) => {
-            const slug = document._sys.filename;
-            return `/work/${slug}`;
-          },
-          filename: {
-            slugify: (values) =>
-              (values?.title || "untitled")
-                .toString()
-                .toLowerCase()
-                .replace(/\s+/g, "-")
-                .replace(/[^\u0600-\u06FFa-z0-9\-]/g, ""),
-          },
-        },
-
-        fields: [
-          { 
-            type: "string", 
-            name: "title", 
-            label: "Title (عنوان)", 
-            isTitle: true, 
-            required: true 
-          },
-          { 
-            type: "datetime", 
-            name: "date", 
-            label: "Date (تاریخ)", 
-            required: true,
-            ui: {
-              dateFormat: 'YYYY-MM-DD',
-            }
-          },
-          { 
-            type: "string", 
-            name: "locale", 
-            label: "Language",
-            required: true,
-            options: [
-              { value: "ur", label: "اردو (Urdu)" },
-              { value: "en", label: "English" }
+            isBody: true,
+            templates: [
+              {
+                name: 'CenterText',
+                label: 'Center Aligned Text',
+                fields: [
+                  {
+                    name: 'children',
+                    label: 'Content',
+                    type: 'rich-text',
+                  },
+                ],
+              },
+              {
+                name: 'RightAlign',
+                label: 'Right Aligned Text',
+                fields: [
+                  {
+                    name: 'children',
+                    label: 'Content',
+                    type: 'rich-text',
+                  },
+                ],
+              },
+              {
+                name: 'LeftAlign',
+                label: 'Left Aligned Text',
+                fields: [
+                  {
+                    name: 'children',
+                    label: 'Content',
+                    type: 'rich-text',
+                  },
+                ],
+              },
             ],
-            ui: { 
-              component: "select",
-            },
-          },
-          { 
-            type: "string", 
-            name: "tags", 
-            label: "Tags", 
-            list: true 
-          },
-          { 
-            type: "image", 
-            name: "coverImage", 
-            label: "Cover Image (سرورق)" 
-          },
-          { 
-            type: "string", 
-            name: "category", 
-            label: "Category",
-            options: [
-              { value: "software", label: "Software" },
-              { value: "milestone", label: "Milestone" },
-              { value: "research", label: "Research" },
-              { value: "other", label: "Other" }
-            ],
-            ui: { 
-              component: "select",
-            },
-          },
-          { 
-            type: "rich-text", 
-            name: "body", 
-            label: "Body (مواد)", 
-            isBody: true 
           },
         ],
       },
@@ -350,7 +367,7 @@ export default defineConfig({
         name: "gallery",
         label: "Gallery",
         path: "content/gallery",
-        format: "md",
+        format: "mdx",
 
         ui: {
           defaultItem: { 

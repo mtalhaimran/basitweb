@@ -2,7 +2,9 @@ import fs from 'fs';
 import path from 'path';
 import { notFound } from 'next/navigation';
 import { parseFrontmatter } from '@/lib/utils/frontmatter';
+import { TinaMarkdown } from 'tinacms/dist/rich-text';
 import { SimpleMarkdown } from '@/components/RichText';
+import { mdxComponents } from '@/components/MDXProvider';
 
 export const dynamic = 'force-static';
 
@@ -17,9 +19,9 @@ export async function generateStaticParams() {
     const filenames = fs.readdirSync(snippetsDirectory);
     
     return filenames
-      .filter(filename => filename.endsWith('.md'))
+      .filter(filename => filename.endsWith('.md') || filename.endsWith('.mdx'))
       .map(filename => ({
-        slug: filename.replace('.md', ''),
+        slug: filename.replace(/\.(md|mdx)$/, ''),
       }));
   } catch (error) {
     console.error('Error generating static params for snippets:', error);
@@ -32,7 +34,7 @@ interface SnippetData {
   date: string;
   tags?: string[];
   coverImage?: string;
-  body: string;
+  body: string | any; // Can be string (markdown) or object (TinaCMS rich-text)
 }
 
 async function getSnippet(slug: string): Promise<SnippetData | null> {
@@ -40,7 +42,12 @@ async function getSnippet(slug: string): Promise<SnippetData | null> {
     // Decode the slug in case it's percent-encoded (e.g., from URLs)
     const decodedSlug = decodeURIComponent(slug);
     const snippetsDirectory = path.join(process.cwd(), 'content/snippets');
-    const filePath = path.join(snippetsDirectory, `${decodedSlug}.md`);
+    
+    // Try .mdx first (new format), then fall back to .md (legacy)
+    let filePath = path.join(snippetsDirectory, `${decodedSlug}.mdx`);
+    if (!fs.existsSync(filePath)) {
+      filePath = path.join(snippetsDirectory, `${decodedSlug}.md`);
+    }
     
     if (!fs.existsSync(filePath)) {
       return null;
@@ -49,12 +56,23 @@ async function getSnippet(slug: string): Promise<SnippetData | null> {
     const fileContents = fs.readFileSync(filePath, 'utf8');
     const { data, content } = parseFrontmatter(fileContents);
     
+    // Try to parse content as JSON (TinaCMS rich-text format)
+    let body: string | any = content;
+    if (content.trim().startsWith('{') || content.trim().startsWith('[')) {
+      try {
+        body = JSON.parse(content);
+      } catch {
+        // If JSON parse fails, keep as string (plain markdown)
+        body = content;
+      }
+    }
+    
     return {
       title: data.title as string || 'بے عنوان',
       date: data.date as string || new Date().toISOString(),
       tags: data.tags as string[] || [],
       coverImage: data.coverImage as string,
-      body: content
+      body
     };
   } catch (error) {
     console.error('Error loading snippet:', error);
@@ -92,7 +110,11 @@ export default async function SnippetDetailPage({ params }: { params: Promise<{ 
 
           {/* Snippet Content */}
           <div className="prose prose-lg max-w-none text-right font-urdu-body">
-            <SimpleMarkdown content={snippet.body} />
+            {typeof snippet.body === 'string' ? (
+              <SimpleMarkdown content={snippet.body} />
+            ) : (
+              <TinaMarkdown components={mdxComponents} content={snippet.body} />
+            )}
           </div>
 
           {/* Tags */}

@@ -2,6 +2,7 @@ import { loadBookById, loadBooks } from '@/lib/utils/books';
 import { getImagePath } from '@/lib/utils/frontmatter';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
+import RichText, { SimpleMarkdown } from '@/components/RichText';
 
 export const dynamic = 'force-static';
 
@@ -72,8 +73,12 @@ export default async function BookDetailPage({ params }: { params: Promise<{ slu
                   <h2 className="text-3xl font-bold mb-4 text-ink font-urdu-heading text-right">
                     تفصیل
                   </h2>
-                  <div className="text-ink leading-relaxed whitespace-pre-wrap">
-                    {book.description}
+                  <div className="text-ink leading-relaxed">
+                    {typeof book.description === 'string' ? (
+                      <SimpleMarkdown content={book.description} />
+                    ) : (
+                      <RichText body={book.description} />
+                    )}
                   </div>
                 </div>
               )}

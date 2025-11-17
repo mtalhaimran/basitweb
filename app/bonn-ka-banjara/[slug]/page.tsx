@@ -2,7 +2,9 @@ import fs from 'fs';
 import path from 'path';
 import { notFound } from 'next/navigation';
 import { parseFrontmatter } from '@/lib/utils/frontmatter';
+import { TinaMarkdown } from 'tinacms/dist/rich-text';
 import { SimpleMarkdown } from '@/components/RichText';
+import { mdxComponents } from '@/components/MDXProvider';
 
 export const dynamic = 'force-static';
 
@@ -12,13 +14,18 @@ interface PostData {
   categories?: string[];
   tags?: string[];
   coverImage?: string;
-  body: string;
+  body: string | any; // Can be string (markdown) or object (TinaCMS rich-text)
 }
 
 async function getPost(slug: string): Promise<PostData | null> {
   try {
     const postsDirectory = path.join(process.cwd(), 'content/bonn-ka-banjara');
-    const filePath = path.join(postsDirectory, `${slug}.md`);
+    
+    // Try .mdx first (new format), then fall back to .md (legacy)
+    let filePath = path.join(postsDirectory, `${slug}.mdx`);
+    if (!fs.existsSync(filePath)) {
+      filePath = path.join(postsDirectory, `${slug}.md`);
+    }
     
     if (!fs.existsSync(filePath)) {
       return null;
@@ -27,13 +34,24 @@ async function getPost(slug: string): Promise<PostData | null> {
     const fileContents = fs.readFileSync(filePath, 'utf8');
     const { data, content } = parseFrontmatter(fileContents);
     
+    // Try to parse content as JSON (TinaCMS rich-text format)
+    let body: string | any = content;
+    if (content.trim().startsWith('{') || content.trim().startsWith('[')) {
+      try {
+        body = JSON.parse(content);
+      } catch {
+        // If JSON parse fails, keep as string (plain markdown)
+        body = content;
+      }
+    }
+    
     return {
       title: data.title as string || 'بے عنوان',
       date: data.date as string || new Date().toISOString(),
       categories: data.categories as string[] || [],
       tags: data.tags as string[] || [],
       coverImage: data.coverImage as string,
-      body: content
+      body
     };
   } catch (error) {
     console.error('Error loading post:', error);
@@ -83,7 +101,11 @@ export default async function BonnKaBanjaraDetailPage({ params }: { params: Prom
 
           {/* Post Content */}
           <div className="prose prose-lg max-w-none text-right font-urdu-body">
-            <SimpleMarkdown content={post.body} />
+            {typeof post.body === 'string' ? (
+              <SimpleMarkdown content={post.body} />
+            ) : (
+              <TinaMarkdown components={mdxComponents} content={post.body} />
+            )}
           </div>
 
           {/* Tags */}
