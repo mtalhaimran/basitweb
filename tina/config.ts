@@ -180,7 +180,7 @@ export default defineConfig({
       },
       {
         name: "book",
-        label: "Books",
+        label: "Books (کتابیں)",
         path: "content/books",
         format: "md",
 
@@ -241,22 +241,18 @@ export default defineConfig({
           },
           { 
             type: "string", 
-            name: "isbn", 
-            label: "ISBN" 
-          },
-          { 
-            type: "string", 
             name: "publisher", 
             label: "Publisher (ناشر)" 
           },
           { 
             type: "string", 
-            name: "buyLink", 
-            label: "Purchase Link" 
+            name: "quotes", 
+            label: "Quotes (اقتباسات)", 
+            list: true 
           },
           { 
             type: "rich-text", 
-            name: "description", 
+            name: "body", 
             label: "Description (تفصیل)", 
             isBody: true 
           },

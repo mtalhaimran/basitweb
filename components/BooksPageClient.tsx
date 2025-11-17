@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { getImagePath } from '@/lib/utils/frontmatter';
 import Image from 'next/image';
@@ -39,34 +40,36 @@ export function BooksPageClient({ books }: BooksPageClientProps) {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                 >
-                  <motion.div 
-                    className="group bg-surface-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-all duration-300"
-                    whileHover={{ y: -8 }}
-                    role="article"
-                    aria-label={`Book: ${book.title}`}
-                  >
-                    <div className="aspect-video bg-surface-elevated relative overflow-hidden">
-                      {book.coverImage ? (
-                        <Image
-                          src={getImagePath(book.coverImage)}
-                          alt={book.title}
-                          fill
-                          className="object-cover transition-transform duration-300 group-hover:scale-105"
-                          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                        />
-                      ) : (
-                        <div className="absolute inset-0 flex items-center justify-center text-ink-muted font-urdu-body">
-                          [کتاب کی تصویر]
-                        </div>
-                      )}
-                      <div className="absolute inset-0 bg-brand/0 group-hover:bg-brand/10 transition-colors duration-300" />
-                    </div>
-                    <div className="p-6">
-                      <h3 className="text-2xl font-bold text-ink group-hover:text-brand transition-colors font-urdu-heading text-right">
-                        {book.title}
-                      </h3>
-                    </div>
-                  </motion.div>
+                  <Link href={`/books/${book.id}`}>
+                    <motion.div 
+                      className="group bg-surface-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-all duration-300"
+                      whileHover={{ y: -8 }}
+                      role="article"
+                      aria-label={`Book: ${book.title}`}
+                    >
+                      <div className="aspect-video bg-surface-elevated relative overflow-hidden">
+                        {book.coverImage ? (
+                          <Image
+                            src={getImagePath(book.coverImage)}
+                            alt={book.title}
+                            fill
+                            className="object-cover transition-transform duration-300 group-hover:scale-105"
+                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                          />
+                        ) : (
+                          <div className="absolute inset-0 flex items-center justify-center text-ink-muted font-urdu-body">
+                            [کتاب کی تصویر]
+                          </div>
+                        )}
+                        <div className="absolute inset-0 bg-brand/0 group-hover:bg-brand/10 transition-colors duration-300" />
+                      </div>
+                      <div className="p-6">
+                        <h3 className="text-2xl font-bold text-ink group-hover:text-brand transition-colors font-urdu-heading text-right">
+                          {book.title}
+                        </h3>
+                      </div>
+                    </motion.div>
+                  </Link>
                 </motion.div>
               ))}
             </div>
