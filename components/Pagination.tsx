@@ -16,14 +16,15 @@ export function Pagination({ currentPage, totalPages, basePath = '' }: Paginatio
   if (totalPages <= 1) return null;
 
   const createPageUrl = (page: number) => {
-    const params = new URLSearchParams(searchParams);
+    const params = new URLSearchParams(searchParams.toString());
     if (page === 1) {
       params.delete('page');
     } else {
       params.set('page', String(page));
     }
     const queryString = params.toString();
-    return basePath || pathname + (queryString ? `?${queryString}` : '');
+    const basePath_ = basePath || pathname;
+    return queryString ? `${basePath_}?${queryString}` : basePath_;
   };
 
   const getPageNumbers = () => {
