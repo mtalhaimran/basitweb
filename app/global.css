@@ -40,6 +40,20 @@ body {
 /* RTL Support */
 [dir="rtl"] {
   text-align: right;
+  direction: rtl;
+}
+
+/* Apply RTL text alignment to all common text elements */
+[dir="rtl"] h1,
+[dir="rtl"] h2,
+[dir="rtl"] h3,
+[dir="rtl"] h4,
+[dir="rtl"] h5,
+[dir="rtl"] h6,
+[dir="rtl"] p,
+[dir="rtl"] span,
+[dir="rtl"] div {
+  text-align: right;
 }
 
 /* Only reverse horizontal flex containers in RTL, not vertical ones */
@@ -85,13 +99,3 @@ body {
   }
 }
 
-/* RTL Support */
-/* Only reverse flex-row by default, but allow opt-out with .no-rtl-reverse */
-[dir="rtl"] .flex-row:not(.no-rtl-reverse) {
-  flex-direction: row-reverse;
-}
-
-/* Force LTR direction for specific elements */
-.ltr-row {
-  flex-direction: row !important;
-}

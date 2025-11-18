@@ -238,7 +238,7 @@ export default function GalleryGrid({ images }: GalleryGridProps) {
                 <div className="p-8 lg:p-12 flex flex-col justify-between bg-gradient-to-br from-surface-elevated to-surface" dir="rtl">
                   <div className="space-y-6">
                     <motion.h2
-                      className="text-4xl font-bold text-ink font-urdu-heading leading-relaxed"
+                      className="text-4xl font-bold text-ink font-urdu-heading leading-relaxed text-right"
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: 0.1 }}
@@ -254,7 +254,7 @@ export default function GalleryGrid({ images }: GalleryGridProps) {
                         transition={{ delay: 0.2 }}
                       >
                         <div className="flex items-center gap-2 justify-end">
-                          <h3 className="text-sm font-semibold text-ink-muted font-urdu-body">
+                          <h3 className="text-sm font-semibold text-ink-muted font-urdu-body text-right">
                             تفصیل
                           </h3>
                           <span className="text-primary text-xl">💬</span>
@@ -273,7 +273,7 @@ export default function GalleryGrid({ images }: GalleryGridProps) {
                         transition={{ delay: 0.3 }}
                       >
                         <div className="flex items-center gap-2 justify-end">
-                          <h3 className="text-sm font-semibold text-ink-muted font-urdu-body">
+                          <h3 className="text-sm font-semibold text-ink-muted font-urdu-body text-right">
                             مقام
                           </h3>
                           <span className="text-primary text-xl">📍</span>
@@ -292,7 +292,7 @@ export default function GalleryGrid({ images }: GalleryGridProps) {
                         transition={{ delay: 0.4 }}
                       >
                         <div className="flex items-center gap-2 justify-end">
-                          <h3 className="text-sm font-semibold text-ink-muted font-urdu-body">
+                          <h3 className="text-sm font-semibold text-ink-muted font-urdu-body text-right">
                             تاریخ
                           </h3>
                           <span className="text-primary text-xl">📅</span>
