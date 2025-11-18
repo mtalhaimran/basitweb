@@ -61,8 +61,8 @@ export default async function GalleryPage() {
   const galleryImages = await getGalleryImages();
 
   return (
-    <div className="min-h-screen bg-surface">
-      <div className="container mx-auto px-4 pt-44 pb-24" dir="rtl">
+    <div className="min-h-screen bg-surface pt-44">
+      <div className="container mx-auto px-4 pb-24" dir="rtl">
         <div className="max-w-6xl mx-auto">
           {/* Page Header */}
           <div className="mb-16 text-right">
