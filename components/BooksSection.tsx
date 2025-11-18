@@ -42,15 +42,15 @@ export function BooksSection({ books, locale = 'ur' }: BooksSectionProps) {
         viewport={{ once: true }}
         transition={{ duration: 0.5 }}
       >
+        <h2 className="text-4xl font-bold text-ink font-urdu-heading">
+          کتابیں
+        </h2>
         <Link
           href="/books"
           className="text-brand hover:text-brand-dark transition-colors font-urdu-body text-lg underline decoration-2 underline-offset-4"
         >
           تمام کتابیں دیکھیں ←
         </Link>
-        <h2 className="text-4xl font-bold text-ink font-urdu-heading">
-          کتابیں
-        </h2>
       </motion.div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {books.map((book, index) => (
