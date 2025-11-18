@@ -13,7 +13,7 @@ interface BooksPageClientProps {
 export function BooksPageClient({ books }: BooksPageClientProps) {
   return (
     <div className="min-h-screen bg-surface pt-40">
-      <div className="container mx-auto px-4 py-12" dir="rtl">
+      <div className="container mx-auto px-4 pb-24" dir="rtl">
         <div className="max-w-6xl mx-auto">
           {/* Page Header */}
           <motion.div 

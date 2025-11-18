@@ -62,7 +62,7 @@ export default async function GalleryPage() {
 
   return (
     <div className="min-h-screen bg-surface">
-      <div className="container mx-auto px-4 py-16 pt-44" dir="rtl">
+      <div className="container mx-auto px-4 pt-44 pb-24" dir="rtl">
         <div className="max-w-6xl mx-auto">
           {/* Page Header */}
           <div className="mb-16 text-right">

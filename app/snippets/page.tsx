@@ -57,7 +57,7 @@ export default async function SnippetsPage() {
 
   return (
     <div className="min-h-screen bg-surface pt-40">
-      <div className="container mx-auto px-4 py-12" dir="rtl">
+      <div className="container mx-auto px-4 pb-24" dir="rtl">
         <div className="max-w-6xl mx-auto">
           <div className="mb-16 text-right">
             <h1 className="text-5xl font-bold text-ink font-urdu-heading mb-6">
