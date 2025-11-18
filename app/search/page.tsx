@@ -93,7 +93,7 @@ export default function SearchPage() {
 
           {/* Search Input */}
           <div className="relative mb-6">
-            <div className="flex items-center gap-3 bg-surface-white rounded-lg border-2 border-line focus-within:border-brand transition-colors">
+            <div className="flex items-center gap-3 bg-surface-white rounded-lg border-2 border-line focus-within:border-brand transition-colors ltr-row">
               <input
                 type="text"
                 value={query}
