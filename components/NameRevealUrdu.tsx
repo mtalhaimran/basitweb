@@ -20,7 +20,6 @@ export default function NameRevealUrdu({ className = '', showDropdown = false }:
 
   const navUrdu = [
     { name: 'کام', href: '/work' },
-    { name: 'تحریریں', href: '/writing' },
     { name: 'مضامین', href: '/snippets' },
     { name: 'کتابیں', href: '/books' },
     { name: 'گیلری', href: '/gallery' },
@@ -31,7 +30,6 @@ export default function NameRevealUrdu({ className = '', showDropdown = false }:
 
   const navEnglish = [
     { name: 'Work', href: '/work' },
-    { name: 'Writing', href: '/writing' },
     { name: 'Snippets', href: '/snippets' },
     { name: 'Books', href: '/books' },
     { name: 'Gallery', href: '/gallery' },
