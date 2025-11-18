@@ -136,24 +136,25 @@ export default function GalleryGrid({ images }: GalleryGridProps) {
                 >
                   {image.caption && (
                     <div className="flex items-start justify-end gap-2">
+                      <span className="text-white/70 text-lg mt-0.5">💬</span>
                       <p className="text-white/90 font-urdu-body text-sm text-right leading-relaxed">
                         {image.caption}
                       </p>
-                      <span className="text-white/70 text-lg mt-0.5">💬</span>
                     </div>
                   )}
 
                   {image.location && (
                     <div className="flex items-center justify-end gap-2">
+                      <span className="text-white/70 text-lg">📍</span>
                       <p className="text-white/80 font-urdu-body text-sm text-right">
                         {image.location}
                       </p>
-                      <span className="text-white/70 text-lg">📍</span>
                     </div>
                   )}
 
                   {image.date && (
                     <div className="flex items-center justify-end gap-2">
+                      <span className="text-white/60 text-sm">📅</span>
                       <p className="text-white/70 font-urdu-body text-xs text-right">
                         {new Date(image.date).toLocaleDateString('ur-PK', {
                           year: 'numeric',
@@ -161,7 +162,6 @@ export default function GalleryGrid({ images }: GalleryGridProps) {
                           day: 'numeric',
                         })}
                       </p>
-                      <span className="text-white/60 text-sm">📅</span>
                     </div>
                   )}
                 </motion.div>
@@ -254,10 +254,10 @@ export default function GalleryGrid({ images }: GalleryGridProps) {
                         transition={{ delay: 0.2 }}
                       >
                         <div className="flex items-center gap-2 justify-end">
+                          <span className="text-primary text-xl">💬</span>
                           <h3 className="text-sm font-semibold text-ink-muted font-urdu-body text-right">
                             تفصیل
                           </h3>
-                          <span className="text-primary text-xl">💬</span>
                         </div>
                         <p className="text-lg text-ink font-urdu-body text-right leading-relaxed">
                           {selectedImage.caption}
@@ -273,10 +273,10 @@ export default function GalleryGrid({ images }: GalleryGridProps) {
                         transition={{ delay: 0.3 }}
                       >
                         <div className="flex items-center gap-2 justify-end">
+                          <span className="text-primary text-xl">📍</span>
                           <h3 className="text-sm font-semibold text-ink-muted font-urdu-body text-right">
                             مقام
                           </h3>
-                          <span className="text-primary text-xl">📍</span>
                         </div>
                         <p className="text-lg text-ink font-urdu-body text-right">
                           {selectedImage.location}
@@ -292,10 +292,10 @@ export default function GalleryGrid({ images }: GalleryGridProps) {
                         transition={{ delay: 0.4 }}
                       >
                         <div className="flex items-center gap-2 justify-end">
+                          <span className="text-primary text-xl">📅</span>
                           <h3 className="text-sm font-semibold text-ink-muted font-urdu-body text-right">
                             تاریخ
                           </h3>
-                          <span className="text-primary text-xl">📅</span>
                         </div>
                         <p className="text-lg text-ink font-urdu-body text-right">
                           {new Date(selectedImage.date).toLocaleDateString('ur-PK', {
