@@ -47,6 +47,11 @@ body {
   flex-direction: row-reverse;
 }
 
+/* Override RTL reverse for specific components that need natural LTR order */
+.ltr-row {
+  flex-direction: row !important;
+}
+
 [dir="ltr"] {
   text-align: left;
 }
@@ -78,4 +83,15 @@ body {
   .container {
     padding: 0 1rem;
   }
+}
+
+/* RTL Support */
+/* Only reverse flex-row by default, but allow opt-out with .no-rtl-reverse */
+[dir="rtl"] .flex-row:not(.no-rtl-reverse) {
+  flex-direction: row-reverse;
+}
+
+/* Force LTR direction for specific elements */
+.ltr-row {
+  flex-direction: row !important;
 }

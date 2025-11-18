@@ -73,7 +73,7 @@ export function Pagination({ currentPage, totalPages, basePath = '' }: Paginatio
       )}
 
       {/* Page numbers */}
-      <div className="flex gap-1">
+      <div className="flex gap-1 ltr-row">
         {getPageNumbers().map((page, index) => {
           if (page === '...') {
             return (
