@@ -25,7 +25,7 @@ export default async function RootLayout({
       <body className="font-urdu-body bg-surface text-ink antialiased">
         <ClientProvider locale={locale}>
           <Header />
-          <main id="main-content" className="pt-20">{children}</main>
+          <main id="main-content">{children}</main>
           <Footer />
         </ClientProvider>
       </body>
