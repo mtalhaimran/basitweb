@@ -22,10 +22,10 @@ export default async function RootLayout({
           rel="stylesheet" 
         />
       </head>
-      <body className="font-urdu-body bg-surface text-ink antialiased">
+      <body className="font-urdu-body bg-surface text-ink antialiased flex flex-col min-h-screen">
         <ClientProvider locale={locale}>
           <Header />
-          <main id="main-content">{children}</main>
+          <main id="main-content" className="flex-1">{children}</main>
           <Footer />
         </ClientProvider>
       </body>

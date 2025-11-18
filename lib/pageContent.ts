@@ -8,12 +8,6 @@ export interface PageContent {
 }
 
 export const pageContent: Record<string, PageContent> = {
-  'work': {
-    titleUr: 'کام',
-    titleEn: 'Work',
-    contentUr: 'میرے کام کا مجموعہ جلد دستیاب ہوگا۔',
-    contentEn: 'Work portfolio coming soon.'
-  },
   'writing': {
     titleUr: 'تحریریں',
     titleEn: 'Writing',

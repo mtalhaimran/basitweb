@@ -39,7 +39,7 @@ export default async function DynamicPage({ params }: { params: Promise<{ slug: 
   const isContactPage = pageSlug === 'contact';
 
   return (
-    <div className="min-h-screen bg-surface pt-40">
+    <div className="bg-surface pt-40">
       <div className="container mx-auto px-4 pb-24" dir={isUrdu ? 'rtl' : 'ltr'}>
         <div className="max-w-6xl mx-auto">
           <h1 className={`text-4xl font-bold mb-8 text-ink ${isUrdu ? 'font-urdu-heading text-right' : ''}`}>
