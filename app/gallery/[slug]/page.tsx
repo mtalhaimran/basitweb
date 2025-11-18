@@ -63,12 +63,12 @@ export default async function GalleryDetailPage({ params }: { params: Promise<{ 
             </h1>
             <div className="flex flex-wrap gap-4 justify-end items-center text-ink-muted">
               {item.location && (
-                <div className="flex items-center gap-2 ltr-row">
+                <div className="flex items-center gap-2">
                   <span>📍</span>
                   <span className="font-urdu-body">{item.location}</span>
                 </div>
               )}
-              <time className="flex items-center gap-2 font-urdu-body ltr-row">
+              <time className="flex items-center gap-2 font-urdu-body">
                 <span>📅</span>
                 <span>
                   {new Date(item.date).toLocaleDateString('ur-PK', {
@@ -100,7 +100,7 @@ export default async function GalleryDetailPage({ params }: { params: Promise<{ 
           {/* Caption */}
           {item.caption && (
             <div className="bg-surface-elevated rounded-xl p-6 shadow-md">
-              <h2 className="text-xl font-bold mb-3 text-ink font-urdu-heading text-right flex items-center justify-end gap-2 ltr-row">
+              <h2 className="text-xl font-bold mb-3 text-ink font-urdu-heading text-right flex items-center justify-end gap-2">
                 <span className="text-2xl">💬</span>
                 <span>تفصیل</span>
               </h2>
