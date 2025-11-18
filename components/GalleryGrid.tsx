@@ -115,6 +115,7 @@ export default function GalleryGrid({ images }: GalleryGridProps) {
                 initial={{ y: 0 }}
                 animate={{ y: hoveredIndex === index ? 0 : 20 }}
                 transition={{ duration: 0.3 }}
+                dir="rtl"
               >
                 <motion.h3
                   className="text-white font-urdu-heading text-xl text-right mb-2 leading-relaxed"
@@ -135,27 +136,27 @@ export default function GalleryGrid({ images }: GalleryGridProps) {
                   className="space-y-2"
                 >
                   {image.caption && (
-                    <div className="flex items-start justify-end gap-2">
+                    <div className="flex items-start gap-2">
                       <span className="text-white/70 text-lg mt-0.5">💬</span>
-                      <p className="text-white/90 font-urdu-body text-sm text-right leading-relaxed">
+                      <p className="text-white/90 font-urdu-body text-sm leading-relaxed">
                         {image.caption}
                       </p>
                     </div>
                   )}
 
                   {image.location && (
-                    <div className="flex items-center justify-end gap-2">
+                    <div className="flex items-center gap-2">
                       <span className="text-white/70 text-lg">📍</span>
-                      <p className="text-white/80 font-urdu-body text-sm text-right">
+                      <p className="text-white/80 font-urdu-body text-sm">
                         {image.location}
                       </p>
                     </div>
                   )}
 
                   {image.date && (
-                    <div className="flex items-center justify-end gap-2">
+                    <div className="flex items-center gap-2">
                       <span className="text-white/60 text-sm">📅</span>
-                      <p className="text-white/70 font-urdu-body text-xs text-right">
+                      <p className="text-white/70 font-urdu-body text-xs">
                         {new Date(image.date).toLocaleDateString('ur-PK', {
                           year: 'numeric',
                           month: 'long',
@@ -238,7 +239,7 @@ export default function GalleryGrid({ images }: GalleryGridProps) {
                 <div className="p-8 lg:p-12 flex flex-col justify-between bg-gradient-to-br from-surface-elevated to-surface" dir="rtl">
                   <div className="space-y-6">
                     <motion.h2
-                      className="text-4xl font-bold text-ink font-urdu-heading leading-relaxed text-right"
+                      className="text-4xl font-bold text-ink font-urdu-heading leading-relaxed"
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: 0.1 }}
@@ -253,13 +254,13 @@ export default function GalleryGrid({ images }: GalleryGridProps) {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.2 }}
                       >
-                        <div className="flex items-center gap-2 justify-end">
+                        <div className="flex items-center gap-2">
                           <span className="text-primary text-xl">💬</span>
-                          <h3 className="text-sm font-semibold text-ink-muted font-urdu-body text-right">
+                          <h3 className="text-sm font-semibold text-ink-muted font-urdu-body">
                             تفصیل
                           </h3>
                         </div>
-                        <p className="text-lg text-ink font-urdu-body text-right leading-relaxed">
+                        <p className="text-lg text-ink font-urdu-body leading-relaxed">
                           {selectedImage.caption}
                         </p>
                       </motion.div>
@@ -272,13 +273,13 @@ export default function GalleryGrid({ images }: GalleryGridProps) {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.3 }}
                       >
-                        <div className="flex items-center gap-2 justify-end">
+                        <div className="flex items-center gap-2">
                           <span className="text-primary text-xl">📍</span>
-                          <h3 className="text-sm font-semibold text-ink-muted font-urdu-body text-right">
+                          <h3 className="text-sm font-semibold text-ink-muted font-urdu-body">
                             مقام
                           </h3>
                         </div>
-                        <p className="text-lg text-ink font-urdu-body text-right">
+                        <p className="text-lg text-ink font-urdu-body">
                           {selectedImage.location}
                         </p>
                       </motion.div>
@@ -291,13 +292,13 @@ export default function GalleryGrid({ images }: GalleryGridProps) {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.4 }}
                       >
-                        <div className="flex items-center gap-2 justify-end">
+                        <div className="flex items-center gap-2">
                           <span className="text-primary text-xl">📅</span>
-                          <h3 className="text-sm font-semibold text-ink-muted font-urdu-body text-right">
+                          <h3 className="text-sm font-semibold text-ink-muted font-urdu-body">
                             تاریخ
                           </h3>
                         </div>
-                        <p className="text-lg text-ink font-urdu-body text-right">
+                        <p className="text-lg text-ink font-urdu-body">
                           {new Date(selectedImage.date).toLocaleDateString('ur-PK', {
                             year: 'numeric',
                             month: 'long',
