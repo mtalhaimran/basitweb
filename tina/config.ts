@@ -413,7 +413,10 @@ export default defineConfig({
           { 
             type: "string", 
             name: "caption", 
-            label: "Caption (تفصیل)" 
+            label: "Caption (تفصیل)",
+            ui: {
+              component: "textarea",
+            },
           },
           { 
             type: "string", 
