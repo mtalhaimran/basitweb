@@ -363,68 +363,6 @@ export default defineConfig({
           },
         ],
       },
-      {
-        name: "gallery",
-        label: "Gallery",
-        path: "content/gallery",
-        format: "mdx",
-
-        ui: {
-          defaultItem: { 
-            date: new Date().toISOString(),
-          },
-          router: ({ document }) => {
-            const slug = document._sys.filename;
-            return `/gallery/${slug}`;
-          },
-          filename: {
-            slugify: (values) =>
-              (values?.title || "untitled")
-                .toString()
-                .toLowerCase()
-                .replace(/\s+/g, "-")
-                .replace(/[^\u0600-\u06FFa-z0-9\-]/g, ""),
-          },
-        },
-
-        fields: [
-          { 
-            type: "string", 
-            name: "title", 
-            label: "Title (عنوان)", 
-            isTitle: true, 
-            required: true 
-          },
-          { 
-            type: "image", 
-            name: "image", 
-            label: "Image (تصویر)", 
-            required: true 
-          },
-          { 
-            type: "datetime", 
-            name: "date", 
-            label: "Date", 
-            required: true,
-            ui: {
-              dateFormat: 'YYYY-MM-DD',
-            }
-          },
-          { 
-            type: "string", 
-            name: "caption", 
-            label: "Caption (تفصیل)",
-            ui: {
-              component: "textarea",
-            },
-          },
-          { 
-            type: "string", 
-            name: "location", 
-            label: "Location (مقام)" 
-          },
-        ],
-      },
     ],
   },
 });

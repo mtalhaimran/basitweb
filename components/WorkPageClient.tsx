@@ -6,14 +6,12 @@ import Link from 'next/link';
 import { useState } from 'react';
 
 interface ContentItem {
-  type: 'book' | 'snippet' | 'bonn' | 'gallery';
+  type: 'book' | 'snippet' | 'bonn';
   slug: string;
   title: string;
   date: string;
   excerpt?: string;
   image?: string;
-  caption?: string;
-  location?: string;
 }
 
 interface WorkPageClientProps {
@@ -21,7 +19,7 @@ interface WorkPageClientProps {
 }
 
 export function WorkPageClient({ content }: WorkPageClientProps) {
-  const [filter, setFilter] = useState<'all' | 'book' | 'snippet' | 'bonn' | 'gallery'>('all');
+  const [filter, setFilter] = useState<'all' | 'book' | 'snippet' | 'bonn'>('all');
 
   const filteredContent = filter === 'all' ? content : content.filter(item => item.type === filter);
 
@@ -29,8 +27,7 @@ export function WorkPageClient({ content }: WorkPageClientProps) {
     const badges = {
       book: '📚 کتاب',
       snippet: '✍️ اقتباس',
-      bonn: '🌆 بون کا بنجارہ',
-      gallery: '📷 گیلری'
+      bonn: '🌆 بون کا بنجارہ'
     };
     return badges[type as keyof typeof badges] || type;
   };
@@ -39,8 +36,7 @@ export function WorkPageClient({ content }: WorkPageClientProps) {
     const colors = {
       book: 'from-purple-500/20 to-pink-500/20 border-purple-500/30',
       snippet: 'from-blue-500/20 to-cyan-500/20 border-blue-500/30',
-      bonn: 'from-green-500/20 to-emerald-500/20 border-green-500/30',
-      gallery: 'from-orange-500/20 to-red-500/20 border-orange-500/30'
+      bonn: 'from-green-500/20 to-emerald-500/20 border-green-500/30'
     };
     return colors[type as keyof typeof colors] || 'from-gray-500/20 to-gray-500/20 border-gray-500/30';
   };
@@ -49,8 +45,7 @@ export function WorkPageClient({ content }: WorkPageClientProps) {
     const links = {
       book: `/books/${item.slug}`,
       snippet: `/snippets/${item.slug}`,
-      bonn: `/bonn-ka-banjara/${item.slug}`,
-      gallery: `/gallery/${item.slug}`
+      bonn: `/bonn-ka-banjara/${item.slug}`
     };
     return links[item.type];
   };
@@ -70,7 +65,7 @@ export function WorkPageClient({ content }: WorkPageClientProps) {
               کام
             </h1>
             <p className="text-xl text-ink-muted font-urdu-body leading-relaxed max-w-3xl mr-auto">
-              میری تمام تخلیقات، کہانیاں، کتابیں، اقتباسات اور تصاویر کا مجموعہ
+              میری تمام تخلیقات، کہانیاں، کتابیں اور اقتباسات کا مجموعہ
             </p>
             <motion.div
               initial={{ scaleX: 0 }}
@@ -91,8 +86,7 @@ export function WorkPageClient({ content }: WorkPageClientProps) {
               { value: 'all', label: 'تمام' },
               { value: 'book', label: '📚 کتابیں' },
               { value: 'bonn', label: '🌆 بون کا بنجارہ' },
-              { value: 'snippet', label: '✍️ اقتباسات' },
-              { value: 'gallery', label: '📷 گیلری' }
+              { value: 'snippet', label: '✍️ اقتباسات' }
             ].map((btn) => (
               <motion.button
                 key={btn.value}

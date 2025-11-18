@@ -2,21 +2,19 @@
 
 import { useState, useEffect, useMemo } from 'react';
 import Link from 'next/link';
-import { Search, Loader2, BookOpen, FileText, Image, Briefcase, Filter } from 'lucide-react';
+import { Search, Loader2, BookOpen, FileText, Briefcase, Filter } from 'lucide-react';
 import { getSearchManager, SearchDoc } from '@/lib/search/flexsearch-index';
 
 const collectionIcons = {
   'bonn-ka-banjara': BookOpen,
   'snippets': FileText,
   'books': BookOpen,
-  'gallery': Image,
 };
 
 const collectionLabels = {
   'bonn-ka-banjara': 'بون کا بنجارہ',
   'snippets': 'مضامین',
   'books': 'کتابیں',
-  'gallery': 'گیلری',
 };
 
 export default function SearchPage() {
@@ -130,7 +128,6 @@ export default function SearchPage() {
               <option value="bonn-ka-banjara">بون کا بنجارہ</option>
               <option value="snippets">مضامین</option>
               <option value="books">کتابیں</option>
-              <option value="gallery">گیلری</option>
             </select>
 
             <select

@@ -22,7 +22,6 @@ export default function NameRevealUrdu({ className = '', showDropdown = false }:
     { name: 'کام', href: '/work' },
     { name: 'مضامین', href: '/snippets' },
     { name: 'کتابیں', href: '/books' },
-    { name: 'گیلری', href: '/gallery' },
     { name: 'بون کا بنجارہ', href: '/bonn-ka-banjara' },
     { name: 'میرے بارے میں', href: '/about' },
     { name: 'رابطہ', href: '/contact' }
@@ -32,7 +31,6 @@ export default function NameRevealUrdu({ className = '', showDropdown = false }:
     { name: 'Work', href: '/work' },
     { name: 'Snippets', href: '/snippets' },
     { name: 'Books', href: '/books' },
-    { name: 'Gallery', href: '/gallery' },
     { name: 'Bonn ka Banjara', href: '/bonn-ka-banjara' },
     { name: 'About', href: '/about' },
     { name: 'Contact', href: '/contact' }
