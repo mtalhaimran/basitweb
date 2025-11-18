@@ -20,7 +20,7 @@ async function getGalleryImages(): Promise<GalleryImage[]> {
   const images: GalleryImage[] = [];
   
   try {
-    // Load from TinaCMS content/gallery (both .md files and image files)
+    // Load only from TinaCMS content/gallery MDX files
     const galleryDirectory = path.join(process.cwd(), 'content/gallery');
     
     if (fs.existsSync(galleryDirectory)) {
@@ -46,41 +46,6 @@ async function getGalleryImages(): Promise<GalleryImage[]> {
         });
       
       images.push(...cmsImages);
-      
-      // Load direct image files (JPG, PNG, etc.)
-      const imageExtensions = ['.jpg', '.jpeg', '.png', '.gif', '.webp', '.JPG', '.JPEG', '.PNG'];
-      const directImages = filenames
-        .filter(filename => imageExtensions.some(ext => filename.endsWith(ext)))
-        .map((filename, index) => ({
-          slug: `direct-${filename.replace(/\.[^/.]+$/, '')}`,
-          title: filename.replace(/\.[^/.]+$/, '').replace(/_/g, ' '),
-          image: `/gallery/${filename}`,
-          caption: undefined,
-          location: undefined,
-          date: new Date().toISOString(),
-          source: 'cms' as const
-        }));
-      
-      images.push(...directImages);
-    }
-
-    // Load from public/gallery folder
-    const publicGalleryManifest = path.join(process.cwd(), 'public/gallery/gallery-manifest.json');
-    if (fs.existsSync(publicGalleryManifest)) {
-      const manifestContent = fs.readFileSync(publicGalleryManifest, 'utf8');
-      const manifest = JSON.parse(manifestContent);
-      
-      const folderImages = manifest.images.map((img: any, index: number) => ({
-        slug: `gallery-${index}`,
-        title: img.title || `تصویر ${index + 1}`,
-        image: `/gallery/${img.filename}`,
-        caption: img.caption,
-        location: img.location,
-        date: img.date || new Date().toISOString(),
-        source: 'folder' as const
-      }));
-      
-      images.push(...folderImages);
     }
   } catch (error) {
     console.error('Error loading gallery images:', error);
