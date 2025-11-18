@@ -12,9 +12,9 @@ interface BooksPageClientProps {
 
 export function BooksPageClient({ books }: BooksPageClientProps) {
   return (
-    <div className="min-h-screen bg-surface pt-32">
-      <div className="container mx-auto px-4 py-12" dir="rtl">
-        <div className="max-w-7xl mx-auto">
+    <div className="min-h-screen bg-surface pt-40">
+      <div className="container mx-auto px-4 pb-24" dir="rtl">
+        <div className="max-w-6xl mx-auto">
           {/* Page Header */}
           <motion.div 
             className="mb-16 text-right"
@@ -22,7 +22,7 @@ export function BooksPageClient({ books }: BooksPageClientProps) {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <h1 className="text-5xl font-bold text-ink font-urdu-heading mb-4">
+            <h1 className="text-5xl font-bold text-ink font-urdu-heading mb-6">
               کتابیں
             </h1>
             <p className="text-lg text-ink-muted font-urdu-body">

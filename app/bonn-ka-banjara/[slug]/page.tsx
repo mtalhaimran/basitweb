@@ -68,8 +68,8 @@ export default async function BonnKaBanjaraDetailPage({ params }: { params: Prom
   }
 
   return (
-    <div className="min-h-screen bg-surface pt-20">
-      <div className="container mx-auto px-4 py-12" dir="rtl">
+    <div className="min-h-screen bg-surface pt-40">
+      <div className="container mx-auto px-4 pb-24" dir="rtl">
         <article className="max-w-4xl mx-auto">
           {/* Post Header */}
           <header className="mb-8">

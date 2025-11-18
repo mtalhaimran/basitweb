@@ -373,6 +373,10 @@ export default defineConfig({
           defaultItem: { 
             date: new Date().toISOString(),
           },
+          router: ({ document }) => {
+            const slug = document._sys.filename;
+            return `/gallery/${slug}`;
+          },
           filename: {
             slugify: (values) =>
               (values?.title || "untitled")
@@ -409,7 +413,10 @@ export default defineConfig({
           { 
             type: "string", 
             name: "caption", 
-            label: "Caption (تفصیل)" 
+            label: "Caption (تفصیل)",
+            ui: {
+              component: "textarea",
+            },
           },
           { 
             type: "string", 

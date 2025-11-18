@@ -1,8 +1,11 @@
 import fs from 'fs';
 import path from 'path';
 import Image from 'next/image';
+import { Pagination } from '@/components/Pagination';
 
 export const dynamic = 'force-static';
+
+const POSTS_PER_PAGE = 12;
 
 interface Post {
   slug: string;
@@ -92,25 +95,40 @@ async function getBonnKaBanjaraPosts(): Promise<Post[]> {
   }
 }
 
-export default async function BonnKaBanjaraPage() {
-  const posts = await getBonnKaBanjaraPosts();
+export default async function BonnKaBanjaraPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ page?: string }>;
+}) {
+  const allPosts = await getBonnKaBanjaraPosts();
+  const resolvedSearchParams = await searchParams;
+  const currentPage = parseInt(resolvedSearchParams.page || '1', 10);
+  const totalPages = Math.ceil(allPosts.length / POSTS_PER_PAGE);
+  
+  // Paginate posts
+  const startIndex = (currentPage - 1) * POSTS_PER_PAGE;
+  const posts = allPosts.slice(startIndex, startIndex + POSTS_PER_PAGE);
 
   return (
-    <div className="min-h-screen bg-surface pt-32">
-      <div className="container mx-auto px-4 py-12" dir="rtl">
+    <div className="bg-surface pt-40">
+      <div className="container mx-auto px-4 pb-24" dir="rtl">
         <div className="max-w-6xl mx-auto">
-          <div className="mb-12 text-right">
-            <h1 className="text-5xl font-bold text-ink font-urdu-heading mb-4">
+          <div className="mb-16 text-right">
+            <h1 className="text-5xl font-bold text-ink font-urdu-heading mb-6">
               بون کا بنجارہ
             </h1>
             <p className="text-lg text-ink-muted font-urdu-body">
               بون شہر سے تعلق رکھنے والی کہانیاں اور تحریریں
             </p>
+            <p className="text-sm text-ink-muted font-urdu-body mt-2">
+              کل {allPosts.length} تحریریں
+            </p>
           </div>
 
           {posts.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {posts.map((post) => (
+            <>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {posts.map((post) => (
                 <a
                   key={post.slug}
                   href={`/bonn-ka-banjara/${post.slug}`}
@@ -151,7 +169,13 @@ export default async function BonnKaBanjaraPage() {
                   </div>
                 </a>
               ))}
-            </div>
+              </div>
+              
+              <Pagination 
+                currentPage={currentPage} 
+                totalPages={totalPages} 
+              />
+            </>
           ) : (
             <div className="text-center py-12">
               <p className="text-lg text-ink-muted font-urdu-body">

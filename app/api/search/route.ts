@@ -97,22 +97,23 @@ export async function GET() {
       });
     }
 
-    // 4. Load Gallery
-    // From TinaCMS content/gallery
+    // 4. Load Gallery from TinaCMS content/gallery only
     const galleryContentPath = path.join(process.cwd(), 'content/gallery');
     if (fs.existsSync(galleryContentPath)) {
       const files = fs.readdirSync(galleryContentPath);
       
       for (const file of files) {
-        if (!file.endsWith('.md')) continue;
+        if (!file.endsWith('.md') && !file.endsWith('.mdx')) continue;
         
         const filePath = path.join(galleryContentPath, file);
         const content = fs.readFileSync(filePath, 'utf8');
         const { data } = parseFrontmatter(content);
         
+        const slug = file.replace(/\.(md|mdx)$/, '');
+        
         docs.push({
-          id: `gallery-cms-${file.replace('.md', '')}`,
-          url: '/gallery',
+          id: `gallery-${slug}`,
+          url: `/gallery/${slug}`,
           title: (data.title as string) || 'تصویر',
           collection: 'gallery',
           tags: [],
@@ -120,28 +121,6 @@ export async function GET() {
           caption: (data.caption as string) || undefined,
           date: (data.date as string) || undefined,
         });
-      }
-    }
-
-    // From public/gallery manifest
-    const manifestPath = path.join(process.cwd(), 'public/gallery/gallery-manifest.json');
-    if (fs.existsSync(manifestPath)) {
-      const manifestContent = fs.readFileSync(manifestPath, 'utf8');
-      const manifest = JSON.parse(manifestContent);
-      
-      if (manifest.images && Array.isArray(manifest.images)) {
-        for (const image of manifest.images) {
-          docs.push({
-            id: `gallery-public-${image.filename}`,
-            url: '/gallery',
-            title: image.title || 'تصویر',
-            collection: 'gallery',
-            tags: [],
-            locale: 'ur',
-            caption: image.caption || undefined,
-            date: image.date || undefined,
-          });
-        }
       }
     }
 

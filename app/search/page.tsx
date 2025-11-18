@@ -69,7 +69,7 @@ export default function SearchPage() {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-surface pt-20 flex items-center justify-center">
+      <div className="min-h-screen bg-surface pt-40 flex items-center justify-center">
         <div className="text-center">
           <Loader2 className="w-12 h-12 animate-spin text-brand mx-auto mb-4" />
           <p className="text-ink-muted font-urdu-body">تلاش لوڈ ہو رہی ہے...</p>
@@ -79,9 +79,9 @@ export default function SearchPage() {
   }
 
   return (
-    <div className="min-h-screen bg-surface pt-20">
-      <div className="container mx-auto px-4 py-12" dir="rtl">
-        <div className="max-w-4xl mx-auto">
+    <div className="min-h-screen bg-surface pt-40">
+      <div className="container mx-auto px-4 pb-24" dir="rtl">
+        <div className="max-w-6xl mx-auto">
           <div className="mb-8 text-right">
             <h1 className="text-4xl font-bold text-ink mb-2 font-urdu-heading">
               تلاش

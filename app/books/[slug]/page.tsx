@@ -22,8 +22,8 @@ export default async function BookDetailPage({ params }: { params: Promise<{ slu
   }
 
   return (
-    <div className="min-h-screen bg-surface pt-32">
-      <div className="container mx-auto px-4 py-12" dir="rtl">
+    <div className="min-h-screen bg-surface pt-40">
+      <div className="container mx-auto px-4 pb-24" dir="rtl">
         <div className="max-w-5xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
             {/* Book Cover */}
