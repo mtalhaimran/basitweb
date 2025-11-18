@@ -205,6 +205,20 @@ export default function GalleryGrid({ images }: GalleryGridProps) {
               variants={modalVariants}
               onClick={(e) => e.stopPropagation()}
             >
+              {/* Close Button - Top Right */}
+              <motion.button
+                className="absolute top-4 right-4 z-10 w-10 h-10 flex items-center justify-center bg-black/50 hover:bg-black/70 text-white rounded-full transition-colors duration-200 backdrop-blur-sm"
+                onClick={() => setSelectedImage(null)}
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.2 }}
+                aria-label="Close"
+              >
+                <span className="text-xl">✕</span>
+              </motion.button>
+
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-0">
                 {/* Image Section */}
                 <div className="relative aspect-square lg:aspect-auto">
@@ -293,20 +307,6 @@ export default function GalleryGrid({ images }: GalleryGridProps) {
                       </motion.div>
                     )}
                   </div>
-
-                  {/* Close Button */}
-                  <motion.button
-                    className="mt-8 w-fit px-4 py-2 bg-primary hover:bg-primary/90 text-white rounded-md font-urdu-body text-base transition-colors duration-200 shadow-lg hover:shadow-xl flex items-center gap-2"
-                    onClick={() => setSelectedImage(null)}
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ delay: 0.5 }}
-                  >
-                    <span>✕</span>
-                    <span>بند کریں</span>
-                  </motion.button>
                 </div>
               </div>
             </motion.div>
