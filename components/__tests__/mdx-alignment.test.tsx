@@ -11,7 +11,7 @@ describe('MDX Alignment Components', () => {
       
       const element = screen.getByText('Test centered content');
       expect(element).toBeInTheDocument();
-      expect(element).toHaveClass('text-center');
+      expect(element).toHaveClass('!text-center');
     });
 
     it('has dir="auto" attribute', () => {
@@ -57,7 +57,7 @@ describe('MDX Alignment Components', () => {
       
       const element = screen.getByText('Test left-aligned content');
       expect(element).toBeInTheDocument();
-      expect(element).toHaveClass('text-left');
+      expect(element).toHaveClass('!text-left');
     });
 
     it('has dir="ltr" attribute for LTR languages', () => {
