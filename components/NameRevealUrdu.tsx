@@ -123,7 +123,7 @@ export default function NameRevealUrdu({ className = '', showDropdown = false }:
               exit={{ opacity: 0, y: -10 }}
               transition={{ duration: 0.2 }}
               className={`absolute top-full mt-2 bg-surface-white rounded-lg shadow-lg border border-line overflow-hidden min-w-[220px] ${
-                isUrduPage ? 'left-0' : 'right-0'
+                isUrduPage ? 'right-0' : 'left-0'
               }`}
               style={{ zIndex: 100 }}
             >

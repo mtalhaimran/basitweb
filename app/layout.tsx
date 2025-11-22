@@ -25,7 +25,7 @@ export default async function RootLayout({
       <body className="font-urdu-body bg-surface text-ink antialiased flex flex-col min-h-screen">
         <ClientProvider locale={locale}>
           <Header />
-          <main id="main-content" className="flex-1">{children}</main>
+          <main id="main-content" className="flex-1 pb-16">{children}</main>
           <Footer />
         </ClientProvider>
       </body>

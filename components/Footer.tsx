@@ -52,24 +52,8 @@ export function Footer() {
   };
   
   return (
-    <footer className="bg-surface border-t border-line mt-auto" data-pagefind-ignore>
+    <footer className="bg-surface border-t border-line mt-24" data-pagefind-ignore>
       <div className="container mx-auto px-4 py-20">
-        {/* Logo Section */}
-        <motion.div 
-          className="text-center mb-20"
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-        >
-          <motion.div variants={itemVariants}>
-            <div className="w-32 h-6 mx-auto mb-8 bg-brand rounded-sm flex items-center justify-center">
-              <span className="text-white font-bold text-sm tracking-wider">EXPOSA</span>
-            </div>
-          </motion.div>
-        </motion.div>
-
-        {/* Footer Content */}
         <motion.div 
           className="flex flex-col md:flex-row items-center justify-between space-y-8 md:space-y-0 md:flex-row-reverse"
           variants={containerVariants}
