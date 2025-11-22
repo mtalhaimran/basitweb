@@ -20,11 +20,14 @@ body {
   font-family: var(--font-inter);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-feature-settings: 'calt' 1, 'liga' 1, 'kern' 1, 'mark' 1, 'mkmk' 1;
-  -webkit-font-feature-settings: 'calt' 1, 'liga' 1, 'kern' 1, 'mark' 1, 'mkmk' 1;
+  /* Critical: Enable all OpenType features for proper diacritic positioning */
+  font-feature-settings: 'calt' 1, 'liga' 1, 'kern' 1, 'mark' 1, 'mkmk' 1, 'ccmp' 1, 'locl' 1;
+  -webkit-font-feature-settings: 'calt' 1, 'liga' 1, 'kern' 1, 'mark' 1, 'mkmk' 1, 'ccmp' 1, 'locl' 1;
   /* Chrome-specific diacritic rendering fixes */
   text-rendering: optimizeLegibility;
   -webkit-text-size-adjust: 100%;
+  /* Force Unicode normalization for combining marks */
+  unicode-bidi: isolate;
 }
 
 /* Urdu Typography */
@@ -34,21 +37,26 @@ body {
   letter-spacing: 0.01em;
   text-align: right;
   direction: rtl;
-  font-feature-settings: 'calt' 1, 'liga' 1, 'kern' 1, 'mark' 1, 'mkmk' 1;
-  -webkit-font-feature-settings: 'calt' 1, 'liga' 1, 'kern' 1, 'mark' 1, 'mkmk' 1;
+  /* Enable ALL OpenType features including 'ccmp' (glyph composition) and 'locl' (localized forms) */
+  font-feature-settings: 'calt' 1, 'liga' 1, 'kern' 1, 'mark' 1, 'mkmk' 1, 'ccmp' 1, 'locl' 1, 'rlig' 1, 'curs' 1;
+  -webkit-font-feature-settings: 'calt' 1, 'liga' 1, 'kern' 1, 'mark' 1, 'mkmk' 1, 'ccmp' 1, 'locl' 1, 'rlig' 1, 'curs' 1;
   /* Chrome-specific fixes for diacritic rendering */
   text-rendering: optimizeLegibility;
   -webkit-text-size-adjust: 100%;
   font-variant-ligatures: normal;
   -webkit-font-variant-ligatures: normal;
+  /* Force proper text shaping for Arabic script */
+  -webkit-font-smoothing: subpixel-antialiased;
+  -moz-osx-font-smoothing: auto;
 }
 
 .urdu-heading {
   font-family: var(--font-urdu-heading);
   line-height: 1.6;
   font-weight: 600;
-  font-feature-settings: 'calt' 1, 'liga' 1, 'kern' 1, 'mark' 1, 'mkmk' 1;
-  -webkit-font-feature-settings: 'calt' 1, 'liga' 1, 'kern' 1, 'mark' 1, 'mkmk' 1;
+  /* Enable ALL OpenType features for Nastaliq script */
+  font-feature-settings: 'calt' 1, 'liga' 1, 'kern' 1, 'mark' 1, 'mkmk' 1, 'ccmp' 1, 'locl' 1, 'rlig' 1, 'curs' 1;
+  -webkit-font-feature-settings: 'calt' 1, 'liga' 1, 'kern' 1, 'mark' 1, 'mkmk' 1, 'ccmp' 1, 'locl' 1, 'rlig' 1, 'curs' 1;
   /* Chrome-specific fixes for diacritic rendering */
   text-rendering: optimizeLegibility;
   -webkit-text-size-adjust: 100%;
@@ -86,6 +94,9 @@ body {
   /* Force complex script shaping in Chrome */
   font-synthesis: none;
   -webkit-font-synthesis: none;
+  /* Critical: Enable glyph composition for proper diacritic positioning */
+  font-feature-settings: 'ccmp' 1, 'mark' 1, 'mkmk' 1;
+  -webkit-font-feature-settings: 'ccmp' 1, 'mark' 1, 'mkmk' 1;
 }
 
 /* Only reverse horizontal flex containers in RTL, not vertical ones */
@@ -105,8 +116,9 @@ body {
 [data-tina-field],
 .tina-field-wrapper,
 .tina-rich-text-editor {
-  font-feature-settings: 'calt' 1, 'liga' 1, 'kern' 1, 'mark' 1, 'mkmk' 1 !important;
-  -webkit-font-feature-settings: 'calt' 1, 'liga' 1, 'kern' 1, 'mark' 1, 'mkmk' 1 !important;
+  /* Enable ALL critical OpenType features for proper diacritic rendering */
+  font-feature-settings: 'calt' 1, 'liga' 1, 'kern' 1, 'mark' 1, 'mkmk' 1, 'ccmp' 1, 'locl' 1, 'rlig' 1, 'curs' 1 !important;
+  -webkit-font-feature-settings: 'calt' 1, 'liga' 1, 'kern' 1, 'mark' 1, 'mkmk' 1, 'ccmp' 1, 'locl' 1, 'rlig' 1, 'curs' 1 !important;
   text-rendering: optimizeLegibility !important;
   -webkit-text-size-adjust: 100% !important;
   font-variant-ligatures: normal !important;
