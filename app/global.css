@@ -22,6 +22,9 @@ body {
   -moz-osx-font-smoothing: grayscale;
   font-feature-settings: 'calt' 1, 'liga' 1, 'kern' 1, 'mark' 1, 'mkmk' 1;
   -webkit-font-feature-settings: 'calt' 1, 'liga' 1, 'kern' 1, 'mark' 1, 'mkmk' 1;
+  /* Chrome-specific diacritic rendering fixes */
+  text-rendering: optimizeLegibility;
+  -webkit-text-size-adjust: 100%;
 }
 
 /* Urdu Typography */
@@ -33,6 +36,11 @@ body {
   direction: rtl;
   font-feature-settings: 'calt' 1, 'liga' 1, 'kern' 1, 'mark' 1, 'mkmk' 1;
   -webkit-font-feature-settings: 'calt' 1, 'liga' 1, 'kern' 1, 'mark' 1, 'mkmk' 1;
+  /* Chrome-specific fixes for diacritic rendering */
+  text-rendering: optimizeLegibility;
+  -webkit-text-size-adjust: 100%;
+  font-variant-ligatures: normal;
+  -webkit-font-variant-ligatures: normal;
 }
 
 .urdu-heading {
@@ -41,6 +49,11 @@ body {
   font-weight: 600;
   font-feature-settings: 'calt' 1, 'liga' 1, 'kern' 1, 'mark' 1, 'mkmk' 1;
   -webkit-font-feature-settings: 'calt' 1, 'liga' 1, 'kern' 1, 'mark' 1, 'mkmk' 1;
+  /* Chrome-specific fixes for diacritic rendering */
+  text-rendering: optimizeLegibility;
+  -webkit-text-size-adjust: 100%;
+  font-variant-ligatures: normal;
+  -webkit-font-variant-ligatures: normal;
 }
 
 /* RTL Support */
@@ -61,6 +74,18 @@ body {
 [dir="rtl"] span:not(.!text-center *):not(.!text-left *):not(.!text-right *),
 [dir="rtl"] div:not(.!text-center):not(.!text-left):not(.!text-right):not(.!text-center *):not(.!text-left *):not(.!text-right *) {
   text-align: right;
+}
+
+/* Chrome-specific fix for Urdu diacritic rendering */
+/* This ensures proper rendering of Arabic/Urdu diacritics in Chrome/Chromium browsers */
+[dir="rtl"] * {
+  text-rendering: optimizeLegibility;
+  -webkit-text-size-adjust: 100%;
+  font-variant-ligatures: normal;
+  -webkit-font-variant-ligatures: normal;
+  /* Force complex script shaping in Chrome */
+  font-synthesis: none;
+  -webkit-font-synthesis: none;
 }
 
 /* Only reverse horizontal flex containers in RTL, not vertical ones */
