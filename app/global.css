@@ -125,22 +125,27 @@ body {
   -webkit-font-variant-ligatures: normal !important;
   font-synthesis: none !important;
   -webkit-font-synthesis: none !important;
+  /* HarfBuzz shaping hints for Chrome */
+  -webkit-font-smoothing: subpixel-antialiased !important;
+  -moz-osx-font-smoothing: auto !important;
 }
 
-/* Fix text overflow/congestion in TinaCMS editor fields */
+/* Fix text overflow/congestion in TinaCMS editor fields - INCREASED SPACING */
 .ProseMirror {
-  line-height: 2 !important;
-  padding: 1rem !important;
-  min-height: 150px !important;
+  line-height: 2.8 !important;
+  padding: 2rem !important;
+  min-height: 250px !important;
   overflow-y: auto !important;
 }
 
-/* Fix for TinaCMS rich text editor specifically for Urdu text */
+/* Fix for TinaCMS rich text editor specifically for Urdu text - INCREASED SPACING */
 .tina-prose p,
 .ProseMirror p {
-  line-height: 2.2 !important;
-  margin-bottom: 1rem !important;
-  padding: 0.25rem 0 !important;
+  line-height: 3.0 !important;
+  margin-bottom: 2rem !important;
+  padding: 0.75rem 0 !important;
+  /* Ensure diacritics don't get clipped */
+  overflow: visible !important;
 }
 
 /* Ensure TinaCMS textarea fields have proper spacing for Urdu text */

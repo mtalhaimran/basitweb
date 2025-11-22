@@ -9,30 +9,32 @@ body,
 .ProseMirror,
 [class*="tina"],
 [class*="prose"] {
-  font-feature-settings: 'calt' 1, 'liga' 1, 'kern' 1, 'mark' 1, 'mkmk' 1 !important;
-  -webkit-font-feature-settings: 'calt' 1, 'liga' 1, 'kern' 1, 'mark' 1, 'mkmk' 1 !important;
+  font-feature-settings: 'calt' 1, 'liga' 1, 'kern' 1, 'mark' 1, 'mkmk' 1, 'ccmp' 1, 'locl' 1, 'rlig' 1, 'curs' 1 !important;
+  -webkit-font-feature-settings: 'calt' 1, 'liga' 1, 'kern' 1, 'mark' 1, 'mkmk' 1, 'ccmp' 1, 'locl' 1, 'rlig' 1, 'curs' 1 !important;
   text-rendering: optimizeLegibility !important;
   -webkit-text-size-adjust: 100% !important;
   font-variant-ligatures: normal !important;
   -webkit-font-variant-ligatures: normal !important;
   font-synthesis: none !important;
   -webkit-font-synthesis: none !important;
+  -webkit-font-smoothing: subpixel-antialiased !important;
+  -moz-osx-font-smoothing: auto !important;
 }
 
-/* Fix text overflow and congestion in ProseMirror editor */
+/* Fix text overflow and congestion in ProseMirror editor - INCREASED SPACING */
 .ProseMirror {
-  line-height: 2.2 !important;
-  padding: 1.5rem !important;
-  min-height: 200px !important;
+  line-height: 2.8 !important;
+  padding: 2rem !important;
+  min-height: 300px !important;
   overflow-y: auto !important;
 }
 
-/* Fix paragraph spacing in rich text editor */
+/* Fix paragraph spacing in rich text editor - INCREASED SPACING */
 .ProseMirror p,
 .ProseMirror-content p {
-  line-height: 2.5 !important;
-  margin-bottom: 1.5rem !important;
-  padding: 0.5rem 0 !important;
+  line-height: 3.0 !important;
+  margin-bottom: 2rem !important;
+  padding: 0.75rem 0 !important;
   overflow: visible !important;
 }
 
@@ -49,22 +51,23 @@ body,
   padding: 0.5rem 0 !important;
 }
 
-/* Fix text input fields */
+/* Fix text input fields - INCREASED SPACING */
 input[type="text"],
 textarea {
-  line-height: 2 !important;
-  padding: 1rem !important;
-  min-height: 3.5rem !important;
-  font-feature-settings: 'calt' 1, 'liga' 1, 'kern' 1, 'mark' 1, 'mkmk' 1 !important;
+  line-height: 2.4 !important;
+  padding: 1.25rem !important;
+  min-height: 4rem !important;
+  font-feature-settings: 'calt' 1, 'liga' 1, 'kern' 1, 'mark' 1, 'mkmk' 1, 'ccmp' 1, 'locl' 1, 'rlig' 1, 'curs' 1 !important;
   text-rendering: optimizeLegibility !important;
   font-synthesis: none !important;
 }
 
-/* Fix textarea specific issues */
+/* Fix textarea specific issues - INCREASED SPACING */
 textarea {
   overflow-y: auto !important;
   resize: vertical !important;
-  min-height: 8rem !important;
+  min-height: 10rem !important;
+  line-height: 2.6 !important;
 }
 
 /* Fix field wrappers to prevent text cutoff */
@@ -79,7 +82,7 @@ textarea {
 [dir="rtl"] *,
 [lang="ur"] *,
 [lang="ar"] * {
-  font-feature-settings: 'calt' 1, 'liga' 1, 'kern' 1, 'mark' 1, 'mkmk' 1 !important;
+  font-feature-settings: 'calt' 1, 'liga' 1, 'kern' 1, 'mark' 1, 'mkmk' 1, 'ccmp' 1, 'locl' 1, 'rlig' 1, 'curs' 1 !important;
   text-rendering: optimizeLegibility !important;
   font-synthesis: none !important;
   -webkit-font-synthesis: none !important;
@@ -93,12 +96,12 @@ textarea {
   overflow: visible !important;
 }
 
-/* Fix editor content area */
+/* Fix editor content area - INCREASED SPACING */
 [class*="editor"],
 [class*="content"],
 [contenteditable="true"] {
-  line-height: 2.2 !important;
-  padding: 1rem !important;
+  line-height: 2.6 !important;
+  padding: 1.5rem !important;
   overflow-y: auto !important;
 }
 
