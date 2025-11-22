@@ -1,11 +1,19 @@
 'use client';
 
 import Link from 'next/link';
-import { Twitter, Linkedin, Mail } from 'lucide-react';
+import { Twitter, Linkedin, Mail, Book, FileText, MapPin, User, Phone } from 'lucide-react';
 import { motion, useReducedMotion } from 'framer-motion';
 
 export function Footer() {
   const shouldReduceMotion = useReducedMotion();
+  
+  const sitemapLinks = [
+    { name: 'کتابیں', href: '/books', icon: Book },
+    { name: 'مضامین', href: '/snippets', icon: FileText },
+    { name: 'بون کا بنجارہ', href: '/bonn-ka-banjara', icon: MapPin },
+    { name: 'میرے بارے میں', href: '/about', icon: User },
+    { name: 'رابطہ', href: '/contact', icon: Phone },
+  ];
   
   const socialLinks = [
     { 
@@ -53,64 +61,90 @@ export function Footer() {
   
   return (
     <footer className="bg-surface border-t border-line mt-24" data-pagefind-ignore>
-      <div className="container mx-auto px-4 py-20">
+      <div className="container mx-auto px-4 py-16">
         <motion.div 
-          className="flex flex-col md:flex-row items-center justify-between space-y-8 md:space-y-0 md:flex-row-reverse"
+          className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12"
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
         >
-          {/* Email */}
-          <motion.div variants={itemVariants}>
+          {/* Sitemap Section */}
+          <motion.div variants={itemVariants} className="space-y-4">
+            <h3 className="text-lg font-semibold urdu-heading mb-4">سائٹ میپ</h3>
+            <nav className="flex flex-col space-y-3">
+              {sitemapLinks.map((link) => {
+                const Icon = link.icon;
+                return (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    className="template-link flex items-center gap-3 hover:text-brand transition-colors"
+                  >
+                    <Icon className="w-4 h-4 flex-shrink-0" />
+                    <span className="urdu-text">{link.name}</span>
+                  </Link>
+                );
+              })}
+            </nav>
+          </motion.div>
+
+          {/* Social Links Section */}
+          <motion.div variants={itemVariants} className="space-y-4">
+            <h3 className="text-lg font-semibold urdu-heading mb-4">سوشل میڈیا</h3>
+            <div className="flex flex-col space-y-3">
+              {socialLinks.map((social, index) => {
+                const Icon = social.icon;
+                return (
+                  <motion.div
+                    key={social.name}
+                    whileHover={shouldReduceMotion ? {} : { scale: 1.05, x: -2 }}
+                    whileTap={shouldReduceMotion ? {} : { scale: 0.95 }}
+                    transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                  >
+                    <Link
+                      href={social.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="template-link flex items-center gap-3 hover:text-brand transition-colors"
+                      aria-label={social.label}
+                    >
+                      <Icon className="w-4 h-4 flex-shrink-0" />
+                      <span className="urdu-text">{social.name}</span>
+                    </Link>
+                  </motion.div>
+                );
+              })}
+            </div>
+          </motion.div>
+
+          {/* Contact Section */}
+          <motion.div variants={itemVariants} className="space-y-4">
+            <h3 className="text-lg font-semibold urdu-heading mb-4">رابطہ</h3>
             <Link
               href="mailto:hello@abdulbasitzafar.com"
-              className="template-link urdu-text"
+              className="template-link flex items-center gap-3 hover:text-brand transition-colors"
             >
-              hello@abdulbasitzafar.com
+              <Mail className="w-4 h-4 flex-shrink-0" />
+              <span className="text-sm break-all">hello@abdulbasitzafar.com</span>
             </Link>
           </motion.div>
+        </motion.div>
 
-          {/* Social Links */}
-          <motion.div 
-            className="flex items-center gap-6"
-            variants={itemVariants}
-          >
-            {socialLinks.map((social, index) => {
-              const Icon = social.icon;
-              return (
-                <motion.div
-                  key={social.name}
-                  whileHover={shouldReduceMotion ? {} : { scale: 1.1, y: -2 }}
-                  whileTap={shouldReduceMotion ? {} : { scale: 0.95 }}
-                  transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  style={{ animationDelay: `${index * 100}ms` }}
-                >
-                  <Link
-                    href={social.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="template-link"
-                    aria-label={social.label}
-                  >
-                    <span className="urdu-text text-sm">{social.name}</span>
-                  </Link>
-                </motion.div>
-              );
-            })}
-          </motion.div>
-
-          {/* Copyright */}
-          <motion.div variants={itemVariants}>
-            <p className="template-caption urdu-text">
-              © {new Intl.DateTimeFormat('ur-PK', {
-                timeZone: 'UTC',
-                year: 'numeric'
-              }).format(new Date())} عبدالباسط ظفر۔
-            </p>
-          </motion.div>
+        {/* Copyright */}
+        <motion.div 
+          variants={itemVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="pt-8 border-t border-line text-center"
+        >
+          <p className="template-caption urdu-text">
+            © {new Intl.DateTimeFormat('ur-PK', {
+              timeZone: 'UTC',
+              year: 'numeric'
+            }).format(new Date())} عبدالباسط ظفر۔
+          </p>
         </motion.div>
       </div>
     </footer>
