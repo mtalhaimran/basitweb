@@ -3,7 +3,7 @@ import path from 'path';
 import Image from 'next/image';
 import { Pagination } from '@/components/Pagination';
 
-export const dynamic = 'force-static';
+export const dynamic = 'force-dynamic';
 
 const POSTS_PER_PAGE = 12;
 
@@ -173,7 +173,8 @@ export default async function BonnKaBanjaraPage({
               
               <Pagination 
                 currentPage={currentPage} 
-                totalPages={totalPages} 
+                totalPages={totalPages}
+                basePath="/bonn-ka-banjara"
               />
             </>
           ) : (
