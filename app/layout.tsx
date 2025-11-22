@@ -18,14 +18,27 @@ export default async function RootLayout({
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
         <link 
-          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Nastaliq+Urdu:wght@400;500;600;700&family=Noto+Naskh+Arabic:wght@400;500;600;700&display=swap" 
+          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Nastaliq+Urdu:wght@400;500;600;700&family=Noto+Naskh+Arabic:wght@400;500;600;700&display=block&text-rendering=optimizeLegibility" 
           rel="stylesheet" 
         />
+        <style dangerouslySetInnerHTML={{__html: `
+          /* Force fonts to load before rendering text - critical for diacritics */
+          @font-face {
+            font-family: 'Noto Nastaliq Urdu';
+            font-display: block;
+            src: local('Noto Nastaliq Urdu');
+          }
+          @font-face {
+            font-family: 'Noto Naskh Arabic';
+            font-display: block;
+            src: local('Noto Naskh Arabic');
+          }
+        `}} />
       </head>
       <body className="font-urdu-body bg-surface text-ink antialiased flex flex-col min-h-screen">
         <ClientProvider locale={locale}>
           <Header />
-          <main id="main-content" className="flex-1">{children}</main>
+          <main id="main-content" className="flex-1 pb-16">{children}</main>
           <Footer />
         </ClientProvider>
       </body>

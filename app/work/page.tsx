@@ -5,14 +5,12 @@ import { WorkPageClient } from '@/components/WorkPageClient';
 export const dynamic = 'force-static';
 
 interface ContentItem {
-  type: 'book' | 'snippet' | 'bonn' | 'gallery';
+  type: 'book' | 'snippet' | 'bonn';
   slug: string;
   title: string;
   date: string;
   excerpt?: string;
   image?: string;
-  caption?: string;
-  location?: string;
 }
 
 // Simple frontmatter parser
@@ -132,29 +130,6 @@ async function getAllContent(): Promise<ContentItem[]> {
         .slice(0, 12);
       
       allContent.push(...bonnPosts);
-    }
-
-    // Get gallery items
-    const galleryDir = path.join(process.cwd(), 'content/gallery');
-    if (fs.existsSync(galleryDir)) {
-      const galleryFiles = fs.readdirSync(galleryDir);
-      galleryFiles
-        .filter(f => f.endsWith('.mdx') || f.endsWith('.md'))
-        .forEach(filename => {
-          const filePath = path.join(galleryDir, filename);
-          const fileContents = fs.readFileSync(filePath, 'utf8');
-          const { data } = parseFrontmatter(fileContents);
-          
-          allContent.push({
-            type: 'gallery',
-            slug: filename.replace(/\.(mdx|md)$/, ''),
-            title: data.title || 'تصویر',
-            date: data.date || new Date().toISOString(),
-            image: data.image,
-            caption: data.caption,
-            location: data.location
-          });
-        });
     }
 
   } catch (error) {

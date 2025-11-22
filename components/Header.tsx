@@ -48,6 +48,11 @@ export function Header() {
       >
         <div className="container">
           <div className="flex items-center justify-between py-5">
+            {/* Right side - NameReveal with dropdown for RTL (Urdu) */}
+            <div className="flex items-center gap-3">
+              <NameRevealUrdu className="text-brand" showDropdown={true} />
+            </div>
+
             {/* Left side - Search button only */}
             <div className="flex items-center gap-3">
               {isUrduPage && (
@@ -60,11 +65,6 @@ export function Header() {
                   <Search className="w-5 h-5" />
                 </Link>
               )}
-            </div>
-
-            {/* Right side - NameReveal with dropdown for RTL (Urdu) */}
-            <div className="flex items-center gap-3">
-              <NameRevealUrdu className="text-brand" showDropdown={true} />
             </div>
           </div>
         </div>

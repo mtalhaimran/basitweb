@@ -9,11 +9,10 @@ export type SearchDoc = {
   url: string;
   title: string;
   excerpt?: string;
-  collection: 'bonn-ka-banjara' | 'snippets' | 'books' | 'gallery';
+  collection: 'bonn-ka-banjara' | 'snippets' | 'books';
   tags?: string[];
   locale: 'ur' | 'en';
   quotes?: string[];
-  caption?: string;
   date?: string;
 };
 
@@ -95,33 +94,6 @@ export async function GET() {
         quotes: book.quotes,
         date: book.publishDate,
       });
-    }
-
-    // 4. Load Gallery from TinaCMS content/gallery only
-    const galleryContentPath = path.join(process.cwd(), 'content/gallery');
-    if (fs.existsSync(galleryContentPath)) {
-      const files = fs.readdirSync(galleryContentPath);
-      
-      for (const file of files) {
-        if (!file.endsWith('.md') && !file.endsWith('.mdx')) continue;
-        
-        const filePath = path.join(galleryContentPath, file);
-        const content = fs.readFileSync(filePath, 'utf8');
-        const { data } = parseFrontmatter(content);
-        
-        const slug = file.replace(/\.(md|mdx)$/, '');
-        
-        docs.push({
-          id: `gallery-${slug}`,
-          url: `/gallery/${slug}`,
-          title: (data.title as string) || 'تصویر',
-          collection: 'gallery',
-          tags: [],
-          locale: ((data.locale as string) || 'ur') as 'ur' | 'en',
-          caption: (data.caption as string) || undefined,
-          date: (data.date as string) || undefined,
-        });
-      }
     }
 
     return NextResponse.json(docs);

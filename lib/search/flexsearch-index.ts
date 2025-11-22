@@ -7,11 +7,10 @@ export type SearchDoc = {
   url: string;
   title: string;
   excerpt?: string;
-  collection: 'bonn-ka-banjara' | 'snippets' | 'books' | 'gallery';
+  collection: 'bonn-ka-banjara' | 'snippets' | 'books';
   tags?: string[];
   locale: 'ur' | 'en';
   quotes?: string[];
-  caption?: string;
   date?: string;
 };
 

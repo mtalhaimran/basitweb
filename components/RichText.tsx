@@ -19,7 +19,7 @@ function renderNode(node: Node, key?: number): React.ReactNode {
   const children = Array.isArray(node.children) ? node.children.map((c: Node, i: number) => renderNode(c, i)) : null;
 
   // Handle MDX template components (CenterText, RightAlign, LeftAlign)
-  if (node.type === 'mdxJsxFlowElement' || node.name) {
+  if (node.type === 'mdxJsxFlowElement' || node.type === 'mdxJsxTextElement' || node.name) {
     const componentName = node.name;
     const Component = mdxComponents[componentName as keyof typeof mdxComponents];
     
@@ -35,11 +35,20 @@ function renderNode(node: Node, key?: number): React.ReactNode {
         return <Component key={key}>{renderedChildren}</Component>;
       }
       
+      // If children is an array, render each child
+      if (Array.isArray(templateChildren)) {
+        const renderedChildren = templateChildren.map((c: Node, i: number) => renderNode(c, i));
+        return <Component key={key}>{renderedChildren}</Component>;
+      }
+      
       return <Component key={key}>{children}</Component>;
     }
   }
 
   switch (node.type) {
+    case 'root':
+      // Handle root type from TinaCMS
+      return <>{children}</>;
     case 'p':
     case 'paragraph':
       return <p key={key} className="leading-8">{children}</p>;

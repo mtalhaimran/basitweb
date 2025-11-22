@@ -20,6 +20,14 @@ body {
   font-family: var(--font-inter);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  /* Critical: Enable all OpenType features for proper diacritic positioning */
+  font-feature-settings: 'calt' 1, 'liga' 1, 'kern' 1, 'mark' 1, 'mkmk' 1, 'ccmp' 1, 'locl' 1;
+  -webkit-font-feature-settings: 'calt' 1, 'liga' 1, 'kern' 1, 'mark' 1, 'mkmk' 1, 'ccmp' 1, 'locl' 1;
+  /* Chrome-specific diacritic rendering fixes */
+  text-rendering: optimizeLegibility;
+  -webkit-text-size-adjust: 100%;
+  /* Force Unicode normalization for combining marks */
+  unicode-bidi: isolate;
 }
 
 /* Urdu Typography */
@@ -29,17 +37,66 @@ body {
   letter-spacing: 0.01em;
   text-align: right;
   direction: rtl;
+  /* Enable ALL OpenType features including 'ccmp' (glyph composition) and 'locl' (localized forms) */
+  font-feature-settings: 'calt' 1, 'liga' 1, 'kern' 1, 'mark' 1, 'mkmk' 1, 'ccmp' 1, 'locl' 1, 'rlig' 1, 'curs' 1;
+  -webkit-font-feature-settings: 'calt' 1, 'liga' 1, 'kern' 1, 'mark' 1, 'mkmk' 1, 'ccmp' 1, 'locl' 1, 'rlig' 1, 'curs' 1;
+  /* Chrome-specific fixes for diacritic rendering */
+  text-rendering: optimizeLegibility;
+  -webkit-text-size-adjust: 100%;
+  font-variant-ligatures: normal;
+  -webkit-font-variant-ligatures: normal;
+  /* Force proper text shaping for Arabic script */
+  -webkit-font-smoothing: subpixel-antialiased;
+  -moz-osx-font-smoothing: auto;
 }
 
 .urdu-heading {
   font-family: var(--font-urdu-heading);
   line-height: 1.6;
   font-weight: 600;
+  /* Enable ALL OpenType features for Nastaliq script */
+  font-feature-settings: 'calt' 1, 'liga' 1, 'kern' 1, 'mark' 1, 'mkmk' 1, 'ccmp' 1, 'locl' 1, 'rlig' 1, 'curs' 1;
+  -webkit-font-feature-settings: 'calt' 1, 'liga' 1, 'kern' 1, 'mark' 1, 'mkmk' 1, 'ccmp' 1, 'locl' 1, 'rlig' 1, 'curs' 1;
+  /* Chrome-specific fixes for diacritic rendering */
+  text-rendering: optimizeLegibility;
+  -webkit-text-size-adjust: 100%;
+  font-variant-ligatures: normal;
+  -webkit-font-variant-ligatures: normal;
 }
 
 /* RTL Support */
 [dir="rtl"] {
   text-align: right;
+  direction: rtl;
+}
+
+/* Apply RTL text alignment to all common text elements */
+/* Exclude elements inside alignment components (!text-center, !text-left, !text-right) */
+[dir="rtl"] h1:not(.!text-center *):not(.!text-left *):not(.!text-right *),
+[dir="rtl"] h2:not(.!text-center *):not(.!text-left *):not(.!text-right *),
+[dir="rtl"] h3:not(.!text-center *):not(.!text-left *):not(.!text-right *),
+[dir="rtl"] h4:not(.!text-center *):not(.!text-left *):not(.!text-right *),
+[dir="rtl"] h5:not(.!text-center *):not(.!text-left *):not(.!text-right *),
+[dir="rtl"] h6:not(.!text-center *):not(.!text-left *):not(.!text-right *),
+[dir="rtl"] p:not(.!text-center *):not(.!text-left *):not(.!text-right *),
+[dir="rtl"] span:not(.!text-center *):not(.!text-left *):not(.!text-right *),
+[dir="rtl"] div:not(.!text-center):not(.!text-left):not(.!text-right):not(.!text-center *):not(.!text-left *):not(.!text-right *) {
+  text-align: right;
+}
+
+/* Chrome-specific fix for Urdu diacritic rendering */
+/* This ensures proper rendering of Arabic/Urdu diacritics in Chrome/Chromium browsers */
+[dir="rtl"] * {
+  text-rendering: optimizeLegibility;
+  -webkit-text-size-adjust: 100%;
+  font-variant-ligatures: normal;
+  -webkit-font-variant-ligatures: normal;
+  /* Force complex script shaping in Chrome */
+  font-synthesis: none;
+  -webkit-font-synthesis: none;
+  /* Critical: Enable glyph composition for proper diacritic positioning */
+  font-feature-settings: 'ccmp' 1, 'mark' 1, 'mkmk' 1;
+  -webkit-font-feature-settings: 'ccmp' 1, 'mark' 1, 'mkmk' 1;
 }
 
 /* Only reverse horizontal flex containers in RTL, not vertical ones */
@@ -50,6 +107,71 @@ body {
 /* Override RTL reverse for specific components that need natural LTR order */
 .ltr-row {
   flex-direction: row !important;
+}
+
+/* TinaCMS Admin Interface Fixes */
+/* Fix Urdu diacritic rendering in TinaCMS editor */
+.ProseMirror,
+.tina-prose,
+[data-tina-field],
+.tina-field-wrapper,
+.tina-rich-text-editor {
+  /* Enable ALL critical OpenType features for proper diacritic rendering */
+  font-feature-settings: 'calt' 1, 'liga' 1, 'kern' 1, 'mark' 1, 'mkmk' 1, 'ccmp' 1, 'locl' 1, 'rlig' 1, 'curs' 1 !important;
+  -webkit-font-feature-settings: 'calt' 1, 'liga' 1, 'kern' 1, 'mark' 1, 'mkmk' 1, 'ccmp' 1, 'locl' 1, 'rlig' 1, 'curs' 1 !important;
+  text-rendering: optimizeLegibility !important;
+  -webkit-text-size-adjust: 100% !important;
+  font-variant-ligatures: normal !important;
+  -webkit-font-variant-ligatures: normal !important;
+  font-synthesis: none !important;
+  -webkit-font-synthesis: none !important;
+  /* HarfBuzz shaping hints for Chrome */
+  -webkit-font-smoothing: subpixel-antialiased !important;
+  -moz-osx-font-smoothing: auto !important;
+}
+
+/* Fix text overflow/congestion in TinaCMS editor fields - INCREASED SPACING */
+.ProseMirror {
+  line-height: 2.8 !important;
+  padding: 2rem !important;
+  min-height: 250px !important;
+  overflow-y: auto !important;
+}
+
+/* Fix for TinaCMS rich text editor specifically for Urdu text - INCREASED SPACING */
+.tina-prose p,
+.ProseMirror p {
+  line-height: 3.0 !important;
+  margin-bottom: 2rem !important;
+  padding: 0.75rem 0 !important;
+  /* Ensure diacritics don't get clipped */
+  overflow: visible !important;
+}
+
+/* Ensure TinaCMS textarea fields have proper spacing for Urdu text */
+[data-tina-field] textarea,
+.tina-field-wrapper textarea,
+input[type="text"].tina-input {
+  line-height: 2 !important;
+  padding: 0.75rem !important;
+  min-height: 3rem !important;
+}
+
+/* Fix TinaCMS form field heights to prevent text cutoff */
+.tina-field-wrapper,
+[data-tina-field-wrapper] {
+  min-height: fit-content !important;
+  overflow: visible !important;
+}
+
+/* Ensure proper font loading in TinaCMS admin */
+#__next, 
+#tina-admin,
+body {
+  font-feature-settings: 'calt' 1, 'liga' 1, 'kern' 1, 'mark' 1, 'mkmk' 1;
+  text-rendering: optimizeLegibility;
+  font-synthesis: none;
+  -webkit-font-synthesis: none;
 }
 
 [dir="ltr"] {
@@ -85,13 +207,3 @@ body {
   }
 }
 
-/* RTL Support */
-/* Only reverse flex-row by default, but allow opt-out with .no-rtl-reverse */
-[dir="rtl"] .flex-row:not(.no-rtl-reverse) {
-  flex-direction: row-reverse;
-}
-
-/* Force LTR direction for specific elements */
-.ltr-row {
-  flex-direction: row !important;
-}
