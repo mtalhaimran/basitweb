@@ -98,6 +98,65 @@ body {
   flex-direction: row !important;
 }
 
+/* TinaCMS Admin Interface Fixes */
+/* Fix Urdu diacritic rendering in TinaCMS editor */
+.ProseMirror,
+.tina-prose,
+[data-tina-field],
+.tina-field-wrapper,
+.tina-rich-text-editor {
+  font-feature-settings: 'calt' 1, 'liga' 1, 'kern' 1, 'mark' 1, 'mkmk' 1 !important;
+  -webkit-font-feature-settings: 'calt' 1, 'liga' 1, 'kern' 1, 'mark' 1, 'mkmk' 1 !important;
+  text-rendering: optimizeLegibility !important;
+  -webkit-text-size-adjust: 100% !important;
+  font-variant-ligatures: normal !important;
+  -webkit-font-variant-ligatures: normal !important;
+  font-synthesis: none !important;
+  -webkit-font-synthesis: none !important;
+}
+
+/* Fix text overflow/congestion in TinaCMS editor fields */
+.ProseMirror {
+  line-height: 2 !important;
+  padding: 1rem !important;
+  min-height: 150px !important;
+  overflow-y: auto !important;
+}
+
+/* Fix for TinaCMS rich text editor specifically for Urdu text */
+.tina-prose p,
+.ProseMirror p {
+  line-height: 2.2 !important;
+  margin-bottom: 1rem !important;
+  padding: 0.25rem 0 !important;
+}
+
+/* Ensure TinaCMS textarea fields have proper spacing for Urdu text */
+[data-tina-field] textarea,
+.tina-field-wrapper textarea,
+input[type="text"].tina-input {
+  line-height: 2 !important;
+  padding: 0.75rem !important;
+  min-height: 3rem !important;
+}
+
+/* Fix TinaCMS form field heights to prevent text cutoff */
+.tina-field-wrapper,
+[data-tina-field-wrapper] {
+  min-height: fit-content !important;
+  overflow: visible !important;
+}
+
+/* Ensure proper font loading in TinaCMS admin */
+#__next, 
+#tina-admin,
+body {
+  font-feature-settings: 'calt' 1, 'liga' 1, 'kern' 1, 'mark' 1, 'mkmk' 1;
+  text-rendering: optimizeLegibility;
+  font-synthesis: none;
+  -webkit-font-synthesis: none;
+}
+
 [dir="ltr"] {
   text-align: left;
 }

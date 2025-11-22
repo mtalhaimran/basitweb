@@ -1,0 +1,115 @@
+/**
+ * Custom CSS for TinaCMS Admin Interface
+ * Fixes Urdu diacritic rendering and text overflow issues in Chrome
+ */
+
+/* Force OpenType features for proper Urdu diacritic rendering */
+body,
+#root,
+.ProseMirror,
+[class*="tina"],
+[class*="prose"] {
+  font-feature-settings: 'calt' 1, 'liga' 1, 'kern' 1, 'mark' 1, 'mkmk' 1 !important;
+  -webkit-font-feature-settings: 'calt' 1, 'liga' 1, 'kern' 1, 'mark' 1, 'mkmk' 1 !important;
+  text-rendering: optimizeLegibility !important;
+  -webkit-text-size-adjust: 100% !important;
+  font-variant-ligatures: normal !important;
+  -webkit-font-variant-ligatures: normal !important;
+  font-synthesis: none !important;
+  -webkit-font-synthesis: none !important;
+}
+
+/* Fix text overflow and congestion in ProseMirror editor */
+.ProseMirror {
+  line-height: 2.2 !important;
+  padding: 1.5rem !important;
+  min-height: 200px !important;
+  overflow-y: auto !important;
+}
+
+/* Fix paragraph spacing in rich text editor */
+.ProseMirror p,
+.ProseMirror-content p {
+  line-height: 2.5 !important;
+  margin-bottom: 1.5rem !important;
+  padding: 0.5rem 0 !important;
+  overflow: visible !important;
+}
+
+/* Fix heading spacing in rich text editor */
+.ProseMirror h1,
+.ProseMirror h2,
+.ProseMirror h3,
+.ProseMirror h4,
+.ProseMirror h5,
+.ProseMirror h6 {
+  line-height: 2 !important;
+  margin-top: 1.5rem !important;
+  margin-bottom: 1rem !important;
+  padding: 0.5rem 0 !important;
+}
+
+/* Fix text input fields */
+input[type="text"],
+textarea {
+  line-height: 2 !important;
+  padding: 1rem !important;
+  min-height: 3.5rem !important;
+  font-feature-settings: 'calt' 1, 'liga' 1, 'kern' 1, 'mark' 1, 'mkmk' 1 !important;
+  text-rendering: optimizeLegibility !important;
+  font-synthesis: none !important;
+}
+
+/* Fix textarea specific issues */
+textarea {
+  overflow-y: auto !important;
+  resize: vertical !important;
+  min-height: 8rem !important;
+}
+
+/* Fix field wrappers to prevent text cutoff */
+[class*="field"],
+[class*="wrapper"],
+[class*="container"] {
+  min-height: fit-content !important;
+  overflow: visible !important;
+}
+
+/* Ensure proper spacing for Urdu/Arabic text in all contexts */
+[dir="rtl"] *,
+[lang="ur"] *,
+[lang="ar"] * {
+  font-feature-settings: 'calt' 1, 'liga' 1, 'kern' 1, 'mark' 1, 'mkmk' 1 !important;
+  text-rendering: optimizeLegibility !important;
+  font-synthesis: none !important;
+  -webkit-font-synthesis: none !important;
+}
+
+/* Fix form field heights */
+.tina-field,
+.tina-field-wrapper,
+[data-tina-field] {
+  min-height: fit-content !important;
+  overflow: visible !important;
+}
+
+/* Fix editor content area */
+[class*="editor"],
+[class*="content"],
+[contenteditable="true"] {
+  line-height: 2.2 !important;
+  padding: 1rem !important;
+  overflow-y: auto !important;
+}
+
+/* Ensure diacritics don't get clipped */
+* {
+  overflow: visible !important;
+}
+
+/* Fix specific TinaCMS form elements */
+[class*="FieldWrapper"],
+[class*="FormField"] {
+  overflow: visible !important;
+  min-height: fit-content !important;
+}
